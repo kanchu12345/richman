@@ -86,25 +86,48 @@
 
   window.renderProjects = function (data) {
     if (!data) return;
-    const grid = document.getElementById('projects-grid');
-    if (!grid) return;
-    grid.innerHTML = data.projects.map(p => `
-      <div class="project-card fade-in" data-cat="${p.category}">
-        ${p.image1
-          ? `<div class="project-img-gallery">
-               <img src="${p.image1}" class="project-card-img" alt="${p.title}" />
-               ${p.image2 ? `<img src="${p.image2}" class="project-card-img proj-img2" alt="${p.title} 2" />` : ''}
-             </div>`
-          : `<div class="project-card-img-placeholder">${categoryEmoji(p.category)}</div>`}
-        <div class="project-card-body">
-          <span class="tag">${p.category}</span>
-          <h3>${p.title}</h3>
-          <p>${p.description}</p>
-        </div>
-        <div class="project-card-footer">
-          <span>${p.year}</span>${statusBadge(p.status)}
-        </div>
-      </div>`).join('');
+    const container = document.getElementById('projects-grid');
+    if (!container) return;
+
+    // Group projects by year
+    const byYear = {};
+    if (data.projects) {
+      data.projects.forEach(p => {
+        const y = p.year || 'Unknown';
+        if (!byYear[y]) byYear[y] = [];
+        byYear[y].push(p);
+      });
+    }
+
+    const years = Object.keys(byYear).sort((a,b) => b.localeCompare(a));
+    const currentYear = new Date().getFullYear().toString();
+
+    let html = '';
+    years.forEach(y => {
+      const badge = y === currentYear ? `<span class="year-badge">Current Year</span>` : '';
+      html += `<div class="project-year-header">${y} ${badge}</div>`;
+      html += `<div class="grid-3">`;
+      html += byYear[y].map(p => `
+        <div class="project-card fade-in" data-cat="${p.category}">
+          ${p.image1
+            ? `<div class="project-img-gallery">
+                 <img src="${p.image1}" class="project-card-img" alt="${p.title}" />
+                 ${p.image2 ? `<img src="${p.image2}" class="project-card-img proj-img2" alt="${p.title} 2" />` : ''}
+               </div>`
+            : `<div class="project-card-img-placeholder">${categoryEmoji(p.category)}</div>`}
+          <div class="project-card-body">
+            <span class="tag">${p.category}</span>
+            <h3>${p.title}</h3>
+            <p>${p.description}</p>
+          </div>
+          <div class="project-card-footer">
+            <span>${p.year}</span>${statusBadge(p.status)}
+          </div>
+        </div>`).join('');
+      html += `</div>`;
+    });
+
+    container.innerHTML = html || '<div class="empty-state">No projects yet.</div>';
     reObserve();
     applySocialLinks(data.club.socialLinks);
   };
