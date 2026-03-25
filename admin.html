@@ -29,6 +29,20 @@
 <!-- ══ ADMIN APP ══ -->
 <div id="adminApp" style="display:none">
 
+  <!-- Live Site Banner -->
+  <div class="live-site-bar">
+    <span class="live-dot"></span>
+    <span>Live Website:</span>
+    <a href="https://kanchu12345.github.io/richman/" target="_blank" class="live-site-url">kanchu12345.github.io/richman</a>
+    <div style="margin-left:auto; display:flex; gap:0.5rem; align-items:center;">
+      <a href="https://kanchu12345.github.io/richman/" target="_blank" class="live-quick-btn">🏠 Home</a>
+      <a href="https://kanchu12345.github.io/richman/projects.html" target="_blank" class="live-quick-btn">📁 Projects</a>
+      <a href="https://kanchu12345.github.io/richman/executive.html" target="_blank" class="live-quick-btn">👥 Executive</a>
+      <a href="https://kanchu12345.github.io/richman/newsletter.html" target="_blank" class="live-quick-btn">📰 Newsletter</a>
+      <a href="https://kanchu12345.github.io/richman/contact.html" target="_blank" class="live-quick-btn">📞 Contact</a>
+    </div>
+  </div>
+
   <!-- Sidebar -->
   <aside class="sidebar">
     <div class="sidebar-brand">
@@ -39,15 +53,28 @@
       </div>
     </div>
     <nav class="sb-nav">
-      <a class="sb-link active" onclick="showTab('projects')" id="tab-projects">📁 Projects</a>
-      <a class="sb-link" onclick="showTab('executive')" id="tab-executive">👥 Executive</a>
-      <a class="sb-link" onclick="showTab('newsletter')" id="tab-newsletter">📰 Newsletter</a>
-      <a class="sb-link" onclick="showTab('club')" id="tab-club">🏛️ Club Info</a>
+      <div class="sb-nav-item">
+        <a class="sb-link active" onclick="showTab('projects')" id="tab-projects">📁 Projects</a>
+        <a href="https://kanchu12345.github.io/richman/projects.html" target="_blank" class="sb-preview-btn" title="View live page">↗</a>
+      </div>
+      <div class="sb-nav-item">
+        <a class="sb-link" onclick="showTab('executive')" id="tab-executive">👥 Executive</a>
+        <a href="https://kanchu12345.github.io/richman/executive.html" target="_blank" class="sb-preview-btn" title="View live page">↗</a>
+      </div>
+      <div class="sb-nav-item">
+        <a class="sb-link" onclick="showTab('newsletter')" id="tab-newsletter">📰 Newsletter</a>
+        <a href="https://kanchu12345.github.io/richman/newsletter.html" target="_blank" class="sb-preview-btn" title="View live page">↗</a>
+      </div>
+      <div class="sb-nav-item">
+        <a class="sb-link" onclick="showTab('club')" id="tab-club">🏛️ Club Info</a>
+        <a href="https://kanchu12345.github.io/richman/" target="_blank" class="sb-preview-btn" title="View live page">↗</a>
+      </div>
       <a class="sb-link" onclick="showTab('settings')" id="tab-settings" style="display:none">⚙️ Settings</a>
     </nav>
     <div class="sb-footer">
       <button class="btn-save" onclick="saveToGitHub()" id="saveBtn">🚀 Publish Updates</button>
       <div id="saveStatus" class="save-status"></div>
+      <a id="previewAfterSave" href="https://kanchu12345.github.io/richman/" target="_blank" class="btn-preview-live" style="display:none">🌐 View Live Website →</a>
       <button class="btn-logout" onclick="doLogout()">← Logout</button>
     </div>
   </aside>
@@ -604,7 +631,8 @@ function previewImg(input) {
 async function uploadImage() {
   if (!_selectedFile) return alert('Please select an image first.');
   const cl = JSON.parse(localStorage.getItem('leoCL') || '{}');
-  if (!cl.cloud) return alert('Please configure Media Storage API Key first (Settings tab).');
+  const imgbbKey = cl.cloud || '580db6f671331120289dba6d8ec108c2';  // default key
+  if (!imgbbKey) return alert('Please configure Media Storage API Key first (Settings tab).');
 
   const prog = document.getElementById('imgUploadProgress');
   const fill  = document.getElementById('progressFill');
@@ -620,7 +648,7 @@ async function uploadImage() {
     const fd = new FormData();
     fd.append('image', _selectedFile); // ImgBB uses an 'image' field
 
-    const r = await fetch(`https://api.imgbb.com/1/upload?key=${cl.cloud}`, { method:'POST', body: fd });
+    const r = await fetch(`https://api.imgbb.com/1/upload?key=${imgbbKey}`, { method:'POST', body: fd });
     const data = await r.json();
     clearInterval(timer);
 
@@ -702,6 +730,9 @@ async function saveToGitHub() {
     if (res.ok) {
       showStatus(st, 'success', '✅ Published successfully!');
       showToast('✅ Updates published live!');
+      // Show the 'View Live Website' button
+      const previewBtn = document.getElementById('previewAfterSave');
+      if (previewBtn) previewBtn.style.display = 'flex';
     } else {
       const err = await res.json();
       showStatus(st, 'error', '❌ ' + (err.message || 'Connection error'));

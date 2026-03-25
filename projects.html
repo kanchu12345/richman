@@ -57,6 +57,9 @@
 </head>
 <body data-page="projects">
 
+<!-- ══ PRELOADER ══ -->
+<div class="preloader" id="preloader"><div class="spinner"></div></div>
+
 <!-- ══ NAVBAR ══ -->
 <nav class="navbar" id="navbar">
   <a class="nav-brand" href="index.html">
@@ -115,174 +118,10 @@
     <!-- ── Dynamic projects from content.json ── -->
     <div id="projects-grid">
 
-    <!-- ── 2024 ── -->
-    <div class="project-year-header">2024 <span class="year-badge">Current Year</span></div>
-    <div class="grid-3">
-
-      <div class="project-card fade-in">
-        <div class="project-card-img-placeholder">📚</div>
-        <div class="project-card-body">
-          <span class="tag">Education</span>
-          <h3>Scholarship Support Drive</h3>
-          <p>Providing school supplies, stationery, and educational resources to underprivileged students across Galle district schools.</p>
-        </div>
-        <div class="project-card-footer">
-          <span>March 2024</span>
-          <span class="badge badge-cyan">Completed</span>
-        </div>
+      <div style="text-align:center; padding: 4rem 1rem; color:var(--text-muted);">
+        <p>Loading projects...</p>
+        <p style="font-size:0.85rem; margin-top:0.5rem; opacity:0.7;">(Note: If this doesn't load locally, please view the live website to see database content.)</p>
       </div>
-
-      <div class="project-card fade-in">
-        <div class="project-card-img-placeholder">🌿</div>
-        <div class="project-card-body">
-          <span class="tag">Environment</span>
-          <h3>Green Richmond Initiative</h3>
-          <p>A large-scale tree planting campaign within the Richmond College campus and the surrounding community areas of Galle.</p>
-        </div>
-        <div class="project-card-footer">
-          <span>May 2024</span>
-          <span class="badge badge-cyan">Completed</span>
-        </div>
-      </div>
-
-      <div class="project-card fade-in">
-        <div class="project-card-img-placeholder">🩸</div>
-        <div class="project-card-body">
-          <span class="tag">Health</span>
-          <h3>Blood Donation Campaign</h3>
-          <p>Annual blood donation drive organized in partnership with the National Blood Transfusion Service of Sri Lanka, collecting 80+ units.</p>
-        </div>
-        <div class="project-card-footer">
-          <span>July 2024</span>
-          <span class="badge badge-maroon">Ongoing</span>
-        </div>
-      </div>
-
-      <div class="project-card fade-in">
-        <div class="project-card-img-placeholder">🏘️</div>
-        <div class="project-card-body">
-          <span class="tag">Community</span>
-          <h3>Community Clean-Up Galle</h3>
-          <p>A community-wide cleanliness drive covering major streets and public spaces in Galle, promoting civic responsibility.</p>
-        </div>
-        <div class="project-card-footer">
-          <span>August 2024</span>
-          <span class="badge badge-gold">Upcoming</span>
-        </div>
-      </div>
-
-      <div class="project-card fade-in">
-        <div class="project-card-img-placeholder">💻</div>
-        <div class="project-card-body">
-          <span class="tag">Education</span>
-          <h3>Digital Literacy Workshop</h3>
-          <p>Training sessions for senior citizens and underprivileged youth on basic computer skills, internet safety, and digital communication.</p>
-        </div>
-        <div class="project-card-footer">
-          <span>September 2024</span>
-          <span class="badge badge-gold">Upcoming</span>
-        </div>
-      </div>
-
-      <div class="project-card fade-in">
-        <div class="project-card-img-placeholder">🎭</div>
-        <div class="project-card-body">
-          <span class="tag">Culture &amp; Arts</span>
-          <h3>Leo Cultural Nite</h3>
-          <p>An annual evening of cultural performances showcasing Sri Lankan heritage, talent shows, and Leo Club achievements of the year.</p>
-        </div>
-        <div class="project-card-footer">
-          <span>December 2024</span>
-          <span class="badge badge-gold">Upcoming</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- ── 2023 ── -->
-    <div class="project-year-header">2023</div>
-    <div class="grid-3">
-
-      <div class="project-card fade-in">
-        <div class="project-card-img-placeholder">🏥</div>
-        <div class="project-card-body">
-          <span class="tag">Health</span>
-          <h3>Eye Camp – Vision for All</h3>
-          <p>Free eye testing and prescription glasses distribution in rural villages around Galle, serving over 200 community members.</p>
-        </div>
-        <div class="project-card-footer">
-          <span>April 2023</span>
-          <span class="badge badge-cyan">Completed</span>
-        </div>
-      </div>
-
-      <div class="project-card fade-in">
-        <div class="project-card-img-placeholder">🌊</div>
-        <div class="project-card-body">
-          <span class="tag">Environment</span>
-          <h3>Beach Clean-Up – Galle Fort</h3>
-          <p>Coastal clean-up initiative along the iconic Galle Fort beach, collecting over 500 kg of trash and raising environmental awareness.</p>
-        </div>
-        <div class="project-card-footer">
-          <span>June 2023</span>
-          <span class="badge badge-cyan">Completed</span>
-        </div>
-      </div>
-
-      <div class="project-card fade-in">
-        <div class="project-card-img-placeholder">👶</div>
-        <div class="project-card-body">
-          <span class="tag">Community</span>
-          <h3>Elders' Home Visit Program</h3>
-          <p>Regular welfare visits to elderly homes in Galle, providing donations, companionship, and organizing recreational activities.</p>
-        </div>
-        <div class="project-card-footer">
-          <span>2023</span>
-          <span class="badge badge-cyan">Completed</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- ── 2022 ── -->
-    <div class="project-year-header">2022</div>
-    <div class="grid-3">
-      <div class="project-card fade-in">
-        <div class="project-card-img-placeholder">🍱</div>
-        <div class="project-card-body">
-          <span class="tag">Community</span>
-          <h3>Flood Relief Initiative</h3>
-          <p>Emergency relief effort providing food, clothing, and essentials to flood-affected families in Southern Province during the 2022 floods.</p>
-        </div>
-        <div class="project-card-footer">
-          <span>2022</span>
-          <span class="badge badge-cyan">Completed</span>
-        </div>
-      </div>
-      <div class="project-card fade-in">
-        <div class="project-card-img-placeholder">📖</div>
-        <div class="project-card-body">
-          <span class="tag">Education</span>
-          <h3>Library Renovation Project</h3>
-          <p>Renovated and restocked the library of a rural government school near Galle with over 300 new books and reading materials.</p>
-        </div>
-        <div class="project-card-footer">
-          <span>2022</span>
-          <span class="badge badge-cyan">Completed</span>
-        </div>
-      </div>
-      <div class="project-card fade-in">
-        <div class="project-card-img-placeholder">🎓</div>
-        <div class="project-card-body">
-          <span class="tag">Education</span>
-          <h3>A/L Mentorship Program</h3>
-          <p>Senior Leo members and old boys mentored A/L students on study techniques, career guidance, and university entrance preparation.</p>
-        </div>
-        <div class="project-card-footer">
-          <span>2022</span>
-          <span class="badge badge-cyan">Completed</span>
-        </div>
-      </div>
-    </div>
-
     </div><!-- #projects-grid -->
 
     <!-- Impact Banner -->

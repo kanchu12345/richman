@@ -52,11 +52,13 @@
     const c = data.club;
     // Stats
     const nums = document.querySelectorAll('.stat-item .number');
-    const labels = document.querySelectorAll('.stat-item .label');
-    if (nums[0]) nums[0].textContent = c.founded;
-    if (nums[1]) nums[1].textContent = c.presidentGenerations;
-    if (nums[2]) nums[2].textContent = c.districtAwards + '+';
-    if (nums[3]) nums[3].textContent = (new Date().getFullYear() - parseInt(c.founded));
+    if (nums[0]) nums[0].dataset.target = c.founded;
+    if (nums[1]) nums[1].dataset.target = c.presidentGenerations;
+    if (nums[2]) { nums[2].dataset.target = c.districtAwards; nums[2].dataset.suffix = '+'; }
+    if (nums[3]) nums[3].dataset.target = (new Date().getFullYear() - parseInt(c.founded));
+    
+    // Clear initial text for animation
+    nums.forEach(n => n.textContent = '0');
     // About
     const descs = document.querySelectorAll('.about-desc');
     if (descs[0]) descs[0].innerHTML = c.about1.replace('Leo District 306 A2', '<strong style="color:var(--text-main)">Leo District 306 A2</strong>').replace('Leo District 306 D8', '<strong style="color:var(--cyan)">Leo District 306 D8</strong>');
@@ -185,15 +187,75 @@
     document.querySelectorAll('.fade-in:not(.visible)').forEach(el => obs.observe(el));
   }
 
+  function initDynamicCounters() {
+    const nums = document.querySelectorAll('.stat-item .number');
+    if (!nums.length) return;
+    const obs = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          observer.unobserve(el);
+          const target = parseInt(el.dataset.target) || 0;
+          const suffix = el.dataset.suffix || '';
+          const duration = 2000;
+          const frameRate = 1000 / 60;
+          const totalFrames = Math.round(duration / frameRate);
+          let frame = 0;
+          
+          let start = 0;
+          if (target > 1500) start = target - 50; // for years like 2016
+          
+          const counter = setInterval(() => {
+            frame++;
+            const progress = frame / totalFrames;
+            const current = Math.floor(start + (target - start) * easeOutQuad(progress));
+            el.textContent = current + suffix;
+            if (frame === totalFrames) {
+              el.textContent = target + suffix;
+              clearInterval(counter);
+            }
+          }, frameRate);
+        }
+      });
+    }, { threshold: 0.5 });
+    
+    nums.forEach(n => obs.observe(n));
+  }
+
+  function easeOutQuad(t) { return t * (2 - t); }
+
+  function removePreloader() {
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+      setTimeout(() => {
+        preloader.classList.add('hidden');
+        setTimeout(() => preloader.remove(), 600);
+      }, 300); // minimum showing time
+    }
+  }
+
   // ─── Bootstrap ────────────────────────────────────────────────────────────
   document.addEventListener('DOMContentLoaded', async () => {
     const data = await loadContent();
-    window.siteContent = data;
+    if (data) window.siteContent = data;
+    
     // Auto-detect page and render
     const page = document.body.dataset.page;
-    if (page === 'home') renderHome(data);
+    if (page === 'home') {
+      renderHome(data);
+      initDynamicCounters();
+    }
     else if (page === 'projects') renderProjects(data);
     else if (page === 'executive') renderExecutive(data);
     else if (page === 'newsletter') renderNewsletter(data);
+
+    // Wait for everything (images etc) then hide preloader
+    if (document.readyState === 'complete') {
+      removePreloader();
+    } else {
+      window.addEventListener('load', removePreloader);
+    }
+    // Safety fallback just in case
+    setTimeout(removePreloader, 3000);
   });
 })();
