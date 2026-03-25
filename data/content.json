@@ -84,6 +84,16 @@
       "status": "Completed",
       "image1": "",
       "image2": ""
+    },
+    {
+      "id": "p1774437735054",
+      "title": "test",
+      "description": "test",
+      "category": "Education",
+      "year": "2026",
+      "status": "Upcoming",
+      "image1": "https://i.ibb.co/Cpy2pw8W/335289625-129469106728231-2268433411872533793-n.jpg",
+      "image2": "https://i.ibb.co/Xr6fCvKT/ggggggggggggggggg-removebg-preview.png"
     }
   ],
   "executive": [
