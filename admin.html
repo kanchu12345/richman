@@ -43,7 +43,7 @@
       <a class="sb-link" onclick="showTab('executive')" id="tab-executive">👥 Executive</a>
       <a class="sb-link" onclick="showTab('newsletter')" id="tab-newsletter">📰 Newsletter</a>
       <a class="sb-link" onclick="showTab('club')" id="tab-club">🏛️ Club Info</a>
-      <a class="sb-link" onclick="showTab('settings')" id="tab-settings">⚙️ Settings</a>
+      <a class="sb-link" onclick="showTab('settings')" id="tab-settings" style="display:none">⚙️ Settings</a>
     </nav>
     <div class="sb-footer">
       <button class="btn-save" onclick="saveToGitHub()" id="saveBtn">💾 Save to GitHub</button>
@@ -122,32 +122,31 @@
 
     <!-- ── SETTINGS TAB ── -->
     <div id="pane-settings" class="pane">
-      <div class="pane-header"><div><h2>Settings</h2><p>Configure GitHub and Cloudinary integration.</p></div></div>
+      <div class="pane-header"><div><h2>Settings</h2><p>System configuration.</p></div></div>
       <div class="settings-grid">
 
         <div class="form-card">
-          <div class="form-section-title">🐙 GitHub Integration</div>
-          <p class="hint">Used to save <code>data/content.json</code> directly to your repo. Generate a token at <a href="https://github.com/settings/tokens" target="_blank">github.com/settings/tokens</a> with <strong>repo</strong> scope.</p>
-          <div class="form-group"><label>GitHub Username</label><input type="text" id="gh-user" placeholder="e.g. yourname"/></div>
-          <div class="form-group"><label>Repository Name</label><input type="text" id="gh-repo" placeholder="e.g. leo-club-website"/></div>
+          <div class="form-section-title">🔗 Integration Setup</div>
+          <p class="hint">Enter your integration credentials below. These are saved locally on this device only.</p>
+          <div class="form-group"><label>Service A – Name</label><input type="text" id="gh-user" placeholder=""/></div>
+          <div class="form-group"><label>Service A – Repository</label><input type="text" id="gh-repo" placeholder=""/></div>
           <div class="form-group"><label>Branch</label><input type="text" id="gh-branch" placeholder="main"/></div>
-          <div class="form-group"><label>Personal Access Token</label><input type="password" id="gh-token" placeholder="ghp_xxxxxxxxxxxx"/></div>
-          <button class="btn-primary" onclick="saveGHSettings()">💾 Save GitHub Settings</button>
+          <div class="form-group"><label>Service A – Key</label><input type="password" id="gh-token" placeholder=""/></div>
+          <button class="btn-primary" onclick="saveGHSettings()">💾 Save Settings</button>
           <button class="btn-outline" style="margin-left:0.75rem;" onclick="testGitHub()">🔍 Test Connection</button>
           <div id="gh-status" class="save-status"></div>
         </div>
 
         <div class="form-card">
-          <div class="form-section-title">☁️ Cloudinary – Image Hosting</div>
-          <p class="hint">Free at <a href="https://cloudinary.com" target="_blank">cloudinary.com</a>. After signing up, go to <strong>Settings → Upload → Upload Presets</strong> and create an <em>unsigned</em> preset.</p>
-          <div class="form-group"><label>Cloud Name</label><input type="text" id="cl-cloud" placeholder="e.g. dxxxxxxxx"/></div>
-          <div class="form-group"><label>Upload Preset (unsigned)</label><input type="text" id="cl-preset" placeholder="e.g. leo_club_unsigned"/></div>
-          <button class="btn-primary" onclick="saveCLSettings()">💾 Save Cloudinary Settings</button>
+          <div class="form-section-title">☁️ Media Storage</div>
+          <p class="hint">Configure your media storage service API key below.</p>
+          <div class="form-group"><label>API Key</label><input type="password" id="cl-cloud" placeholder=""/></div>
+          <button class="btn-primary" onclick="saveCLSettings()">💾 Save Settings</button>
           <div id="cl-status" class="save-status"></div>
         </div>
 
         <div class="form-card">
-          <div class="form-section-title">🔐 Change Password</div>
+          <div class="form-section-title">🔐 Security</div>
           <div class="form-group"><label>New Password</label><input type="password" id="new-pass" placeholder="Enter new password"/></div>
           <div class="form-group"><label>Confirm Password</label><input type="password" id="new-pass2" placeholder="Confirm new password"/></div>
           <button class="btn-primary" onclick="changePassword()">🔑 Update Password</button>
@@ -184,7 +183,7 @@
     </div>
     <div class="modal-footer">
       <button class="btn-outline" onclick="closeImgModal()">Cancel</button>
-      <button class="btn-primary" onclick="uploadImage()" id="uploadBtn">☁️ Upload to Cloudinary</button>
+      <button class="btn-primary" onclick="uploadImage()" id="uploadBtn">☁️ Upload Image</button>
     </div>
   </div>
 </div>
@@ -246,7 +245,6 @@ function loadSettings() {
   document.getElementById('gh-branch').value = gh.branch || 'main';
   document.getElementById('gh-token').value  = gh.token  || '';
   document.getElementById('cl-cloud').value  = cl.cloud  || '';
-  document.getElementById('cl-preset').value = cl.preset || '';
 }
 
 function saveGHSettings() {
@@ -261,8 +259,7 @@ function saveGHSettings() {
 
 function saveCLSettings() {
   localStorage.setItem('leoCL', JSON.stringify({
-    cloud:  document.getElementById('cl-cloud').value.trim(),
-    preset: document.getElementById('cl-preset').value.trim()
+    cloud:  document.getElementById('cl-cloud').value.trim()
   }));
   showStatus(document.getElementById('cl-status'), 'success', '✅ Saved!');
 }
@@ -607,7 +604,7 @@ function previewImg(input) {
 async function uploadImage() {
   if (!_selectedFile) return alert('Please select an image first.');
   const cl = JSON.parse(localStorage.getItem('leoCL') || '{}');
-  if (!cl.cloud || !cl.preset) return alert('Please configure Cloudinary settings first (Settings tab).');
+  if (!cl.cloud) return alert('Please configure Media Storage API Key first (Settings tab).');
 
   const prog = document.getElementById('imgUploadProgress');
   const fill  = document.getElementById('progressFill');
@@ -621,27 +618,25 @@ async function uploadImage() {
 
   try {
     const fd = new FormData();
-    fd.append('file', _selectedFile);
-    fd.append('upload_preset', cl.preset);
-    fd.append('folder', 'leo_club');
+    fd.append('image', _selectedFile); // ImgBB uses an 'image' field
 
-    const r = await fetch(`https://api.cloudinary.com/v1_1/${cl.cloud}/image/upload`, { method:'POST', body: fd });
+    const r = await fetch(`https://api.imgbb.com/1/upload?key=${cl.cloud}`, { method:'POST', body: fd });
     const data = await r.json();
     clearInterval(timer);
 
-    if (data.secure_url) {
+    if (data.success) {
       fill.style.width = '100%';
       text.textContent = '✅ Upload complete!';
       // Apply url to content object
-      _imgTarget.obj[_imgTarget.field] = data.secure_url;
+      _imgTarget.obj[_imgTarget.field] = data.data.url;
       // Update preview in the form
       const prevEl = document.getElementById(_imgTarget.imgElId);
       const boxEl  = document.getElementById(_imgTarget.boxId);
       if (prevEl) {
-        if (prevEl.tagName === 'IMG') { prevEl.src = data.secure_url; }
+        if (prevEl.tagName === 'IMG') { prevEl.src = data.data.url; }
         else {
           const img = document.createElement('img');
-          img.src = data.secure_url;
+          img.src = data.data.url;
           img.id  = _imgTarget.imgElId;
           if (_imgTarget.round) img.style.borderRadius = '50%';
           prevEl.replaceWith(img);
@@ -656,7 +651,7 @@ async function uploadImage() {
     }
   } catch (e) {
     clearInterval(timer);
-    text.textContent = '❌ Network error. Check Cloudinary settings.';
+    text.textContent = '❌ Network error. Check Media Storage API key.';
   }
   document.getElementById('uploadBtn').disabled = false;
 }
@@ -748,6 +743,20 @@ function esc(s) { return (s || '').replace(/"/g,'&quot;').replace(/</g,'&lt;'); 
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('loginPass').addEventListener('keydown', e => {
     if (e.key === 'Enter') doLogin();
+  });
+
+  // Secret shortcut: Ctrl+Shift+S reveals Settings tab
+  document.addEventListener('keydown', e => {
+    if (e.ctrlKey && e.shiftKey && e.key === 'S') {
+      const tab = document.getElementById('tab-settings');
+      if (tab) {
+        tab.style.display = tab.style.display === 'none' ? 'flex' : 'none';
+        if (tab.style.display === 'flex') {
+          showTab('settings');
+          showToast('⚙️ Settings unlocked');
+        }
+      }
+    }
   });
 });
 </script>
