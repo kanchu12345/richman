@@ -46,7 +46,7 @@
       <a class="sb-link" onclick="showTab('settings')" id="tab-settings" style="display:none">⚙️ Settings</a>
     </nav>
     <div class="sb-footer">
-      <button class="btn-save" onclick="saveToGitHub()" id="saveBtn">💾 Save to GitHub</button>
+      <button class="btn-save" onclick="saveToGitHub()" id="saveBtn">🚀 Publish Updates</button>
       <div id="saveStatus" class="save-status"></div>
       <button class="btn-logout" onclick="doLogout()">← Logout</button>
     </div>
@@ -672,7 +672,7 @@ async function saveToGitHub() {
   const gh = JSON.parse(localStorage.getItem('leoGH') || '{}');
   const st = document.getElementById('saveStatus');
   if (!gh.token || !gh.user || !gh.repo) {
-    showStatus(st, 'error', '⚠️ Configure GitHub settings first!');
+    showStatus(st, 'error', '⚠️ Configure integration settings first!');
     showTab('settings'); return;
   }
   const btn = document.getElementById('saveBtn');
@@ -700,11 +700,11 @@ async function saveToGitHub() {
 
     const res = await fetch(apiBase, { method:'PUT', headers, body });
     if (res.ok) {
-      showStatus(st, 'success', '✅ Saved to GitHub!');
-      showToast('✅ Content saved to GitHub!');
+      showStatus(st, 'success', '✅ Published successfully!');
+      showToast('✅ Updates published live!');
     } else {
       const err = await res.json();
-      showStatus(st, 'error', '❌ ' + (err.message || 'GitHub error'));
+      showStatus(st, 'error', '❌ ' + (err.message || 'Connection error'));
     }
   } catch (e) {
     showStatus(st, 'error', '❌ Network error: ' + e.message);
