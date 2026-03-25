@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Executive Committee – Centennial Leo Club of Richmond College</title>
+  <meta name="description" content="Meet the Executive Committee and explore the presidential history of the Centennial Leo Club of Richmond College." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="image/logo.jpg.jpeg" type="image/jpeg" />
+  <style>
+    .exec-section-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--cyan);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.75rem;
+      margin-bottom: 2rem;
+      margin-top: 3rem;
+    }
+    .exec-section-title:first-of-type { margin-top: 0; }
+
+    /* President feature card */
+    .president-card {
+      background: var(--navy-card);
+      border: 1px solid rgba(0,188,212,0.35);
+      border-radius: 16px;
+      padding: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      margin-bottom: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .president-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--maroon), var(--cyan), var(--gold));
+    }
+    .president-avatar {
+      min-width: 110px; height: 110px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(0,188,212,0.2), rgba(139,26,26,0.15));
+      border: 3px solid var(--cyan);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.5rem; font-weight: 700;
+      color: var(--cyan); font-family: 'Playfair Display', serif;
+      box-shadow: 0 0 28px rgba(0,188,212,0.25);
+    }
+    .president-info .role-tag {
+      display: inline-block;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 2.5px;
+      text-transform: uppercase; color: var(--gold);
+      background: rgba(244,197,66,0.1); border: 1px solid rgba(244,197,66,0.25);
+      padding: 0.2rem 0.7rem; border-radius: 50px; margin-bottom: 0.6rem;
+    }
+    .president-info h2 {
+      font-family: 'Playfair Display', serif; font-size: 1.6rem;
+      font-weight: 700; color: var(--white); margin-bottom: 0.3rem;
+    }
+    .president-info .sub { color: var(--cyan); font-size: 0.9rem; font-weight: 500; margin-bottom: 0.75rem; }
+    .president-info p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.7; }
+
+    /* exec cards with 2-col role/name layout */
+    .exec-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+    .exec-mini {
+      background: var(--navy-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.4rem 1.5rem;
+      transition: all var(--transition); position: relative; overflow: hidden;
+    }
+    .exec-mini::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--maroon), var(--cyan));
+      transform: scaleX(0); transition: transform var(--transition);
+    }
+    .exec-mini:hover::before { transform: scaleX(1); }
+    .exec-mini:hover { border-color: rgba(0,188,212,0.3); transform: translateY(-3px); box-shadow: var(--shadow); }
+    .exec-mini .avatar {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: rgba(0,188,212,0.08); border: 2px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; font-weight: 700; color: var(--cyan);
+      font-family: 'Playfair Display', serif; margin-bottom: 1rem;
+      transition: border-color var(--transition);
+    }
+    .exec-mini:hover .avatar { border-color: var(--cyan); }
+    .exec-mini .role {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 1.8px;
+      text-transform: uppercase; color: var(--cyan); margin-bottom: 0.3rem;
+    }
+    .exec-mini h4 { font-size: 0.95rem; font-weight: 600; color: var(--white); }
+
+    /* Advisor card – horizontal */
+    .advisor-strip {
+      display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem;
+    }
+    .advisor-card {
+      flex: 1; min-width: 240px;
+      background: var(--navy-card); border: 1px solid rgba(244,197,66,0.2);
+      border-radius: var(--radius); padding: 1.25rem 1.5rem;
+      display: flex; align-items: center; gap: 1rem;
+      transition: all var(--transition);
+    }
+    .advisor-card:hover { border-color: rgba(244,197,66,0.45); transform: translateY(-2px); }
+    .advisor-ava {
+      width: 54px; height: 54px; border-radius: 50%;
+      background: rgba(244,197,66,0.08); border: 2px solid rgba(244,197,66,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; font-weight: 700; color: var(--gold);
+      flex-shrink: 0;
+    }
+    .advisor-info .role { font-size: 0.68rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 0.2rem; }
+    .advisor-info .name { font-size: 0.95rem; font-weight: 600; color: var(--white); }
+    .advisor-info .org { font-size: 0.78rem; color: var(--text-muted); }
+
+    /* Presidential History Timeline */
+    .president-history {
+      background: var(--navy-card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 2.5rem 2rem; margin-bottom: 3rem;
+    }
+    .ph-header {
+      display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;
+    }
+    .ph-header h3 {
+      font-family: 'Playfair Display', serif; font-size: 1.3rem;
+      font-weight: 700; color: var(--white);
+    }
+    .gen-row {
+      display: grid; gap: 0;
+    }
+    .gen-item {
+      display: grid; grid-template-columns: 90px 1fr;
+      gap: 0; border-bottom: 1px solid var(--border);
+      transition: background var(--transition);
+    }
+    .gen-item:last-child { border-bottom: none; }
+    .gen-item:hover { background: rgba(0,188,212,0.04); }
+    .gen-year {
+      padding: 1rem 1rem 1rem 0;
+      font-size: 0.78rem; font-weight: 700; color: var(--cyan);
+      letter-spacing: 0.5px; border-right: 1px solid var(--border);
+      display: flex; align-items: flex-start; padding-right: 1.2rem;
+    }
+    .gen-details { padding: 1rem 0 1rem 1.2rem; }
+    .gen-name { font-size: 0.92rem; font-weight: 600; color: var(--white); margin-bottom: 0.4rem; }
+    .gen-awards { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .gen-award {
+      font-size: 0.7rem; font-weight: 600; padding: 0.18rem 0.6rem;
+      border-radius: 50px; white-space: nowrap;
+    }
+    .aw-gold { background: rgba(244,197,66,0.12); color: var(--gold); border: 1px solid rgba(244,197,66,0.25); }
+    .aw-cyan { background: rgba(0,188,212,0.1); color: var(--cyan); border: 1px solid rgba(0,188,212,0.2); }
+    .aw-maroon { background: rgba(139,26,26,0.15); color: #ef9a9a; border: 1px solid rgba(139,26,26,0.3); }
+
+    @media (max-width: 640px) {
+      .president-card { flex-direction: column; text-align: center; }
+      .exec-row { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 400px) {
+      .exec-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body data-page="executive">
+
+<!-- ══ NAVBAR ══ -->
+<nav class="navbar" id="navbar">
+  <a class="nav-brand" href="index.html">
+    <img src="image/logo.jpg.jpeg" alt="Leo Club Logo" class="nav-logo" />
+    <div class="nav-title">
+      <span class="name">Centennial Leo Club</span>
+      <span class="sub">Richmond College · Sri Lanka</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="projects.html">Projects</a>
+    <a href="newsletter.html">Newsletter</a>
+    <a href="executive.html" class="active">Executive Committee</a>
+    <a href="contact.html">Contact Us</a>
+  </div>
+  <div class="nav-toggle" id="navToggle" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="toggleMenu()">Home</a>
+  <a href="projects.html" onclick="toggleMenu()">Projects</a>
+  <a href="newsletter.html" onclick="toggleMenu()">Newsletter</a>
+  <a href="executive.html" class="active" onclick="toggleMenu()">Executive Committee</a>
+  <a href="contact.html" onclick="toggleMenu()">Contact Us</a>
+</div>
+
+<!-- ══ PAGE HEADER ══ -->
+<div class="page-header">
+  <div class="container">
+    <nav class="breadcrumb">
+      <a href="index.html">Home</a><span>›</span><span>Executive Committee</span>
+    </nav>
+    <h1>Executive <span>Committee</span></h1>
+    <p style="color:var(--text-muted); margin-top:0.5rem;">2025/26 Board &amp; Presidential Legacy since 2016.</p>
+  </div>
+</div>
+
+<!-- ══ MAIN ══ -->
+<section class="section">
+  <div class="container">
+
+    <!-- LEO ADVISOR -->
+    <div class="exec-section-title">Leo Advisor</div>
+    <div class="advisor-strip" id="exec-advisor">
+      <div class="advisor-card fade-in">
+        <div class="advisor-ava">LK</div>
+        <div class="advisor-info">
+          <div class="role">Leo Advisor</div>
+          <div class="name">Lion Lakma Kithmini</div>
+          <div class="org">Leo District 306 D8, Sri Lanka</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRESIDENT -->
+    <div class="exec-section-title">President – 2025/26</div>
+    <div class="president-card fade-in">
+      <div class="president-avatar">MG</div>
+      <div class="president-info">
+        <div class="role-tag">👑 Club President 2025/26</div>
+        <h2>Leo Mevinu Gamage</h2>
+        <div class="sub">Centennial Leo Club of Richmond College</div>
+        <p>Leo Mevinu Gamage leads the club's reactivation in 2025/26, taking the helm as the 9th generation president of the Centennial Leo Club. Under his leadership, the club has rejoined the fold under the newly redistricted Leo District 306 D8, carrying forward the club's proud tradition of service, achievement, and community impact.</p>
+      </div>
+    </div>
+
+    <div class="exec-row" id="exec-vp">
+      <div class="exec-mini fade-in">
+        <div class="avatar">SS</div>
+        <div class="role">Vice President</div>
+        <h4>Leo Sachitha Siriwardana</h4>
+      </div>
+      <div class="exec-mini fade-in">
+        <div class="avatar">DP</div>
+        <div class="role">Vice President</div>
+        <h4>Leo Dimaga Pieris</h4>
+      </div>
+    </div>
+
+    <div class="exec-row" id="exec-secretariat">
+      <div class="exec-mini fade-in">
+        <div class="avatar">MK</div>
+        <div class="role">Secretary</div>
+        <h4>Leo Minuda Kalansooriya</h4>
+      </div>
+      <div class="exec-mini fade-in">
+        <div class="avatar">IR</div>
+        <div class="role">Assistant Secretary</div>
+        <h4>Leo Inosh Ranathunga</h4>
+      </div>
+    </div>
+
+    <div class="exec-row" id="exec-treasury">
+      <div class="exec-mini fade-in">
+        <div class="avatar">SW</div>
+        <div class="role">Treasurer</div>
+        <h4>Leo Sadeepa Weerasinghe</h4>
+      </div>
+      <div class="exec-mini fade-in">
+        <div class="avatar">SH</div>
+        <div class="role">Assistant Treasurer</div>
+        <h4>Leo Savindu Hansana</h4>
+      </div>
+    </div>
+
+    <div class="exec-row" id="exec-directors">
+      <div class="exec-mini fade-in">
+        <div class="avatar">HT</div>
+        <div class="role">Director – Public Relations</div>
+        <h4>Leo Harindu Thirasara</h4>
+      </div>
+      <div class="exec-mini fade-in">
+        <div class="avatar">IH</div>
+        <div class="role">Director</div>
+        <h4>Leo Isuka Hansindu</h4>
+      </div>
+      <div class="exec-mini fade-in">
+        <div class="avatar">AO</div>
+        <div class="role">Director</div>
+        <h4>Leo Asuru Oshada</h4>
+      </div>
+      <div class="exec-mini fade-in">
+        <div class="avatar">CM</div>
+        <div class="role">Membership Chairperson</div>
+        <h4>Leo Chamal Mendis</h4>
+      </div>
+    </div>
+
+    <!-- ═══ DISTRICT HISTORY ═══ -->
+    <div class="exec-section-title" style="margin-top:4rem;">District History</div>
+    <div style="background:var(--navy-card); border:1px solid rgba(0,188,212,0.2); border-radius:var(--radius); padding:1.5rem 2rem; margin-bottom:3rem; display:flex; gap:2rem; flex-wrap:wrap; align-items:center;">
+      <div style="text-align:center; min-width:120px;">
+        <div style="font-size:1.5rem; font-weight:800; color:var(--text-muted);">306 A2</div>
+        <div style="font-size:0.72rem; color:var(--text-muted); letter-spacing:1px; text-transform:uppercase; margin-top:0.2rem;">Founded Under</div>
+        <div style="font-size:0.78rem; color:var(--text-muted); margin-top:0.2rem;">2016 – 2024</div>
+      </div>
+      <div style="font-size:1.5rem; color:var(--border);">→</div>
+      <div style="text-align:center; min-width:120px;">
+        <div style="font-size:1.5rem; font-weight:800; color:var(--cyan);">306 D8</div>
+        <div style="font-size:0.72rem; color:var(--cyan); letter-spacing:1px; text-transform:uppercase; margin-top:0.2rem;">Current District</div>
+        <div style="font-size:0.78rem; color:var(--text-muted); margin-top:0.2rem;">2025 Redistricting</div>
+      </div>
+      <div style="flex:1; min-width:220px;">
+        <p style="color:var(--text-muted); font-size:0.88rem; line-height:1.7;">The club was originally chartered under <strong style="color:var(--text-main);">Leo District 306 A2</strong>. Following the 2025 Leo district redistricting in Sri Lanka, the Centennial Leo Club of Richmond College now operates under <strong style="color:var(--cyan);">Leo District 306 D8</strong>.</p>
+      </div>
+    </div>
+
+    <!-- ═══ PRESIDENTIAL HISTORY ═══ -->
+    <div class="exec-section-title" style="margin-top:0;">Presidential Legacy – 9 Generations (2016 – Present)</div>
+    <div class="president-history fade-in">
+      <div class="ph-header">
+        <span style="font-size:2rem;">👑</span>
+        <h3>Presidents of the Centennial Leo Club of Richmond College</h3>
+      </div>
+      <div class="gen-row">
+
+        <!-- Gen 1 -->
+        <div class="gen-item">
+          <div class="gen-year">2016/17<br/><span style="font-size:0.65rem; color:var(--text-muted); font-weight:400;">Gen 1</span></div>
+          <div class="gen-details">
+            <div class="gen-name">Leo Sandul Siriwarda <span style="font-size:0.75rem; color:var(--gold);">★ <em>1st President</em></span></div>
+            <div class="gen-awards">
+              <span class="gen-award aw-maroon">2nd Runner-up – Most Outstanding School Leo Club</span>
+              <span class="gen-award aw-maroon">2nd Runner-up – Most Outstanding School Leo Club President</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gen 2 -->
+        <div class="gen-item">
+          <div class="gen-year">2017/18<br/><span style="font-size:0.65rem; color:var(--text-muted); font-weight:400;">Gen 2</span></div>
+          <div class="gen-details">
+            <div class="gen-name">Leo Sandul Siriwardira <span style="font-size:0.75rem; color:var(--text-muted);"><em>(Continued)</em></span></div>
+            <div class="gen-awards">
+              <span class="gen-award aw-gold">Best Fundraising Project</span>
+              <span class="gen-award aw-cyan">1st Runner-up – Most Outstanding School Leo Club</span>
+              <span class="gen-award aw-cyan">1st Runner-up – Most Outstanding School Leo Club President</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gen 3 -->
+        <div class="gen-item">
+          <div class="gen-year">2018/19<br/><span style="font-size:0.65rem; color:var(--text-muted); font-weight:400;">Gen 3</span></div>
+          <div class="gen-details">
+            <div class="gen-name">President – Generation 3</div>
+            <div class="gen-awards">
+              <span class="gen-award aw-maroon">2nd Runner-up – Helping Hand for Differently-Abled</span>
+              <span class="gen-award aw-maroon" title="Project: Nethata Saviyak">Project: Nethata Saviyak</span>
+              <span class="gen-award aw-maroon">2nd Runner-up – Most Outstanding School Leo Club</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gen 4 -->
+        <div class="gen-item">
+          <div class="gen-year">2019/20<br/><span style="font-size:0.65rem; color:var(--text-muted); font-weight:400;">Gen 4</span></div>
+          <div class="gen-details">
+            <div class="gen-name">President – Generation 4</div>
+            <div class="gen-awards">
+              <span class="gen-award aw-cyan">1st Runner-up – Most Outstanding School Leo Club</span>
+              <span class="gen-award aw-cyan">1st Runner-up – Most Outstanding School Leo Club President</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gen 5 -->
+        <div class="gen-item">
+          <div class="gen-year">2020/21<br/><span style="font-size:0.65rem; color:var(--text-muted); font-weight:400;">Gen 5</span></div>
+          <div class="gen-details">
+            <div class="gen-name">President – Generation 5</div>
+            <div class="gen-awards">
+              <span class="gen-award aw-cyan">1st Runner-up – Most Outstanding School Leo Club</span>
+              <span class="gen-award aw-cyan">1st Runner-up – Most Outstanding School Leo Club President</span>
+              <span class="gen-award aw-gold">Best Research Project</span>
+              <span class="gen-award aw-gold" title="Project: Slay the Dread">Project: Slay the Dread</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gen 6 – BEST YEAR -->
+        <div class="gen-item" style="background:rgba(0,188,212,0.03);">
+          <div class="gen-year">2021/22<br/><span style="font-size:0.65rem; color:var(--text-muted); font-weight:400;">Gen 6</span></div>
+          <div class="gen-details">
+            <div class="gen-name" style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+              Leo Kulith <span style="font-size:0.72rem; color:var(--gold);">★ Most Outstanding President</span>
+              <span style="font-size:0.78rem; color:var(--text-muted);">· Secretary: Leo Dumindu</span>
+            </div>
+            <div class="gen-awards" style="margin-top:0.5rem;">
+              <span class="gen-award aw-gold">🏆 Most Outstanding School Leo Club</span>
+              <span class="gen-award aw-gold">Most Outstanding School Leo Club President – Leo Kulith</span>
+              <span class="gen-award aw-gold">Most Outstanding School Leo Club Secretary – Leo Dumindu</span>
+              <span class="gen-award aw-gold">Best International Joint Project – Rich Hearts</span>
+              <span class="gen-award aw-cyan">1st Runner-up – Clean Water &amp; Energy Conservation</span>
+              <span class="gen-award aw-maroon">Project: Perahankada</span>
+              <span class="gen-award aw-cyan">1st Runner-up – Most Outstanding Service Project</span>
+              <span class="gen-award aw-maroon">Project: Pipasayata Diya Dothak</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gen 7 -->
+        <div class="gen-item">
+          <div class="gen-year">2022/23<br/><span style="font-size:0.65rem; color:var(--text-muted); font-weight:400;">Gen 7</span></div>
+          <div class="gen-details">
+            <div class="gen-name">President – Generation 7</div>
+            <div class="gen-awards">
+              <span class="gen-award aw-cyan">1st Runner-up – Most Outstanding School Leo Club</span>
+              <span class="gen-award aw-cyan">1st Runner-up – Most Outstanding School Leo Club President</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gen 8 - gap years (reactivation context) -->
+        <div class="gen-item">
+          <div class="gen-year">2023/24<br/><span style="font-size:0.65rem; color:var(--text-muted); font-weight:400;">Gen 8</span></div>
+          <div class="gen-details">
+            <div class="gen-name">President – Generation 8</div>
+            <div class="gen-awards">
+              <span class="gen-award aw-maroon">Club Transition Period</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gen 9 – Current -->
+        <div class="gen-item" style="background:rgba(0,188,212,0.04);">
+          <div class="gen-year">2025/26<br/><span style="font-size:0.65rem; color:var(--cyan); font-weight:600;">Gen 9 · Active</span></div>
+          <div class="gen-details">
+            <div class="gen-name" style="color:var(--cyan);">Leo Mevinu Gamage <span style="font-size:0.75rem; color:var(--text-muted);">★ Current President</span></div>
+            <div class="gen-awards">
+              <span class="gen-award aw-cyan">Club Reactivated – 2025/26</span>
+              <span class="gen-award aw-gold">Leo District 306 D8</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /president-history -->
+
+    <!-- Note -->
+    <div style="background:rgba(0,188,212,0.05); border:1px solid rgba(0,188,212,0.15); border-radius:var(--radius); padding:1.5rem 2rem; text-align:center;">
+      <p style="color:var(--text-muted); font-size:0.88rem;">📌 For generations where individual president names are not yet confirmed in our records, names will be updated progressively. To provide corrections or additional information, please <a href="contact.html" style="color:var(--cyan);">contact us</a>.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="brand-row">
+        <img src="image/logo.jpg.jpeg" alt="Logo" class="footer-logo" />
+        <div>
+          <div class="brand-name">Centennial Leo Club</div>
+          <div class="motto">of Richmond College</div>
+        </div>
+      </div>
+      <p>A dynamic youth service organization under Lions International, proudly serving Sri Lanka since 2016.</p>
+      <div class="footer-social">
+        <a class="social-btn" href="#" title="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.532-4.697 1.313 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.885v2.27h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg></a>
+        <a class="social-btn" href="#" title="Instagram"><svg width="18" height="18" viewBox="0 0 24 24"><defs><linearGradient id="ig4" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f09433"/><stop offset="50%" stop-color="#dc2743"/><stop offset="100%" stop-color="#bc1888"/></linearGradient></defs><path fill="url(#ig4)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+        <a class="social-btn" href="#" title="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="#FF0000"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg></a>
+        <a class="social-btn" href="#" title="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="#0A66C2"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Pages</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="newsletter.html">Newsletter</a></li>
+        <li><a href="executive.html">Executive Committee</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Club</h4>
+      <ul>
+        <li><a href="#">About Leo Clubs</a></li>
+        <li><a href="#">Lions International</a></li>
+        <li><a href="#">Leo District 306 D8</a></li>
+        <li><a href="#">Richmond College</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="contact.html">Contact Us</a></li>
+        <li><a href="newsletter.html">Newsletter</a></li>
+        <li><a href="#">Membership</a></li>
+        <li><a href="#">Volunteer</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Centennial Leo Club of Richmond College. All rights reserved.</span>
+    <span class="district">🦁 Leo District 306 D8 (formerly 306 A2) · Sri Lanka · Est. 2016</span>
+  </div>
+  <p class="footer-design-credit">Designed &amp; Developed by <a href="https://www.facebook.com/profile.php?id=100082101311247" target="_blank" rel="noopener">Infinite Design</a></p>
+</footer>
+
+<a id="infinite-design-credit" href="https://www.facebook.com/profile.php?id=100082101311247" target="_blank" rel="noopener" title="Website designed by Infinite Design">
+  <span class="idcredit-dot"></span>
+  <span class="idcredit-label">Designed by</span>
+  <span class="idcredit-name">Infinite Design</span>
+</a>
+
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<script>
+  const navbar = document.getElementById('navbar');
+  const scrollTop = document.getElementById('scrollTop');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
+    scrollTop.classList.toggle('show', window.scrollY > 300);
+  });
+  function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  (function protectCredit(){
+    const FB='https://www.facebook.com/profile.php?id=100082101311247';
+    const ID='infinite-design-credit';
+    var _busy=false;
+    function restore(){
+      if(_busy) return; _busy=true;
+      var el=document.getElementById(ID);
+      if(!el||(el.href||'').indexOf('100082101311247')===-1){
+        if(!el){el=document.createElement('a');el.id=ID;document.body.appendChild(el);}
+        el.href=FB;el.target='_blank';el.rel='noopener';el.title='Website designed by Infinite Design';
+        el.innerHTML='<span class="idcredit-dot"></span><span class="idcredit-label">Designed by</span><span class="idcredit-name">Infinite Design</span>';
+        el.style.cssText='position:fixed!important;bottom:1rem!important;left:1rem!important;display:flex!important;visibility:visible!important;opacity:1!important;z-index:9999!important;pointer-events:all!important;';
+      }
+      _busy=false;
+    }
+    restore();
+    new MutationObserver(function(){restore();}).observe(document.body,{childList:true,subtree:false});
+  })();
+</script>
+<script src="js/loader.js"></script>
+</body>
+</html>

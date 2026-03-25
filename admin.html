@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Admin Panel – Centennial Leo Club</title>
+  <link rel="stylesheet" href="admin-style.css"/>
+  <link rel="icon" href="image/logo.jpg.jpeg" type="image/jpeg"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+<!-- ══ LOGIN SCREEN ══ -->
+<div id="loginScreen" class="login-screen">
+  <div class="login-card">
+    <img src="image/logo.jpg.jpeg" alt="Logo" class="login-logo"/>
+    <h1>Admin Panel</h1>
+    <p class="login-sub">Centennial Leo Club of Richmond College</p>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" id="loginPass" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')doLogin()"/>
+    </div>
+    <button class="btn-primary" onclick="doLogin()">🔐 Login</button>
+    <div id="loginErr" class="login-err" style="display:none">Incorrect password. Try again.</div>
+    <div class="login-hint">Default password: <code>leoclub2025</code> — change in Settings after login.</div>
+  </div>
+</div>
+
+<!-- ══ ADMIN APP ══ -->
+<div id="adminApp" style="display:none">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <img src="image/logo.jpg.jpeg" alt="Logo" class="sb-logo"/>
+      <div>
+        <div class="sb-name">Leo Club</div>
+        <div class="sb-sub">Admin Panel</div>
+      </div>
+    </div>
+    <nav class="sb-nav">
+      <a class="sb-link active" onclick="showTab('projects')" id="tab-projects">📁 Projects</a>
+      <a class="sb-link" onclick="showTab('executive')" id="tab-executive">👥 Executive</a>
+      <a class="sb-link" onclick="showTab('newsletter')" id="tab-newsletter">📰 Newsletter</a>
+      <a class="sb-link" onclick="showTab('club')" id="tab-club">🏛️ Club Info</a>
+      <a class="sb-link" onclick="showTab('settings')" id="tab-settings">⚙️ Settings</a>
+    </nav>
+    <div class="sb-footer">
+      <button class="btn-save" onclick="saveToGitHub()" id="saveBtn">💾 Save to GitHub</button>
+      <div id="saveStatus" class="save-status"></div>
+      <button class="btn-logout" onclick="doLogout()">← Logout</button>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="admin-main">
+
+    <!-- ── PROJECTS TAB ── -->
+    <div id="pane-projects" class="pane active">
+      <div class="pane-header">
+        <div>
+          <h2>Projects</h2>
+          <p>Add, edit or delete club projects. Upload up to 2 images per project.</p>
+        </div>
+        <button class="btn-primary" onclick="addProject()">+ Add Project</button>
+      </div>
+      <div id="projects-list" class="item-list"></div>
+    </div>
+
+    <!-- ── EXECUTIVE TAB ── -->
+    <div id="pane-executive" class="pane">
+      <div class="pane-header">
+        <div>
+          <h2>Executive Committee</h2>
+          <p>Edit member names, roles, sections and upload profile photos.</p>
+        </div>
+        <button class="btn-primary" onclick="addMember()">+ Add Member</button>
+      </div>
+      <div id="executive-list" class="item-list"></div>
+    </div>
+
+    <!-- ── NEWSLETTER TAB ── -->
+    <div id="pane-newsletter" class="pane">
+      <div class="pane-header">
+        <div>
+          <h2>Newsletter</h2>
+          <p>Manage newsletter issues.</p>
+        </div>
+        <button class="btn-primary" onclick="addNewsletter()">+ Add Issue</button>
+      </div>
+      <div id="newsletter-list" class="item-list"></div>
+    </div>
+
+    <!-- ── CLUB INFO TAB ── -->
+    <div id="pane-club" class="pane">
+      <div class="pane-header"><div><h2>Club Info</h2><p>Edit contact details, social links and about text.</p></div></div>
+      <div class="form-card">
+        <div class="form-section-title">Contact Details</div>
+        <div class="form-row2">
+          <div class="form-group"><label>Email</label><input type="text" id="ci-email"/></div>
+          <div class="form-group"><label>WhatsApp Number (international)</label><input type="text" id="ci-whatsapp"/></div>
+        </div>
+        <div class="form-group"><label>Location / Address</label><input type="text" id="ci-location"/></div>
+        <div class="form-group"><label>Google Maps Link</label><input type="text" id="ci-maplink"/></div>
+
+        <div class="form-section-title" style="margin-top:1.5rem;">About Text</div>
+        <div class="form-group"><label>About Paragraph 1</label><textarea id="ci-about1" rows="3"></textarea></div>
+        <div class="form-group"><label>About Paragraph 2</label><textarea id="ci-about2" rows="3"></textarea></div>
+
+        <div class="form-section-title" style="margin-top:1.5rem;">Social Media Links</div>
+        <div class="form-row2">
+          <div class="form-group"><label>Facebook URL</label><input type="text" id="ci-facebook"/></div>
+          <div class="form-group"><label>Instagram URL</label><input type="text" id="ci-instagram"/></div>
+        </div>
+        <div class="form-row2">
+          <div class="form-group"><label>YouTube URL</label><input type="text" id="ci-youtube"/></div>
+          <div class="form-group"><label>LinkedIn URL</label><input type="text" id="ci-linkedin"/></div>
+        </div>
+        <button class="btn-primary" style="margin-top:1rem;" onclick="saveClubInfo()">✅ Apply Changes</button>
+      </div>
+    </div>
+
+    <!-- ── SETTINGS TAB ── -->
+    <div id="pane-settings" class="pane">
+      <div class="pane-header"><div><h2>Settings</h2><p>Configure GitHub and Cloudinary integration.</p></div></div>
+      <div class="settings-grid">
+
+        <div class="form-card">
+          <div class="form-section-title">🐙 GitHub Integration</div>
+          <p class="hint">Used to save <code>data/content.json</code> directly to your repo. Generate a token at <a href="https://github.com/settings/tokens" target="_blank">github.com/settings/tokens</a> with <strong>repo</strong> scope.</p>
+          <div class="form-group"><label>GitHub Username</label><input type="text" id="gh-user" placeholder="e.g. yourname"/></div>
+          <div class="form-group"><label>Repository Name</label><input type="text" id="gh-repo" placeholder="e.g. leo-club-website"/></div>
+          <div class="form-group"><label>Branch</label><input type="text" id="gh-branch" placeholder="main"/></div>
+          <div class="form-group"><label>Personal Access Token</label><input type="password" id="gh-token" placeholder="ghp_xxxxxxxxxxxx"/></div>
+          <button class="btn-primary" onclick="saveGHSettings()">💾 Save GitHub Settings</button>
+          <button class="btn-outline" style="margin-left:0.75rem;" onclick="testGitHub()">🔍 Test Connection</button>
+          <div id="gh-status" class="save-status"></div>
+        </div>
+
+        <div class="form-card">
+          <div class="form-section-title">☁️ Cloudinary – Image Hosting</div>
+          <p class="hint">Free at <a href="https://cloudinary.com" target="_blank">cloudinary.com</a>. After signing up, go to <strong>Settings → Upload → Upload Presets</strong> and create an <em>unsigned</em> preset.</p>
+          <div class="form-group"><label>Cloud Name</label><input type="text" id="cl-cloud" placeholder="e.g. dxxxxxxxx"/></div>
+          <div class="form-group"><label>Upload Preset (unsigned)</label><input type="text" id="cl-preset" placeholder="e.g. leo_club_unsigned"/></div>
+          <button class="btn-primary" onclick="saveCLSettings()">💾 Save Cloudinary Settings</button>
+          <div id="cl-status" class="save-status"></div>
+        </div>
+
+        <div class="form-card">
+          <div class="form-section-title">🔐 Change Password</div>
+          <div class="form-group"><label>New Password</label><input type="password" id="new-pass" placeholder="Enter new password"/></div>
+          <div class="form-group"><label>Confirm Password</label><input type="password" id="new-pass2" placeholder="Confirm new password"/></div>
+          <button class="btn-primary" onclick="changePassword()">🔑 Update Password</button>
+          <div id="pass-status" class="save-status"></div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ══ IMAGE UPLOAD MODAL ══ -->
+<div id="imgModal" class="modal-overlay" style="display:none" onclick="if(event.target===this)closeImgModal()">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 id="imgModalTitle">Upload Image</h3>
+      <button class="modal-close" onclick="closeImgModal()">✕</button>
+    </div>
+    <div class="img-upload-area" id="imgDropZone" onclick="document.getElementById('imgFileInput').click()">
+      <div id="imgPreviewWrap" style="display:none">
+        <img id="imgPreview" alt="Preview" style="max-width:100%;max-height:220px;border-radius:8px;"/>
+        <p id="imgPreviewName" style="margin-top:0.5rem;font-size:0.82rem;color:var(--text-muted);"></p>
+      </div>
+      <div id="imgDropPrompt">
+        <div style="font-size:2.5rem;">📁</div>
+        <p>Click to choose an image<br/><span style="font-size:0.78rem;opacity:0.6;">JPG, PNG, WEBP — max 10 MB</span></p>
+      </div>
+    </div>
+    <input type="file" id="imgFileInput" accept="image/*" style="display:none" onchange="previewImg(this)"/>
+    <div id="imgUploadProgress" style="display:none" class="upload-progress">
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <p id="progressText">Uploading…</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-outline" onclick="closeImgModal()">Cancel</button>
+      <button class="btn-primary" onclick="uploadImage()" id="uploadBtn">☁️ Upload to Cloudinary</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════════════════════════════
+//  STATE
+// ════════════════════════════════════════════════════════
+let content = null;
+let _imgTarget = null; // { obj, field, imgElId }
+
+// ════════════════════════════════════════════════════════
+//  AUTH
+// ════════════════════════════════════════════════════════
+function hashStr(s) {
+  let h = 0;
+  for (let i = 0; i < s.length; i++) h = Math.imul(31, h) + s.charCodeAt(i) | 0;
+  return h.toString(16);
+}
+const DEFAULT_HASH = hashStr('leoclub2025');
+
+function doLogin() {
+  const pass = document.getElementById('loginPass').value;
+  const stored = localStorage.getItem('leoAdminHash') || DEFAULT_HASH;
+  if (hashStr(pass) === stored) {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('adminApp').style.display = 'flex';
+    loadContent();
+  } else {
+    document.getElementById('loginErr').style.display = 'block';
+  }
+}
+
+function doLogout() {
+  document.getElementById('adminApp').style.display = 'none';
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('loginPass').value = '';
+}
+
+function changePassword() {
+  const p1 = document.getElementById('new-pass').value;
+  const p2 = document.getElementById('new-pass2').value;
+  const st = document.getElementById('pass-status');
+  if (!p1) return showStatus(st, 'error', 'Password cannot be empty.');
+  if (p1 !== p2) return showStatus(st, 'error', 'Passwords do not match.');
+  if (p1.length < 6) return showStatus(st, 'error', 'Password must be at least 6 characters.');
+  localStorage.setItem('leoAdminHash', hashStr(p1));
+  showStatus(st, 'success', '✅ Password updated!');
+}
+
+// ════════════════════════════════════════════════════════
+//  SETTINGS
+// ════════════════════════════════════════════════════════
+function loadSettings() {
+  const gh = JSON.parse(localStorage.getItem('leoGH') || '{}');
+  const cl = JSON.parse(localStorage.getItem('leoCL') || '{}');
+  document.getElementById('gh-user').value   = gh.user   || '';
+  document.getElementById('gh-repo').value   = gh.repo   || '';
+  document.getElementById('gh-branch').value = gh.branch || 'main';
+  document.getElementById('gh-token').value  = gh.token  || '';
+  document.getElementById('cl-cloud').value  = cl.cloud  || '';
+  document.getElementById('cl-preset').value = cl.preset || '';
+}
+
+function saveGHSettings() {
+  localStorage.setItem('leoGH', JSON.stringify({
+    user:   document.getElementById('gh-user').value.trim(),
+    repo:   document.getElementById('gh-repo').value.trim(),
+    branch: document.getElementById('gh-branch').value.trim() || 'main',
+    token:  document.getElementById('gh-token').value.trim()
+  }));
+  showStatus(document.getElementById('gh-status'), 'success', '✅ Saved!');
+}
+
+function saveCLSettings() {
+  localStorage.setItem('leoCL', JSON.stringify({
+    cloud:  document.getElementById('cl-cloud').value.trim(),
+    preset: document.getElementById('cl-preset').value.trim()
+  }));
+  showStatus(document.getElementById('cl-status'), 'success', '✅ Saved!');
+}
+
+async function testGitHub() {
+  const st = document.getElementById('gh-status');
+  const gh = JSON.parse(localStorage.getItem('leoGH') || '{}');
+  if (!gh.token || !gh.user || !gh.repo) return showStatus(st, 'error', 'Fill in all GitHub fields first.');
+  showStatus(st, 'info', '⏳ Testing…');
+  try {
+    const r = await fetch(`https://api.github.com/repos/${gh.user}/${gh.repo}`, {
+      headers: { Authorization: `token ${gh.token}` }
+    });
+    if (r.ok) showStatus(st, 'success', '✅ Connected! Repo found.');
+    else showStatus(st, 'error', `❌ Error ${r.status}: check username, repo, and token.`);
+  } catch {
+    showStatus(st, 'error', '❌ Network error.');
+  }
+}
+
+// ════════════════════════════════════════════════════════
+//  LOAD CONTENT
+// ════════════════════════════════════════════════════════
+async function loadContent() {
+  loadSettings();
+  try {
+    const r = await fetch('data/content.json?t=' + Date.now());
+    content = r.ok ? await r.json() : defaultContent();
+  } catch { content = defaultContent(); }
+  renderProjects();
+  renderExecutive();
+  renderNewsletter();
+  loadClubInfo();
+}
+
+function defaultContent() {
+  return { club: { email:'', whatsapp:'', whatsappLink:'', location:'', mapLink:'', about1:'', about2:'', socialLinks:{facebook:'#',instagram:'#',youtube:'#',linkedin:'#'} }, projects:[], executive:[], newsletter:[] };
+}
+
+// ════════════════════════════════════════════════════════
+//  TABS
+// ════════════════════════════════════════════════════════
+function showTab(name) {
+  document.querySelectorAll('.pane').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.sb-link').forEach(l => l.classList.remove('active'));
+  document.getElementById('pane-' + name).classList.add('active');
+  document.getElementById('tab-' + name).classList.add('active');
+}
+
+// ════════════════════════════════════════════════════════
+//  PROJECTS
+// ════════════════════════════════════════════════════════
+const CATEGORIES = ['Education','Environment','Health','Community','International','Culture','Sports','Other'];
+const STATUSES   = ['Completed','Ongoing','Upcoming'];
+
+function renderProjects() {
+  const list = document.getElementById('projects-list');
+  if (!content?.projects?.length) { list.innerHTML = '<div class="empty-state">No projects yet. Click "+ Add Project" to start.</div>'; return; }
+  list.innerHTML = content.projects.map((p, i) => `
+    <div class="item-card" id="pc-${p.id}">
+      <div class="item-card-header">
+        <div class="item-thumb">
+          ${p.image1 ? `<img src="${p.image1}" alt="img"/>` : '<span>📌</span>'}
+        </div>
+        <div class="item-info">
+          <div class="item-title">${p.title || 'Untitled Project'}</div>
+          <div class="item-meta">${p.category || '–'} · ${p.year || '–'} · <span class="item-status">${p.status || '–'}</span></div>
+        </div>
+        <div class="item-actions">
+          <button class="btn-icon" onclick="toggleEdit('pc-form-${p.id}')">✏️ Edit</button>
+          <button class="btn-icon btn-del" onclick="deleteProject('${p.id}')">🗑️</button>
+        </div>
+      </div>
+      <div class="item-form" id="pc-form-${p.id}" style="display:none">
+        <div class="form-row2">
+          <div class="form-group"><label>Title</label><input type="text" id="pf-title-${p.id}" value="${esc(p.title)}"/></div>
+          <div class="form-group"><label>Year</label><input type="text" id="pf-year-${p.id}" value="${esc(p.year)}" style="max-width:120px"/></div>
+        </div>
+        <div class="form-row2">
+          <div class="form-group"><label>Category</label>
+            <select id="pf-cat-${p.id}">${CATEGORIES.map(c=>`<option ${p.category===c?'selected':''}>${c}</option>`).join('')}</select>
+          </div>
+          <div class="form-group"><label>Status</label>
+            <select id="pf-status-${p.id}">${STATUSES.map(s=>`<option ${p.status===s?'selected':''}>${s}</option>`).join('')}</select>
+          </div>
+        </div>
+        <div class="form-group"><label>Description</label><textarea id="pf-desc-${p.id}" rows="3">${esc(p.description)}</textarea></div>
+        <div class="img-upload-row">
+          <div class="img-slot">
+            <label>Image 1</label>
+            <div class="img-preview-box ${p.image1?'has-img':''}" id="pf-img1-box-${p.id}">
+              ${p.image1 ? `<img src="${p.image1}" alt="img1" id="pf-img1-prev-${p.id}"/>` : `<span id="pf-img1-prev-${p.id}">No image</span>`}
+            </div>
+            <button class="btn-upload" onclick="openImgModal({obj:content.projects[${i}],field:'image1',imgElId:'pf-img1-prev-${p.id}',boxId:'pf-img1-box-${p.id}'})">📁 Upload Image 1</button>
+            ${p.image1 ? `<button class="btn-remove" onclick="removeImg(content.projects[${i}],'image1','pf-img1-prev-${p.id}','pf-img1-box-${p.id}')">✕ Remove</button>` : ''}
+          </div>
+          <div class="img-slot">
+            <label>Image 2 (optional)</label>
+            <div class="img-preview-box ${p.image2?'has-img':''}" id="pf-img2-box-${p.id}">
+              ${p.image2 ? `<img src="${p.image2}" alt="img2" id="pf-img2-prev-${p.id}"/>` : `<span id="pf-img2-prev-${p.id}">No image</span>`}
+            </div>
+            <button class="btn-upload" onclick="openImgModal({obj:content.projects[${i}],field:'image2',imgElId:'pf-img2-prev-${p.id}',boxId:'pf-img2-box-${p.id}'})">📁 Upload Image 2</button>
+            ${p.image2 ? `<button class="btn-remove" onclick="removeImg(content.projects[${i}],'image2','pf-img2-prev-${p.id}','pf-img2-box-${p.id}')">✕ Remove</button>` : ''}
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn-primary" onclick="saveProject('${p.id}',${i})">✅ Save Project</button>
+          <button class="btn-outline" onclick="toggleEdit('pc-form-${p.id}')">Cancel</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function saveProject(id, i) {
+  const p = content.projects[i];
+  p.title       = document.getElementById(`pf-title-${id}`).value;
+  p.year        = document.getElementById(`pf-year-${id}`).value;
+  p.category    = document.getElementById(`pf-cat-${id}`).value;
+  p.status      = document.getElementById(`pf-status-${id}`).value;
+  p.description = document.getElementById(`pf-desc-${id}`).value;
+  renderProjects();
+  showToast('Project updated!');
+}
+
+function addProject() {
+  const id = 'p' + Date.now();
+  content.projects.push({ id, title:'New Project', description:'', category:'Education', year: String(new Date().getFullYear()), status:'Upcoming', image1:'', image2:'' });
+  renderProjects();
+  setTimeout(() => { toggleEdit('pc-form-' + id); document.getElementById(`pf-title-${id}`)?.focus(); }, 50);
+}
+
+function deleteProject(id) {
+  if (!confirm('Delete this project?')) return;
+  content.projects = content.projects.filter(p => p.id !== id);
+  renderProjects();
+  showToast('Project deleted.');
+}
+
+// ════════════════════════════════════════════════════════
+//  EXECUTIVE
+// ════════════════════════════════════════════════════════
+const SECTIONS = ['advisor','president','vp','secretariat','treasury','directors'];
+
+function renderExecutive() {
+  const list = document.getElementById('executive-list');
+  if (!content?.executive?.length) { list.innerHTML = '<div class="empty-state">No members yet.</div>'; return; }
+  list.innerHTML = content.executive.map((m, i) => `
+    <div class="item-card" id="ec-${m.id}">
+      <div class="item-card-header">
+        <div class="item-thumb member-thumb">
+          ${m.photo ? `<img src="${m.photo}" alt="photo" style="border-radius:50%;width:48px;height:48px;object-fit:cover;"/>` : `<span class="member-initials">${initials(m.name)}</span>`}
+        </div>
+        <div class="item-info">
+          <div class="item-title">${m.name}</div>
+          <div class="item-meta">${m.role} · <span class="item-status">${m.section}</span></div>
+        </div>
+        <div class="item-actions">
+          <button class="btn-icon" onclick="toggleEdit('ec-form-${m.id}')">✏️ Edit</button>
+          <button class="btn-icon btn-del" onclick="deleteMember('${m.id}')">🗑️</button>
+        </div>
+      </div>
+      <div class="item-form" id="ec-form-${m.id}" style="display:none">
+        <div class="form-row2">
+          <div class="form-group"><label>Full Name</label><input type="text" id="ef-name-${m.id}" value="${esc(m.name)}"/></div>
+          <div class="form-group"><label>Role / Title</label><input type="text" id="ef-role-${m.id}" value="${esc(m.role)}"/></div>
+        </div>
+        <div class="form-group"><label>Section</label>
+          <select id="ef-sec-${m.id}">${SECTIONS.map(s=>`<option ${m.section===s?'selected':''}>${s}</option>`).join('')}</select>
+        </div>
+        <div class="img-slot">
+          <label>Profile Photo</label>
+          <div class="img-preview-box round ${m.photo?'has-img':''}" id="ef-photo-box-${m.id}">
+            ${m.photo ? `<img src="${m.photo}" alt="photo" id="ef-photo-prev-${m.id}" style="border-radius:50%;"/>` : `<span id="ef-photo-prev-${m.id}">${initials(m.name)}</span>`}
+          </div>
+          <button class="btn-upload" onclick="openImgModal({obj:content.executive[${i}],field:'photo',imgElId:'ef-photo-prev-${m.id}',boxId:'ef-photo-box-${m.id}',round:true})">📁 Upload Photo</button>
+          ${m.photo ? `<button class="btn-remove" onclick="removeImg(content.executive[${i}],'photo','ef-photo-prev-${m.id}','ef-photo-box-${m.id}')">✕ Remove</button>` : ''}
+        </div>
+        <div class="form-actions">
+          <button class="btn-primary" onclick="saveMember('${m.id}',${i})">✅ Save Member</button>
+          <button class="btn-outline" onclick="toggleEdit('ec-form-${m.id}')">Cancel</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function saveMember(id, i) {
+  const m = content.executive[i];
+  m.name    = document.getElementById(`ef-name-${id}`).value;
+  m.role    = document.getElementById(`ef-role-${id}`).value;
+  m.section = document.getElementById(`ef-sec-${id}`).value;
+  renderExecutive();
+  showToast('Member updated!');
+}
+
+function addMember() {
+  const id = 'e' + Date.now();
+  content.executive.push({ id, name:'New Member', role:'Director', section:'directors', photo:'' });
+  renderExecutive();
+  setTimeout(() => { toggleEdit('ec-form-' + id); document.getElementById(`ef-name-${id}`)?.focus(); }, 50);
+}
+
+function deleteMember(id) {
+  if (!confirm('Remove this member?')) return;
+  content.executive = content.executive.filter(m => m.id !== id);
+  renderExecutive();
+  showToast('Member removed.');
+}
+
+function initials(name) {
+  return name.replace(/^Leo |^Lion /, '').split(' ').slice(0,2).map(w=>w[0]).join('').toUpperCase();
+}
+
+// ════════════════════════════════════════════════════════
+//  NEWSLETTER
+// ════════════════════════════════════════════════════════
+function renderNewsletter() {
+  const list = document.getElementById('newsletter-list');
+  if (!content?.newsletter?.length) { list.innerHTML = '<div class="empty-state">No newsletter issues yet.</div>'; return; }
+  list.innerHTML = content.newsletter.map((n, i) => `
+    <div class="item-card" id="nl-${n.id}">
+      <div class="item-card-header">
+        <div class="item-thumb"><span>📰</span></div>
+        <div class="item-info">
+          <div class="item-title">${n.title}</div>
+          <div class="item-meta">${n.date}</div>
+        </div>
+        <div class="item-actions">
+          <button class="btn-icon" onclick="toggleEdit('nl-form-${n.id}')">✏️ Edit</button>
+          <button class="btn-icon btn-del" onclick="deleteIssue('${n.id}')">🗑️</button>
+        </div>
+      </div>
+      <div class="item-form" id="nl-form-${n.id}" style="display:none">
+        <div class="form-row2">
+          <div class="form-group"><label>Title</label><input type="text" id="nf-title-${n.id}" value="${esc(n.title)}"/></div>
+          <div class="form-group"><label>Date</label><input type="text" id="nf-date-${n.id}" value="${esc(n.date)}"/></div>
+        </div>
+        <div class="form-group"><label>Description</label><textarea id="nf-desc-${n.id}" rows="3">${esc(n.description)}</textarea></div>
+        <div class="form-group"><label>PDF Link (Google Drive / external URL)</label><input type="text" id="nf-pdf-${n.id}" value="${esc(n.pdfLink)}" placeholder="https://drive.google.com/..."/></div>
+        <div class="form-actions">
+          <button class="btn-primary" onclick="saveIssue('${n.id}',${i})">✅ Save Issue</button>
+          <button class="btn-outline" onclick="toggleEdit('nl-form-${n.id}')">Cancel</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function saveIssue(id, i) {
+  const n = content.newsletter[i];
+  n.title       = document.getElementById(`nf-title-${id}`).value;
+  n.date        = document.getElementById(`nf-date-${id}`).value;
+  n.description = document.getElementById(`nf-desc-${id}`).value;
+  n.pdfLink     = document.getElementById(`nf-pdf-${id}`).value;
+  renderNewsletter();
+  showToast('Issue updated!');
+}
+
+function addNewsletter() {
+  const id = 'n' + Date.now();
+  content.newsletter.push({ id, title:'New Issue', date:'', description:'', pdfLink:'' });
+  renderNewsletter();
+  setTimeout(() => { toggleEdit('nl-form-' + id); document.getElementById(`nf-title-${id}`)?.focus(); }, 50);
+}
+
+function deleteIssue(id) {
+  if (!confirm('Delete this issue?')) return;
+  content.newsletter = content.newsletter.filter(n => n.id !== id);
+  renderNewsletter();
+  showToast('Issue deleted.');
+}
+
+// ════════════════════════════════════════════════════════
+//  CLUB INFO
+// ════════════════════════════════════════════════════════
+function loadClubInfo() {
+  const c = content?.club;
+  if (!c) return;
+  document.getElementById('ci-email').value    = c.email    || '';
+  document.getElementById('ci-whatsapp').value = c.whatsapp || '';
+  document.getElementById('ci-location').value = c.location || '';
+  document.getElementById('ci-maplink').value  = c.mapLink  || '';
+  document.getElementById('ci-about1').value   = c.about1   || '';
+  document.getElementById('ci-about2').value   = c.about2   || '';
+  const sl = c.socialLinks || {};
+  document.getElementById('ci-facebook').value  = sl.facebook  || '';
+  document.getElementById('ci-instagram').value = sl.instagram || '';
+  document.getElementById('ci-youtube').value   = sl.youtube   || '';
+  document.getElementById('ci-linkedin').value  = sl.linkedin  || '';
+}
+
+function saveClubInfo() {
+  const wa = document.getElementById('ci-whatsapp').value.trim().replace(/\s/g,'').replace(/^\+/,'');
+  content.club.email    = document.getElementById('ci-email').value.trim();
+  content.club.whatsapp = '+' + wa;
+  content.club.whatsappLink = 'https://wa.me/' + wa;
+  content.club.location = document.getElementById('ci-location').value.trim();
+  content.club.mapLink  = document.getElementById('ci-maplink').value.trim();
+  content.club.about1   = document.getElementById('ci-about1').value.trim();
+  content.club.about2   = document.getElementById('ci-about2').value.trim();
+  content.club.socialLinks = {
+    facebook:  document.getElementById('ci-facebook').value.trim(),
+    instagram: document.getElementById('ci-instagram').value.trim(),
+    youtube:   document.getElementById('ci-youtube').value.trim(),
+    linkedin:  document.getElementById('ci-linkedin').value.trim()
+  };
+  showToast('Club info updated! Remember to Save to GitHub.');
+}
+
+// ════════════════════════════════════════════════════════
+//  IMAGE UPLOAD (Cloudinary)
+// ════════════════════════════════════════════════════════
+let _selectedFile = null;
+
+function openImgModal(target) {
+  _imgTarget = target;
+  _selectedFile = null;
+  document.getElementById('imgPreviewWrap').style.display = 'none';
+  document.getElementById('imgDropPrompt').style.display = 'block';
+  document.getElementById('imgUploadProgress').style.display = 'none';
+  document.getElementById('imgFileInput').value = '';
+  document.getElementById('imgModalTitle').textContent = target.round ? 'Upload Profile Photo' : 'Upload Project Image';
+  document.getElementById('imgModal').style.display = 'flex';
+}
+
+function closeImgModal() {
+  document.getElementById('imgModal').style.display = 'none';
+  _selectedFile = null; _imgTarget = null;
+}
+
+function previewImg(input) {
+  _selectedFile = input.files[0];
+  if (!_selectedFile) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    document.getElementById('imgPreview').src = e.target.result;
+    document.getElementById('imgPreviewName').textContent = _selectedFile.name;
+    document.getElementById('imgDropPrompt').style.display = 'none';
+    document.getElementById('imgPreviewWrap').style.display = 'block';
+  };
+  reader.readAsDataURL(_selectedFile);
+}
+
+async function uploadImage() {
+  if (!_selectedFile) return alert('Please select an image first.');
+  const cl = JSON.parse(localStorage.getItem('leoCL') || '{}');
+  if (!cl.cloud || !cl.preset) return alert('Please configure Cloudinary settings first (Settings tab).');
+
+  const prog = document.getElementById('imgUploadProgress');
+  const fill  = document.getElementById('progressFill');
+  const text  = document.getElementById('progressText');
+  prog.style.display = 'block';
+  document.getElementById('uploadBtn').disabled = true;
+
+  // Animate progress bar
+  let pct = 0;
+  const timer = setInterval(() => { pct = Math.min(pct + 3, 85); fill.style.width = pct + '%'; }, 80);
+
+  try {
+    const fd = new FormData();
+    fd.append('file', _selectedFile);
+    fd.append('upload_preset', cl.preset);
+    fd.append('folder', 'leo_club');
+
+    const r = await fetch(`https://api.cloudinary.com/v1_1/${cl.cloud}/image/upload`, { method:'POST', body: fd });
+    const data = await r.json();
+    clearInterval(timer);
+
+    if (data.secure_url) {
+      fill.style.width = '100%';
+      text.textContent = '✅ Upload complete!';
+      // Apply url to content object
+      _imgTarget.obj[_imgTarget.field] = data.secure_url;
+      // Update preview in the form
+      const prevEl = document.getElementById(_imgTarget.imgElId);
+      const boxEl  = document.getElementById(_imgTarget.boxId);
+      if (prevEl) {
+        if (prevEl.tagName === 'IMG') { prevEl.src = data.secure_url; }
+        else {
+          const img = document.createElement('img');
+          img.src = data.secure_url;
+          img.id  = _imgTarget.imgElId;
+          if (_imgTarget.round) img.style.borderRadius = '50%';
+          prevEl.replaceWith(img);
+        }
+      }
+      if (boxEl) boxEl.classList.add('has-img');
+      showToast('Image uploaded!');
+      setTimeout(closeImgModal, 800);
+    } else {
+      clearInterval(timer);
+      text.textContent = '❌ Upload failed: ' + (data.error?.message || 'Unknown error');
+    }
+  } catch (e) {
+    clearInterval(timer);
+    text.textContent = '❌ Network error. Check Cloudinary settings.';
+  }
+  document.getElementById('uploadBtn').disabled = false;
+}
+
+function removeImg(obj, field, prevId, boxId) {
+  obj[field] = '';
+  const prevEl = document.getElementById(prevId);
+  const boxEl  = document.getElementById(boxId);
+  if (prevEl) { prevEl.outerHTML = `<span id="${prevId}">No image</span>`; }
+  if (boxEl)  { boxEl.classList.remove('has-img'); }
+  showToast('Image removed.');
+}
+
+// ════════════════════════════════════════════════════════
+//  GITHUB SAVE
+// ════════════════════════════════════════════════════════
+async function saveToGitHub() {
+  const gh = JSON.parse(localStorage.getItem('leoGH') || '{}');
+  const st = document.getElementById('saveStatus');
+  if (!gh.token || !gh.user || !gh.repo) {
+    showStatus(st, 'error', '⚠️ Configure GitHub settings first!');
+    showTab('settings'); return;
+  }
+  const btn = document.getElementById('saveBtn');
+  btn.disabled = true;
+  showStatus(st, 'info', '⏳ Saving…');
+
+  const path = 'data/content.json';
+  const apiBase = `https://api.github.com/repos/${gh.user}/${gh.repo}/contents/${path}`;
+  const headers = { Authorization: `token ${gh.token}`, 'Content-Type':'application/json' };
+
+  try {
+    // Get current file SHA
+    let sha = '';
+    try {
+      const cur = await fetch(`${apiBase}?ref=${gh.branch}`, { headers });
+      if (cur.ok) { const d = await cur.json(); sha = d.sha; }
+    } catch {}
+
+    const body = JSON.stringify({
+      message: `Admin: update content.json [${new Date().toISOString()}]`,
+      content: btoa(unescape(encodeURIComponent(JSON.stringify(content, null, 2)))),
+      branch: gh.branch || 'main',
+      ...(sha ? { sha } : {})
+    });
+
+    const res = await fetch(apiBase, { method:'PUT', headers, body });
+    if (res.ok) {
+      showStatus(st, 'success', '✅ Saved to GitHub!');
+      showToast('✅ Content saved to GitHub!');
+    } else {
+      const err = await res.json();
+      showStatus(st, 'error', '❌ ' + (err.message || 'GitHub error'));
+    }
+  } catch (e) {
+    showStatus(st, 'error', '❌ Network error: ' + e.message);
+  }
+  btn.disabled = false;
+}
+
+// ════════════════════════════════════════════════════════
+//  UTILS
+// ════════════════════════════════════════════════════════
+function toggleEdit(id) {
+  const el = document.getElementById(id);
+  if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
+}
+
+function showStatus(el, type, msg) {
+  if (!el) return;
+  el.className = 'save-status show ' + type;
+  el.textContent = msg;
+  if (type === 'success') setTimeout(() => el.className = 'save-status', 3000);
+}
+
+function showToast(msg) {
+  let t = document.getElementById('toast');
+  if (!t) { t = document.createElement('div'); t.id = 'toast'; document.body.appendChild(t); }
+  t.textContent = msg; t.className = 'toast show';
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => t.className = 'toast', 2500);
+}
+
+function esc(s) { return (s || '').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
+
+// ════════════════════════════════════════════════════════
+//  INIT
+// ════════════════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('loginPass').addEventListener('keydown', e => {
+    if (e.key === 'Enter') doLogin();
+  });
+});
+</script>
+</body>
+</html>

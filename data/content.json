@@ -1,0 +1,184 @@
+{
+  "club": {
+    "name": "Centennial Leo Club of Richmond College",
+    "shortName": "Centennial Leo Club",
+    "tagline": "Empowering youth to serve. Building leaders who make a difference.",
+    "motto": "One Team · One Dream · One Aim",
+    "district": "Leo District 306 D8",
+    "districtFormer": "formerly 306 A2",
+    "founded": "2016",
+    "presidentGenerations": 9,
+    "districtAwards": 10,
+    "currentPresident": "Leo Mevinu Gamage",
+    "email": "rcgleos@gmail.com",
+    "whatsapp": "+94768086721",
+    "whatsappLink": "https://wa.me/94768086721",
+    "location": "Richmond Hill Road, Galle, Sri Lanka",
+    "mapLink": "https://www.google.com/maps/search/Richmond%20Hill%20Road%2C%20Galle%2C%20Sri%20Lanka/@6.0464,80.2076,17z?hl=en",
+    "about1": "The Centennial Leo Club of Richmond College was founded in 2016 under Leo District 306 A2 and is now proudly part of Leo District 306 D8 following the 2025 redistricting. Through 9 generations of presidents and countless community projects, we continue to uphold the Leo values of Leadership, Experience, and Opportunity.",
+    "about2": "Our club has earned district recognition every year since foundation, including being named Most Outstanding School Leo Club and receiving multiple Presidential awards — a testament to the dedication of every Leo member.",
+    "socialLinks": {
+      "facebook": "#",
+      "instagram": "#",
+      "youtube": "#",
+      "linkedin": "#"
+    }
+  },
+  "projects": [
+    {
+      "id": "p1",
+      "title": "Scholarship Support Drive",
+      "description": "Supporting underprivileged students with school supplies, stationery, and educational resources across Galle district.",
+      "category": "Education",
+      "year": "2024",
+      "status": "Completed",
+      "image1": "",
+      "image2": ""
+    },
+    {
+      "id": "p2",
+      "title": "Green Richmond Initiative",
+      "description": "A large-scale tree planting campaign within the Richmond College grounds and surrounding community areas.",
+      "category": "Environment",
+      "year": "2024",
+      "status": "Completed",
+      "image1": "",
+      "image2": ""
+    },
+    {
+      "id": "p3",
+      "title": "Blood Donation Campaign",
+      "description": "Organizing annual blood donation events in partnership with the National Blood Transfusion Service of Sri Lanka.",
+      "category": "Health",
+      "year": "2024",
+      "status": "Ongoing",
+      "image1": "",
+      "image2": ""
+    },
+    {
+      "id": "p4",
+      "title": "Rich Hearts",
+      "description": "Award-winning international joint project connecting Leo clubs across borders for a shared humanitarian cause.",
+      "category": "International",
+      "year": "2022",
+      "status": "Completed",
+      "image1": "",
+      "image2": ""
+    },
+    {
+      "id": "p5",
+      "title": "Slay the Dread",
+      "description": "Best Research Project award winner — a youth mental health awareness and support initiative.",
+      "category": "Health",
+      "year": "2021",
+      "status": "Completed",
+      "image1": "",
+      "image2": ""
+    },
+    {
+      "id": "p6",
+      "title": "Nethata Saviyak",
+      "description": "A visionary project supporting differently-abled youth, recognized at the district level.",
+      "category": "Community",
+      "year": "2019",
+      "status": "Completed",
+      "image1": "",
+      "image2": ""
+    }
+  ],
+  "executive": [
+    {
+      "id": "e1",
+      "name": "Lion Lakma Kithmini",
+      "role": "Leo Advisor",
+      "section": "advisor",
+      "photo": ""
+    },
+    {
+      "id": "e2",
+      "name": "Leo Mevinu Gamage",
+      "role": "President",
+      "section": "president",
+      "photo": ""
+    },
+    {
+      "id": "e3",
+      "name": "Leo Sachitha Siriwardana",
+      "role": "Vice President",
+      "section": "vp",
+      "photo": ""
+    },
+    {
+      "id": "e4",
+      "name": "Leo Dimaga Pieris",
+      "role": "Vice President",
+      "section": "vp",
+      "photo": ""
+    },
+    {
+      "id": "e5",
+      "name": "Leo Minuda Kalansooriya",
+      "role": "Secretary",
+      "section": "secretariat",
+      "photo": ""
+    },
+    {
+      "id": "e6",
+      "name": "Leo Inosh Ranathunga",
+      "role": "Assistant Secretary",
+      "section": "secretariat",
+      "photo": ""
+    },
+    {
+      "id": "e7",
+      "name": "Leo Sadeepa Weerasinghe",
+      "role": "Treasurer",
+      "section": "treasury",
+      "photo": ""
+    },
+    {
+      "id": "e8",
+      "name": "Leo Savindu Hansana",
+      "role": "Assistant Treasurer",
+      "section": "treasury",
+      "photo": ""
+    },
+    {
+      "id": "e9",
+      "name": "Leo Harindu Thirasara",
+      "role": "Director – Public Relations",
+      "section": "directors",
+      "photo": ""
+    },
+    {
+      "id": "e10",
+      "name": "Leo Isuka Hansindu",
+      "role": "Director",
+      "section": "directors",
+      "photo": ""
+    },
+    {
+      "id": "e11",
+      "name": "Leo Asuru Oshada",
+      "role": "Director",
+      "section": "directors",
+      "photo": ""
+    },
+    {
+      "id": "e12",
+      "name": "Leo Chamal Mendis",
+      "role": "Membership Chairperson",
+      "section": "directors",
+      "photo": ""
+    }
+  ],
+  "newsletter": [
+    {
+      "id": "n1",
+      "title": "Leo Voice – Issue 01",
+      "date": "March 2025",
+      "description": "Club reactivation edition — introducing the 2025/26 executive committee and upcoming project pipeline.",
+      "pdfLink": ""
+    }
+  ]
+}
