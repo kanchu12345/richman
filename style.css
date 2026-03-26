@@ -236,14 +236,14 @@ ul { list-style: none; }
 
 .hero-grid {
   display: grid;
-  grid-template-columns: 1fr 1.35fr;
+  grid-template-columns: 1fr 1.6fr;
   align-items: center;
-  gap: 3.5rem;
+  gap: 3rem;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1400px;
   position: relative;
   z-index: 1;
-  padding: 0 4rem;
+  padding: 0 2rem;
 }
 .hero-text-content { text-align: left; }
 .hero-visual { position: relative; width: 100%; display: flex; justify-content: flex-end; align-items: center; }
@@ -261,7 +261,8 @@ ul { list-style: none; }
 }
 .hero-img-main {
   width: 100%;
-  max-height: 540px;
+  max-height: none;
+  aspect-ratio: 16 / 10;
   object-fit: cover;
   display: block;
 }
