@@ -54,6 +54,10 @@
     </div>
     <nav class="sb-nav">
       <div class="sb-nav-item">
+        <a class="sb-link" onclick="showTab('home')" id="tab-home">🏠 Home Page</a>
+        <a href="https://kanchu12345.github.io/richman/" target="_blank" class="sb-preview-btn" title="View live page">↗</a>
+      </div>
+      <div class="sb-nav-item">
         <a class="sb-link active" onclick="showTab('projects')" id="tab-projects">📁 Projects</a>
         <a href="https://kanchu12345.github.io/richman/projects.html" target="_blank" class="sb-preview-btn" title="View live page">↗</a>
       </div>
@@ -118,10 +122,10 @@
       <div id="newsletter-list" class="item-list"></div>
     </div>
 
-    <!-- ── CLUB INFO TAB ── -->
-    <div id="pane-club" class="pane" style="display:none">
-      <div class="pane-header"><div><h2>Club Info</h2><p>Edit hero visual, contact details, social links and about text.</p></div></div>
-      <div class="form-card">
+    <!-- ── HOME PAGE TAB ── -->
+    <div id="pane-home" class="pane" style="display:none">
+      <div class="pane-header"><div><h2>Home Page Settings</h2><p>Edit your main hero text and right-side group photo.</p></div></div>
+      <div class="form-card" style="margin-bottom:1rem;">
         <div class="form-section-title">Hero Section – Group Photo</div>
         <div class="img-upload-row" style="margin-bottom:1.5rem;">
           <div class="img-slot" style="max-width:280px;">
@@ -137,13 +141,22 @@
           <div class="form-group"><label>Photo Caption Title (e.g. Team 2025/2026)</label><input type="text" id="ci-group-title" placeholder="Team 2025/2026"/></div>
           <div class="form-group"><label>Photo Caption Subtitle (e.g. Leading with Pride)</label><input type="text" id="ci-group-sub" placeholder="Leading with Pride"/></div>
         </div>
-
+      </div>
+      
+      <div class="form-card">
         <div class="form-section-title">Home Page Texts</div>
         <div class="form-group"><label>Hero Title (HTML acceptable - e.g. for color spans)</label><input type="text" id="ci-hero-title"/></div>
         <div class="form-group"><label>Hero Subtitle</label><input type="text" id="ci-hero-subtitle"/></div>
         <div class="form-group"><label>Hero Description</label><textarea id="ci-hero-desc" rows="2"></textarea></div>
         <div class="form-group"><label>Hero Motto / Tags</label><input type="text" id="ci-hero-motto"/></div>
+        <button class="btn-primary" style="margin-top:1rem;" onclick="saveClubInfo()">✅ Apply Changes</button>
+      </div>
+    </div>
 
+    <!-- ── CLUB INFO TAB ── -->
+    <div id="pane-club" class="pane" style="display:none">
+      <div class="pane-header"><div><h2>Club Info</h2><p>Edit contact details, social links and about text.</p></div></div>
+      <div class="form-card">
         <div class="form-section-title">Contact Details</div>
         <div class="form-row2">
           <div class="form-group"><label>Email</label><input type="text" id="ci-email"/></div>
