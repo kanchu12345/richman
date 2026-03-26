@@ -92,6 +92,10 @@
   window.renderHome = function (data) {
     if (!data) return;
     const c = data.club;
+    if (c && c.heroImage) {
+      const heroEl = document.getElementById('hero-dynamic-img');
+      if (heroEl) heroEl.src = c.heroImage;
+    }
     // Stats
     const nums = document.querySelectorAll('.stat-item .number');
     if (nums[0]) nums[0].dataset.target = c.founded;
@@ -108,7 +112,7 @@
     // Featured projects (first 3)
     const grid = document.getElementById('featured-projects');
     if (grid && data.projects) {
-      grid.innerHTML = data.projects.slice(0, 3).map(p => `
+      grid.innerHTML = [...data.projects].reverse().slice(0, 3).map(p => `
         <div class="project-card fade-in">
           ${generateImageGallery(p)}
           <div class="project-card-body">

@@ -119,9 +119,21 @@
     </div>
 
     <!-- ── CLUB INFO TAB ── -->
-    <div id="pane-club" class="pane">
-      <div class="pane-header"><div><h2>Club Info</h2><p>Edit contact details, social links and about text.</p></div></div>
+    <div id="pane-club" class="pane" style="display:none">
+      <div class="pane-header"><div><h2>Club Info</h2><p>Edit hero visual, contact details, social links and about text.</p></div></div>
       <div class="form-card">
+        <div class="form-section-title">Hero Section Visual</div>
+        <div class="img-upload-row" style="margin-bottom:1.5rem;">
+          <div class="img-slot" style="max-width:250px;">
+            <label>Home Page Hero Image</label>
+            <div class="img-preview-box" id="club-hero-box" style="height:140px; margin: 0.5rem 0;">
+              <span id="club-hero-prev">No image</span>
+            </div>
+            <button class="btn-upload" onclick="openImgModal({obj:content.club,field:'heroImage',imgElId:'club-hero-prev',boxId:'club-hero-box'})">📁 Upload Image</button>
+            <button class="btn-remove" id="club-hero-remove" style="display:none; margin-top:0.5rem;" onclick="removeImg(content.club,'heroImage','club-hero-prev','club-hero-box'); document.getElementById('club-hero-remove').style.display='none';">✕ Remove</button>
+          </div>
+        </div>
+
         <div class="form-section-title">Contact Details</div>
         <div class="form-row2">
           <div class="form-group"><label>Email</label><input type="text" id="ci-email"/></div>
@@ -560,6 +572,15 @@ function deleteIssue(id) {
 function loadClubInfo() {
   const c = content?.club;
   if (!c) return;
+  if (c.heroImage) {
+    document.getElementById('club-hero-box').classList.add('has-img');
+    document.getElementById('club-hero-box').innerHTML = `<img src="${c.heroImage}" id="club-hero-prev"/>`;
+    document.getElementById('club-hero-remove').style.display = 'inline-block';
+  } else {
+    document.getElementById('club-hero-box').classList.remove('has-img');
+    document.getElementById('club-hero-box').innerHTML = `<span id="club-hero-prev">No image</span>`;
+    document.getElementById('club-hero-remove').style.display = 'none';
+  }
   document.getElementById('ci-email').value    = c.email    || '';
   document.getElementById('ci-whatsapp').value = c.whatsapp || '';
   document.getElementById('ci-location').value = c.location || '';
