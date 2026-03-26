@@ -140,10 +140,11 @@
     const container = document.getElementById('projects-grid');
     if (!container) return;
 
-    // Group projects by year
+    // Group projects by year (reversed to put newest first inside the block)
     const byYear = {};
     if (data.projects) {
-      data.projects.forEach(p => {
+      // Loop reversed so newest pushed items appear first
+      [...data.projects].reverse().forEach(p => {
         const y = p.year || 'Unknown';
         if (!byYear[y]) byYear[y] = [];
         byYear[y].push(p);
