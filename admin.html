@@ -87,7 +87,7 @@
       <div class="pane-header">
         <div>
           <h2>Projects</h2>
-          <p>Add, edit or delete club projects. Upload up to 5 images per project (0.5MB max each). Multiple images will auto-swap.</p>
+          <p>Add, edit or delete club projects. Upload up to 5 images per project (1MB max each). Multiple images will auto-swap.</p>
         </div>
         <button class="btn-primary" onclick="addProject()">+ Add Project</button>
       </div>
@@ -200,7 +200,7 @@
       </div>
       <div id="imgDropPrompt">
         <div style="font-size:2.5rem;">📁</div>
-        <p>Click to choose an image<br/><span style="font-size:0.78rem;opacity:0.6;">JPG, PNG, WEBP — max 0.5 MB</span></p>
+        <p>Click to choose an image<br/><span style="font-size:0.78rem;opacity:0.6;">JPG, PNG, WEBP — max 1 MB</span></p>
       </div>
     </div>
     <input type="file" id="imgFileInput" accept="image/*" style="display:none" onchange="previewImg(this)"/>
@@ -615,8 +615,8 @@ function closeImgModal() {
 function previewImg(input) {
   _selectedFile = input.files[0];
   if (!_selectedFile) return;
-  if (_selectedFile.size > 500 * 1024) {
-    alert('Image size exceeds 0.5 MB limit (it is ' + (_selectedFile.size / 1024 / 1024).toFixed(2) + ' MB). Please compress and choose a smaller image.');
+  if (_selectedFile.size > 1024 * 1024) {
+    alert('Image size exceeds 1 MB limit (it is ' + (_selectedFile.size / 1024 / 1024).toFixed(2) + ' MB). Please compress and choose a smaller image.');
     input.value = '';
     _selectedFile = null;
     return;
