@@ -122,16 +122,20 @@
     <div id="pane-club" class="pane" style="display:none">
       <div class="pane-header"><div><h2>Club Info</h2><p>Edit hero visual, contact details, social links and about text.</p></div></div>
       <div class="form-card">
-        <div class="form-section-title">Hero Section Visual</div>
+        <div class="form-section-title">Hero Section – Group Photo</div>
         <div class="img-upload-row" style="margin-bottom:1.5rem;">
-          <div class="img-slot" style="max-width:250px;">
-            <label>Home Page Hero Image</label>
-            <div class="img-preview-box" id="club-hero-box" style="height:140px; margin: 0.5rem 0;">
-              <span id="club-hero-prev">No image</span>
+          <div class="img-slot" style="max-width:280px;">
+            <label>Team / Group Photo (shown on Home Page right side)</label>
+            <div class="img-preview-box" id="club-hero-box" style="height:160px; margin: 0.5rem 0;">
+              <span id="club-hero-prev">No image – using local file image/group.jpg</span>
             </div>
-            <button class="btn-upload" onclick="openImgModal({obj:content.club,field:'heroImage',imgElId:'club-hero-prev',boxId:'club-hero-box'})">📁 Upload Image</button>
+            <button class="btn-upload" onclick="openImgModal({obj:content.club,field:'heroImage',imgElId:'club-hero-prev',boxId:'club-hero-box'})">📁 Upload Photo</button>
             <button class="btn-remove" id="club-hero-remove" style="display:none; margin-top:0.5rem;" onclick="removeImg(content.club,'heroImage','club-hero-prev','club-hero-box'); document.getElementById('club-hero-remove').style.display='none';">✕ Remove</button>
           </div>
+        </div>
+        <div class="form-row2">
+          <div class="form-group"><label>Photo Caption Title (e.g. Team 2025/2026)</label><input type="text" id="ci-group-title" placeholder="Team 2025/2026"/></div>
+          <div class="form-group"><label>Photo Caption Subtitle (e.g. Leading with Pride)</label><input type="text" id="ci-group-sub" placeholder="Leading with Pride"/></div>
         </div>
 
         <div class="form-section-title">Home Page Texts</div>

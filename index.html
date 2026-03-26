@@ -61,7 +61,14 @@
       </div>
     </div>
     <div class="hero-visual">
-      <img id="hero-dynamic-img" src="image/logo.jpg.jpeg" alt="Club Hero Visual" class="hero-img-main" onerror="this.src='image/logo.jpg.jpeg';"/>
+      <!-- Group photo (admin-updatable). Falls back to spinning logo if not set -->
+      <div id="hero-group-wrap" class="hero-group-frame">
+        <img id="hero-dynamic-img" src="image/group.jpg" alt="Club Team Photo" class="hero-img-main" onerror="this.parentElement.innerHTML='<div class=\'hero-logo-wrap\'><img src=\'image/logo.jpg.jpeg\' alt=\'Leo Club Logo\' class=\'hero-logo glow-pulse\' /></div>'"/>
+        <div class="hero-group-caption">
+          <span id="hero-group-title">Team 2025/2026</span>
+          <span id="hero-group-sub">Leading with Pride</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
