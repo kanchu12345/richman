@@ -96,6 +96,11 @@
       const heroEl = document.getElementById('hero-dynamic-img');
       if (heroEl) heroEl.src = c.heroImage;
     }
+    // Group photo caption
+    const gtEl = document.getElementById('hero-group-title');
+    const gsEl = document.getElementById('hero-group-sub');
+    if (gtEl) gtEl.textContent = c.groupTitle || 'Team 2025/2026';
+    if (gsEl) gsEl.textContent = c.groupSub   || 'Leading with Pride';
     // Stats
     const nums = document.querySelectorAll('.stat-item .number');
     if (nums[0]) nums[0].dataset.target = c.founded;
