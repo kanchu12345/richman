@@ -999,11 +999,17 @@ footer {
   .nav-toggle { display: flex; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .form-row { grid-template-columns: 1fr; }
-  .hero-logo { width: 120px; height: 120px; }
+  .hero-logo-main { width: 120px; height: 120px; }
+  .navbar { padding: 0 1rem; }
+  .hero { min-height: auto; padding: 110px 1.25rem 50px; }
+  .container { padding: 0 1.25rem; }
 }
 @media (max-width: 540px) {
   .footer-grid { grid-template-columns: 1fr; }
   .footer-brand { max-width: 100%; }
+  .hero h1 { font-size: 2.25rem; }
+  .page-header { padding: 5rem 1rem 2.5rem; min-height: 280px; }
+  .hero-grid { padding: 0 0.5rem; gap: 1.5rem; }
 }
 
 /* glow pulse animation */
