@@ -117,7 +117,8 @@
     // Featured projects (first 3)
     const grid = document.getElementById('featured-projects');
     if (grid && data.projects) {
-      grid.innerHTML = [...data.projects].reverse().slice(0, 3).map(p => `
+      const sortedProjects = [...data.projects].reverse().sort((a,b) => (parseInt(b.year) || 0) - (parseInt(a.year) || 0));
+      grid.innerHTML = sortedProjects.slice(0, 3).map(p => `
         <div class="project-card fade-in">
           ${generateImageGallery(p)}
           <div class="project-card-body">
@@ -143,8 +144,9 @@
     // Group projects by year (reversed to put newest first inside the block)
     const byYear = {};
     if (data.projects) {
-      // Loop reversed so newest pushed items appear first
-      [...data.projects].reverse().forEach(p => {
+      // Loop with sorted array to guarantee absolute newest is first in category
+      const sortedProjects = [...data.projects].reverse().sort((a,b) => (parseInt(b.year) || 0) - (parseInt(a.year) || 0));
+      sortedProjects.forEach(p => {
         const y = p.year || 'Unknown';
         if (!byYear[y]) byYear[y] = [];
         byYear[y].push(p);
