@@ -208,6 +208,36 @@
     btn.addEventListener('click', () => {
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
+      const filter = btn.textContent.trim();
+      let totalVisible = 0;
+      document.querySelectorAll('.project-year-header').forEach(header => {
+        let hasVisible = false;
+        const grid = header.nextElementSibling;
+        if (grid && grid.classList.contains('grid-3')) {
+          grid.querySelectorAll('.project-card').forEach(card => {
+            if (filter === 'All Projects' || card.dataset.cat === filter) {
+              card.style.display = 'flex';
+              hasVisible = true;
+              totalVisible++;
+            } else { card.style.display = 'none'; }
+          });
+          grid.style.display = hasVisible ? 'grid' : 'none';
+        }
+        header.style.display = hasVisible ? 'flex' : 'none';
+      });
+      let emptyMsg = document.getElementById('empty-filter-msg');
+      if (totalVisible === 0) {
+        if (!emptyMsg) {
+          emptyMsg = document.createElement('div');
+          emptyMsg.id = 'empty-filter-msg';
+          emptyMsg.className = 'empty-state';
+          emptyMsg.style.gridColumn = '1 / -1';
+          emptyMsg.style.marginTop = '2rem';
+          emptyMsg.textContent = 'No projects found in this category.';
+          document.getElementById('projects-grid').appendChild(emptyMsg);
+        }
+        emptyMsg.style.display = 'block';
+      } else if (emptyMsg) { emptyMsg.style.display = 'none'; }
     });
   });
   const observer = new IntersectionObserver(entries => {

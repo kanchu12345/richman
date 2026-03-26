@@ -10,13 +10,13 @@
   async function loadContent() {
     try {
       // Try absolute path first (works on server/GitHub Pages)
-      let res = await fetch(CONTENT_PATH);
+      let res = await fetch(CONTENT_PATH + '?t=' + Date.now());
       if (!res.ok) throw new Error('absolute path failed');
       return await res.json();
     } catch {
       // Fallback: relative path (works when opening local files)
       try {
-        let res2 = await fetch('data/content.json');
+        let res2 = await fetch('data/content.json?t=' + Date.now());
         if (!res2.ok) throw new Error('relative path failed');
         return await res2.json();
       } catch (e) {
@@ -41,7 +41,7 @@
   }
 
   function categoryEmoji(cat) {
-    const map = { Education:'📚', Environment:'🌿', Health:'🩸', Community:'🤝', International:'🌍', Culture:'🎨', Sports:'⚽' };
+    const map = { Education:'📚', Environment:'🌿', Health:'❤️', Community:'🤝', International:'🌍', Culture:'🎨', Sports:'⚽' };
     return map[cat] || '📌';
   }
 
