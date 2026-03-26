@@ -595,6 +595,8 @@ function loadClubInfo() {
   document.getElementById('ci-hero-subtitle').value = c.heroSubtitle || 'of Richmond College';
   document.getElementById('ci-hero-desc').value = c.heroDesc || 'Empowering youth to serve. Building leaders who make a difference in our communities and beyond.';
   document.getElementById('ci-hero-motto').value = c.heroMotto || '# One Team · # One Dream · # One Aim';
+  document.getElementById('ci-group-title').value = c.groupTitle || 'Team 2025/2026';
+  document.getElementById('ci-group-sub').value = c.groupSub || 'Leading with Pride';
   document.getElementById('ci-email').value    = c.email    || '';
   document.getElementById('ci-whatsapp').value = c.whatsapp || '';
   document.getElementById('ci-location').value = c.location || '';
@@ -615,6 +617,8 @@ function saveClubInfo() {
   content.club.heroSubtitle = document.getElementById('ci-hero-subtitle').value.trim();
   content.club.heroDesc     = document.getElementById('ci-hero-desc').value.trim();
   content.club.heroMotto    = document.getElementById('ci-hero-motto').value.trim();
+  content.club.groupTitle   = document.getElementById('ci-group-title').value.trim();
+  content.club.groupSub     = document.getElementById('ci-group-sub').value.trim();
   content.club.email    = document.getElementById('ci-email').value.trim();
   content.club.whatsapp = '+' + wa;
   content.club.whatsappLink = 'https://wa.me/' + wa;
