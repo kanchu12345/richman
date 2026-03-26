@@ -28,6 +28,48 @@
 
   // ─── Helpers ──────────────────────────────────────────────────────────────
 
+  window.toggleText = function(btn) {
+    const p = btn.previousElementSibling;
+    if (p.classList.contains('text-truncate')) {
+      p.classList.remove('text-truncate');
+      btn.textContent = 'See Less';
+    } else {
+      p.classList.add('text-truncate');
+      btn.textContent = 'See More';
+    }
+  };
+
+  window.startAutoSwap = function() {
+    setInterval(() => {
+      document.querySelectorAll('.auto-swap-gallery').forEach(gal => {
+        const imgs = Array.from(gal.querySelectorAll('img'));
+        if (imgs.length > 1) {
+          let act = gal.querySelector('img.active');
+          if (!act) { imgs[0].classList.add('active'); return; }
+          act.classList.remove('active');
+          let next = act.nextElementSibling;
+          if (!next || next.tagName !== 'IMG') next = imgs[0];
+          next.classList.add('active');
+        }
+      });
+    }, 3500);
+  };
+
+  function generateImageGallery(p) {
+    const imgs = [p.image1, p.image2, p.image3, p.image4, p.image5].filter(Boolean);
+    if (imgs.length === 0) return `<div class="project-card-img-placeholder">${categoryEmoji(p.category)}</div>`;
+    if (imgs.length === 1) return `<div class="project-img-gallery"><img src="${imgs[0]}" class="project-card-img active" alt="${p.title}" /></div>`;
+    return `<div class="project-img-gallery auto-swap-gallery">
+              ${imgs.map((src, i) => `<img src="${src}" class="project-card-img ${i === 0 ? 'active' : ''}" alt="${p.title}" />`).join('')}
+            </div>`;
+  }
+
+  function generateDescription(p) {
+    if (!p.description) return '';
+    if (p.description.length <= 110) return `<p>${p.description}</p>`;
+    return `<p class="text-truncate">${p.description}</p><button class="see-more-btn" onclick="toggleText(this)">See More</button>`;
+  }
+
   function initials(name) {
     return name.replace(/^Leo |^Lion /, '')
       .split(' ').slice(0, 2)
@@ -68,13 +110,11 @@
     if (grid && data.projects) {
       grid.innerHTML = data.projects.slice(0, 3).map(p => `
         <div class="project-card fade-in">
-          ${p.image1
-            ? `<img src="${p.image1}" class="project-card-img" alt="${p.title}" />`
-            : `<div class="project-card-img-placeholder">${categoryEmoji(p.category)}</div>`}
+          ${generateImageGallery(p)}
           <div class="project-card-body">
             <span class="tag">${p.category}</span>
             <h3>${p.title}</h3>
-            <p>${p.description}</p>
+            ${generateDescription(p)}
           </div>
           <div class="project-card-footer">
             <span>${p.year}</span>${statusBadge(p.status)}
@@ -111,16 +151,11 @@
       html += `<div class="grid-3">`;
       html += byYear[y].map(p => `
         <div class="project-card fade-in" data-cat="${p.category}">
-          ${p.image1
-            ? `<div class="project-img-gallery">
-                 <img src="${p.image1}" class="project-card-img" alt="${p.title}" />
-                 ${p.image2 ? `<img src="${p.image2}" class="project-card-img proj-img2" alt="${p.title} 2" />` : ''}
-               </div>`
-            : `<div class="project-card-img-placeholder">${categoryEmoji(p.category)}</div>`}
+          ${generateImageGallery(p)}
           <div class="project-card-body">
             <span class="tag">${p.category}</span>
             <h3>${p.title}</h3>
-            <p>${p.description}</p>
+            ${generateDescription(p)}
           </div>
           <div class="project-card-footer">
             <span>${p.year}</span>${statusBadge(p.status)}
@@ -236,6 +271,7 @@
 
   // ─── Bootstrap ────────────────────────────────────────────────────────────
   document.addEventListener('DOMContentLoaded', async () => {
+    startAutoSwap();
     const data = await loadContent();
     if (data) window.siteContent = data;
     

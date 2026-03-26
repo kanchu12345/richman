@@ -535,6 +535,44 @@ ul { list-style: none; }
   font-size: 3rem;
 }
 .project-card-body { padding: 1.5rem; }
+.project-img-gallery {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  background: var(--navy-mid);
+  overflow: hidden;
+}
+.auto-swap-gallery img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+}
+.auto-swap-gallery img.active {
+  opacity: 1;
+}
+.text-truncate {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.see-more-btn {
+  background: transparent;
+  border: none;
+  color: var(--cyan);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  margin-top: 0.3rem;
+  letter-spacing: 0.5px;
+}
+.see-more-btn:hover { color: var(--cyan-light); text-decoration: underline; }
 .project-card-body .tag {
   font-size: 0.72rem;
   font-weight: 600;

@@ -87,7 +87,7 @@
       <div class="pane-header">
         <div>
           <h2>Projects</h2>
-          <p>Add, edit or delete club projects. Upload up to 2 images per project.</p>
+          <p>Add, edit or delete club projects. Upload up to 5 images per project (0.5MB max each). Multiple images will auto-swap.</p>
         </div>
         <button class="btn-primary" onclick="addProject()">+ Add Project</button>
       </div>
@@ -200,7 +200,7 @@
       </div>
       <div id="imgDropPrompt">
         <div style="font-size:2.5rem;">📁</div>
-        <p>Click to choose an image<br/><span style="font-size:0.78rem;opacity:0.6;">JPG, PNG, WEBP — max 10 MB</span></p>
+        <p>Click to choose an image<br/><span style="font-size:0.78rem;opacity:0.6;">JPG, PNG, WEBP — max 0.5 MB</span></p>
       </div>
     </div>
     <input type="file" id="imgFileInput" accept="image/*" style="display:none" onchange="previewImg(this)"/>
@@ -375,22 +375,19 @@ function renderProjects() {
         </div>
         <div class="form-group"><label>Description</label><textarea id="pf-desc-${p.id}" rows="3">${esc(p.description)}</textarea></div>
         <div class="img-upload-row">
-          <div class="img-slot">
-            <label>Image 1</label>
-            <div class="img-preview-box ${p.image1?'has-img':''}" id="pf-img1-box-${p.id}">
-              ${p.image1 ? `<img src="${p.image1}" alt="img1" id="pf-img1-prev-${p.id}"/>` : `<span id="pf-img1-prev-${p.id}">No image</span>`}
-            </div>
-            <button class="btn-upload" onclick="openImgModal({obj:content.projects[${i}],field:'image1',imgElId:'pf-img1-prev-${p.id}',boxId:'pf-img1-box-${p.id}'})">📁 Upload Image 1</button>
-            ${p.image1 ? `<button class="btn-remove" onclick="removeImg(content.projects[${i}],'image1','pf-img1-prev-${p.id}','pf-img1-box-${p.id}')">✕ Remove</button>` : ''}
-          </div>
-          <div class="img-slot">
-            <label>Image 2 (optional)</label>
-            <div class="img-preview-box ${p.image2?'has-img':''}" id="pf-img2-box-${p.id}">
-              ${p.image2 ? `<img src="${p.image2}" alt="img2" id="pf-img2-prev-${p.id}"/>` : `<span id="pf-img2-prev-${p.id}">No image</span>`}
-            </div>
-            <button class="btn-upload" onclick="openImgModal({obj:content.projects[${i}],field:'image2',imgElId:'pf-img2-prev-${p.id}',boxId:'pf-img2-box-${p.id}'})">📁 Upload Image 2</button>
-            ${p.image2 ? `<button class="btn-remove" onclick="removeImg(content.projects[${i}],'image2','pf-img2-prev-${p.id}','pf-img2-box-${p.id}')">✕ Remove</button>` : ''}
-          </div>
+        <div class="img-upload-row" style="display:flex; gap:1rem; flex-wrap:wrap; margin-top:1rem;">
+          ${[1, 2, 3, 4, 5].map(imgIdx => {
+            const field = 'image' + imgIdx;
+            const url = p[field];
+            return `<div class="img-slot" style="flex:1; min-width:140px; text-align:center;">
+              <label>Image ${imgIdx}</label>
+              <div class="img-preview-box ${url?'has-img':''}" id="pf-img${imgIdx}-box-${p.id}" style="margin: 0.5rem auto;">
+                ${url ? `<img src="${url}" alt="img${imgIdx}" id="pf-img${imgIdx}-prev-${p.id}"/>` : `<span id="pf-img${imgIdx}-prev-${p.id}">No image</span>`}
+              </div>
+              <button class="btn-upload" onclick="openImgModal({obj:content.projects[${i}],field:'${field}',imgElId:'pf-img${imgIdx}-prev-${p.id}',boxId:'pf-img${imgIdx}-box-${p.id}'})">📁</button>
+              ${url ? `<button class="btn-remove" onclick="removeImg(content.projects[${i}],'${field}','pf-img${imgIdx}-prev-${p.id}','pf-img${imgIdx}-box-${p.id}')">✕</button>` : ''}
+            </div>`;
+          }).join('')}
         </div>
         <div class="form-actions">
           <button class="btn-primary" onclick="saveProject('${p.id}',${i})">✅ Save Project</button>
@@ -413,7 +410,7 @@ function saveProject(id, i) {
 
 function addProject() {
   const id = 'p' + Date.now();
-  content.projects.push({ id, title:'New Project', description:'', category:'Education', year: String(new Date().getFullYear()), status:'Upcoming', image1:'', image2:'' });
+  content.projects.push({ id, title:'New Project', description:'', category:'Education', year: String(new Date().getFullYear()), status:'Upcoming', image1:'', image2:'', image3:'', image4:'', image5:'' });
   renderProjects();
   setTimeout(() => { toggleEdit('pc-form-' + id); document.getElementById(`pf-title-${id}`)?.focus(); }, 50);
 }
@@ -618,6 +615,12 @@ function closeImgModal() {
 function previewImg(input) {
   _selectedFile = input.files[0];
   if (!_selectedFile) return;
+  if (_selectedFile.size > 500 * 1024) {
+    alert('Image size exceeds 0.5 MB limit (it is ' + (_selectedFile.size / 1024 / 1024).toFixed(2) + ' MB). Please compress and choose a smaller image.');
+    input.value = '';
+    _selectedFile = null;
+    return;
+  }
   const reader = new FileReader();
   reader.onload = e => {
     document.getElementById('imgPreview').src = e.target.result;
