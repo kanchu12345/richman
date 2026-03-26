@@ -134,6 +134,12 @@
           </div>
         </div>
 
+        <div class="form-section-title">Home Page Texts</div>
+        <div class="form-group"><label>Hero Title (HTML acceptable - e.g. for color spans)</label><input type="text" id="ci-hero-title"/></div>
+        <div class="form-group"><label>Hero Subtitle</label><input type="text" id="ci-hero-subtitle"/></div>
+        <div class="form-group"><label>Hero Description</label><textarea id="ci-hero-desc" rows="2"></textarea></div>
+        <div class="form-group"><label>Hero Motto / Tags</label><input type="text" id="ci-hero-motto"/></div>
+
         <div class="form-section-title">Contact Details</div>
         <div class="form-row2">
           <div class="form-group"><label>Email</label><input type="text" id="ci-email"/></div>
@@ -581,6 +587,10 @@ function loadClubInfo() {
     document.getElementById('club-hero-box').innerHTML = `<span id="club-hero-prev">No image</span>`;
     document.getElementById('club-hero-remove').style.display = 'none';
   }
+  document.getElementById('ci-hero-title').value = c.heroTitle || 'Centennial <span>Leo Club</span>';
+  document.getElementById('ci-hero-subtitle').value = c.heroSubtitle || 'of Richmond College';
+  document.getElementById('ci-hero-desc').value = c.heroDesc || 'Empowering youth to serve. Building leaders who make a difference in our communities and beyond.';
+  document.getElementById('ci-hero-motto').value = c.heroMotto || '# One Team · # One Dream · # One Aim';
   document.getElementById('ci-email').value    = c.email    || '';
   document.getElementById('ci-whatsapp').value = c.whatsapp || '';
   document.getElementById('ci-location').value = c.location || '';
@@ -596,6 +606,11 @@ function loadClubInfo() {
 
 function saveClubInfo() {
   const wa = document.getElementById('ci-whatsapp').value.trim().replace(/\s/g,'').replace(/^\+/,'');
+  if(!content.club) content.club = {};
+  content.club.heroTitle    = document.getElementById('ci-hero-title').value.trim();
+  content.club.heroSubtitle = document.getElementById('ci-hero-subtitle').value.trim();
+  content.club.heroDesc     = document.getElementById('ci-hero-desc').value.trim();
+  content.club.heroMotto    = document.getElementById('ci-hero-motto').value.trim();
   content.club.email    = document.getElementById('ci-email').value.trim();
   content.club.whatsapp = '+' + wa;
   content.club.whatsappLink = 'https://wa.me/' + wa;
