@@ -91,6 +91,7 @@
       <div class="sb-footer">
         <button class="btn-save" onclick="saveToGitHub()" id="saveBtn">🚀 Publish Updates</button>
         <div id="saveStatus" class="save-status"></div>
+        <button class="btn-outline" onclick="downloadJSON()" style="width:100%; margin-top:0.5rem; font-size:0.85rem; border-color:var(--border-color);">📥 Download JSON (Fallback)</button>
         <a id="previewAfterSave" href="https://kanchu12345.github.io/richman/" target="_blank" class="btn-preview-live"
           style="display:none">🌐 View Live Website →</a>
         <button class="btn-logout" onclick="doLogout()">← Logout</button>
@@ -260,8 +261,12 @@
             <div class="form-group"><label>Repository Name</label><input type="text" id="gh-repo"
                 placeholder="e.g. richman" /></div>
             <div class="form-group"><label>Branch</label><input type="text" id="gh-branch" placeholder="main" /></div>
-            <div class="form-group"><label>Personal Access Token</label><input type="password" id="gh-token"
-                placeholder="ghp_..." /></div>
+            <div class="form-group" style="position:relative;">
+              <label>Personal Access Token</label>
+              <input type="password" id="gh-token" placeholder="ghp_..." />
+              <button class="btn-icon" onclick="toggleTokenVisibility()" style="position:absolute; right:10px; top:32px; font-size:1.2rem; cursor:pointer;" title="Show/Hide">👁️</button>
+            </div>
+            <p class="hint" style="margin-top:0.5rem; font-size:0.75rem;">Need a token? <a href="https://github.com/settings/tokens" target="_blank" style="color:var(--primary-color);">Generate one here</a> (requires 'repo' scope).</p>
             <button class="btn-primary" onclick="saveGHSettings()">💾 Save Settings</button>
             <button class="btn-outline" style="margin-left:0.75rem;" onclick="testGitHub()">🔍 Test Connection</button>
             <div id="gh-status" class="save-status"></div>
@@ -378,17 +383,17 @@
       document.getElementById('gh-user').value = gh.user || 'kanchu12345';
       document.getElementById('gh-repo').value = gh.repo || 'richman';
       document.getElementById('gh-branch').value = gh.branch || 'master';
-      document.getElementById('gh-token').value = gh.token || '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                                                                                 ';
+      document.getElementById('gh-token').value = (gh.token || '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').trim();
       document.getElementById('cl-cloud').value = cl.cloud || '';
     }
 
     function saveGHSettings() {
-      localStorage.setItem('leoGH', JSON.stringify({
-        user: document.getElementById('gh-user').value.trim(),
-        repo: document.getElementById('gh-repo').value.trim(),
-        branch: document.getElementById('gh-branch').value.trim() || 'main',
-        token: document.getElementById('gh-token').value.trim()
-      }));
+      const token = document.getElementById('gh-token').value.trim();
+      const user = document.getElementById('gh-user').value.trim();
+      const repo = document.getElementById('gh-repo').value.trim();
+      const branch = document.getElementById('gh-branch').value.trim() || 'main';
+
+      localStorage.setItem('leoGH', JSON.stringify({ user, repo, branch, token }));
       showStatus(document.getElementById('gh-status'), 'success', '✅ Saved!');
     }
 
@@ -405,13 +410,22 @@
       if (!gh.token) gh.token = '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';
       if (!gh.user) gh.user = 'kanchu12345';
       if (!gh.repo) gh.repo = 'richman';
+      
+      // Cleanup spaces
+      gh.token = gh.token.trim();
+      gh.user = gh.user.trim();
+      gh.repo = gh.repo.trim();
+
       showStatus(st, 'info', '⏳ Testing…');
       try {
         const r = await fetch(`https://api.github.com/repos/${gh.user}/${gh.repo}`, {
           headers: { Authorization: `token ${gh.token}` }
         });
         if (r.ok) showStatus(st, 'success', '✅ Connected! Repo found.');
-        else showStatus(st, 'error', `❌ Error ${r.status}: check username, repo, and token.`);
+        else {
+          const msg = r.status === 401 ? '❌ Bad credentials (invalid token).' : `❌ Error ${r.status}: check settings.`;
+          showStatus(st, 'error', msg);
+        }
       } catch {
         showStatus(st, 'error', '❌ Network error.');
       }
@@ -944,6 +958,9 @@
       if (!gh.repo) gh.repo = 'richman';
       if (!gh.branch) gh.branch = 'master';
 
+      // Cleanup
+      gh.token = gh.token.trim();
+
       const st = document.getElementById('saveStatus');
       const btn = document.getElementById('saveBtn');
       btn.disabled = true;
@@ -977,12 +994,36 @@
           if (previewBtn) previewBtn.style.display = 'flex';
         } else {
           const err = await res.json();
-          showStatus(st, 'error', '❌ ' + (err.message || 'Connection error'));
+          let msg = err.message || 'Connection error';
+          if (msg === 'Bad credentials') msg = 'Bad credentials. Check your token in Settings.';
+          showStatus(st, 'error', '❌ ' + msg);
+          showToast('⚠️ Github update failed. Try "Download JSON" instead.');
         }
       } catch (e) {
         showStatus(st, 'error', '❌ Network error: ' + e.message);
       }
       btn.disabled = false;
+    }
+
+    function downloadJSON() {
+      if (!content) return showToast('Error: No content to download.');
+      const data = JSON.stringify(content, null, 2);
+      const blob = new Blob([data], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'content.json';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast('✅ content.json downloaded. You can manually upload it to GitHub.');
+    }
+
+    function toggleTokenVisibility() {
+      const input = document.getElementById('gh-token');
+      if (input.type === 'password') input.type = 'text';
+      else input.type = 'password';
     }
 
     // ════════════════════════════════════════════════════════
