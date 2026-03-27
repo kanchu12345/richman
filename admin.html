@@ -267,6 +267,7 @@
               <button class="btn-icon" onclick="toggleTokenVisibility()" style="position:absolute; right:10px; top:32px; font-size:1.2rem; cursor:pointer;" title="Show/Hide">👁️</button>
             </div>
             <p class="hint" style="margin-top:0.5rem; font-size:0.75rem;">Need a token? <a href="https://github.com/settings/tokens" target="_blank" style="color:var(--primary-color);">Generate one here</a> (requires 'repo' scope).</p>
+            <p class="hint" style="margin-top:0.25rem; font-size:0.75rem; color:var(--primary-color);">💡 Tip: Ensure token has <b>"Contents: Read & Write"</b> permissions.</p>
             <button class="btn-primary" onclick="saveGHSettings()">💾 Save Settings</button>
             <button class="btn-outline" style="margin-left:0.75rem;" onclick="testGitHub()">🔍 Test Connection</button>
             <div id="gh-status" class="save-status"></div>
@@ -383,7 +384,7 @@
       document.getElementById('gh-user').value = gh.user || 'kanchu12345';
       document.getElementById('gh-repo').value = gh.repo || 'richman';
       document.getElementById('gh-branch').value = gh.branch || 'master';
-      document.getElementById('gh-token').value = (gh.token || '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').trim();
+      document.getElementById('gh-token').value = (gh.token || '').trim();
       document.getElementById('cl-cloud').value = cl.cloud || '';
     }
 
@@ -407,23 +408,26 @@
     async function testGitHub() {
       const st = document.getElementById('gh-status');
       let gh = JSON.parse(localStorage.getItem('leoGH') || '{}');
-      if (!gh.token) gh.token = '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';
+      
+      // Basic defaults if absolutely nothing is set
       if (!gh.user) gh.user = 'kanchu12345';
       if (!gh.repo) gh.repo = 'richman';
       
       // Cleanup spaces
-      gh.token = gh.token.trim();
-      gh.user = gh.user.trim();
-      gh.repo = gh.repo.trim();
+      gh.token = (gh.token || "").trim();
+      gh.user = (gh.user || "").trim();
+      gh.repo = (gh.repo || "").trim();
+
+      if (!gh.token) return showStatus(st, 'error', '❌ Please enter a token first.');
 
       showStatus(st, 'info', '⏳ Testing…');
       try {
         const r = await fetch(`https://api.github.com/repos/${gh.user}/${gh.repo}`, {
-          headers: { Authorization: `token ${gh.token}` }
+          headers: { Authorization: `Bearer ${gh.token}` }
         });
         if (r.ok) showStatus(st, 'success', '✅ Connected! Repo found.');
         else {
-          const msg = r.status === 401 ? '❌ Bad credentials (invalid token).' : `❌ Error ${r.status}: check settings.`;
+          const msg = r.status === 401 ? '❌ Bad credentials (check token permissions).' : `❌ Error ${r.status}: check settings.`;
           showStatus(st, 'error', msg);
         }
       } catch {
@@ -952,23 +956,30 @@
     // ════════════════════════════════════════════════════════
     async function saveToGitHub() {
       let gh = JSON.parse(localStorage.getItem('leoGH') || '{}');
-      // Hardcoded Fallbacks
-      if (!gh.token) gh.token = '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';
-      if (!gh.user) gh.user = 'kanchu12345';
-      if (!gh.repo) gh.repo = 'richman';
+      
+      // Final safeguard: ensure we have the latest from inputs if not saved
+      if (!gh.token) gh.token = document.getElementById('gh-token').value;
+      if (!gh.user)  gh.user  = 'kanchu12345';
+      if (!gh.repo)  gh.repo  = 'richman';
       if (!gh.branch) gh.branch = 'master';
 
       // Cleanup
-      gh.token = gh.token.trim();
+      gh.token = (gh.token || "").trim();
 
       const st = document.getElementById('saveStatus');
       const btn = document.getElementById('saveBtn');
+      
+      if (!gh.token) {
+        showStatus(st, 'error', '❌ No token found. Check Settings.');
+        return;
+      }
+
       btn.disabled = true;
       showStatus(st, 'info', '⏳ Saving…');
 
       const path = 'data/content.json';
       const apiBase = `https://api.github.com/repos/${gh.user}/${gh.repo}/contents/${path}`;
-      const headers = { Authorization: `token ${gh.token}`, 'Content-Type': 'application/json' };
+      const headers = { Authorization: `Bearer ${gh.token}`, 'Content-Type': 'application/json' };
 
       try {
         // Get current file SHA
@@ -995,7 +1006,7 @@
         } else {
           const err = await res.json();
           let msg = err.message || 'Connection error';
-          if (msg === 'Bad credentials') msg = 'Bad credentials. Check your token in Settings.';
+          if (msg === 'Bad credentials') msg = 'Bad credentials. Your token might be expired or lacks permissions.';
           showStatus(st, 'error', '❌ ' + msg);
           showToast('⚠️ Github update failed. Try "Download JSON" instead.');
         }
