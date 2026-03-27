@@ -115,6 +115,13 @@
     const descs = document.querySelectorAll('.about-desc');
     if (descs[0]) descs[0].innerHTML = c.about1.replace('Leo District 306 A2', '<strong style="color:var(--text-main)">Leo District 306 A2</strong>').replace('Leo District 306 D8', '<strong style="color:var(--cyan)">Leo District 306 D8</strong>');
     if (descs[1]) descs[1].innerHTML = c.about2.replace('Most Outstanding School Leo Club', '<strong style="color:var(--gold)">Most Outstanding School Leo Club</strong>');
+    
+    // Mission & Vision
+    const mTitle = document.getElementById('mission-title');
+    const mText = document.getElementById('mission-text');
+    if (mTitle) mTitle.innerHTML = c.missionTitle || 'Leading The Way <br/><span>For A Better Tomorrow</span>';
+    if (mText) mText.innerHTML = c.missionStatement || '';
+
     // Featured projects (first 3)
     const grid = document.getElementById('featured-projects');
     if (grid && data.projects) {

@@ -1165,6 +1165,79 @@ footer {
 .fade-in.visible { opacity: 1; transform: translateY(0); }
 
 /* ════════════════════════════════════════
+   MISSION SECTION (added)
+   ════════════════════════════════════════ */
+.mission-section { padding: 6rem 2rem; background: transparent; position: relative; }
+.mission-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 5rem;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.mission-image-wrap { position: relative; display: flex; justify-content: center; }
+.mission-image-frame {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  aspect-ratio: 1 / 1;
+  background: #fdfaf5;
+  padding: 2.5rem;
+  box-shadow: 
+    0 10px 40px rgba(0,0,0,0.6),
+    inset 0 0 60px rgba(0,0,0,0.05);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: transform 0.4s ease;
+}
+.mission-image-frame:hover { transform: rotate(-1deg) scale(1.02); }
+.mission-image-frame::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+  opacity: 0.25;
+  pointer-events: none;
+}
+.mission-image-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+}
+.mission-content { text-align: left; }
+.mission-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+  line-height: 1.1;
+  color: var(--white);
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+.mission-title span { color: var(--cyan); display: block; margin-top: 0.5rem; }
+.mission-divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(255,255,255,0.15);
+  margin: 2rem 0;
+}
+.mission-text {
+  font-size: 1.08rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+
+@media (max-width: 900px) {
+  .mission-grid { grid-template-columns: 1fr; gap: 4rem; text-align: center; }
+  .mission-content { text-align: center; }
+  .mission-image-frame { max-width: 360px; }
+  .mission-divider { margin: 1.5rem auto; max-width: 80%; }
+}
+
+/* ════════════════════════════════════════
    DESIGN CREDIT BADGE — Infinite Design
    DO NOT REMOVE · Protected Element
 ════════════════════════════════════════ */
