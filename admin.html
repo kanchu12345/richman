@@ -722,8 +722,12 @@
 
       const gh = JSON.parse(localStorage.getItem('leoGH') || '{}');
       const token = (gh.token || "").trim();
+      const user = (gh.user  || "kanchu12345").trim();
+      const repo = (gh.repo  || "richman").trim();
+      const branch = (gh.branch || "main").trim();
+
       if (!token) {
-        showToast('❌ No GitHub token found. Please set it in Settings.');
+        showToast('❌ No GitHub token found. Please set it in Settings (Ctrl+Shift+S).');
         return;
       }
 
@@ -732,35 +736,33 @@
       const reader = new FileReader();
       reader.onload = async (e) => {
         const b64 = e.target.result.split(',')[1];
-        // Clean filename: remove spaces and special chars, append timestamp
         const safeName = file.name.replace(/[^a-z0-9.]/gi, '_').toLowerCase();
         const fileName = `issue_${Date.now()}_${safeName}`;
         const path = `newsletter/${fileName}`;
         
-        const apiBase = `https://api.github.com/repos/${gh.user || 'kanchu12345'}/${gh.repo || 'richman'}/contents/${path}`;
+        const apiBase = `https://api.github.com/repos/${user}/${repo}/contents/${path}`;
         
         try {
           const res = await fetch(apiBase, {
             method: 'PUT',
-            headers: {
-              'Authorization': `Bearer ${token}`,
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              message: `Upload Newsletter PDF: ${file.name}`,
-              content: b64,
-              branch: gh.branch || 'main'
-            })
+            headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: `Upload PDF: ${file.name}`, content: b64, branch: branch })
           });
 
           if (res.ok) {
-            // Use relative path for the site. 
-            // Since it's in root/newsletter/, the path is newsletter/name.pdf
             document.getElementById(`nf-pdf-${currentPDFTargetId}`).value = path;
             showToast('✅ PDF uploaded successfully! Now click "Save Issue".');
           } else {
-            const err = await res.json();
-            showToast('❌ Upload failed: ' + (err.message || 'Check permissions.'));
+            const status = res.status;
+            let msg = 'Upload failed.';
+            if (status === 401) msg = '❌ Bad credentials (check if token is correct/expired).';
+            else if (status === 403) msg = '❌ Permission denied (check "Contents: Read & Write" on GitHub).';
+            else if (status === 404) msg = '❌ Repository not found (check Username/Repo in Settings).';
+            else {
+              const err = await res.json();
+              msg = `❌ Error ${status}: ${err.message || 'unknown error'}`;
+            }
+            showToast(msg);
           }
         } catch (err) {
           showToast('❌ Network error during upload.');
