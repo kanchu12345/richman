@@ -124,7 +124,7 @@
 
     <!-- ── HOME PAGE TAB ── -->
     <div id="pane-home" class="pane">
-      <div class="pane-header"><div><h2>Home Page Settings</h2><p>Edit your main hero text and right-side group photo.</p></div></div>
+      <div class="pane-header"><div><h2>Home Page Settings</h2><p>Edit your main hero text, right-side group photo, and attached governing bodies.</p></div></div>
       <div class="form-card" style="margin-bottom:1rem;">
         <div class="form-section-title">Hero Section – Group Photo</div>
         <div class="img-upload-row" style="margin-bottom:1.5rem;">
@@ -154,8 +154,11 @@
 
       <!-- Attached Bodies Section -->
       <div class="form-card" style="margin-top:1rem;">
-        <div class="form-section-title">🏛️ Attached / Governing Bodies</div>
-        <p class="hint" style="margin-bottom:1rem; font-size:0.82rem; color:var(--text-muted);">Manage the 4 governing bodies shown on the Home Page. Edit title, description, background image and logo for each.</p>
+        <div class="form-section-title" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>🏛️ Attached / Governing Bodies</span>
+          <button class="btn-primary" onclick="addAffiliated()" style="padding:0.4rem 0.8rem; font-size:0.75rem;">+ Add Body</button>
+        </div>
+        <p class="hint" style="margin-bottom:1rem; font-size:0.82rem; color:var(--text-muted);">Manage the governing bodies shown on the Home Page. Edit title, description, background image and logo for each.</p>
         <div id="affiliated-list" class="item-list"></div>
       </div>
     </div>
@@ -197,12 +200,12 @@
       <div class="settings-grid">
 
         <div class="form-card">
-          <div class="form-section-title">🔗 Integration Setup</div>
-          <p class="hint">Enter your integration credentials below. These are saved locally on this device only.</p>
-          <div class="form-group"><label>Service A – Name</label><input type="text" id="gh-user" placeholder=""/></div>
-          <div class="form-group"><label>Service A – Repository</label><input type="text" id="gh-repo" placeholder=""/></div>
+          <div class="form-section-title">🔗 GitHub Integration</div>
+          <p class="hint">Connect to your GitHub repository to publish updates live. These info are saved locally on this device only.</p>
+          <div class="form-group"><label>GitHub Username</label><input type="text" id="gh-user" placeholder="e.g. kanchu12345"/></div>
+          <div class="form-group"><label>Repository Name</label><input type="text" id="gh-repo" placeholder="e.g. richman"/></div>
           <div class="form-group"><label>Branch</label><input type="text" id="gh-branch" placeholder="main"/></div>
-          <div class="form-group"><label>Service A – Key</label><input type="password" id="gh-token" placeholder=""/></div>
+          <div class="form-group"><label>Personal Access Token</label><input type="password" id="gh-token" placeholder="ghp_..."/></div>
           <button class="btn-primary" onclick="saveGHSettings()">💾 Save Settings</button>
           <button class="btn-outline" style="margin-left:0.75rem;" onclick="testGitHub()">🔍 Test Connection</button>
           <div id="gh-status" class="save-status"></div>
@@ -311,8 +314,8 @@ function changePassword() {
 function loadSettings() {
   const gh = JSON.parse(localStorage.getItem('leoGH') || '{}');
   const cl = JSON.parse(localStorage.getItem('leoCL') || '{}');
-  document.getElementById('gh-user').value   = gh.user   || '';
-  document.getElementById('gh-repo').value   = gh.repo   || '';
+  document.getElementById('gh-user').value   = gh.user   || 'kanchu12345';
+  document.getElementById('gh-repo').value   = gh.repo   || 'richman';
   document.getElementById('gh-branch').value = gh.branch || 'main';
   document.getElementById('gh-token').value  = gh.token  || '';
   document.getElementById('cl-cloud').value  = cl.cloud  || '';
@@ -672,11 +675,12 @@ function renderAffiliated() {
     <div class="item-card" id="ab-${b.id}">
       <div class="item-card-header">
         <div class="item-info">
-          <div class="item-title">${b.title}</div>
+          <div class="item-title">${b.title || 'New Body'}</div>
           <div style="font-size:0.75rem; color:var(--text-muted);">${b.label || 'Governing Body'}</div>
         </div>
         <div class="item-actions">
           <button class="btn-icon" onclick="toggleEdit('ab-form-${b.id}')">✏️ Edit</button>
+          <button class="btn-icon btn-del" onclick="deleteAffiliated('${b.id}')">🗑️</button>
         </div>
       </div>
       <div class="item-form" id="ab-form-${b.id}" style="display:none">
@@ -721,6 +725,21 @@ function saveAffiliated(id, i) {
   b.description = document.getElementById(`af-desc-${id}`).value;
   renderAffiliated();
   showToast('Affiliated Body updated!');
+}
+
+function addAffiliated() {
+  const id = 'ab' + Date.now();
+  if(!content.affiliatedBodies) content.affiliatedBodies = [];
+  content.affiliatedBodies.push({ id, label:'Governing Body', title:'New Body', description:'', bgImage:'', logoImage:'' });
+  renderAffiliated();
+  setTimeout(() => { toggleEdit('ab-form-' + id); document.getElementById(`af-title-${id}`)?.focus(); }, 50);
+}
+
+function deleteAffiliated(id) {
+  if (!confirm('Remove this body?')) return;
+  content.affiliatedBodies = content.affiliatedBodies.filter(b => b.id !== id);
+  renderAffiliated();
+  showToast('Body removed.');
 }
 
 // ════════════════════════════════════════════════════════
@@ -836,7 +855,7 @@ async function saveToGitHub() {
   const st = document.getElementById('saveStatus');
   if (!gh.token || !gh.user || !gh.repo) {
     showStatus(st, 'error', '⚠️ Configure integration settings first!');
-    showTab('settings'); return;
+    return;
   }
   const btn = document.getElementById('saveBtn');
   btn.disabled = true;
@@ -890,7 +909,9 @@ function showStatus(el, type, msg) {
   if (!el) return;
   el.className = 'save-status show ' + type;
   el.textContent = msg;
-  if (type === 'success') setTimeout(() => el.className = 'save-status', 3000);
+  // Auto-hide after some time (longer for errors)
+  const duration = type === 'success' ? 4000 : 8000;
+  setTimeout(() => { if (el.textContent === msg) el.className = 'save-status'; }, duration);
 }
 
 function showToast(msg) {
