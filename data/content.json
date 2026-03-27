@@ -26,7 +26,13 @@
       "instagram": "#",
       "youtube": "#",
       "linkedin": "#"
-    }
+    },
+    "heroTitle": "Centennial <span>Leo Club</span>",
+    "heroSubtitle": "of Richmond College",
+    "heroDesc": "Empowering youth to serve. Building leaders who make a difference in our communities and beyond.",
+    "heroMotto": "# One Team · # One Dream · # One Aimmm",
+    "groupTitle": "Team 2025/2026",
+    "groupSub": "Leading with Pride"
   },
   "projects": [
     {
@@ -79,7 +85,7 @@
       "category": "Health",
       "year": "2021",
       "status": "Completed",
-      "image1": "",
+      "image1": "https://i.ibb.co/TDtgtN6x/premium-crew-neck-tshirt-men-charcoal-grey-tshirt-republic-sri-lanka-300x300.jpg",
       "image2": ""
     },
     {
