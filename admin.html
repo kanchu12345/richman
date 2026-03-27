@@ -136,6 +136,7 @@
           <button class="btn-primary" onclick="addNewsletter()">+ Add Issue</button>
         </div>
         <div id="newsletter-list" class="item-list"></div>
+        <input type="file" id="pdfFileInput" accept=".pdf" style="display:none;" onchange="handlePDFUpload(this)">
       </div>
 
       <!-- ── HOME PAGE TAB ── -->
@@ -654,8 +655,15 @@
           <div class="form-group"><label>Date</label><input type="text" id="nf-date-${n.id}" value="${esc(n.date)}"/></div>
         </div>
         <div class="form-group"><label>Description</label><textarea id="nf-desc-${n.id}" rows="3">${esc(n.description)}</textarea></div>
-        <div class="form-group"><label>PDF Link (Google Drive / external URL)</label><input type="text" id="nf-pdf-${n.id}" value="${esc(n.pdfLink)}" placeholder="https://drive.google.com/..."/></div>
-        
+          <div class="form-group">
+            <label>PDF Link (Google Drive or Upload File)</label>
+            <div style="display:flex; gap:0.5rem;">
+              <input type="text" id="nf-pdf-${n.id}" value="${esc(n.pdfLink)}" placeholder="https://..." style="flex:1;"/>
+              <button class="btn-outline" onclick="openPDFSelector('${n.id}', ${i})" style="white-space:nowrap; padding:0.5rem 1rem;">📁 Upload PDF</button>
+            </div>
+            <p class="hint" style="margin-top:0.25rem; font-size:0.75rem;">Tip: You can paste a link or upload a file directly to your website.</p>
+          </div>
+          <button class="btn-primary" onclick="saveIssue('${n.id}', ${i})">✅ Save Issue</button>
         <div class="img-slot" style="margin-top:1rem;">
           <label>Optional Cover Image (Overrides auto-generated cover)</label>
           <div class="img-preview-box ${n.coverImage ? 'has-img' : ''}" id="nf-cover-box-${n.id}" style="height:120px; width:90px;">
@@ -666,7 +674,6 @@
         </div>
 
         <div class="form-actions">
-          <button class="btn-primary" onclick="saveIssue('${n.id}',${i})">✅ Save Issue</button>
           <button class="btn-outline" onclick="toggleEdit('nl-form-${n.id}')">Cancel</button>
         </div>
       </div>
@@ -693,6 +700,74 @@
       
       renderNewsletter();
       showToast('✅ Issue updated locally! Now click "Publish Updates".');
+    }
+
+    let currentPDFTargetId = null;
+    let currentPDFTargetIndex = null;
+
+    function openPDFSelector(id, i) {
+      currentPDFTargetId = id;
+      currentPDFTargetIndex = i;
+      document.getElementById('pdfFileInput').click();
+    }
+
+    async function handlePDFUpload(input) {
+      const file = input.files[0];
+      if (!file || !currentPDFTargetId) return;
+      
+      if (file.size > 25 * 1024 * 1024) {
+        showToast('❌ File too large! Maximum 25MB.');
+        return;
+      }
+
+      const gh = JSON.parse(localStorage.getItem('leoGH') || '{}');
+      const token = (gh.token || "").trim();
+      if (!token) {
+        showToast('❌ No GitHub token found. Please set it in Settings.');
+        return;
+      }
+
+      showToast('⏳ Uploading PDF to GitHub... Please wait.');
+      
+      const reader = new FileReader();
+      reader.onload = async (e) => {
+        const b64 = e.target.result.split(',')[1];
+        // Clean filename: remove spaces and special chars, append timestamp
+        const safeName = file.name.replace(/[^a-z0-9.]/gi, '_').toLowerCase();
+        const fileName = `issue_${Date.now()}_${safeName}`;
+        const path = `newsletter/${fileName}`;
+        
+        const apiBase = `https://api.github.com/repos/${gh.user || 'kanchu12345'}/${gh.repo || 'richman'}/contents/${path}`;
+        
+        try {
+          const res = await fetch(apiBase, {
+            method: 'PUT',
+            headers: {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              message: `Upload Newsletter PDF: ${file.name}`,
+              content: b64,
+              branch: gh.branch || 'main'
+            })
+          });
+
+          if (res.ok) {
+            // Use relative path for the site. 
+            // Since it's in root/newsletter/, the path is newsletter/name.pdf
+            document.getElementById(`nf-pdf-${currentPDFTargetId}`).value = path;
+            showToast('✅ PDF uploaded successfully! Now click "Save Issue".');
+          } else {
+            const err = await res.json();
+            showToast('❌ Upload failed: ' + (err.message || 'Check permissions.'));
+          }
+        } catch (err) {
+          showToast('❌ Network error during upload.');
+        }
+        input.value = ''; // Reset input
+      };
+      reader.readAsDataURL(file);
     }
 
     function addNewsletter() {
