@@ -236,18 +236,46 @@
     if (!data) return;
     const grid = document.getElementById('newsletter-grid');
     if (grid && data.newsletter) {
-      grid.innerHTML = data.newsletter.map((n, i) => `
-        <div class="nl-card fade-in">
-          <div class="nl-num">Issue ${String(i + 1).padStart(2, '0')}</div>
-          <h3>${n.title}</h3>
-          <div class="nl-date">${n.date}</div>
-          <p>${n.description}</p>
-          ${n.pdfLink ? `<a href="${n.pdfLink}" target="_blank" class="btn-outline" style="font-size:0.8rem;padding:0.5rem 1.2rem;margin-top:1rem;">📄 Read Issue</a>` : ''}
-        </div>`).join('');
+      grid.innerHTML = data.newsletter.map((n, i) => {
+        const coverHtml = n.coverImage 
+          ? `<img src="${n.coverImage}" alt="${n.title}" style="width:100%;height:100%;object-fit:cover;" />`
+          : generateBookCover(n.title, n.date);
+        
+        return `
+        <div class="book-item fade-in">
+          <div class="book-wrap ${n.pdfLink ? '' : 'no-link'}" onclick="${n.pdfLink ? `openFlipbook('${n.pdfLink}')` : ''}">
+            <div class="book-spine"></div>
+            <div class="book-cover">
+              ${coverHtml}
+            </div>
+            <div class="book-back"></div>
+          </div>
+          <div class="book-info">
+            <div class="nl-num">Issue ${String(i + 1).padStart(2, '0')}</div>
+            <h3>${n.title}</h3>
+            <p>${n.description}</p>
+            ${n.pdfLink ? `<button class="btn-primary" onclick="openFlipbook('${n.pdfLink}')" style="padding:0.6rem 1.5rem; font-size:0.8rem; margin: 0 auto; display: flex;">📖 Read in 3D</button>` : '<span style="color:var(--text-muted);font-size:0.8rem;">PDF coming soon</span>'}
+          </div>
+        </div>`;
+      }).join('');
       reObserve();
     }
     applySocialLinks(data.club.socialLinks);
   };
+
+  function generateBookCover(title, date) {
+    // Generate a beautiful programmatic cover
+    return `
+      <div class="auto-cover">
+        <div class="club-tag">Centennial Leo Club</div>
+        <div class="book-title">${title || 'Newsletter Edition'}</div>
+        <div>
+          <div class="book-date">${date || ''}</div>
+          <img src="image/logo.jpg.jpeg" class="leo-logo-min" alt="Leo Logo" />
+        </div>
+      </div>
+    `;
+  }
 
   function applySocialLinks(links) {
     if (!links) return;

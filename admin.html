@@ -584,6 +584,16 @@ function renderNewsletter() {
         </div>
         <div class="form-group"><label>Description</label><textarea id="nf-desc-${n.id}" rows="3">${esc(n.description)}</textarea></div>
         <div class="form-group"><label>PDF Link (Google Drive / external URL)</label><input type="text" id="nf-pdf-${n.id}" value="${esc(n.pdfLink)}" placeholder="https://drive.google.com/..."/></div>
+        
+        <div class="img-slot" style="margin-top:1rem;">
+          <label>Optional Cover Image (Overrides auto-generated cover)</label>
+          <div class="img-preview-box ${n.coverImage?'has-img':''}" id="nf-cover-box-${n.id}" style="height:120px; width:90px;">
+            ${n.coverImage ? `<img src="${n.coverImage}" id="nf-cover-prev-${n.id}" style="height:100%; width:100%; object-fit:cover;"/>` : `<span id="nf-cover-prev-${n.id}">Auto</span>`}
+          </div>
+          <button class="btn-upload" onclick="openImgModal({obj:content.newsletter[${i}],field:'coverImage',imgElId:'nf-cover-prev-${n.id}',boxId:'nf-cover-box-${n.id}'})">📁 Upload Cover</button>
+          ${n.coverImage ? `<button class="btn-remove" onclick="removeImg(content.newsletter[${i}],'coverImage','nf-cover-prev-${n.id}','nf-cover-box-${n.id}')">✕ Remove</button>` : ''}
+        </div>
+
         <div class="form-actions">
           <button class="btn-primary" onclick="saveIssue('${n.id}',${i})">✅ Save Issue</button>
           <button class="btn-outline" onclick="toggleEdit('nl-form-${n.id}')">Cancel</button>
@@ -604,7 +614,7 @@ function saveIssue(id, i) {
 
 function addNewsletter() {
   const id = 'n' + Date.now();
-  content.newsletter.push({ id, title:'New Issue', date:'', description:'', pdfLink:'' });
+  content.newsletter.push({ id, title:'New Issue', date:'', description:'', pdfLink:'', coverImage:'' });
   renderNewsletter();
   setTimeout(() => { toggleEdit('nl-form-' + id); document.getElementById(`nf-title-${id}`)?.focus(); }, 50);
 }
