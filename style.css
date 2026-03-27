@@ -1179,11 +1179,14 @@ footer {
 .about-logo-wrap { display: flex; justify-content: flex-start; }
 .about-logo-img {
   width: 100%;
-  max-width: 250px;
-  mix-blend-mode: multiply; /* Removes white background */
+  max-width: 260px;
+  mix-blend-mode: multiply;
   opacity: 0.95;
-  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.15));
+  filter: 
+    drop-shadow(0 0 15px rgba(0, 243, 255, 0.4))  /* Cyan glow */
+    drop-shadow(0 0 5px rgba(0, 243, 255, 0.2));
   animation: logoFadeIn 1.5s ease-out forwards;
+  border-radius: 8px; /* Optional slight rounding */
 }
 
 .about-center-content { text-align: left; }
@@ -1215,7 +1218,7 @@ footer {
 .mission-title span { color: var(--cyan); display: block; margin-top: 0.5rem; }
 
 @keyframes letterSpacingIn {
-  from { letter-spacing: -0.3rem; opacity: 0; filter: blur(4px); transform: translateX(-15px); }
+  from { letter-spacing: -0.5rem; opacity: 0; filter: blur(8px); transform: translateX(-20px); }
   to { letter-spacing: normal; opacity: 1; filter: blur(0); transform: translateX(0); }
 }
 
