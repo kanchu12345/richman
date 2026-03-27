@@ -9,11 +9,14 @@
     content="Centennial Leo Club of Richmond College – Leo District 306 D8. One Team. One Dream. One Aim." />
   <link rel="stylesheet" href="style.css?v=1.1" />
   <link rel="icon" href="image/logo.jpg.jpeg" type="image/jpeg" />
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles-confetti@2.12.0/tsparticles.confetti.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
 </head>
 
 <body data-page="home">
 
   <!-- ══ PRELOADER ══ -->
+  <div id="tsparticles"></div>
   <div class="preloader" id="preloader">
     <div class="spinner"></div>
   </div>
@@ -53,10 +56,11 @@
     <div class="hero-grid">
       <div class="hero-text-content">
         <div class="hero-tag" style="margin-bottom:1rem;">🦁 LEO District 306 D8 · Sri Lanka · Since 2016</div>
-        <h1 class="hero-mobile-align" style="text-align:left; margin-bottom: 0.5rem;" id="hero-title">Centennial <span>Leo Club</span></h1>
+        <h1 class="hero-mobile-align" style="text-align:left; margin-bottom: 0.5rem;" id="hero-title">Centennial
+          <span>Leo Club</span></h1>
         <h2 class="hero-mobile-align"
           style="font-family:'Playfair Display', serif; font-size:clamp(1.5rem, 3vw, 2.5rem); color:var(--white); margin-bottom:1.5rem; text-align:left;"
-          id="hero-subtitle">of Richmond College</h2>
+          id="hero-subtitle">Richmond College</h2>
         <p class="hero-sub hero-mobile-align" style="margin-left:0; margin-right:0; max-width:100%; text-align:left;"
           id="hero-desc">Empowering youth to serve. Building leaders who make a difference in our communities and
           beyond.</p>
@@ -70,8 +74,7 @@
       <div class="hero-visual">
         <!-- Group photo (admin-updatable). Falls back to spinning logo if not set -->
         <div id="hero-group-wrap" class="hero-group-frame">
-          <img id="hero-dynamic-img" src="image/group.jpg" alt="Club Team Photo" class="hero-img-main"
-            onerror="this.parentElement.innerHTML='<div class=\'hero-logo-wrap\'><img src=\'image/logo.jpg.jpeg\' alt=\'Leo Club Logo\' class=\'hero-logo glow-pulse\' /></div>'" />
+          <img id="hero-dynamic-img" src="image/group.jpg" alt="Club Team Photo" class="hero-img-main" />
           <div class="hero-group-caption">
             <span id="hero-group-title">Team 2025/2026</span>
 
@@ -119,10 +122,12 @@
       <!-- Column 2: Content -->
       <div class="about-center-content fade-in">
         <div class="section-label">About Us</div>
-        <h2 class="mission-title" id="mission-title">Leading The Way <br/><span>For A Better Tomorrow</span></h2>
+        <h2 class="mission-title" id="mission-title">Leading The Way <br /><span>For A Better Tomorrow</span></h2>
         <div class="mission-divider"></div>
         <p class="mission-text" id="mission-text">
-          The Centennial Leo Club of Richmond College is a vibrant youth-led organization committed to leadership, volunteering, and service. Through impactful projects, community initiatives, and teamwork, we strive to uplift lives, empower youth, and build a better tomorrow as part of the global Leo and Lions movement.
+          The Centennial Leo Club of Richmond College is a vibrant youth-led organization committed to leadership,
+          volunteering, and service. Through impactful projects, community initiatives, and teamwork, we strive to
+          uplift lives, empower youth, and build a better tomorrow as part of the global Leo and Lions movement.
         </p>
       </div>
 
@@ -190,9 +195,11 @@
   <section class="section">
     <div class="container">
       <div class="section-head" style="text-align:center; margin-bottom:3rem;">
-        <div class="section-label" style="border-left:none; padding-left:0; margin:0 auto 0.75rem;">Our Affiliations</div>
+        <div class="section-label" style="border-left:none; padding-left:0; margin:0 auto 0.75rem;">Our Affiliations
+        </div>
         <h2 class="section-title" style="text-align:center;">Governing <span>Bodies</span></h2>
-        <p class="section-desc" style="margin:0 auto;">The organisations and institutions we are proudly affiliated with.</p>
+        <p class="section-desc" style="margin:0 auto;">The organisations and institutions we are proudly affiliated
+          with.</p>
       </div>
       <div class="bodies-grid" id="affiliated-bodies">
         <div style="grid-column: 1 / -1; text-align:center; padding: 2rem; color:var(--text-muted);">
@@ -368,6 +375,7 @@
     })();
   </script>
   <script src="js/loader.js?v=1.1"></script>
+  <script src="js/particles-config.js"></script>
 </body>
 
 </html>
