@@ -269,8 +269,11 @@
             </div>
             <p class="hint" style="margin-top:0.5rem; font-size:0.75rem;">Need a token? <a href="https://github.com/settings/tokens" target="_blank" style="color:var(--primary-color);">Generate one here</a> (requires 'repo' scope).</p>
             <p class="hint" style="margin-top:0.25rem; font-size:0.75rem; color:var(--primary-color);">💡 Tip: Ensure token has <b>"Contents: Read & Write"</b> permissions.</p>
-            <button class="btn-primary" onclick="saveGHSettings()">💾 Save Settings</button>
-            <button class="btn-outline" style="margin-left:0.75rem;" onclick="testGitHub()">🔍 Test Connection</button>
+            <div style="margin-top:1rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+              <button class="btn-primary" onclick="saveGHSettings()">💾 Save Settings</button>
+              <button class="btn-outline" onclick="testGitHub()">🔍 Test Repo Access</button>
+              <button class="btn-outline" onclick="verifyToken()" style="border-color:var(--gold); color:var(--gold);">👤 Verify Account</button>
+            </div>
             <div id="gh-status" class="save-status"></div>
           </div>
 
@@ -410,26 +413,44 @@
       const st = document.getElementById('gh-status');
       let gh = JSON.parse(localStorage.getItem('leoGH') || '{}');
       
-      // Basic defaults if absolutely nothing is set
-      if (!gh.user) gh.user = 'kanchu12345';
-      if (!gh.repo) gh.repo = 'richman';
-      
-      // Cleanup spaces
-      gh.token = (gh.token || "").trim();
-      gh.user = (gh.user || "").trim();
-      gh.repo = (gh.repo || "").trim();
+      const user = (gh.user || 'kanchu12345').trim();
+      const repo = (gh.repo || 'richman').trim();
+      const token = (gh.token || '').trim();
 
-      if (!gh.token) return showStatus(st, 'error', '❌ Please enter a token first.');
+      if (!token) return showStatus(st, 'error', '❌ Please enter a token first.');
 
-      showStatus(st, 'info', '⏳ Testing…');
+      showStatus(st, 'info', '⏳ Testing Repo Access…');
       try {
-        const r = await fetch(`https://api.github.com/repos/${gh.user}/${gh.repo}`, {
-          headers: { Authorization: `Bearer ${gh.token}` }
+        const r = await fetch(`https://api.github.com/repos/${user}/${repo}`, {
+          headers: { Authorization: `Bearer ${token}` }
         });
-        if (r.ok) showStatus(st, 'success', '✅ Connected! Repo found.');
+        if (r.ok) showStatus(st, 'success', `✅ Success! Found ${user}/${repo}.`);
         else {
-          const msg = r.status === 401 ? '❌ Bad credentials (check token permissions).' : `❌ Error ${r.status}: check settings.`;
+          const msg = r.status === 401 ? '❌ Bad credentials (Invalid Token).' : `❌ Error ${r.status}: Check Repo name.`;
           showStatus(st, 'error', msg);
+        }
+      } catch {
+        showStatus(st, 'error', '❌ Network error.');
+      }
+    }
+
+    async function verifyToken() {
+      const st = document.getElementById('gh-status');
+      const gh = JSON.parse(localStorage.getItem('leoGH') || '{}');
+      const token = (gh.token || '').trim();
+
+      if (!token) return showStatus(st, 'error', '❌ Please enter a token first.');
+
+      showStatus(st, 'info', '⏳ Verifying Account…');
+      try {
+        const r = await fetch(`https://api.github.com/user`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        if (r.ok) {
+          const u = await r.json();
+          showStatus(st, 'success', `✅ Token is Valid! Belongs to: ${u.login}`);
+        } else {
+          showStatus(st, 'error', '❌ Invalid Token (Bad credentials).');
         }
       } catch {
         showStatus(st, 'error', '❌ Network error.');
