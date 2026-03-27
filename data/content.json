@@ -187,6 +187,7 @@
   "affiliatedBodies": [
     {
       "id": "ab1",
+      "label": "Governing Body",
       "title": "Leo Multiple District 306",
       "description": "Leo Multiple District 306 encompasses the Leo Clubs across Sri Lanka, fostering youth leadership and service excellence. As part of this prestigious network, we connect with Leo Clubs nationwide, sharing resources, best practices, and collaborative opportunities.",
       "bgImage": "",
@@ -194,6 +195,7 @@
     },
     {
       "id": "ab2",
+      "label": "Governing Body",
       "title": "Leo District 306 D8",
       "description": "Leo District 306 D8 is our immediate governing body, overseeing Leo Clubs in our region with dedicated support and leadership. Through District D8, we participate in inter-club activities, conventions, and leadership training programs.",
       "bgImage": "",
@@ -201,6 +203,7 @@
     },
     {
       "id": "ab3",
+      "label": "Governing Body",
       "title": "Lions Clubs International",
       "description": "The world's largest service club organization, providing global opportunities for our youth to serve, lead, and connect.",
       "bgImage": "",
@@ -208,6 +211,7 @@
     },
     {
       "id": "ab4",
+      "label": "Institution",
       "title": "Richmond College",
       "description": "Our esteemed alma mater and backing institution, fostering generations of young leaders who bring pride to the college through dedicated community service.",
       "bgImage": "",

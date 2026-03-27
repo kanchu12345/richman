@@ -148,7 +148,7 @@
           <div class="body-card-bg" style="${bgStyle}"></div>
           <div class="body-card-overlay"></div>
           <div class="body-card-content">
-            <div class="body-card-label">Governing Body</div>
+            <div class="body-card-label">${b.label || 'Governing Body'}</div>
             <div class="body-card-title">${b.title}</div>
             <div class="body-card-desc">${b.description}</div>
           </div>

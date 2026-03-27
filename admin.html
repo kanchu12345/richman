@@ -73,10 +73,6 @@
         <a class="sb-link" onclick="showTab('club')" id="tab-club">🏛️ Club Info</a>
         <a href="https://kanchu12345.github.io/richman/" target="_blank" class="sb-preview-btn" title="View live page">↗</a>
       </div>
-      <div class="sb-nav-item">
-        <a class="sb-link" onclick="showTab('affiliated')" id="tab-affiliated">🏛️ Attached Bodies</a>
-        <a href="https://kanchu12345.github.io/richman/" target="_blank" class="sb-preview-btn" title="View live page">↗</a>
-      </div>
       <a class="sb-link" onclick="showTab('settings')" id="tab-settings" style="display:none">⚙️ Settings</a>
     </nav>
     <div class="sb-footer">
@@ -155,6 +151,13 @@
         <div class="form-group"><label>Hero Motto / Tags</label><input type="text" id="ci-hero-motto"/></div>
         <button class="btn-primary" style="margin-top:1rem;" onclick="saveClubInfo()">✅ Apply Changes</button>
       </div>
+
+      <!-- Attached Bodies Section -->
+      <div class="form-card" style="margin-top:1rem;">
+        <div class="form-section-title">🏛️ Attached / Governing Bodies</div>
+        <p class="hint" style="margin-bottom:1rem; font-size:0.82rem; color:var(--text-muted);">Manage the 4 governing bodies shown on the Home Page. Edit title, description, background image and logo for each.</p>
+        <div id="affiliated-list" class="item-list"></div>
+      </div>
     </div>
 
     <!-- ── CLUB INFO TAB ── -->
@@ -186,16 +189,7 @@
       </div>
     </div>
 
-    <!-- ── ATTACHED BODIES TAB ── -->
-    <div id="pane-affiliated" class="pane">
-      <div class="pane-header">
-        <div>
-          <h2>Attached Bodies</h2>
-          <p>Manage the 4 affiliated/governing bodies shown on the Home Page.</p>
-        </div>
-      </div>
-      <div id="affiliated-list" class="item-list"></div>
-    </div>
+
 
     <!-- ── SETTINGS TAB ── -->
     <div id="pane-settings" class="pane">
@@ -679,13 +673,17 @@ function renderAffiliated() {
       <div class="item-card-header">
         <div class="item-info">
           <div class="item-title">${b.title}</div>
+          <div style="font-size:0.75rem; color:var(--text-muted);">${b.label || 'Governing Body'}</div>
         </div>
         <div class="item-actions">
           <button class="btn-icon" onclick="toggleEdit('ab-form-${b.id}')">✏️ Edit</button>
         </div>
       </div>
       <div class="item-form" id="ab-form-${b.id}" style="display:none">
-        <div class="form-group"><label>Title</label><input type="text" id="af-title-${b.id}" value="${esc(b.title)}"/></div>
+        <div class="form-row2">
+          <div class="form-group"><label>Label (e.g. Governing Body)</label><input type="text" id="af-label-${b.id}" value="${esc(b.label || '')}"/></div>
+          <div class="form-group"><label>Title (Full Name)</label><input type="text" id="af-title-${b.id}" value="${esc(b.title)}"/></div>
+        </div>
         <div class="form-group"><label>Description</label><textarea id="af-desc-${b.id}" rows="3">${esc(b.description)}</textarea></div>
         
         <div class="img-upload-row" style="display:flex; gap:1rem; flex-wrap:wrap; margin-top:1rem;">
@@ -699,7 +697,7 @@ function renderAffiliated() {
           </div>
 
           <div class="img-slot" style="flex:1; min-width:140px; text-align:center;">
-            <label>Logo Image</label>
+            <label>Logo / Seal Image</label>
             <div class="img-preview-box ${b.logoImage?'has-img':''}" id="af-logo-box-${b.id}" style="margin: 0.5rem auto;">
               ${b.logoImage ? `<img src="${b.logoImage}" id="af-logo-prev-${b.id}"/>` : `<span id="af-logo-prev-${b.id}">No image</span>`}
             </div>
@@ -718,6 +716,7 @@ function renderAffiliated() {
 
 function saveAffiliated(id, i) {
   const b = content.affiliatedBodies[i];
+  b.label       = document.getElementById(`af-label-${id}`).value;
   b.title       = document.getElementById(`af-title-${id}`).value;
   b.description = document.getElementById(`af-desc-${id}`).value;
   renderAffiliated();
