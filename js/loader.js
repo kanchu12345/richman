@@ -104,9 +104,10 @@
     // Stats
     const nums = document.querySelectorAll('.stat-item .number');
     if (nums[0]) nums[0].dataset.target = c.founded;
-    if (nums[1]) nums[1].dataset.target = c.presidentGenerations;
+    if (nums[1]) { nums[1].dataset.target = c.members || 400; nums[1].dataset.suffix = '+'; }
     if (nums[2]) { nums[2].dataset.target = c.districtAwards; nums[2].dataset.suffix = '+'; }
     if (nums[3]) nums[3].dataset.target = (new Date().getFullYear() - parseInt(c.founded));
+    if (nums[4]) { nums[4].dataset.target = c.alumni || 300; nums[4].dataset.suffix = '+'; }
     
     // Clear initial text for animation
     nums.forEach(n => n.textContent = '0');
