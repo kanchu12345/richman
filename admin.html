@@ -326,8 +326,8 @@ function loadSettings() {
   const cl = JSON.parse(localStorage.getItem('leoCL') || '{}');
   document.getElementById('gh-user').value   = gh.user   || 'kanchu12345';
   document.getElementById('gh-repo').value   = gh.repo   || 'richman';
-  document.getElementById('gh-branch').value = gh.branch || 'main';
-  document.getElementById('gh-token').value  = gh.token  || '';
+  document.getElementById('gh-branch').value = gh.branch || 'master';
+  document.getElementById('gh-token').value  = gh.token  || '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';
   document.getElementById('cl-cloud').value  = cl.cloud  || '';
 }
 
@@ -350,8 +350,10 @@ function saveCLSettings() {
 
 async function testGitHub() {
   const st = document.getElementById('gh-status');
-  const gh = JSON.parse(localStorage.getItem('leoGH') || '{}');
-  if (!gh.token || !gh.user || !gh.repo) return showStatus(st, 'error', 'Fill in all GitHub fields first.');
+  let gh = JSON.parse(localStorage.getItem('leoGH') || '{}');
+  if (!gh.token) gh.token = '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';
+  if (!gh.user)  gh.user  = 'kanchu12345';
+  if (!gh.repo)  gh.repo  = 'richman';
   showStatus(st, 'info', '⏳ Testing…');
   try {
     const r = await fetch(`https://api.github.com/repos/${gh.user}/${gh.repo}`, {
@@ -884,12 +886,14 @@ function removeImg(obj, field, prevId, boxId) {
 //  GITHUB SAVE
 // ════════════════════════════════════════════════════════
 async function saveToGitHub() {
-  const gh = JSON.parse(localStorage.getItem('leoGH') || '{}');
+  let gh = JSON.parse(localStorage.getItem('leoGH') || '{}');
+  // Hardcoded Fallbacks
+  if (!gh.token)  gh.token = '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';
+  if (!gh.user)   gh.user  = 'kanchu12345';
+  if (!gh.repo)   gh.repo  = 'richman';
+  if (!gh.branch) gh.branch = 'master';
+
   const st = document.getElementById('saveStatus');
-  if (!gh.token || !gh.user || !gh.repo) {
-    showStatus(st, 'error', '⚠️ Configure integration settings first!');
-    return;
-  }
   const btn = document.getElementById('saveBtn');
   btn.disabled = true;
   showStatus(st, 'info', '⏳ Saving…');
