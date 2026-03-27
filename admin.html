@@ -131,7 +131,7 @@
         <div class="pane-header">
           <div>
             <h2>Newsletter</h2>
-            <p>Manage newsletter issues.</p>
+            <p>Manage newsletter issues. <span style="color:var(--cyan); font-weight:600;">(Remember: Click "Save Issue" before "Publish Updates")</span></p>
           </div>
           <button class="btn-primary" onclick="addNewsletter()">+ Add Issue</button>
         </div>
@@ -678,9 +678,21 @@
       n.title = document.getElementById(`nf-title-${id}`).value;
       n.date = document.getElementById(`nf-date-${id}`).value;
       n.description = document.getElementById(`nf-desc-${id}`).value;
-      n.pdfLink = document.getElementById(`nf-pdf-${id}`).value;
+      
+      let link = document.getElementById(`nf-pdf-${id}`).value.trim();
+      // Auto-fix Google Drive links for embedding
+      if (link.includes('drive.google.com')) {
+        if (link.includes('/view') || link.includes('open?id=')) {
+          link = link.replace(/\/view.*$/, '/preview').replace('open?id=', 'file/d/') + (link.includes('file/d/') ? '' : '');
+          if (link.includes('file/d/') && !link.includes('/preview')) {
+            link = link.split('?')[0].replace(/\/$/, '') + '/preview';
+          }
+        }
+      }
+      n.pdfLink = link;
+      
       renderNewsletter();
-      showToast('Issue updated!');
+      showToast('✅ Issue updated locally! Now click "Publish Updates".');
     }
 
     function addNewsletter() {
