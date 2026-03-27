@@ -1,415 +1,466 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>Admin Panel – Centennial Leo Club</title>
-  <link rel="stylesheet" href="admin-style.css"/>
-  <link rel="icon" href="image/logo.jpg.jpeg" type="image/jpeg"/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="admin-style.css" />
+  <link rel="icon" href="image/logo.jpg.jpeg" type="image/jpeg" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 </head>
+
 <body>
 
-<!-- ══ LOGIN SCREEN ══ -->
-<div id="loginScreen" class="login-screen">
-  <div class="login-card">
-    <img src="image/logo.jpg.jpeg" alt="Logo" class="login-logo"/>
-    <h1>Admin Panel</h1>
-    <p class="login-sub">Centennial Leo Club of Richmond College</p>
-    <div class="form-group">
-      <label>Password</label>
-      <input type="password" id="loginPass" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')doLogin()"/>
-    </div>
-    <button class="btn-primary" onclick="doLogin()">🔐 Login</button>
-    <div id="loginErr" class="login-err" style="display:none">Incorrect password. Try again.</div>
-    <div class="login-hint">Default password: <code>leoclub2025</code> — change in Settings after login.</div>
-  </div>
-</div>
-
-<!-- ══ ADMIN APP ══ -->
-<div id="adminApp" style="display:none">
-
-  <!-- Live Site Banner -->
-  <div class="live-site-bar">
-    <span class="live-dot"></span>
-    <span>Live Website:</span>
-    <a href="https://kanchu12345.github.io/richman/" target="_blank" class="live-site-url">kanchu12345.github.io/richman</a>
-    <div style="margin-left:auto; display:flex; gap:0.5rem; align-items:center;">
-      <a href="https://kanchu12345.github.io/richman/" target="_blank" class="live-quick-btn">🏠 Home</a>
-      <a href="https://kanchu12345.github.io/richman/projects.html" target="_blank" class="live-quick-btn">📁 Projects</a>
-      <a href="https://kanchu12345.github.io/richman/executive.html" target="_blank" class="live-quick-btn">👥 Executive</a>
-      <a href="https://kanchu12345.github.io/richman/newsletter.html" target="_blank" class="live-quick-btn">📰 Newsletter</a>
-      <a href="https://kanchu12345.github.io/richman/contact.html" target="_blank" class="live-quick-btn">📞 Contact</a>
+  <!-- ══ LOGIN SCREEN ══ -->
+  <div id="loginScreen" class="login-screen">
+    <div class="login-card">
+      <img src="image/logo.jpg.jpeg" alt="Logo" class="login-logo" />
+      <h1>Admin Panel</h1>
+      <p class="login-sub">Centennial Leo Club of Richmond College</p>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="loginPass" placeholder="Enter admin password"
+          onkeydown="if(event.key==='Enter')doLogin()" />
+      </div>
+      <button class="btn-primary" onclick="doLogin()">🔐 Login</button>
+      <div id="loginErr" class="login-err" style="display:none">Incorrect password. Try again.</div>
+      <div class="login-hint">Default password: <code>leoclub2025</code> — change in Settings after login.</div>
     </div>
   </div>
 
-  <!-- Sidebar -->
-  <aside class="sidebar">
-    <div class="sidebar-brand">
-      <img src="image/logo.jpg.jpeg" alt="Logo" class="sb-logo"/>
-      <div>
-        <div class="sb-name">Leo Club</div>
-        <div class="sb-sub">Admin Panel</div>
+  <!-- ══ ADMIN APP ══ -->
+  <div id="adminApp" style="display:none">
+
+    <!-- Live Site Banner -->
+    <div class="live-site-bar">
+      <span class="live-dot"></span>
+      <span>Live Website:</span>
+      <a href="https://kanchu12345.github.io/richman/" target="_blank"
+        class="live-site-url">kanchu12345.github.io/richman</a>
+      <div style="margin-left:auto; display:flex; gap:0.5rem; align-items:center;">
+        <a href="https://kanchu12345.github.io/richman/" target="_blank" class="live-quick-btn">🏠 Home</a>
+        <a href="https://kanchu12345.github.io/richman/projects.html" target="_blank" class="live-quick-btn">📁
+          Projects</a>
+        <a href="https://kanchu12345.github.io/richman/executive.html" target="_blank" class="live-quick-btn">👥
+          Executive</a>
+        <a href="https://kanchu12345.github.io/richman/newsletter.html" target="_blank" class="live-quick-btn">📰
+          Newsletter</a>
+        <a href="https://kanchu12345.github.io/richman/contact.html" target="_blank" class="live-quick-btn">📞
+          Contact</a>
       </div>
     </div>
-    <nav class="sb-nav">
-      <div class="sb-nav-item">
-        <a class="sb-link" onclick="showTab('home')" id="tab-home">🏠 Home Page</a>
-        <a href="https://kanchu12345.github.io/richman/" target="_blank" class="sb-preview-btn" title="View live page">↗</a>
-      </div>
-      <div class="sb-nav-item">
-        <a class="sb-link active" onclick="showTab('projects')" id="tab-projects">📁 Projects</a>
-        <a href="https://kanchu12345.github.io/richman/projects.html" target="_blank" class="sb-preview-btn" title="View live page">↗</a>
-      </div>
-      <div class="sb-nav-item">
-        <a class="sb-link" onclick="showTab('executive')" id="tab-executive">👥 Executive</a>
-        <a href="https://kanchu12345.github.io/richman/executive.html" target="_blank" class="sb-preview-btn" title="View live page">↗</a>
-      </div>
-      <div class="sb-nav-item">
-        <a class="sb-link" onclick="showTab('newsletter')" id="tab-newsletter">📰 Newsletter</a>
-        <a href="https://kanchu12345.github.io/richman/newsletter.html" target="_blank" class="sb-preview-btn" title="View live page">↗</a>
-      </div>
-      <div class="sb-nav-item">
-        <a class="sb-link" onclick="showTab('club')" id="tab-club">🏛️ Club Info</a>
-        <a href="https://kanchu12345.github.io/richman/" target="_blank" class="sb-preview-btn" title="View live page">↗</a>
-      </div>
-      <a class="sb-link" onclick="showTab('settings')" id="tab-settings" style="display:none">⚙️ Settings</a>
-    </nav>
-    <div class="sb-footer">
-      <button class="btn-save" onclick="saveToGitHub()" id="saveBtn">🚀 Publish Updates</button>
-      <div id="saveStatus" class="save-status"></div>
-      <a id="previewAfterSave" href="https://kanchu12345.github.io/richman/" target="_blank" class="btn-preview-live" style="display:none">🌐 View Live Website →</a>
-      <button class="btn-logout" onclick="doLogout()">← Logout</button>
-    </div>
-  </aside>
 
-  <!-- Main Content -->
-  <main class="admin-main">
-
-    <!-- ── PROJECTS TAB ── -->
-    <div id="pane-projects" class="pane active">
-      <div class="pane-header">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <img src="image/logo.jpg.jpeg" alt="Logo" class="sb-logo" />
         <div>
-          <h2>Projects</h2>
-          <p>Add, edit or delete club projects. Upload up to 5 images per project (1MB max each). Multiple images will auto-swap.</p>
+          <div class="sb-name">Leo Club</div>
+          <div class="sb-sub">Admin Panel</div>
         </div>
-        <button class="btn-primary" onclick="addProject()">+ Add Project</button>
       </div>
-      <div id="projects-list" class="item-list"></div>
-    </div>
-
-    <!-- ── EXECUTIVE TAB ── -->
-    <div id="pane-executive" class="pane">
-      <div class="pane-header">
-        <div>
-          <h2>Executive Committee</h2>
-          <p>Edit member names, roles, sections and upload profile photos.</p>
+      <nav class="sb-nav">
+        <div class="sb-nav-item">
+          <a class="sb-link" onclick="showTab('home')" id="tab-home">🏠 Home Page</a>
+          <a href="https://kanchu12345.github.io/richman/" target="_blank" class="sb-preview-btn"
+            title="View live page">↗</a>
         </div>
-        <button class="btn-primary" onclick="addMember()">+ Add Member</button>
-      </div>
-      <div id="executive-list" class="item-list"></div>
-    </div>
-
-    <!-- ── NEWSLETTER TAB ── -->
-    <div id="pane-newsletter" class="pane">
-      <div class="pane-header">
-        <div>
-          <h2>Newsletter</h2>
-          <p>Manage newsletter issues.</p>
+        <div class="sb-nav-item">
+          <a class="sb-link active" onclick="showTab('projects')" id="tab-projects">📁 Projects</a>
+          <a href="https://kanchu12345.github.io/richman/projects.html" target="_blank" class="sb-preview-btn"
+            title="View live page">↗</a>
         </div>
-        <button class="btn-primary" onclick="addNewsletter()">+ Add Issue</button>
+        <div class="sb-nav-item">
+          <a class="sb-link" onclick="showTab('executive')" id="tab-executive">👥 Executive</a>
+          <a href="https://kanchu12345.github.io/richman/executive.html" target="_blank" class="sb-preview-btn"
+            title="View live page">↗</a>
+        </div>
+        <div class="sb-nav-item">
+          <a class="sb-link" onclick="showTab('newsletter')" id="tab-newsletter">📰 Newsletter</a>
+          <a href="https://kanchu12345.github.io/richman/newsletter.html" target="_blank" class="sb-preview-btn"
+            title="View live page">↗</a>
+        </div>
+        <div class="sb-nav-item">
+          <a class="sb-link" onclick="showTab('club')" id="tab-club">🏛️ Club Info</a>
+          <a href="https://kanchu12345.github.io/richman/" target="_blank" class="sb-preview-btn"
+            title="View live page">↗</a>
+        </div>
+        <a class="sb-link" onclick="showTab('settings')" id="tab-settings" style="display:none">⚙️ Settings</a>
+      </nav>
+      <div class="sb-footer">
+        <button class="btn-save" onclick="saveToGitHub()" id="saveBtn">🚀 Publish Updates</button>
+        <div id="saveStatus" class="save-status"></div>
+        <a id="previewAfterSave" href="https://kanchu12345.github.io/richman/" target="_blank" class="btn-preview-live"
+          style="display:none">🌐 View Live Website →</a>
+        <button class="btn-logout" onclick="doLogout()">← Logout</button>
       </div>
-      <div id="newsletter-list" class="item-list"></div>
-    </div>
+    </aside>
 
-    <!-- ── HOME PAGE TAB ── -->
-    <div id="pane-home" class="pane">
-      <div class="pane-header"><div><h2>Home Page Settings</h2><p>Edit your main hero text, right-side group photo, and attached governing bodies.</p></div></div>
-      <div class="form-card" style="margin-bottom:1rem;">
-        <div class="form-section-title">Hero Section – Group Photo</div>
-        <div class="img-upload-row" style="margin-bottom:1.5rem;">
-          <div class="img-slot" style="max-width:280px;">
-            <label>Team / Group Photo (shown on Home Page right side)</label>
-            <div class="img-preview-box" id="club-hero-box" style="height:160px; margin: 0.5rem 0;">
-              <span id="club-hero-prev">No image – using local file image/group.jpg</span>
-            </div>
-            <button class="btn-upload" onclick="openImgModal({obj:content.club,field:'heroImage',imgElId:'club-hero-prev',boxId:'club-hero-box'})">📁 Upload Photo</button>
-            <button class="btn-remove" id="club-hero-remove" style="display:none; margin-top:0.5rem;" onclick="removeImg(content.club,'heroImage','club-hero-prev','club-hero-box'); document.getElementById('club-hero-remove').style.display='none';">✕ Remove</button>
+    <!-- Main Content -->
+    <main class="admin-main">
+
+      <!-- ── PROJECTS TAB ── -->
+      <div id="pane-projects" class="pane active">
+        <div class="pane-header">
+          <div>
+            <h2>Projects</h2>
+            <p>Add, edit or delete club projects. Upload up to 5 images per project (1MB max each). Multiple images will
+              auto-swap.</p>
+          </div>
+          <button class="btn-primary" onclick="addProject()">+ Add Project</button>
+        </div>
+        <div id="projects-list" class="item-list"></div>
+      </div>
+
+      <!-- ── EXECUTIVE TAB ── -->
+      <div id="pane-executive" class="pane">
+        <div class="pane-header">
+          <div>
+            <h2>Executive Committee</h2>
+            <p>Edit member names, roles, sections and upload profile photos.</p>
+          </div>
+          <button class="btn-primary" onclick="addMember()">+ Add Member</button>
+        </div>
+        <div id="executive-list" class="item-list"></div>
+      </div>
+
+      <!-- ── NEWSLETTER TAB ── -->
+      <div id="pane-newsletter" class="pane">
+        <div class="pane-header">
+          <div>
+            <h2>Newsletter</h2>
+            <p>Manage newsletter issues.</p>
+          </div>
+          <button class="btn-primary" onclick="addNewsletter()">+ Add Issue</button>
+        </div>
+        <div id="newsletter-list" class="item-list"></div>
+      </div>
+
+      <!-- ── HOME PAGE TAB ── -->
+      <div id="pane-home" class="pane">
+        <div class="pane-header">
+          <div>
+            <h2>Home Page Settings</h2>
+            <p>Edit your main hero text, right-side group photo, and attached governing bodies.</p>
           </div>
         </div>
-        <div class="form-row2">
-          <div class="form-group"><label>Photo Caption Title (e.g. Team 2025/2026)</label><input type="text" id="ci-group-title" placeholder="Team 2025/2026"/></div>
-          <div class="form-group"><label>Photo Caption Subtitle (e.g. Leading with Pride)</label><input type="text" id="ci-group-sub" placeholder="Leading with Pride"/></div>
-        </div>
-      </div>
-      
-      <div class="form-card">
-        <div class="form-section-title">Home Page Texts</div>
-        <div class="form-group"><label>Hero Title (HTML acceptable - e.g. for color spans)</label><input type="text" id="ci-hero-title"/></div>
-        <div class="form-group"><label>Hero Subtitle</label><input type="text" id="ci-hero-subtitle"/></div>
-        <div class="form-group"><label>Hero Description</label><textarea id="ci-hero-desc" rows="2"></textarea></div>
-        <div class="form-group"><label>Hero Motto / Tags</label><input type="text" id="ci-hero-motto"/></div>
-        <button class="btn-primary" style="margin-top:1rem;" onclick="saveClubInfo()">✅ Apply Changes</button>
-      </div>
-
-      <!-- Attached Bodies Section -->
-      <div class="form-card" style="margin-top:1rem;">
-        <div class="form-section-title" style="display:flex; justify-content:space-between; align-items:center;">
-          <span>🏛️ Attached / Governing Bodies</span>
-          <button class="btn-primary" onclick="addAffiliated()" style="padding:0.4rem 0.8rem; font-size:0.75rem;">+ Add Body</button>
-        </div>
-        <p class="hint" style="margin-bottom:1rem; font-size:0.82rem; color:var(--text-muted);">Manage the governing bodies shown on the Home Page. Edit title, description, background image and logo for each.</p>
-        <div id="affiliated-list" class="item-list"></div>
-      </div>
-    </div>
-
-    <!-- ── CLUB INFO TAB ── -->
-    <div id="pane-club" class="pane">
-      <div class="pane-header"><div><h2>Club Info</h2><p>Edit contact details, social links and about text.</p></div></div>
-      <div class="form-card">
-        <div class="form-section-title">Contact Details</div>
-        <div class="form-row2">
-          <div class="form-group"><label>Email</label><input type="text" id="ci-email"/></div>
-          <div class="form-group"><label>WhatsApp Number (international)</label><input type="text" id="ci-whatsapp"/></div>
-        </div>
-        <div class="form-group"><label>Location / Address</label><input type="text" id="ci-location"/></div>
-        <div class="form-group"><label>Google Maps Link</label><input type="text" id="ci-maplink"/></div>
-
-        <div class="form-section-title" style="margin-top:1.5rem;">Club Statistics (Home Page)</div>
-        <div class="form-row" style="grid-template-columns: repeat(3, 1fr); gap: 1rem;">
-          <div class="form-group"><label>Members</label><input type="number" id="ci-members"/></div>
-          <div class="form-group"><label>Alumni</label><input type="number" id="ci-alumni"/></div>
-          <div class="form-group"><label>District Awards</label><input type="number" id="ci-awards"/></div>
-        </div>
-
-        <div class="form-section-title" style="margin-top:1.5rem;">About Text</div>
-        <div class="form-group"><label>About Paragraph 2</label><textarea id="ci-about2" rows="3"></textarea></div>
-
-        <div class="form-section-title" style="margin-top:1.5rem;">Mission & Vision (Home Page)</div>
-        <div class="form-group"><label>Mission Title (use <span> for cyan color)</label><input type="text" id="ci-mission-title"/></div>
-        <div class="form-group"><label>Mission Statement</label><textarea id="ci-mission-statement" rows="3"></textarea></div>
-
-        <div class="form-section-title" style="margin-top:1.5rem;">Social Media Links</div>
-        <div class="form-row2">
-          <div class="form-group"><label>Facebook URL</label><input type="text" id="ci-facebook"/></div>
-          <div class="form-group"><label>Instagram URL</label><input type="text" id="ci-instagram"/></div>
-        </div>
-        <div class="form-row2">
-          <div class="form-group"><label>YouTube URL</label><input type="text" id="ci-youtube"/></div>
-          <div class="form-group"><label>LinkedIn URL</label><input type="text" id="ci-linkedin"/></div>
-        </div>
-        <button class="btn-primary" style="margin-top:1rem;" onclick="saveClubInfo()">✅ Apply Changes</button>
-      </div>
-    </div>
-
-
-
-    <!-- ── SETTINGS TAB ── -->
-    <div id="pane-settings" class="pane">
-      <div class="pane-header"><div><h2>Settings</h2><p>System configuration.</p></div></div>
-      <div class="settings-grid">
-
-        <div class="form-card">
-          <div class="form-section-title">🔗 GitHub Integration</div>
-          <p class="hint">Connect to your GitHub repository to publish updates live. These info are saved locally on this device only.</p>
-          <div class="form-group"><label>GitHub Username</label><input type="text" id="gh-user" placeholder="e.g. kanchu12345"/></div>
-          <div class="form-group"><label>Repository Name</label><input type="text" id="gh-repo" placeholder="e.g. richman"/></div>
-          <div class="form-group"><label>Branch</label><input type="text" id="gh-branch" placeholder="main"/></div>
-          <div class="form-group"><label>Personal Access Token</label><input type="password" id="gh-token" placeholder="ghp_..."/></div>
-          <button class="btn-primary" onclick="saveGHSettings()">💾 Save Settings</button>
-          <button class="btn-outline" style="margin-left:0.75rem;" onclick="testGitHub()">🔍 Test Connection</button>
-          <div id="gh-status" class="save-status"></div>
+        <div class="form-card" style="margin-bottom:1rem;">
+          <div class="form-section-title">Hero Section – Group Photo</div>
+          <div class="img-upload-row" style="margin-bottom:1.5rem;">
+            <div class="img-slot" style="max-width:280px;">
+              <label>Team / Group Photo (shown on Home Page right side)</label>
+              <div class="img-preview-box" id="club-hero-box" style="height:160px; margin: 0.5rem 0;">
+                <span id="club-hero-prev">No image – using local file image/group.jpg</span>
+              </div>
+              <button class="btn-upload"
+                onclick="openImgModal({obj:content.club,field:'heroImage',imgElId:'club-hero-prev',boxId:'club-hero-box'})">📁
+                Upload Photo</button>
+              <button class="btn-remove" id="club-hero-remove" style="display:none; margin-top:0.5rem;"
+                onclick="removeImg(content.club,'heroImage','club-hero-prev','club-hero-box'); document.getElementById('club-hero-remove').style.display='none';">✕
+                Remove</button>
+            </div>
+          </div>
+          <div class="form-row2">
+            <div class="form-group"><label>Photo Caption Title (e.g. Team 2025/2026)</label><input type="text"
+                id="ci-group-title" placeholder="Team 2025/2026" /></div>
+            <div class="form-group"><label>Photo Caption Subtitle (e.g. Leading with Pride)</label><input type="text"
+                id="ci-group-sub" placeholder="Leading with Pride" /></div>
+          </div>
         </div>
 
         <div class="form-card">
-          <div class="form-section-title">☁️ Media Storage</div>
-          <p class="hint">Configure your media storage service API key below.</p>
-          <div class="form-group"><label>API Key</label><input type="password" id="cl-cloud" placeholder=""/></div>
-          <button class="btn-primary" onclick="saveCLSettings()">💾 Save Settings</button>
-          <div id="cl-status" class="save-status"></div>
+          <div class="form-section-title">Home Page Texts</div>
+          <div class="form-group"><label>Hero Title (HTML acceptable - e.g. for color spans)</label><input type="text"
+              id="ci-hero-title" /></div>
+          <div class="form-group"><label>Hero Subtitle</label><input type="text" id="ci-hero-subtitle" /></div>
+          <div class="form-group"><label>Hero Description</label><textarea id="ci-hero-desc" rows="2"></textarea></div>
+          <div class="form-group"><label>Hero Motto / Tags</label><input type="text" id="ci-hero-motto" /></div>
+          <button class="btn-primary" style="margin-top:1rem;" onclick="saveClubInfo()">✅ Apply Changes</button>
         </div>
 
+        <!-- Attached Bodies Section -->
+        <div class="form-card" style="margin-top:1rem;">
+          <div class="form-section-title" style="display:flex; justify-content:space-between; align-items:center;">
+            <span>🏛️ Attached / Governing Bodies</span>
+            <button class="btn-primary" onclick="addAffiliated()" style="padding:0.4rem 0.8rem; font-size:0.75rem;">+
+              Add Body</button>
+          </div>
+          <p class="hint" style="margin-bottom:1rem; font-size:0.82rem; color:var(--text-muted);">Manage the governing
+            bodies shown on the Home Page. Edit title, description, background image and logo for each.</p>
+          <div id="affiliated-list" class="item-list"></div>
+        </div>
+      </div>
+
+      <!-- ── CLUB INFO TAB ── -->
+      <div id="pane-club" class="pane">
+        <div class="pane-header">
+          <div>
+            <h2>Club Info</h2>
+            <p>Edit contact details, social links and about text.</p>
+          </div>
+        </div>
         <div class="form-card">
-          <div class="form-section-title">🔐 Security</div>
-          <div class="form-group"><label>New Password</label><input type="password" id="new-pass" placeholder="Enter new password"/></div>
-          <div class="form-group"><label>Confirm Password</label><input type="password" id="new-pass2" placeholder="Confirm new password"/></div>
-          <button class="btn-primary" onclick="changePassword()">🔑 Update Password</button>
-          <div id="pass-status" class="save-status"></div>
+          <div class="form-section-title">Contact Details</div>
+          <div class="form-row2">
+            <div class="form-group"><label>Email</label><input type="text" id="ci-email" /></div>
+            <div class="form-group"><label>WhatsApp Number (international)</label><input type="text" id="ci-whatsapp" />
+            </div>
+          </div>
+          <div class="form-group"><label>Location / Address</label><input type="text" id="ci-location" /></div>
+          <div class="form-group"><label>Google Maps Link</label><input type="text" id="ci-maplink" /></div>
+
+          <div class="form-section-title" style="margin-top:1.5rem;">Club Statistics (Home Page)</div>
+          <div class="form-row" style="grid-template-columns: repeat(3, 1fr); gap: 1rem;">
+            <div class="form-group"><label>Members</label><input type="number" id="ci-members" /></div>
+            <div class="form-group"><label>Alumni</label><input type="number" id="ci-alumni" /></div>
+            <div class="form-group"><label>District Awards</label><input type="number" id="ci-awards" /></div>
+          </div>
+
+          <div class="form-section-title" style="margin-top:1.5rem;">About Text</div>
+          <div class="form-group"><label>About Paragraph 2</label><textarea id="ci-about2" rows="3"></textarea></div>
+
+          <div class="form-section-title" style="margin-top:1.5rem;">Mission & Vision (Home Page)</div>
+          <div class="form-group"><label>Mission Title (use <span> for cyan color)</label><input type="text"
+              id="ci-mission-title" /></div>
+          <div class="form-group"><label>Mission Statement</label><textarea id="ci-mission-statement"
+              rows="3"></textarea></div>
+
+          <div class="form-section-title" style="margin-top:1.5rem;">Social Media Links</div>
+          <div class="form-row2">
+            <div class="form-group"><label>Facebook URL</label><input type="text" id="ci-facebook" /></div>
+            <div class="form-group"><label>Instagram URL</label><input type="text" id="ci-instagram" /></div>
+          </div>
+          <div class="form-row2">
+            <div class="form-group"><label>YouTube URL</label><input type="text" id="ci-youtube" /></div>
+            <div class="form-group"><label>LinkedIn URL</label><input type="text" id="ci-linkedin" /></div>
+          </div>
+          <button class="btn-primary" style="margin-top:1rem;" onclick="saveClubInfo()">✅ Apply Changes</button>
         </div>
-
       </div>
-    </div>
 
-  </main>
-</div>
 
-<!-- ══ IMAGE UPLOAD MODAL ══ -->
-<div id="imgModal" class="modal-overlay" style="display:none" onclick="if(event.target===this)closeImgModal()">
-  <div class="modal-card">
-    <div class="modal-header">
-      <h3 id="imgModalTitle">Upload Image</h3>
-      <button class="modal-close" onclick="closeImgModal()">✕</button>
-    </div>
-    <div class="img-upload-area" id="imgDropZone" onclick="document.getElementById('imgFileInput').click()">
-      <div id="imgPreviewWrap" style="display:none">
-        <img id="imgPreview" alt="Preview" style="max-width:100%;max-height:220px;border-radius:8px;"/>
-        <p id="imgPreviewName" style="margin-top:0.5rem;font-size:0.82rem;color:var(--text-muted);"></p>
+
+      <!-- ── SETTINGS TAB ── -->
+      <div id="pane-settings" class="pane">
+        <div class="pane-header">
+          <div>
+            <h2>Settings</h2>
+            <p>System configuration.</p>
+          </div>
+        </div>
+        <div class="settings-grid">
+
+          <div class="form-card">
+            <div class="form-section-title">🔗 GitHub Integration</div>
+            <p class="hint">Connect to your GitHub repository to publish updates live. These info are saved locally on
+              this device only.</p>
+            <div class="form-group"><label>GitHub Username</label><input type="text" id="gh-user"
+                placeholder="e.g. kanchu12345" /></div>
+            <div class="form-group"><label>Repository Name</label><input type="text" id="gh-repo"
+                placeholder="e.g. richman" /></div>
+            <div class="form-group"><label>Branch</label><input type="text" id="gh-branch" placeholder="main" /></div>
+            <div class="form-group"><label>Personal Access Token</label><input type="password" id="gh-token"
+                placeholder="ghp_..." /></div>
+            <button class="btn-primary" onclick="saveGHSettings()">💾 Save Settings</button>
+            <button class="btn-outline" style="margin-left:0.75rem;" onclick="testGitHub()">🔍 Test Connection</button>
+            <div id="gh-status" class="save-status"></div>
+          </div>
+
+          <div class="form-card">
+            <div class="form-section-title">☁️ Media Storage</div>
+            <p class="hint">Configure your media storage service API key below.</p>
+            <div class="form-group"><label>API Key</label><input type="password" id="cl-cloud" placeholder="" /></div>
+            <button class="btn-primary" onclick="saveCLSettings()">💾 Save Settings</button>
+            <div id="cl-status" class="save-status"></div>
+          </div>
+
+          <div class="form-card">
+            <div class="form-section-title">🔐 Security</div>
+            <div class="form-group"><label>New Password</label><input type="password" id="new-pass"
+                placeholder="Enter new password" /></div>
+            <div class="form-group"><label>Confirm Password</label><input type="password" id="new-pass2"
+                placeholder="Confirm new password" /></div>
+            <button class="btn-primary" onclick="changePassword()">🔑 Update Password</button>
+            <div id="pass-status" class="save-status"></div>
+          </div>
+
+        </div>
       </div>
-      <div id="imgDropPrompt">
-        <div style="font-size:2.5rem;">📁</div>
-        <p>Click to choose an image<br/><span style="font-size:0.78rem;opacity:0.6;">JPG, PNG, WEBP — max 1 MB</span></p>
+
+    </main>
+  </div>
+
+  <!-- ══ IMAGE UPLOAD MODAL ══ -->
+  <div id="imgModal" class="modal-overlay" style="display:none" onclick="if(event.target===this)closeImgModal()">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="imgModalTitle">Upload Image</h3>
+        <button class="modal-close" onclick="closeImgModal()">✕</button>
       </div>
-    </div>
-    <input type="file" id="imgFileInput" accept="image/*" style="display:none" onchange="previewImg(this)"/>
-    <div id="imgUploadProgress" style="display:none" class="upload-progress">
-      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-      <p id="progressText">Uploading…</p>
-    </div>
-    <div class="modal-footer">
-      <button class="btn-outline" onclick="closeImgModal()">Cancel</button>
-      <button class="btn-primary" onclick="uploadImage()" id="uploadBtn">☁️ Upload Image</button>
+      <div class="img-upload-area" id="imgDropZone" onclick="document.getElementById('imgFileInput').click()">
+        <div id="imgPreviewWrap" style="display:none">
+          <img id="imgPreview" alt="Preview" style="max-width:100%;max-height:220px;border-radius:8px;" />
+          <p id="imgPreviewName" style="margin-top:0.5rem;font-size:0.82rem;color:var(--text-muted);"></p>
+        </div>
+        <div id="imgDropPrompt">
+          <div style="font-size:2.5rem;">📁</div>
+          <p>Click to choose an image<br /><span style="font-size:0.78rem;opacity:0.6;">JPG, PNG, WEBP — max 1 MB</span>
+          </p>
+        </div>
+      </div>
+      <input type="file" id="imgFileInput" accept="image/*" style="display:none" onchange="previewImg(this)" />
+      <div id="imgUploadProgress" style="display:none" class="upload-progress">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <p id="progressText">Uploading…</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-outline" onclick="closeImgModal()">Cancel</button>
+        <button class="btn-primary" onclick="uploadImage()" id="uploadBtn">☁️ Upload Image</button>
+      </div>
     </div>
   </div>
-</div>
 
-<script>
-// ════════════════════════════════════════════════════════
-//  STATE
-// ════════════════════════════════════════════════════════
-let content = null;
-let _imgTarget = null; // { obj, field, imgElId }
+  <script>
+    // ════════════════════════════════════════════════════════
+    //  STATE
+    // ════════════════════════════════════════════════════════
+    let content = null;
+    let _imgTarget = null; // { obj, field, imgElId }
 
-// ════════════════════════════════════════════════════════
-//  AUTH
-// ════════════════════════════════════════════════════════
-function hashStr(s) {
-  let h = 0;
-  for (let i = 0; i < s.length; i++) h = Math.imul(31, h) + s.charCodeAt(i) | 0;
-  return h.toString(16);
-}
-const DEFAULT_HASH = hashStr('leoclub2025');
+    // ════════════════════════════════════════════════════════
+    //  AUTH
+    // ════════════════════════════════════════════════════════
+    function hashStr(s) {
+      let h = 0;
+      for (let i = 0; i < s.length; i++) h = Math.imul(31, h) + s.charCodeAt(i) | 0;
+      return h.toString(16);
+    }
+    const DEFAULT_HASH = hashStr('leoclub2025');
 
-function doLogin() {
-  const pass = document.getElementById('loginPass').value;
-  const stored = localStorage.getItem('leoAdminHash') || DEFAULT_HASH;
-  if (hashStr(pass) === stored) {
-    document.getElementById('loginScreen').style.display = 'none';
-    document.getElementById('adminApp').style.display = 'flex';
-    loadContent();
-  } else {
-    document.getElementById('loginErr').style.display = 'block';
-  }
-}
+    function doLogin() {
+      const pass = document.getElementById('loginPass').value;
+      const stored = localStorage.getItem('leoAdminHash') || DEFAULT_HASH;
+      if (hashStr(pass) === stored) {
+        document.getElementById('loginScreen').style.display = 'none';
+        document.getElementById('adminApp').style.display = 'flex';
+        loadContent();
+      } else {
+        document.getElementById('loginErr').style.display = 'block';
+      }
+    }
 
-function doLogout() {
-  document.getElementById('adminApp').style.display = 'none';
-  document.getElementById('loginScreen').style.display = 'flex';
-  document.getElementById('loginPass').value = '';
-}
+    function doLogout() {
+      document.getElementById('adminApp').style.display = 'none';
+      document.getElementById('loginScreen').style.display = 'flex';
+      document.getElementById('loginPass').value = '';
+    }
 
-function changePassword() {
-  const p1 = document.getElementById('new-pass').value;
-  const p2 = document.getElementById('new-pass2').value;
-  const st = document.getElementById('pass-status');
-  if (!p1) return showStatus(st, 'error', 'Password cannot be empty.');
-  if (p1 !== p2) return showStatus(st, 'error', 'Passwords do not match.');
-  if (p1.length < 6) return showStatus(st, 'error', 'Password must be at least 6 characters.');
-  localStorage.setItem('leoAdminHash', hashStr(p1));
-  showStatus(st, 'success', '✅ Password updated!');
-}
+    function changePassword() {
+      const p1 = document.getElementById('new-pass').value;
+      const p2 = document.getElementById('new-pass2').value;
+      const st = document.getElementById('pass-status');
+      if (!p1) return showStatus(st, 'error', 'Password cannot be empty.');
+      if (p1 !== p2) return showStatus(st, 'error', 'Passwords do not match.');
+      if (p1.length < 6) return showStatus(st, 'error', 'Password must be at least 6 characters.');
+      localStorage.setItem('leoAdminHash', hashStr(p1));
+      showStatus(st, 'success', '✅ Password updated!');
+    }
 
-// ════════════════════════════════════════════════════════
-//  SETTINGS
-// ════════════════════════════════════════════════════════
-function loadSettings() {
-  const gh = JSON.parse(localStorage.getItem('leoGH') || '{}');
-  const cl = JSON.parse(localStorage.getItem('leoCL') || '{}');
-  document.getElementById('gh-user').value   = gh.user   || 'kanchu12345';
-  document.getElementById('gh-repo').value   = gh.repo   || 'richman';
-  document.getElementById('gh-branch').value = gh.branch || 'master';
-  document.getElementById('gh-token').value  = gh.token  || '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';
-  document.getElementById('cl-cloud').value  = cl.cloud  || '';
-}
+    // ════════════════════════════════════════════════════════
+    //  SETTINGS
+    // ════════════════════════════════════════════════════════
+    function loadSettings() {
+      const gh = JSON.parse(localStorage.getItem('leoGH') || '{}');
+      const cl = JSON.parse(localStorage.getItem('leoCL') || '{}');
+      document.getElementById('gh-user').value = gh.user || 'kanchu12345';
+      document.getElementById('gh-repo').value = gh.repo || 'richman';
+      document.getElementById('gh-branch').value = gh.branch || 'master';
+      document.getElementById('gh-token').value = gh.token || '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                                                                                 ';
+      document.getElementById('cl-cloud').value = cl.cloud || '';
+    }
 
-function saveGHSettings() {
-  localStorage.setItem('leoGH', JSON.stringify({
-    user:   document.getElementById('gh-user').value.trim(),
-    repo:   document.getElementById('gh-repo').value.trim(),
-    branch: document.getElementById('gh-branch').value.trim() || 'main',
-    token:  document.getElementById('gh-token').value.trim()
-  }));
-  showStatus(document.getElementById('gh-status'), 'success', '✅ Saved!');
-}
+    function saveGHSettings() {
+      localStorage.setItem('leoGH', JSON.stringify({
+        user: document.getElementById('gh-user').value.trim(),
+        repo: document.getElementById('gh-repo').value.trim(),
+        branch: document.getElementById('gh-branch').value.trim() || 'main',
+        token: document.getElementById('gh-token').value.trim()
+      }));
+      showStatus(document.getElementById('gh-status'), 'success', '✅ Saved!');
+    }
 
-function saveCLSettings() {
-  localStorage.setItem('leoCL', JSON.stringify({
-    cloud:  document.getElementById('cl-cloud').value.trim()
-  }));
-  showStatus(document.getElementById('cl-status'), 'success', '✅ Saved!');
-}
+    function saveCLSettings() {
+      localStorage.setItem('leoCL', JSON.stringify({
+        cloud: document.getElementById('cl-cloud').value.trim()
+      }));
+      showStatus(document.getElementById('cl-status'), 'success', '✅ Saved!');
+    }
 
-async function testGitHub() {
-  const st = document.getElementById('gh-status');
-  let gh = JSON.parse(localStorage.getItem('leoGH') || '{}');
-  if (!gh.token) gh.token = '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';
-  if (!gh.user)  gh.user  = 'kanchu12345';
-  if (!gh.repo)  gh.repo  = 'richman';
-  showStatus(st, 'info', '⏳ Testing…');
-  try {
-    const r = await fetch(`https://api.github.com/repos/${gh.user}/${gh.repo}`, {
-      headers: { Authorization: `token ${gh.token}` }
-    });
-    if (r.ok) showStatus(st, 'success', '✅ Connected! Repo found.');
-    else showStatus(st, 'error', `❌ Error ${r.status}: check username, repo, and token.`);
-  } catch {
-    showStatus(st, 'error', '❌ Network error.');
-  }
-}
+    async function testGitHub() {
+      const st = document.getElementById('gh-status');
+      let gh = JSON.parse(localStorage.getItem('leoGH') || '{}');
+      if (!gh.token) gh.token = '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';
+      if (!gh.user) gh.user = 'kanchu12345';
+      if (!gh.repo) gh.repo = 'richman';
+      showStatus(st, 'info', '⏳ Testing…');
+      try {
+        const r = await fetch(`https://api.github.com/repos/${gh.user}/${gh.repo}`, {
+          headers: { Authorization: `token ${gh.token}` }
+        });
+        if (r.ok) showStatus(st, 'success', '✅ Connected! Repo found.');
+        else showStatus(st, 'error', `❌ Error ${r.status}: check username, repo, and token.`);
+      } catch {
+        showStatus(st, 'error', '❌ Network error.');
+      }
+    }
 
-// ════════════════════════════════════════════════════════
-//  LOAD CONTENT
-// ════════════════════════════════════════════════════════
-async function loadContent() {
-  loadSettings();
-  try {
-    const r = await fetch('data/content.json?t=' + Date.now());
-    content = r.ok ? await r.json() : defaultContent();
-  } catch { content = defaultContent(); }
-  if(!content.affiliatedBodies) content.affiliatedBodies = [];
-  renderProjects();
-  renderExecutive();
-  renderNewsletter();
-  loadClubInfo();
-  renderAffiliated();
-}
+    // ════════════════════════════════════════════════════════
+    //  LOAD CONTENT
+    // ════════════════════════════════════════════════════════
+    async function loadContent() {
+      loadSettings();
+      try {
+        const r = await fetch('data/content.json?t=' + Date.now());
+        content = r.ok ? await r.json() : defaultContent();
+      } catch { content = defaultContent(); }
+      if (!content.affiliatedBodies) content.affiliatedBodies = [];
+      renderProjects();
+      renderExecutive();
+      renderNewsletter();
+      loadClubInfo();
+      renderAffiliated();
+    }
 
-function defaultContent() {
-  return { club: { email:'', whatsapp:'', whatsappLink:'', location:'', mapLink:'', about1:'', about2:'', socialLinks:{facebook:'#',instagram:'#',youtube:'#',linkedin:'#'} }, projects:[], executive:[], newsletter:[], affiliatedBodies:[] };
-}
+    function defaultContent() {
+      return { club: { email: '', whatsapp: '', whatsappLink: '', location: '', mapLink: '', about1: '', about2: '', socialLinks: { facebook: '#', instagram: '#', youtube: '#', linkedin: '#' } }, projects: [], executive: [], newsletter: [], affiliatedBodies: [] };
+    }
 
-// ════════════════════════════════════════════════════════
-//  TABS
-// ════════════════════════════════════════════════════════
-function showTab(name) {
-  document.querySelectorAll('.pane').forEach(p => {
-    p.classList.remove('active');
-    p.style.display = ''; // force clear inline styles that might block the CSS
-  });
-  document.querySelectorAll('.sb-link').forEach(l => l.classList.remove('active'));
-  document.getElementById('pane-' + name).classList.add('active');
-  document.getElementById('tab-' + name).classList.add('active');
-}
+    // ════════════════════════════════════════════════════════
+    //  TABS
+    // ════════════════════════════════════════════════════════
+    function showTab(name) {
+      document.querySelectorAll('.pane').forEach(p => {
+        p.classList.remove('active');
+        p.style.display = ''; // force clear inline styles that might block the CSS
+      });
+      document.querySelectorAll('.sb-link').forEach(l => l.classList.remove('active'));
+      document.getElementById('pane-' + name).classList.add('active');
+      document.getElementById('tab-' + name).classList.add('active');
+    }
 
-// ════════════════════════════════════════════════════════
-//  PROJECTS
-// ════════════════════════════════════════════════════════
-const CATEGORIES = ['Education','Environment','Health','Community','International','Culture','Sports','Other'];
-const STATUSES   = ['Completed','Ongoing','Upcoming'];
+    // ════════════════════════════════════════════════════════
+    //  PROJECTS
+    // ════════════════════════════════════════════════════════
+    const CATEGORIES = ['Education', 'Environment', 'Health', 'Community', 'International', 'Culture', 'Sports', 'Other'];
+    const STATUSES = ['Completed', 'Ongoing', 'Upcoming'];
 
-function renderProjects() {
-  const list = document.getElementById('projects-list');
-  if (!content?.projects?.length) { list.innerHTML = '<div class="empty-state">No projects yet. Click "+ Add Project" to start.</div>'; return; }
-  list.innerHTML = content.projects.map((p, i) => `
+    function renderProjects() {
+      const list = document.getElementById('projects-list');
+      if (!content?.projects?.length) { list.innerHTML = '<div class="empty-state">No projects yet. Click "+ Add Project" to start.</div>'; return; }
+      list.innerHTML = content.projects.map((p, i) => `
     <div class="item-card" id="pc-${p.id}">
       <div class="item-card-header">
         <div class="item-thumb">
@@ -431,27 +482,27 @@ function renderProjects() {
         </div>
         <div class="form-row2">
           <div class="form-group"><label>Category</label>
-            <select id="pf-cat-${p.id}">${CATEGORIES.map(c=>`<option ${p.category===c?'selected':''}>${c}</option>`).join('')}</select>
+            <select id="pf-cat-${p.id}">${CATEGORIES.map(c => `<option ${p.category === c ? 'selected' : ''}>${c}</option>`).join('')}</select>
           </div>
           <div class="form-group"><label>Status</label>
-            <select id="pf-status-${p.id}">${STATUSES.map(s=>`<option ${p.status===s?'selected':''}>${s}</option>`).join('')}</select>
+            <select id="pf-status-${p.id}">${STATUSES.map(s => `<option ${p.status === s ? 'selected' : ''}>${s}</option>`).join('')}</select>
           </div>
         </div>
         <div class="form-group"><label>Description</label><textarea id="pf-desc-${p.id}" rows="3">${esc(p.description)}</textarea></div>
         <div class="img-upload-row">
         <div class="img-upload-row" style="display:flex; gap:1rem; flex-wrap:wrap; margin-top:1rem;">
           ${[1, 2, 3, 4, 5].map(imgIdx => {
-            const field = 'image' + imgIdx;
-            const url = p[field];
-            return `<div class="img-slot" style="flex:1; min-width:140px; text-align:center;">
+        const field = 'image' + imgIdx;
+        const url = p[field];
+        return `<div class="img-slot" style="flex:1; min-width:140px; text-align:center;">
               <label>Image ${imgIdx}</label>
-              <div class="img-preview-box ${url?'has-img':''}" id="pf-img${imgIdx}-box-${p.id}" style="margin: 0.5rem auto;">
+              <div class="img-preview-box ${url ? 'has-img' : ''}" id="pf-img${imgIdx}-box-${p.id}" style="margin: 0.5rem auto;">
                 ${url ? `<img src="${url}" alt="img${imgIdx}" id="pf-img${imgIdx}-prev-${p.id}"/>` : `<span id="pf-img${imgIdx}-prev-${p.id}">No image</span>`}
               </div>
               <button class="btn-upload" onclick="openImgModal({obj:content.projects[${i}],field:'${field}',imgElId:'pf-img${imgIdx}-prev-${p.id}',boxId:'pf-img${imgIdx}-box-${p.id}'})">📁</button>
               ${url ? `<button class="btn-remove" onclick="removeImg(content.projects[${i}],'${field}','pf-img${imgIdx}-prev-${p.id}','pf-img${imgIdx}-box-${p.id}')">✕</button>` : ''}
             </div>`;
-          }).join('')}
+      }).join('')}
         </div>
         <div class="form-actions">
           <button class="btn-primary" onclick="saveProject('${p.id}',${i})">✅ Save Project</button>
@@ -459,42 +510,42 @@ function renderProjects() {
         </div>
       </div>
     </div>`).join('');
-}
+    }
 
-function saveProject(id, i) {
-  const p = content.projects[i];
-  p.title       = document.getElementById(`pf-title-${id}`).value;
-  p.year        = document.getElementById(`pf-year-${id}`).value;
-  p.category    = document.getElementById(`pf-cat-${id}`).value;
-  p.status      = document.getElementById(`pf-status-${id}`).value;
-  p.description = document.getElementById(`pf-desc-${id}`).value;
-  renderProjects();
-  showToast('Project updated!');
-}
+    function saveProject(id, i) {
+      const p = content.projects[i];
+      p.title = document.getElementById(`pf-title-${id}`).value;
+      p.year = document.getElementById(`pf-year-${id}`).value;
+      p.category = document.getElementById(`pf-cat-${id}`).value;
+      p.status = document.getElementById(`pf-status-${id}`).value;
+      p.description = document.getElementById(`pf-desc-${id}`).value;
+      renderProjects();
+      showToast('Project updated!');
+    }
 
-function addProject() {
-  const id = 'p' + Date.now();
-  content.projects.push({ id, title:'New Project', description:'', category:'Education', year: String(new Date().getFullYear()), status:'Upcoming', image1:'', image2:'', image3:'', image4:'', image5:'' });
-  renderProjects();
-  setTimeout(() => { toggleEdit('pc-form-' + id); document.getElementById(`pf-title-${id}`)?.focus(); }, 50);
-}
+    function addProject() {
+      const id = 'p' + Date.now();
+      content.projects.push({ id, title: 'New Project', description: '', category: 'Education', year: String(new Date().getFullYear()), status: 'Upcoming', image1: '', image2: '', image3: '', image4: '', image5: '' });
+      renderProjects();
+      setTimeout(() => { toggleEdit('pc-form-' + id); document.getElementById(`pf-title-${id}`)?.focus(); }, 50);
+    }
 
-function deleteProject(id) {
-  if (!confirm('Delete this project?')) return;
-  content.projects = content.projects.filter(p => p.id !== id);
-  renderProjects();
-  showToast('Project deleted.');
-}
+    function deleteProject(id) {
+      if (!confirm('Delete this project?')) return;
+      content.projects = content.projects.filter(p => p.id !== id);
+      renderProjects();
+      showToast('Project deleted.');
+    }
 
-// ════════════════════════════════════════════════════════
-//  EXECUTIVE
-// ════════════════════════════════════════════════════════
-const SECTIONS = ['advisor','president','vp','secretariat','treasury','directors'];
+    // ════════════════════════════════════════════════════════
+    //  EXECUTIVE
+    // ════════════════════════════════════════════════════════
+    const SECTIONS = ['advisor', 'president', 'vp', 'secretariat', 'treasury', 'directors'];
 
-function renderExecutive() {
-  const list = document.getElementById('executive-list');
-  if (!content?.executive?.length) { list.innerHTML = '<div class="empty-state">No members yet.</div>'; return; }
-  list.innerHTML = content.executive.map((m, i) => `
+    function renderExecutive() {
+      const list = document.getElementById('executive-list');
+      if (!content?.executive?.length) { list.innerHTML = '<div class="empty-state">No members yet.</div>'; return; }
+      list.innerHTML = content.executive.map((m, i) => `
     <div class="item-card" id="ec-${m.id}">
       <div class="item-card-header">
         <div class="item-thumb member-thumb">
@@ -515,11 +566,11 @@ function renderExecutive() {
           <div class="form-group"><label>Role / Title</label><input type="text" id="ef-role-${m.id}" value="${esc(m.role)}"/></div>
         </div>
         <div class="form-group"><label>Section</label>
-          <select id="ef-sec-${m.id}">${SECTIONS.map(s=>`<option ${m.section===s?'selected':''}>${s}</option>`).join('')}</select>
+          <select id="ef-sec-${m.id}">${SECTIONS.map(s => `<option ${m.section === s ? 'selected' : ''}>${s}</option>`).join('')}</select>
         </div>
         <div class="img-slot">
           <label>Profile Photo</label>
-          <div class="img-preview-box round ${m.photo?'has-img':''}" id="ef-photo-box-${m.id}">
+          <div class="img-preview-box round ${m.photo ? 'has-img' : ''}" id="ef-photo-box-${m.id}">
             ${m.photo ? `<img src="${m.photo}" alt="photo" id="ef-photo-prev-${m.id}" style="border-radius:50%;"/>` : `<span id="ef-photo-prev-${m.id}">${initials(m.name)}</span>`}
           </div>
           <button class="btn-upload" onclick="openImgModal({obj:content.executive[${i}],field:'photo',imgElId:'ef-photo-prev-${m.id}',boxId:'ef-photo-box-${m.id}',round:true})">📁 Upload Photo</button>
@@ -531,42 +582,42 @@ function renderExecutive() {
         </div>
       </div>
     </div>`).join('');
-}
+    }
 
-function saveMember(id, i) {
-  const m = content.executive[i];
-  m.name    = document.getElementById(`ef-name-${id}`).value;
-  m.role    = document.getElementById(`ef-role-${id}`).value;
-  m.section = document.getElementById(`ef-sec-${id}`).value;
-  renderExecutive();
-  showToast('Member updated!');
-}
+    function saveMember(id, i) {
+      const m = content.executive[i];
+      m.name = document.getElementById(`ef-name-${id}`).value;
+      m.role = document.getElementById(`ef-role-${id}`).value;
+      m.section = document.getElementById(`ef-sec-${id}`).value;
+      renderExecutive();
+      showToast('Member updated!');
+    }
 
-function addMember() {
-  const id = 'e' + Date.now();
-  content.executive.push({ id, name:'New Member', role:'Director', section:'directors', photo:'' });
-  renderExecutive();
-  setTimeout(() => { toggleEdit('ec-form-' + id); document.getElementById(`ef-name-${id}`)?.focus(); }, 50);
-}
+    function addMember() {
+      const id = 'e' + Date.now();
+      content.executive.push({ id, name: 'New Member', role: 'Director', section: 'directors', photo: '' });
+      renderExecutive();
+      setTimeout(() => { toggleEdit('ec-form-' + id); document.getElementById(`ef-name-${id}`)?.focus(); }, 50);
+    }
 
-function deleteMember(id) {
-  if (!confirm('Remove this member?')) return;
-  content.executive = content.executive.filter(m => m.id !== id);
-  renderExecutive();
-  showToast('Member removed.');
-}
+    function deleteMember(id) {
+      if (!confirm('Remove this member?')) return;
+      content.executive = content.executive.filter(m => m.id !== id);
+      renderExecutive();
+      showToast('Member removed.');
+    }
 
-function initials(name) {
-  return name.replace(/^Leo |^Lion /, '').split(' ').slice(0,2).map(w=>w[0]).join('').toUpperCase();
-}
+    function initials(name) {
+      return name.replace(/^Leo |^Lion /, '').split(' ').slice(0, 2).map(w => w[0]).join('').toUpperCase();
+    }
 
-// ════════════════════════════════════════════════════════
-//  NEWSLETTER
-// ════════════════════════════════════════════════════════
-function renderNewsletter() {
-  const list = document.getElementById('newsletter-list');
-  if (!content?.newsletter?.length) { list.innerHTML = '<div class="empty-state">No newsletter issues yet.</div>'; return; }
-  list.innerHTML = content.newsletter.map((n, i) => `
+    // ════════════════════════════════════════════════════════
+    //  NEWSLETTER
+    // ════════════════════════════════════════════════════════
+    function renderNewsletter() {
+      const list = document.getElementById('newsletter-list');
+      if (!content?.newsletter?.length) { list.innerHTML = '<div class="empty-state">No newsletter issues yet.</div>'; return; }
+      list.innerHTML = content.newsletter.map((n, i) => `
     <div class="item-card" id="nl-${n.id}">
       <div class="item-card-header">
         <div class="item-thumb"><span>📰</span></div>
@@ -589,7 +640,7 @@ function renderNewsletter() {
         
         <div class="img-slot" style="margin-top:1rem;">
           <label>Optional Cover Image (Overrides auto-generated cover)</label>
-          <div class="img-preview-box ${n.coverImage?'has-img':''}" id="nf-cover-box-${n.id}" style="height:120px; width:90px;">
+          <div class="img-preview-box ${n.coverImage ? 'has-img' : ''}" id="nf-cover-box-${n.id}" style="height:120px; width:90px;">
             ${n.coverImage ? `<img src="${n.coverImage}" id="nf-cover-prev-${n.id}" style="height:100%; width:100%; object-fit:cover;"/>` : `<span id="nf-cover-prev-${n.id}">Auto</span>`}
           </div>
           <button class="btn-upload" onclick="openImgModal({obj:content.newsletter[${i}],field:'coverImage',imgElId:'nf-cover-prev-${n.id}',boxId:'nf-cover-box-${n.id}'})">📁 Upload Cover</button>
@@ -602,111 +653,111 @@ function renderNewsletter() {
         </div>
       </div>
     </div>`).join('');
-}
+    }
 
-function saveIssue(id, i) {
-  const n = content.newsletter[i];
-  n.title       = document.getElementById(`nf-title-${id}`).value;
-  n.date        = document.getElementById(`nf-date-${id}`).value;
-  n.description = document.getElementById(`nf-desc-${id}`).value;
-  n.pdfLink     = document.getElementById(`nf-pdf-${id}`).value;
-  renderNewsletter();
-  showToast('Issue updated!');
-}
+    function saveIssue(id, i) {
+      const n = content.newsletter[i];
+      n.title = document.getElementById(`nf-title-${id}`).value;
+      n.date = document.getElementById(`nf-date-${id}`).value;
+      n.description = document.getElementById(`nf-desc-${id}`).value;
+      n.pdfLink = document.getElementById(`nf-pdf-${id}`).value;
+      renderNewsletter();
+      showToast('Issue updated!');
+    }
 
-function addNewsletter() {
-  const id = 'n' + Date.now();
-  content.newsletter.push({ id, title:'New Issue', date:'', description:'', pdfLink:'', coverImage:'' });
-  renderNewsletter();
-  setTimeout(() => { toggleEdit('nl-form-' + id); document.getElementById(`nf-title-${id}`)?.focus(); }, 50);
-}
+    function addNewsletter() {
+      const id = 'n' + Date.now();
+      content.newsletter.push({ id, title: 'New Issue', date: '', description: '', pdfLink: '', coverImage: '' });
+      renderNewsletter();
+      setTimeout(() => { toggleEdit('nl-form-' + id); document.getElementById(`nf-title-${id}`)?.focus(); }, 50);
+    }
 
-function deleteIssue(id) {
-  if (!confirm('Delete this issue?')) return;
-  content.newsletter = content.newsletter.filter(n => n.id !== id);
-  renderNewsletter();
-  showToast('Issue deleted.');
-}
+    function deleteIssue(id) {
+      if (!confirm('Delete this issue?')) return;
+      content.newsletter = content.newsletter.filter(n => n.id !== id);
+      renderNewsletter();
+      showToast('Issue deleted.');
+    }
 
-// ════════════════════════════════════════════════════════
-//  CLUB INFO
-// ════════════════════════════════════════════════════════
-function loadClubInfo() {
-  const c = content?.club;
-  if (!c) return;
-  if (c.heroImage) {
-    document.getElementById('club-hero-box').classList.add('has-img');
-    document.getElementById('club-hero-box').innerHTML = `<img src="${c.heroImage}" id="club-hero-prev"/>`;
-    document.getElementById('club-hero-remove').style.display = 'inline-block';
-  } else {
-    document.getElementById('club-hero-box').classList.remove('has-img');
-    document.getElementById('club-hero-box').innerHTML = `<span id="club-hero-prev">No image</span>`;
-    document.getElementById('club-hero-remove').style.display = 'none';
-  }
-  document.getElementById('ci-hero-title').value = c.heroTitle || 'Centennial <span>Leo Club</span>';
-  document.getElementById('ci-hero-subtitle').value = c.heroSubtitle || 'of Richmond College';
-  document.getElementById('ci-hero-desc').value = c.heroDesc || 'Empowering youth to serve. Building leaders who make a difference in our communities and beyond.';
-  document.getElementById('ci-hero-motto').value = c.heroMotto || '# One Team · # One Dream · # One Aim';
-  document.getElementById('ci-group-title').value = c.groupTitle || 'Team 2025/2026';
-  document.getElementById('ci-group-sub').value = c.groupSub || 'Leading with Pride';
-  document.getElementById('ci-email').value    = c.email    || '';
-  document.getElementById('ci-whatsapp').value = c.whatsapp || '';
-  document.getElementById('ci-location').value = c.location || '';
-  document.getElementById('ci-maplink').value  = c.mapLink  || '';
-  document.getElementById('ci-about1').value   = c.about1   || '';
-  document.getElementById('ci-about2').value   = c.about2   || '';
-  document.getElementById('ci-mission-title').value = c.missionTitle || '';
-  document.getElementById('ci-mission-statement').value = c.missionStatement || '';
-  const sl = c.socialLinks || {};
-  document.getElementById('ci-facebook').value  = sl.facebook  || '';
-  document.getElementById('ci-instagram').value = sl.instagram || '';
-  document.getElementById('ci-youtube').value   = sl.youtube   || '';
-  document.getElementById('ci-linkedin').value  = sl.linkedin  || '';
+    // ════════════════════════════════════════════════════════
+    //  CLUB INFO
+    // ════════════════════════════════════════════════════════
+    function loadClubInfo() {
+      const c = content?.club;
+      if (!c) return;
+      if (c.heroImage) {
+        document.getElementById('club-hero-box').classList.add('has-img');
+        document.getElementById('club-hero-box').innerHTML = `<img src="${c.heroImage}" id="club-hero-prev"/>`;
+        document.getElementById('club-hero-remove').style.display = 'inline-block';
+      } else {
+        document.getElementById('club-hero-box').classList.remove('has-img');
+        document.getElementById('club-hero-box').innerHTML = `<span id="club-hero-prev">No image</span>`;
+        document.getElementById('club-hero-remove').style.display = 'none';
+      }
+      document.getElementById('ci-hero-title').value = c.heroTitle || 'Centennial <span>Leo Club</span>';
+      document.getElementById('ci-hero-subtitle').value = c.heroSubtitle || 'of Richmond College';
+      document.getElementById('ci-hero-desc').value = c.heroDesc || 'Empowering youth to serve. Building leaders who make a difference in our communities and beyond.';
+      document.getElementById('ci-hero-motto').value = c.heroMotto || '# One Team · # One Dream · # One Aim';
+      document.getElementById('ci-group-title').value = c.groupTitle || 'Team 2025/2026';
+      document.getElementById('ci-group-sub').value = c.groupSub || 'Leading with Pride';
+      document.getElementById('ci-email').value = c.email || '';
+      document.getElementById('ci-whatsapp').value = c.whatsapp || '';
+      document.getElementById('ci-location').value = c.location || '';
+      document.getElementById('ci-maplink').value = c.mapLink || '';
+      document.getElementById('ci-about1').value = c.about1 || '';
+      document.getElementById('ci-about2').value = c.about2 || '';
+      document.getElementById('ci-mission-title').value = c.missionTitle || '';
+      document.getElementById('ci-mission-statement').value = c.missionStatement || '';
+      const sl = c.socialLinks || {};
+      document.getElementById('ci-facebook').value = sl.facebook || '';
+      document.getElementById('ci-instagram').value = sl.instagram || '';
+      document.getElementById('ci-youtube').value = sl.youtube || '';
+      document.getElementById('ci-linkedin').value = sl.linkedin || '';
 
-  // Stats
-  document.getElementById('ci-members').value = c.members || 400;
-  document.getElementById('ci-alumni').value  = c.alumni  || 300;
-  document.getElementById('ci-awards').value  = c.districtAwards || 10;
-}
+      // Stats
+      document.getElementById('ci-members').value = c.members || 400;
+      document.getElementById('ci-alumni').value = c.alumni || 300;
+      document.getElementById('ci-awards').value = c.districtAwards || 10;
+    }
 
-function saveClubInfo() {
-  const wa = document.getElementById('ci-whatsapp').value.trim().replace(/\s/g,'').replace(/^\+/,'');
-  if(!content.club) content.club = {};
-  content.club.heroTitle    = document.getElementById('ci-hero-title').value.trim();
-  content.club.heroSubtitle = document.getElementById('ci-hero-subtitle').value.trim();
-  content.club.heroDesc     = document.getElementById('ci-hero-desc').value.trim();
-  content.club.heroMotto    = document.getElementById('ci-hero-motto').value.trim();
-  content.club.groupTitle   = document.getElementById('ci-group-title').value.trim();
-  content.club.groupSub     = document.getElementById('ci-group-sub').value.trim();
-  content.club.email    = document.getElementById('ci-email').value.trim();
-  content.club.whatsapp = '+' + wa;
-  content.club.whatsappLink = 'https://wa.me/' + wa;
-  content.club.location = document.getElementById('ci-location').value.trim();
-  content.club.mapLink  = document.getElementById('ci-maplink').value.trim();
-  content.club.about1   = document.getElementById('ci-about1').value.trim();
-  content.club.about2   = document.getElementById('ci-about2').value.trim();
-  content.club.missionTitle     = document.getElementById('ci-mission-title').value.trim();
-  content.club.missionStatement = document.getElementById('ci-mission-statement').value.trim();
-  content.club.socialLinks = {
-    facebook:  document.getElementById('ci-facebook').value.trim(),
-    instagram: document.getElementById('ci-instagram').value.trim(),
-    youtube:   document.getElementById('ci-youtube').value.trim(),
-    linkedin:  document.getElementById('ci-linkedin').value.trim()
-  };
-  content.club.members = parseInt(document.getElementById('ci-members').value) || 0;
-  content.club.alumni  = parseInt(document.getElementById('ci-alumni').value) || 0;
-  content.club.districtAwards = parseInt(document.getElementById('ci-awards').value) || 0;
+    function saveClubInfo() {
+      const wa = document.getElementById('ci-whatsapp').value.trim().replace(/\s/g, '').replace(/^\+/, '');
+      if (!content.club) content.club = {};
+      content.club.heroTitle = document.getElementById('ci-hero-title').value.trim();
+      content.club.heroSubtitle = document.getElementById('ci-hero-subtitle').value.trim();
+      content.club.heroDesc = document.getElementById('ci-hero-desc').value.trim();
+      content.club.heroMotto = document.getElementById('ci-hero-motto').value.trim();
+      content.club.groupTitle = document.getElementById('ci-group-title').value.trim();
+      content.club.groupSub = document.getElementById('ci-group-sub').value.trim();
+      content.club.email = document.getElementById('ci-email').value.trim();
+      content.club.whatsapp = '+' + wa;
+      content.club.whatsappLink = 'https://wa.me/' + wa;
+      content.club.location = document.getElementById('ci-location').value.trim();
+      content.club.mapLink = document.getElementById('ci-maplink').value.trim();
+      content.club.about1 = document.getElementById('ci-about1').value.trim();
+      content.club.about2 = document.getElementById('ci-about2').value.trim();
+      content.club.missionTitle = document.getElementById('ci-mission-title').value.trim();
+      content.club.missionStatement = document.getElementById('ci-mission-statement').value.trim();
+      content.club.socialLinks = {
+        facebook: document.getElementById('ci-facebook').value.trim(),
+        instagram: document.getElementById('ci-instagram').value.trim(),
+        youtube: document.getElementById('ci-youtube').value.trim(),
+        linkedin: document.getElementById('ci-linkedin').value.trim()
+      };
+      content.club.members = parseInt(document.getElementById('ci-members').value) || 0;
+      content.club.alumni = parseInt(document.getElementById('ci-alumni').value) || 0;
+      content.club.districtAwards = parseInt(document.getElementById('ci-awards').value) || 0;
 
-  showToast('Club info updated! Remember to Save to GitHub.');
-}
+      showToast('Club info updated! Remember to Save to GitHub.');
+    }
 
-// ════════════════════════════════════════════════════════
-//  ATTACHED BODIES
-// ════════════════════════════════════════════════════════
-function renderAffiliated() {
-  const list = document.getElementById('affiliated-list');
-  if (!content?.affiliatedBodies?.length) { list.innerHTML = '<div class="empty-state">No affiliated bodies. Format data/content.json properly.</div>'; return; }
-  list.innerHTML = content.affiliatedBodies.map((b, i) => `
+    // ════════════════════════════════════════════════════════
+    //  ATTACHED BODIES
+    // ════════════════════════════════════════════════════════
+    function renderAffiliated() {
+      const list = document.getElementById('affiliated-list');
+      if (!content?.affiliatedBodies?.length) { list.innerHTML = '<div class="empty-state">No affiliated bodies. Format data/content.json properly.</div>'; return; }
+      list.innerHTML = content.affiliatedBodies.map((b, i) => `
     <div class="item-card" id="ab-${b.id}">
       <div class="item-card-header">
         <div class="item-info">
@@ -728,7 +779,7 @@ function renderAffiliated() {
         <div class="img-upload-row" style="display:flex; gap:1rem; flex-wrap:wrap; margin-top:1rem;">
           <div class="img-slot" style="flex:1; min-width:140px; text-align:center;">
             <label>Background Image</label>
-            <div class="img-preview-box ${b.bgImage?'has-img':''}" id="af-bg-box-${b.id}" style="margin: 0.5rem auto;">
+            <div class="img-preview-box ${b.bgImage ? 'has-img' : ''}" id="af-bg-box-${b.id}" style="margin: 0.5rem auto;">
               ${b.bgImage ? `<img src="${b.bgImage}" id="af-bg-prev-${b.id}"/>` : `<span id="af-bg-prev-${b.id}">No image</span>`}
             </div>
             <button class="btn-upload" onclick="openImgModal({obj:content.affiliatedBodies[${i}],field:'bgImage',imgElId:'af-bg-prev-${b.id}',boxId:'af-bg-box-${b.id}'})">📁</button>
@@ -737,7 +788,7 @@ function renderAffiliated() {
 
           <div class="img-slot" style="flex:1; min-width:140px; text-align:center;">
             <label>Logo / Seal Image</label>
-            <div class="img-preview-box ${b.logoImage?'has-img':''}" id="af-logo-box-${b.id}" style="margin: 0.5rem auto;">
+            <div class="img-preview-box ${b.logoImage ? 'has-img' : ''}" id="af-logo-box-${b.id}" style="margin: 0.5rem auto;">
               ${b.logoImage ? `<img src="${b.logoImage}" id="af-logo-prev-${b.id}"/>` : `<span id="af-logo-prev-${b.id}">No image</span>`}
             </div>
             <button class="btn-upload" onclick="openImgModal({obj:content.affiliatedBodies[${i}],field:'logoImage',imgElId:'af-logo-prev-${b.id}',boxId:'af-logo-box-${b.id}'})">📁</button>
@@ -751,238 +802,239 @@ function renderAffiliated() {
         </div>
       </div>
     </div>`).join('');
-}
-
-function saveAffiliated(id, i) {
-  const b = content.affiliatedBodies[i];
-  b.label       = document.getElementById(`af-label-${id}`).value;
-  b.title       = document.getElementById(`af-title-${id}`).value;
-  b.description = document.getElementById(`af-desc-${id}`).value;
-  renderAffiliated();
-  showToast('Affiliated Body updated!');
-}
-
-function addAffiliated() {
-  const id = 'ab' + Date.now();
-  if(!content.affiliatedBodies) content.affiliatedBodies = [];
-  content.affiliatedBodies.push({ id, label:'Governing Body', title:'New Body', description:'', bgImage:'', logoImage:'' });
-  renderAffiliated();
-  setTimeout(() => { toggleEdit('ab-form-' + id); document.getElementById(`af-title-${id}`)?.focus(); }, 50);
-}
-
-function deleteAffiliated(id) {
-  if (!confirm('Remove this body?')) return;
-  content.affiliatedBodies = content.affiliatedBodies.filter(b => b.id !== id);
-  renderAffiliated();
-  showToast('Body removed.');
-}
-
-// ════════════════════════════════════════════════════════
-//  IMAGE UPLOAD (Cloudinary)
-// ════════════════════════════════════════════════════════
-let _selectedFile = null;
-
-function openImgModal(target) {
-  _imgTarget = target;
-  _selectedFile = null;
-  document.getElementById('imgPreviewWrap').style.display = 'none';
-  document.getElementById('imgDropPrompt').style.display = 'block';
-  document.getElementById('imgUploadProgress').style.display = 'none';
-  document.getElementById('imgFileInput').value = '';
-  document.getElementById('imgModalTitle').textContent = target.round ? 'Upload Profile Photo' : 'Upload Project Image';
-  document.getElementById('imgModal').style.display = 'flex';
-}
-
-function closeImgModal() {
-  document.getElementById('imgModal').style.display = 'none';
-  _selectedFile = null; _imgTarget = null;
-}
-
-function previewImg(input) {
-  _selectedFile = input.files[0];
-  if (!_selectedFile) return;
-  if (_selectedFile.size > 1024 * 1024) {
-    alert('Image size exceeds 1 MB limit (it is ' + (_selectedFile.size / 1024 / 1024).toFixed(2) + ' MB). Please compress and choose a smaller image.');
-    input.value = '';
-    _selectedFile = null;
-    return;
-  }
-  const reader = new FileReader();
-  reader.onload = e => {
-    document.getElementById('imgPreview').src = e.target.result;
-    document.getElementById('imgPreviewName').textContent = _selectedFile.name;
-    document.getElementById('imgDropPrompt').style.display = 'none';
-    document.getElementById('imgPreviewWrap').style.display = 'block';
-  };
-  reader.readAsDataURL(_selectedFile);
-}
-
-async function uploadImage() {
-  if (!_selectedFile) return alert('Please select an image first.');
-  const cl = JSON.parse(localStorage.getItem('leoCL') || '{}');
-  const imgbbKey = cl.cloud || '580db6f671331120289dba6d8ec108c2';  // default key
-  if (!imgbbKey) return alert('Please configure Media Storage API Key first (Settings tab).');
-
-  const prog = document.getElementById('imgUploadProgress');
-  const fill  = document.getElementById('progressFill');
-  const text  = document.getElementById('progressText');
-  prog.style.display = 'block';
-  document.getElementById('uploadBtn').disabled = true;
-
-  // Animate progress bar
-  let pct = 0;
-  const timer = setInterval(() => { pct = Math.min(pct + 3, 85); fill.style.width = pct + '%'; }, 80);
-
-  try {
-    const fd = new FormData();
-    fd.append('image', _selectedFile); // ImgBB uses an 'image' field
-
-    const r = await fetch(`https://api.imgbb.com/1/upload?key=${imgbbKey}`, { method:'POST', body: fd });
-    const data = await r.json();
-    clearInterval(timer);
-
-    if (data.success) {
-      fill.style.width = '100%';
-      text.textContent = '✅ Upload complete!';
-      // Apply url to content object
-      _imgTarget.obj[_imgTarget.field] = data.data.url;
-      // Update preview in the form
-      const prevEl = document.getElementById(_imgTarget.imgElId);
-      const boxEl  = document.getElementById(_imgTarget.boxId);
-      if (prevEl) {
-        if (prevEl.tagName === 'IMG') { prevEl.src = data.data.url; }
-        else {
-          const img = document.createElement('img');
-          img.src = data.data.url;
-          img.id  = _imgTarget.imgElId;
-          if (_imgTarget.round) img.style.borderRadius = '50%';
-          prevEl.replaceWith(img);
-        }
-      }
-      if (boxEl) boxEl.classList.add('has-img');
-      showToast('Image uploaded!');
-      setTimeout(closeImgModal, 800);
-    } else {
-      clearInterval(timer);
-      text.textContent = '❌ Upload failed: ' + (data.error?.message || 'Unknown error');
     }
-  } catch (e) {
-    clearInterval(timer);
-    text.textContent = '❌ Network error. Check Media Storage API key.';
-  }
-  document.getElementById('uploadBtn').disabled = false;
-}
 
-function removeImg(obj, field, prevId, boxId) {
-  obj[field] = '';
-  const prevEl = document.getElementById(prevId);
-  const boxEl  = document.getElementById(boxId);
-  if (prevEl) { prevEl.outerHTML = `<span id="${prevId}">No image</span>`; }
-  if (boxEl)  { boxEl.classList.remove('has-img'); }
-  showToast('Image removed.');
-}
+    function saveAffiliated(id, i) {
+      const b = content.affiliatedBodies[i];
+      b.label = document.getElementById(`af-label-${id}`).value;
+      b.title = document.getElementById(`af-title-${id}`).value;
+      b.description = document.getElementById(`af-desc-${id}`).value;
+      renderAffiliated();
+      showToast('Affiliated Body updated!');
+    }
 
-// ════════════════════════════════════════════════════════
-//  GITHUB SAVE
-// ════════════════════════════════════════════════════════
-async function saveToGitHub() {
-  let gh = JSON.parse(localStorage.getItem('leoGH') || '{}');
-  // Hardcoded Fallbacks
-  if (!gh.token)  gh.token = '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';
-  if (!gh.user)   gh.user  = 'kanchu12345';
-  if (!gh.repo)   gh.repo  = 'richman';
-  if (!gh.branch) gh.branch = 'master';
+    function addAffiliated() {
+      const id = 'ab' + Date.now();
+      if (!content.affiliatedBodies) content.affiliatedBodies = [];
+      content.affiliatedBodies.push({ id, label: 'Governing Body', title: 'New Body', description: '', bgImage: '', logoImage: '' });
+      renderAffiliated();
+      setTimeout(() => { toggleEdit('ab-form-' + id); document.getElementById(`af-title-${id}`)?.focus(); }, 50);
+    }
 
-  const st = document.getElementById('saveStatus');
-  const btn = document.getElementById('saveBtn');
-  btn.disabled = true;
-  showStatus(st, 'info', '⏳ Saving…');
+    function deleteAffiliated(id) {
+      if (!confirm('Remove this body?')) return;
+      content.affiliatedBodies = content.affiliatedBodies.filter(b => b.id !== id);
+      renderAffiliated();
+      showToast('Body removed.');
+    }
 
-  const path = 'data/content.json';
-  const apiBase = `https://api.github.com/repos/${gh.user}/${gh.repo}/contents/${path}`;
-  const headers = { Authorization: `token ${gh.token}`, 'Content-Type':'application/json' };
+    // ════════════════════════════════════════════════════════
+    //  IMAGE UPLOAD (Cloudinary)
+    // ════════════════════════════════════════════════════════
+    let _selectedFile = null;
 
-  try {
-    // Get current file SHA
-    let sha = '';
-    try {
-      const cur = await fetch(`${apiBase}?ref=${gh.branch}`, { headers });
-      if (cur.ok) { const d = await cur.json(); sha = d.sha; }
-    } catch {}
+    function openImgModal(target) {
+      _imgTarget = target;
+      _selectedFile = null;
+      document.getElementById('imgPreviewWrap').style.display = 'none';
+      document.getElementById('imgDropPrompt').style.display = 'block';
+      document.getElementById('imgUploadProgress').style.display = 'none';
+      document.getElementById('imgFileInput').value = '';
+      document.getElementById('imgModalTitle').textContent = target.round ? 'Upload Profile Photo' : 'Upload Project Image';
+      document.getElementById('imgModal').style.display = 'flex';
+    }
 
-    const body = JSON.stringify({
-      message: `Admin: update content.json [${new Date().toISOString()}]`,
-      content: btoa(unescape(encodeURIComponent(JSON.stringify(content, null, 2)))),
-      branch: gh.branch || 'main',
-      ...(sha ? { sha } : {})
+    function closeImgModal() {
+      document.getElementById('imgModal').style.display = 'none';
+      _selectedFile = null; _imgTarget = null;
+    }
+
+    function previewImg(input) {
+      _selectedFile = input.files[0];
+      if (!_selectedFile) return;
+      if (_selectedFile.size > 1024 * 1024) {
+        alert('Image size exceeds 1 MB limit (it is ' + (_selectedFile.size / 1024 / 1024).toFixed(2) + ' MB). Please compress and choose a smaller image.');
+        input.value = '';
+        _selectedFile = null;
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = e => {
+        document.getElementById('imgPreview').src = e.target.result;
+        document.getElementById('imgPreviewName').textContent = _selectedFile.name;
+        document.getElementById('imgDropPrompt').style.display = 'none';
+        document.getElementById('imgPreviewWrap').style.display = 'block';
+      };
+      reader.readAsDataURL(_selectedFile);
+    }
+
+    async function uploadImage() {
+      if (!_selectedFile) return alert('Please select an image first.');
+      const cl = JSON.parse(localStorage.getItem('leoCL') || '{}');
+      const imgbbKey = cl.cloud || '580db6f671331120289dba6d8ec108c2';  // default key
+      if (!imgbbKey) return alert('Please configure Media Storage API Key first (Settings tab).');
+
+      const prog = document.getElementById('imgUploadProgress');
+      const fill = document.getElementById('progressFill');
+      const text = document.getElementById('progressText');
+      prog.style.display = 'block';
+      document.getElementById('uploadBtn').disabled = true;
+
+      // Animate progress bar
+      let pct = 0;
+      const timer = setInterval(() => { pct = Math.min(pct + 3, 85); fill.style.width = pct + '%'; }, 80);
+
+      try {
+        const fd = new FormData();
+        fd.append('image', _selectedFile); // ImgBB uses an 'image' field
+
+        const r = await fetch(`https://api.imgbb.com/1/upload?key=${imgbbKey}`, { method: 'POST', body: fd });
+        const data = await r.json();
+        clearInterval(timer);
+
+        if (data.success) {
+          fill.style.width = '100%';
+          text.textContent = '✅ Upload complete!';
+          // Apply url to content object
+          _imgTarget.obj[_imgTarget.field] = data.data.url;
+          // Update preview in the form
+          const prevEl = document.getElementById(_imgTarget.imgElId);
+          const boxEl = document.getElementById(_imgTarget.boxId);
+          if (prevEl) {
+            if (prevEl.tagName === 'IMG') { prevEl.src = data.data.url; }
+            else {
+              const img = document.createElement('img');
+              img.src = data.data.url;
+              img.id = _imgTarget.imgElId;
+              if (_imgTarget.round) img.style.borderRadius = '50%';
+              prevEl.replaceWith(img);
+            }
+          }
+          if (boxEl) boxEl.classList.add('has-img');
+          showToast('Image uploaded!');
+          setTimeout(closeImgModal, 800);
+        } else {
+          clearInterval(timer);
+          text.textContent = '❌ Upload failed: ' + (data.error?.message || 'Unknown error');
+        }
+      } catch (e) {
+        clearInterval(timer);
+        text.textContent = '❌ Network error. Check Media Storage API key.';
+      }
+      document.getElementById('uploadBtn').disabled = false;
+    }
+
+    function removeImg(obj, field, prevId, boxId) {
+      obj[field] = '';
+      const prevEl = document.getElementById(prevId);
+      const boxEl = document.getElementById(boxId);
+      if (prevEl) { prevEl.outerHTML = `<span id="${prevId}">No image</span>`; }
+      if (boxEl) { boxEl.classList.remove('has-img'); }
+      showToast('Image removed.');
+    }
+
+    // ════════════════════════════════════════════════════════
+    //  GITHUB SAVE
+    // ════════════════════════════════════════════════════════
+    async function saveToGitHub() {
+      let gh = JSON.parse(localStorage.getItem('leoGH') || '{}');
+      // Hardcoded Fallbacks
+      if (!gh.token) gh.token = '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';
+      if (!gh.user) gh.user = 'kanchu12345';
+      if (!gh.repo) gh.repo = 'richman';
+      if (!gh.branch) gh.branch = 'master';
+
+      const st = document.getElementById('saveStatus');
+      const btn = document.getElementById('saveBtn');
+      btn.disabled = true;
+      showStatus(st, 'info', '⏳ Saving…');
+
+      const path = 'data/content.json';
+      const apiBase = `https://api.github.com/repos/${gh.user}/${gh.repo}/contents/${path}`;
+      const headers = { Authorization: `token ${gh.token}`, 'Content-Type': 'application/json' };
+
+      try {
+        // Get current file SHA
+        let sha = '';
+        try {
+          const cur = await fetch(`${apiBase}?ref=${gh.branch}`, { headers });
+          if (cur.ok) { const d = await cur.json(); sha = d.sha; }
+        } catch { }
+
+        const body = JSON.stringify({
+          message: `Admin: update content.json [${new Date().toISOString()}]`,
+          content: btoa(unescape(encodeURIComponent(JSON.stringify(content, null, 2)))),
+          branch: gh.branch || 'main',
+          ...(sha ? { sha } : {})
+        });
+
+        const res = await fetch(apiBase, { method: 'PUT', headers, body });
+        if (res.ok) {
+          showStatus(st, 'success', '✅ Published successfully!');
+          showToast('✅ Updates published live!');
+          // Show the 'View Live Website' button
+          const previewBtn = document.getElementById('previewAfterSave');
+          if (previewBtn) previewBtn.style.display = 'flex';
+        } else {
+          const err = await res.json();
+          showStatus(st, 'error', '❌ ' + (err.message || 'Connection error'));
+        }
+      } catch (e) {
+        showStatus(st, 'error', '❌ Network error: ' + e.message);
+      }
+      btn.disabled = false;
+    }
+
+    // ════════════════════════════════════════════════════════
+    //  UTILS
+    // ════════════════════════════════════════════════════════
+    function toggleEdit(id) {
+      const el = document.getElementById(id);
+      if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function showStatus(el, type, msg) {
+      if (!el) return;
+      el.className = 'save-status show ' + type;
+      el.textContent = msg;
+      // Auto-hide after some time (longer for errors)
+      const duration = type === 'success' ? 4000 : 8000;
+      setTimeout(() => { if (el.textContent === msg) el.className = 'save-status'; }, duration);
+    }
+
+    function showToast(msg) {
+      let t = document.getElementById('toast');
+      if (!t) { t = document.createElement('div'); t.id = 'toast'; document.body.appendChild(t); }
+      t.textContent = msg; t.className = 'toast show';
+      clearTimeout(t._timer);
+      t._timer = setTimeout(() => t.className = 'toast', 2500);
+    }
+
+    function esc(s) { return (s || '').replace(/"/g, '&quot;').replace(/</g, '&lt;'); }
+
+    // ════════════════════════════════════════════════════════
+    //  INIT
+    // ════════════════════════════════════════════════════════
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('loginPass').addEventListener('keydown', e => {
+        if (e.key === 'Enter') doLogin();
+      });
+
+      // Secret shortcut: Ctrl+Shift+S reveals Settings tab
+      document.addEventListener('keydown', e => {
+        if (e.ctrlKey && e.shiftKey && e.key === 'S') {
+          const tab = document.getElementById('tab-settings');
+          if (tab) {
+            tab.style.display = tab.style.display === 'none' ? 'flex' : 'none';
+            if (tab.style.display === 'flex') {
+              showTab('settings');
+              showToast('⚙️ Settings unlocked');
+            }
+          }
+        }
+      });
     });
-
-    const res = await fetch(apiBase, { method:'PUT', headers, body });
-    if (res.ok) {
-      showStatus(st, 'success', '✅ Published successfully!');
-      showToast('✅ Updates published live!');
-      // Show the 'View Live Website' button
-      const previewBtn = document.getElementById('previewAfterSave');
-      if (previewBtn) previewBtn.style.display = 'flex';
-    } else {
-      const err = await res.json();
-      showStatus(st, 'error', '❌ ' + (err.message || 'Connection error'));
-    }
-  } catch (e) {
-    showStatus(st, 'error', '❌ Network error: ' + e.message);
-  }
-  btn.disabled = false;
-}
-
-// ════════════════════════════════════════════════════════
-//  UTILS
-// ════════════════════════════════════════════════════════
-function toggleEdit(id) {
-  const el = document.getElementById(id);
-  if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
-}
-
-function showStatus(el, type, msg) {
-  if (!el) return;
-  el.className = 'save-status show ' + type;
-  el.textContent = msg;
-  // Auto-hide after some time (longer for errors)
-  const duration = type === 'success' ? 4000 : 8000;
-  setTimeout(() => { if (el.textContent === msg) el.className = 'save-status'; }, duration);
-}
-
-function showToast(msg) {
-  let t = document.getElementById('toast');
-  if (!t) { t = document.createElement('div'); t.id = 'toast'; document.body.appendChild(t); }
-  t.textContent = msg; t.className = 'toast show';
-  clearTimeout(t._timer);
-  t._timer = setTimeout(() => t.className = 'toast', 2500);
-}
-
-function esc(s) { return (s || '').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
-
-// ════════════════════════════════════════════════════════
-//  INIT
-// ════════════════════════════════════════════════════════
-document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('loginPass').addEventListener('keydown', e => {
-    if (e.key === 'Enter') doLogin();
-  });
-
-  // Secret shortcut: Ctrl+Shift+S reveals Settings tab
-  document.addEventListener('keydown', e => {
-    if (e.ctrlKey && e.shiftKey && e.key === 'S') {
-      const tab = document.getElementById('tab-settings');
-      if (tab) {
-        tab.style.display = tab.style.display === 'none' ? 'flex' : 'none';
-        if (tab.style.display === 'flex') {
-          showTab('settings');
-          showToast('⚙️ Settings unlocked');
-        }
-      }
-    }
-  });
-});
-</script>
+  </script>
 </body>
+
 </html>
