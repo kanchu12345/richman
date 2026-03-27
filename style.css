@@ -243,12 +243,18 @@ ul { list-style: none; }
   width: 100%;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 24px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(0,188,212,0.25);
+  box-shadow: 
+    0 24px 60px rgba(0,0,0,0.6), 
+    0 0 40px rgba(0,188,212,0.2); /* Soft cyan glow */
   transition: transform 0.4s ease, box-shadow 0.4s ease;
+  mask-image: radial-gradient(circle at center, black 70%, transparent 100%);
+  -webkit-mask-image: radial-gradient(circle at center, black 70%, transparent 100%);
 }
 .hero-group-frame:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 32px 70px rgba(0,0,0,0.65), 0 0 0 1px rgba(0,188,212,0.5);
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 
+    0 32px 70px rgba(0,0,0,0.65), 
+    0 0 60px rgba(0,188,212,0.4);
 }
 .hero-img-main {
   width: 100%;
