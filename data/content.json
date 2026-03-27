@@ -183,5 +183,35 @@
       "description": "Club reactivation edition — introducing the 2025/26 executive committee and upcoming project pipeline.",
       "pdfLink": ""
     }
+  ],
+  "affiliatedBodies": [
+    {
+      "id": "ab1",
+      "title": "Leo Multiple District 306",
+      "description": "Leo Multiple District 306 encompasses the Leo Clubs across Sri Lanka, fostering youth leadership and service excellence. As part of this prestigious network, we connect with Leo Clubs nationwide, sharing resources, best practices, and collaborative opportunities.",
+      "bgImage": "",
+      "logoImage": ""
+    },
+    {
+      "id": "ab2",
+      "title": "Leo District 306 D8",
+      "description": "Leo District 306 D8 is our immediate governing body, overseeing Leo Clubs in our region with dedicated support and leadership. Through District D8, we participate in inter-club activities, conventions, and leadership training programs.",
+      "bgImage": "",
+      "logoImage": ""
+    },
+    {
+      "id": "ab3",
+      "title": "Lions Clubs International",
+      "description": "The world's largest service club organization, providing global opportunities for our youth to serve, lead, and connect.",
+      "bgImage": "",
+      "logoImage": ""
+    },
+    {
+      "id": "ab4",
+      "title": "Richmond College",
+      "description": "Our esteemed alma mater and backing institution, fostering generations of young leaders who bring pride to the college through dedicated community service.",
+      "bgImage": "",
+      "logoImage": ""
+    }
   ]
 }

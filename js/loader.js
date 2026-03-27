@@ -134,6 +134,29 @@
     }
     // Social links
     applySocialLinks(c.socialLinks);
+
+    // Affiliated bodies
+    const bodiesGrid = document.getElementById('affiliated-bodies');
+    if (bodiesGrid && data.affiliatedBodies && data.affiliatedBodies.length) {
+      bodiesGrid.innerHTML = data.affiliatedBodies.map(b => {
+        const bgStyle = b.bgImage ? `background-image:url('${b.bgImage}');` : '';
+        const logoHtml = b.logoImage
+          ? `<div class="body-card-logo"><img src="${b.logoImage}" alt="${b.title} logo"/></div>`
+          : `<div class="body-card-logo"><span class="body-card-logo-placeholder">🏛️</span></div>`;
+        return `
+        <div class="body-card fade-in" onclick="this.classList.toggle('expanded')">
+          <div class="body-card-bg" style="${bgStyle}"></div>
+          <div class="body-card-overlay"></div>
+          <div class="body-card-content">
+            <div class="body-card-label">Governing Body</div>
+            <div class="body-card-title">${b.title}</div>
+            <div class="body-card-desc">${b.description}</div>
+          </div>
+          ${logoHtml}
+        </div>`;
+      }).join('');
+      reObserve();
+    }
   };
 
   window.renderProjects = function (data) {

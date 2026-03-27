@@ -73,6 +73,10 @@
         <a class="sb-link" onclick="showTab('club')" id="tab-club">🏛️ Club Info</a>
         <a href="https://kanchu12345.github.io/richman/" target="_blank" class="sb-preview-btn" title="View live page">↗</a>
       </div>
+      <div class="sb-nav-item">
+        <a class="sb-link" onclick="showTab('affiliated')" id="tab-affiliated">🏛️ Attached Bodies</a>
+        <a href="https://kanchu12345.github.io/richman/" target="_blank" class="sb-preview-btn" title="View live page">↗</a>
+      </div>
       <a class="sb-link" onclick="showTab('settings')" id="tab-settings" style="display:none">⚙️ Settings</a>
     </nav>
     <div class="sb-footer">
@@ -180,6 +184,17 @@
         </div>
         <button class="btn-primary" style="margin-top:1rem;" onclick="saveClubInfo()">✅ Apply Changes</button>
       </div>
+    </div>
+
+    <!-- ── ATTACHED BODIES TAB ── -->
+    <div id="pane-affiliated" class="pane">
+      <div class="pane-header">
+        <div>
+          <h2>Attached Bodies</h2>
+          <p>Manage the 4 affiliated/governing bodies shown on the Home Page.</p>
+        </div>
+      </div>
+      <div id="affiliated-list" class="item-list"></div>
     </div>
 
     <!-- ── SETTINGS TAB ── -->
@@ -351,14 +366,16 @@ async function loadContent() {
     const r = await fetch('data/content.json?t=' + Date.now());
     content = r.ok ? await r.json() : defaultContent();
   } catch { content = defaultContent(); }
+  if(!content.affiliatedBodies) content.affiliatedBodies = [];
   renderProjects();
   renderExecutive();
   renderNewsletter();
   loadClubInfo();
+  renderAffiliated();
 }
 
 function defaultContent() {
-  return { club: { email:'', whatsapp:'', whatsappLink:'', location:'', mapLink:'', about1:'', about2:'', socialLinks:{facebook:'#',instagram:'#',youtube:'#',linkedin:'#'} }, projects:[], executive:[], newsletter:[] };
+  return { club: { email:'', whatsapp:'', whatsappLink:'', location:'', mapLink:'', about1:'', about2:'', socialLinks:{facebook:'#',instagram:'#',youtube:'#',linkedin:'#'} }, projects:[], executive:[], newsletter:[], affiliatedBodies:[] };
 }
 
 // ════════════════════════════════════════════════════════
@@ -649,6 +666,62 @@ function saveClubInfo() {
     linkedin:  document.getElementById('ci-linkedin').value.trim()
   };
   showToast('Club info updated! Remember to Save to GitHub.');
+}
+
+// ════════════════════════════════════════════════════════
+//  ATTACHED BODIES
+// ════════════════════════════════════════════════════════
+function renderAffiliated() {
+  const list = document.getElementById('affiliated-list');
+  if (!content?.affiliatedBodies?.length) { list.innerHTML = '<div class="empty-state">No affiliated bodies. Format data/content.json properly.</div>'; return; }
+  list.innerHTML = content.affiliatedBodies.map((b, i) => `
+    <div class="item-card" id="ab-${b.id}">
+      <div class="item-card-header">
+        <div class="item-info">
+          <div class="item-title">${b.title}</div>
+        </div>
+        <div class="item-actions">
+          <button class="btn-icon" onclick="toggleEdit('ab-form-${b.id}')">✏️ Edit</button>
+        </div>
+      </div>
+      <div class="item-form" id="ab-form-${b.id}" style="display:none">
+        <div class="form-group"><label>Title</label><input type="text" id="af-title-${b.id}" value="${esc(b.title)}"/></div>
+        <div class="form-group"><label>Description</label><textarea id="af-desc-${b.id}" rows="3">${esc(b.description)}</textarea></div>
+        
+        <div class="img-upload-row" style="display:flex; gap:1rem; flex-wrap:wrap; margin-top:1rem;">
+          <div class="img-slot" style="flex:1; min-width:140px; text-align:center;">
+            <label>Background Image</label>
+            <div class="img-preview-box ${b.bgImage?'has-img':''}" id="af-bg-box-${b.id}" style="margin: 0.5rem auto;">
+              ${b.bgImage ? `<img src="${b.bgImage}" id="af-bg-prev-${b.id}"/>` : `<span id="af-bg-prev-${b.id}">No image</span>`}
+            </div>
+            <button class="btn-upload" onclick="openImgModal({obj:content.affiliatedBodies[${i}],field:'bgImage',imgElId:'af-bg-prev-${b.id}',boxId:'af-bg-box-${b.id}'})">📁</button>
+            ${b.bgImage ? `<button class="btn-remove" onclick="removeImg(content.affiliatedBodies[${i}],'bgImage','af-bg-prev-${b.id}','af-bg-box-${b.id}')">✕</button>` : ''}
+          </div>
+
+          <div class="img-slot" style="flex:1; min-width:140px; text-align:center;">
+            <label>Logo Image</label>
+            <div class="img-preview-box ${b.logoImage?'has-img':''}" id="af-logo-box-${b.id}" style="margin: 0.5rem auto;">
+              ${b.logoImage ? `<img src="${b.logoImage}" id="af-logo-prev-${b.id}"/>` : `<span id="af-logo-prev-${b.id}">No image</span>`}
+            </div>
+            <button class="btn-upload" onclick="openImgModal({obj:content.affiliatedBodies[${i}],field:'logoImage',imgElId:'af-logo-prev-${b.id}',boxId:'af-logo-box-${b.id}'})">📁</button>
+            ${b.logoImage ? `<button class="btn-remove" onclick="removeImg(content.affiliatedBodies[${i}],'logoImage','af-logo-prev-${b.id}','af-logo-box-${b.id}')">✕</button>` : ''}
+          </div>
+        </div>
+
+        <div class="form-actions" style="margin-top:1.5rem;">
+          <button class="btn-primary" onclick="saveAffiliated('${b.id}',${i})">✅ Save Body</button>
+          <button class="btn-outline" onclick="toggleEdit('ab-form-${b.id}')">Cancel</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function saveAffiliated(id, i) {
+  const b = content.affiliatedBodies[i];
+  b.title       = document.getElementById(`af-title-${id}`).value;
+  b.description = document.getElementById(`af-desc-${id}`).value;
+  renderAffiliated();
+  showToast('Affiliated Body updated!');
 }
 
 // ════════════════════════════════════════════════════════
