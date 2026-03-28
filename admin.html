@@ -8,6 +8,35 @@
   <link rel="stylesheet" href="admin-style.css" />
   <link rel="icon" href="image/logo.jpg.jpeg" type="image/jpeg" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    // IMPORTANT: To activate Server Mode (Firebase), paste your Firebase Configuration here.
+    // If apiKey is empty, the system will use the standard Browser Local Storage.
+    window.firebaseConfig = {
+      apiKey: "AIzaSyAczOgjfkr4wOmqTxUPlnU4peKNUBbaa1c",
+      authDomain: "leo-club-richmen.firebaseapp.com",
+      projectId: "leo-club-richmen",
+      storageBucket: "leo-club-richmen.firebasestorage.app",
+      messagingSenderId: "203209874637",
+      appId: "1:203209874637:web:e90e68fa27e6f292699d84",
+      measurementId: "G-07KJYRDZ0M"
+    };
+
+    window.hasFirebase = window.firebaseConfig.apiKey !== "";
+
+    if (window.hasFirebase) {
+      window.fbApp = initializeApp(window.firebaseConfig);
+      window.fbAuth = getAuth(window.fbApp);
+      window.fbDb = getFirestore(window.fbApp);
+      window.fbFunctions = { signInWithEmailAndPassword, onAuthStateChanged, signOut, doc, getDoc, setDoc };
+      console.log("🔥 Firebase Server Mode is ACTIVE");
+    } else {
+      console.log("💻 Local Browser Mode is ACTIVE");
+    }
+  </script>
 </head>
 
 <body>
@@ -350,19 +379,38 @@
     }
     const DEFAULT_HASH = hashStr('leoclub2025');
 
-    function doLogin() {
+    async function doLogin() {
       const pass = document.getElementById('loginPass').value;
+      const errEl = document.getElementById('loginErr');
+
+      if (window.hasFirebase) {
+        const email = document.getElementById('loginEmail')?.value || "admin@example.com";
+        try {
+          // Attempt Firebase login
+          await window.fbFunctions.signInWithEmailAndPassword(window.fbAuth, email, pass);
+          // onAuthStateChanged will handle the UI switch
+        } catch (error) {
+          errEl.style.display = 'block';
+          errEl.textContent = '❌ ' + error.message;
+        }
+        return;
+      }
+
       const stored = localStorage.getItem('leoAdminHash') || DEFAULT_HASH;
       if (hashStr(pass) === stored) {
+        localStorage.setItem('leoLoggedIn', 'true');
         document.getElementById('loginScreen').style.display = 'none';
         document.getElementById('adminApp').style.display = 'flex';
         loadContent();
       } else {
-        document.getElementById('loginErr').style.display = 'block';
+        errEl.style.display = 'block';
+        errEl.textContent = 'Incorrect password. Try again.';
       }
     }
 
-    function doLogout() {
+    async function doLogout() {
+      if (window.hasFirebase) await window.fbFunctions.signOut(window.fbAuth);
+      localStorage.removeItem('leoLoggedIn');
       document.getElementById('adminApp').style.display = 'none';
       document.getElementById('loginScreen').style.display = 'flex';
       document.getElementById('loginPass').value = '';
@@ -382,30 +430,66 @@
     // ════════════════════════════════════════════════════════
     //  SETTINGS
     // ════════════════════════════════════════════════════════
-    function loadSettings() {
-      const gh = JSON.parse(localStorage.getItem('leoGH') || '{}');
-      const cl = JSON.parse(localStorage.getItem('leoCL') || '{}');
-      document.getElementById('gh-user').value = gh.user || 'kanchu12345';
-      document.getElementById('gh-repo').value = gh.repo || 'richman';
-      document.getElementById('gh-branch').value = gh.branch || 'master';
+    async function loadSettings() {
+      let gh = JSON.parse(localStorage.getItem('leoGH') || '{}');
+      let cl = JSON.parse(localStorage.getItem('leoCL') || '{}');
+
+      if (window.hasFirebase && window.fbAuth.currentUser) {
+        try {
+          const docRef = window.fbFunctions.doc(window.fbDb, "admin", "settings");
+          const snap = await window.fbFunctions.getDoc(docRef);
+          if (snap.exists()) {
+            const data = snap.data();
+            gh = data.gh || gh;
+            cl = data.cl || cl;
+          }
+        } catch (e) {
+          console.error("Firebase settings error:", e);
+        }
+      }
+      
+      // Auto-configure defaults for client handover
+      if (!gh.user) gh.user = 'kanchu12345';
+      if (!gh.repo) gh.repo = 'richman';
+      if (!gh.branch) gh.branch = 'main';
+      if (!cl.cloud) cl.cloud = '580db6f671331120289dba6d8ec108c2';
+      
+      localStorage.setItem('leoGH', JSON.stringify(gh));
+      localStorage.setItem('leoCL', JSON.stringify(cl));
+
+      document.getElementById('gh-user').value = gh.user;
+      document.getElementById('gh-repo').value = gh.repo;
+      document.getElementById('gh-branch').value = gh.branch;
       document.getElementById('gh-token').value = (gh.token || '').trim();
-      document.getElementById('cl-cloud').value = cl.cloud || '';
+      document.getElementById('cl-cloud').value = cl.cloud;
     }
 
-    function saveGHSettings() {
+    async function saveGHSettings() {
       const token = document.getElementById('gh-token').value.trim();
       const user = document.getElementById('gh-user').value.trim();
       const repo = document.getElementById('gh-repo').value.trim();
       const branch = document.getElementById('gh-branch').value.trim() || 'main';
 
+      if (window.hasFirebase && window.fbAuth.currentUser) {
+        const docRef = window.fbFunctions.doc(window.fbDb, "admin", "settings");
+        await window.fbFunctions.setDoc(docRef, { gh: { user, repo, branch, token } }, { merge: true });
+        showStatus(document.getElementById('gh-status'), 'success', '✅ Saved to Server!');
+        return;
+      }
+
       localStorage.setItem('leoGH', JSON.stringify({ user, repo, branch, token }));
       showStatus(document.getElementById('gh-status'), 'success', '✅ Saved!');
     }
 
-    function saveCLSettings() {
-      localStorage.setItem('leoCL', JSON.stringify({
-        cloud: document.getElementById('cl-cloud').value.trim()
-      }));
+    async function saveCLSettings() {
+      const cloud = document.getElementById('cl-cloud').value.trim();
+      if (window.hasFirebase && window.fbAuth.currentUser) {
+        const docRef = window.fbFunctions.doc(window.fbDb, "admin", "settings");
+        await window.fbFunctions.setDoc(docRef, { cl: { cloud } }, { merge: true });
+        showStatus(document.getElementById('cl-status'), 'success', '✅ Saved to Server!');
+        return;
+      }
+      localStorage.setItem('leoCL', JSON.stringify({ cloud }));
       showStatus(document.getElementById('cl-status'), 'success', '✅ Saved!');
     }
 
@@ -461,7 +545,7 @@
     //  LOAD CONTENT
     // ════════════════════════════════════════════════════════
     async function loadContent() {
-      loadSettings();
+      await loadSettings();
       try {
         const r = await fetch('data/content.json?t=' + Date.now());
         content = r.ok ? await r.json() : defaultContent();
@@ -1178,6 +1262,34 @@
     //  INIT
     // ════════════════════════════════════════════════════════
     document.addEventListener('DOMContentLoaded', () => {
+      if (window.hasFirebase) {
+        if (window.fbFunctions) {
+          // dynamically add email field
+          const loginPassDiv = document.getElementById('loginPass').parentNode;
+          const emailDiv = document.createElement('div');
+          emailDiv.className = 'form-group';
+          emailDiv.innerHTML = '<label>Email</label><input type="email" id="loginEmail" placeholder="admin@example.com" value="admin@example.com"/>';
+          loginPassDiv.parentNode.insertBefore(emailDiv, loginPassDiv);
+
+          window.fbFunctions.onAuthStateChanged(window.fbAuth, user => {
+            if (user) {
+              document.getElementById('loginScreen').style.display = 'none';
+              document.getElementById('adminApp').style.display = 'flex';
+              loadContent();
+            } else {
+              document.getElementById('adminApp').style.display = 'none';
+              document.getElementById('loginScreen').style.display = 'flex';
+            }
+          });
+        }
+      } else {
+        if (localStorage.getItem('leoLoggedIn') === 'true') {
+          document.getElementById('loginScreen').style.display = 'none';
+          document.getElementById('adminApp').style.display = 'flex';
+          loadContent();
+        }
+      }
+
       document.getElementById('loginPass').addEventListener('keydown', e => {
         if (e.key === 'Enter') doLogin();
       });
