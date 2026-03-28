@@ -936,61 +936,70 @@
       } else {
         document.getElementById('club-hero-box').classList.remove('has-img');
         document.getElementById('club-hero-box').innerHTML = `<span id="club-hero-prev">No image</span>`;
-        document.getElementById('club-hero-remove').style.display = 'none';
+        if (document.getElementById('club-hero-remove')) document.getElementById('club-hero-remove').style.display = 'none';
       }
-      document.getElementById('ci-hero-title').value = c.heroTitle || 'Centennial <span>Leo Club</span>';
-      document.getElementById('ci-hero-subtitle').value = c.heroSubtitle || 'of Richmond College';
-      document.getElementById('ci-hero-desc').value = c.heroDesc || 'Empowering youth to serve. Building leaders who make a difference in our communities and beyond.';
-      document.getElementById('ci-hero-motto').value = c.heroMotto || '# One Team · # One Dream · # One Aim';
-      document.getElementById('ci-group-title').value = c.groupTitle || 'Team 2025/2026';
-      document.getElementById('ci-group-sub').value = c.groupSub || 'Leading with Pride';
-      document.getElementById('ci-email').value = c.email || '';
-      document.getElementById('ci-whatsapp').value = c.whatsapp || '';
-      document.getElementById('ci-location').value = c.location || '';
-      document.getElementById('ci-maplink').value = c.mapLink || '';
-      document.getElementById('ci-about1').value = c.about1 || '';
-      document.getElementById('ci-about2').value = c.about2 || '';
-      document.getElementById('ci-mission-title').value = c.missionTitle || '';
-      document.getElementById('ci-mission-statement').value = c.missionStatement || '';
+
+      const safeSet = (id, val) => { const el = document.getElementById(id); if (el) el.value = val; };
+      
+      safeSet('ci-hero-title', c.heroTitle || 'Centennial <span>Leo Club</span>');
+      safeSet('ci-hero-subtitle', c.heroSubtitle || 'of Richmond College');
+      safeSet('ci-hero-desc', c.heroDesc || 'Empowering youth to serve. Building leaders who make a difference in our communities and beyond.');
+      safeSet('ci-hero-motto', c.heroMotto || '# One Team · # One Dream · # One Aim');
+      safeSet('ci-group-title', c.groupTitle || 'Team 2025/2026');
+      safeSet('ci-group-sub', c.groupSub || 'Leading with Pride');
+      safeSet('ci-email', c.email || '');
+      safeSet('ci-whatsapp', c.whatsapp || '');
+      safeSet('ci-location', c.location || '');
+      safeSet('ci-maplink', c.mapLink || '');
+      safeSet('ci-about1', c.about1 || '');
+      safeSet('ci-about2', c.about2 || '');
+      safeSet('ci-mission-title', c.missionTitle || '');
+      safeSet('ci-mission-statement', c.missionStatement || '');
+      
       const sl = c.socialLinks || {};
-      document.getElementById('ci-facebook').value = sl.facebook || '';
-      document.getElementById('ci-instagram').value = sl.instagram || '';
-      document.getElementById('ci-youtube').value = sl.youtube || '';
-      document.getElementById('ci-linkedin').value = sl.linkedin || '';
+      safeSet('ci-facebook', sl.facebook || '');
+      safeSet('ci-instagram', sl.instagram || '');
+      safeSet('ci-youtube', sl.youtube || '');
+      safeSet('ci-linkedin', sl.linkedin || '');
 
       // Stats
-      document.getElementById('ci-members').value = c.members || 400;
-      document.getElementById('ci-alumni').value = c.alumni || 300;
-      document.getElementById('ci-awards').value = c.districtAwards || 10;
+      safeSet('ci-members', c.members || 400);
+      safeSet('ci-alumni', c.alumni || 300);
+      safeSet('ci-awards', c.districtAwards || 10);
     }
 
     function saveClubInfo() {
-      const wa = document.getElementById('ci-whatsapp').value.trim().replace(/\s/g, '').replace(/^\+/, '');
+      const safeGet = (id) => { const el = document.getElementById(id); return el ? el.value.trim() : ''; };
+      
+      const wa = safeGet('ci-whatsapp').replace(/\s/g, '').replace(/^\+/, '');
       if (!content.club) content.club = {};
-      content.club.heroTitle = document.getElementById('ci-hero-title').value.trim();
-      content.club.heroSubtitle = document.getElementById('ci-hero-subtitle').value.trim();
-      content.club.heroDesc = document.getElementById('ci-hero-desc').value.trim();
-      content.club.heroMotto = document.getElementById('ci-hero-motto').value.trim();
-      content.club.groupTitle = document.getElementById('ci-group-title').value.trim();
-      content.club.groupSub = document.getElementById('ci-group-sub').value.trim();
-      content.club.email = document.getElementById('ci-email').value.trim();
+      
+      content.club.heroTitle = safeGet('ci-hero-title');
+      content.club.heroSubtitle = safeGet('ci-hero-subtitle');
+      content.club.heroDesc = safeGet('ci-hero-desc');
+      content.club.heroMotto = safeGet('ci-hero-motto');
+      content.club.groupTitle = safeGet('ci-group-title');
+      content.club.groupSub = safeGet('ci-group-sub');
+      content.club.email = safeGet('ci-email');
       content.club.whatsapp = '+' + wa;
       content.club.whatsappLink = 'https://wa.me/' + wa;
-      content.club.location = document.getElementById('ci-location').value.trim();
-      content.club.mapLink = document.getElementById('ci-maplink').value.trim();
-      content.club.about1 = document.getElementById('ci-about1').value.trim();
-      content.club.about2 = document.getElementById('ci-about2').value.trim();
-      content.club.missionTitle = document.getElementById('ci-mission-title').value.trim();
-      content.club.missionStatement = document.getElementById('ci-mission-statement').value.trim();
+      content.club.location = safeGet('ci-location');
+      content.club.mapLink = safeGet('ci-maplink');
+      content.club.about1 = safeGet('ci-about1');
+      content.club.about2 = safeGet('ci-about2');
+      content.club.missionTitle = safeGet('ci-mission-title');
+      content.club.missionStatement = safeGet('ci-mission-statement');
+      
       content.club.socialLinks = {
-        facebook: document.getElementById('ci-facebook').value.trim(),
-        instagram: document.getElementById('ci-instagram').value.trim(),
-        youtube: document.getElementById('ci-youtube').value.trim(),
-        linkedin: document.getElementById('ci-linkedin').value.trim()
+        facebook: safeGet('ci-facebook'),
+        instagram: safeGet('ci-instagram'),
+        youtube: safeGet('ci-youtube'),
+        linkedin: safeGet('ci-linkedin')
       };
-      content.club.members = parseInt(document.getElementById('ci-members').value) || 0;
-      content.club.alumni = parseInt(document.getElementById('ci-alumni').value) || 0;
-      content.club.districtAwards = parseInt(document.getElementById('ci-awards').value) || 0;
+      
+      content.club.members = parseInt(safeGet('ci-members')) || 0;
+      content.club.alumni = parseInt(safeGet('ci-alumni')) || 0;
+      content.club.districtAwards = parseInt(safeGet('ci-awards')) || 0;
 
       showToast('Club info updated! Remember to Save to GitHub.');
     }
