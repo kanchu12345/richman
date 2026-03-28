@@ -376,7 +376,7 @@
     </div>
     <div class="footer-col">
       <h4>Club</h4>
-      <ul>
+      <ul id="footer-club-links">
         <li><a href="#">About Leo Clubs</a></li>
         <li><a href="#">Lions International</a></li>
         <li><a href="#">Leo District 306 D8</a></li>
@@ -421,6 +421,48 @@
   }
   function handleContact(e) {
     e.preventDefault();
+    const form = e.target;
+    // Get inquiry type
+    const typeBtn = document.querySelector('.inquiry-type-btn.selected');
+    const type = typeBtn ? typeBtn.textContent.trim() : 'General';
+    
+    // Get input values
+    const fname = form.querySelector('input[placeholder="First name"]').value;
+    const lname = form.querySelector('input[placeholder="Last name"]').value;
+    const email = form.querySelector('input[placeholder="you@example.com"]').value;
+    const phone = form.querySelector('input[placeholder="+94 XX XXX XXXX"]').value;
+    const org   = form.querySelector('input[placeholder="e.g. Richmond College, Galle"]').value;
+    const subj  = form.querySelector('input[placeholder="Brief subject of your message"]').value;
+    const msg   = form.querySelector('textarea').value;
+    
+    // Date and Time
+    const now = new Date();
+    const dateTime = now.toLocaleString();
+
+    // Format message
+    const whatsappMsg = `*🦁 NEW WEBSITE INQUIRY*\n` +
+                        `--------------------------\n` +
+                        `*Type:* ${type}\n` +
+                        `*Name:* ${fname} ${lname}\n` +
+                        `*Email:* ${email}\n` +
+                        `*Phone:* ${phone}\n` +
+                        `*Org:* ${org}\n` +
+                        `*Subject:* ${subj}\n` +
+                        `*Sent On:* ${dateTime}\n\n` +
+                        `*Message:*\n${msg}`;
+
+    // Target Number - Use dynamic WhatsApp number if loaded, else fallback
+    let waNumber = "94768086721"; // Default
+    if (window.siteContent && window.siteContent.club && window.siteContent.club.whatsapp) {
+      waNumber = window.siteContent.club.whatsapp.replace(/\s/g, '').replace(/^\+/, '');
+    }
+
+    const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(whatsappMsg)}`;
+    
+    // Redirect to WhatsApp
+    window.open(waUrl, '_blank');
+
+    // UI Feedback
     document.getElementById('contactForm').style.display = 'none';
     document.getElementById('successBanner').style.display = 'block';
   }

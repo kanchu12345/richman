@@ -1048,6 +1048,7 @@
           <div class="form-group"><label>Label (e.g. Governing Body)</label><input type="text" id="af-label-${b.id}" value="${esc(b.label || '')}" oninput="document.querySelector('#ab-${b.id} .item-meta-label').textContent = this.value || 'Governing Body'"/></div>
           <div class="form-group"><label>Title (Full Name)</label><input type="text" id="af-title-${b.id}" value="${esc(b.title)}" oninput="document.querySelector('#ab-${b.id} .item-title').textContent = this.value || 'New Body'"/></div>
         </div>
+        <div class="form-group"><label>Reference Link (Website/FB)</label><input type="text" id="af-link-${b.id}" value="${esc(b.link || '')}" placeholder="https://..."/></div>
         <div class="form-group"><label>Description</label><textarea id="af-desc-${b.id}" rows="3">${esc(b.description)}</textarea></div>
         
         <div class="img-upload-row" style="display:flex; gap:1rem; flex-wrap:wrap; margin-top:1rem;">
@@ -1082,6 +1083,7 @@
       const b = content.affiliatedBodies[i];
       b.label = document.getElementById(`af-label-${id}`).value;
       b.title = document.getElementById(`af-title-${id}`).value;
+      b.link = document.getElementById(`af-link-${id}`).value;
       b.description = document.getElementById(`af-desc-${id}`).value;
       renderAffiliated();
       showToast('Affiliated Body updated!');
@@ -1090,7 +1092,7 @@
     function addAffiliated() {
       const id = 'ab' + Date.now();
       if (!content.affiliatedBodies) content.affiliatedBodies = [];
-      content.affiliatedBodies.push({ id, label: 'Governing Body', title: 'New Body', description: '', bgImage: '', logoImage: '' });
+      content.affiliatedBodies.push({ id, label: 'Governing Body', title: 'New Body', link: '', description: '', bgImage: '', logoImage: '' });
       renderAffiliated();
       setTimeout(() => { toggleEdit('ab-form-' + id); document.getElementById(`af-title-${id}`)?.focus(); }, 50);
     }

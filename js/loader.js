@@ -293,6 +293,28 @@
     applySocialLinks(c.socialLinks);
   };
 
+  /**
+   * Dynamically renders footer "Club" links based on Governing Bodies.
+   */
+  window.renderFooter = function (data) {
+    if (!data) return;
+    const list = document.getElementById('footer-club-links');
+    if (!list) return;
+    
+    // Default static link
+    let html = `<li><a href="https://www.lionsclubs.org/en/resources-for-members/leos-corner" target="_blank">About Leo Movement</a></li>`;
+    
+    // Add links from Governing Bodies
+    if (data.affiliatedBodies) {
+      data.affiliatedBodies.forEach(b => {
+        const href = b.link && b.link !== '#' ? b.link : '#';
+        const target = href !== '#' ? 'target="_blank"' : '';
+        html += `<li><a href="${href}" ${target}>${b.title}</a></li>`;
+      });
+    }
+    list.innerHTML = html;
+  };
+
   function generateBookCover(title, date) {
     // Generate a beautiful programmatic cover
     return `
@@ -374,7 +396,10 @@
   document.addEventListener('DOMContentLoaded', async () => {
     startAutoSwap();
     const data = await loadContent();
-    if (data) window.siteContent = data;
+    if (data) {
+      window.siteContent = data;
+      renderFooter(data);
+    }
     
     // Auto-detect page and render
     const page = document.body.dataset.page;
