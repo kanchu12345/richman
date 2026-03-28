@@ -26,5 +26,14 @@
   "projects": [],
   "executive": [],
   "newsletter": [],
-  "affiliatedBodies": []
+  "affiliatedBodies": [
+    {
+      "id": "ab1774681190694",
+      "label": "Governing Body",
+      "title": "Leo District 306 D8",
+      "description": "Leo District 306 D8 is the governing body for the Leos of the South, overseeing a network of 16 Leo Clubs across the Southern Province. Guided by the theme \"Leading with Humanity,\" and the dedicated leadership of District President Leo Anushka Liyanage, the District coordinates inter-club collaborations, impactful service projects, and mentorship for Leos to create lasting social chang",
+      "bgImage": "",
+      "logoImage": "https://i.ibb.co/m5DfjmN4/Whats-App-Image-2026-03-27-at-14-23-45.jpg"
+    }
+  ]
 }
