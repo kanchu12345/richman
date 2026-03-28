@@ -267,6 +267,32 @@
     applySocialLinks(data.club.socialLinks);
   };
 
+  window.renderContact = function (data) {
+    if (!data) return;
+    const c = data.club;
+    const safeSetText = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+    const safeSetHref = (id, val) => { const el = document.getElementById(id); if (el) el.href = val; };
+    
+    safeSetText('contact-email', c.email);
+    safeSetHref('contact-email-link', 'mailto:' + c.email);
+    
+    const wa = (c.whatsapp || '').replace(/\s/g, '').replace(/^\+/, '');
+    safeSetText('contact-whatsapp', c.whatsapp || '+94 76 808 6721');
+    safeSetHref('contact-whatsapp-link', 'https://wa.me/' + wa);
+    
+    safeSetText('contact-pres-name', c.presidentName || 'Leo Mevinu Gamage');
+    safeSetText('contact-pres-phone', c.presidentPhone || '+94 70 163 6086');
+    const presWA = (c.presidentPhone || '').replace(/\s/g, '').replace(/^\+/, '');
+    safeSetHref('contact-pres-link', 'https://wa.me/' + presWA);
+    
+    safeSetText('contact-sec-name', c.secretaryName || 'Leo Minuda Kalansooriya');
+    safeSetText('contact-sec-phone', c.secretaryPhone || '+94 76 419 3485');
+    const secWA = (c.secretaryPhone || '').replace(/\s/g, '').replace(/^\+/, '');
+    safeSetHref('contact-sec-link', 'https://wa.me/' + secWA);
+    
+    applySocialLinks(c.socialLinks);
+  };
+
   function generateBookCover(title, date) {
     // Generate a beautiful programmatic cover
     return `
@@ -359,6 +385,7 @@
     else if (page === 'projects') renderProjects(data);
     else if (page === 'executive') renderExecutive(data);
     else if (page === 'newsletter') renderNewsletter(data);
+    else if (page === 'contact') renderContact(data);
 
     // Wait for everything (images etc) then hide preloader
     if (document.readyState === 'complete') {
