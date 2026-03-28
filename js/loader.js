@@ -223,14 +223,47 @@
       const el = document.getElementById(id);
       if (!el) return;
       const members = data.executive.filter(m => m.section === key);
-      el.innerHTML = members.map(m => `
+      
+      el.innerHTML = members.map(m => {
+        if (key === 'president') {
+          // Special large card for the President
+          return `
+          <div class="president-card fade-in">
+            <div class="president-avatar" style="${m.photo ? `background-image:url('${m.photo}');background-size:cover;background-position:center;color:transparent;` : ''}">
+              ${m.photo ? '' : initials(m.name)}
+            </div>
+            <div class="president-info">
+              <div class="role-tag">👑 ${m.role}</div>
+              <h2>${m.name}</h2>
+              <div class="sub">Centennial Leo Club of Richmond College</div>
+              <p>${m.description || 'Leading the club with pride and excellence.'}</p>
+            </div>
+          </div>`;
+        } else if (key === 'advisor') {
+          // Special strip card for the Advisor
+          return `
+          <div class="advisor-card fade-in">
+            <div class="advisor-ava" style="${m.photo ? `background-image:url('${m.photo}');background-size:cover;background-position:center;color:transparent;` : ''}">
+              ${m.photo ? '' : initials(m.name)}
+            </div>
+            <div class="advisor-info">
+              <div class="role">${m.role}</div>
+              <div class="name">${m.name}</div>
+              <div class="org">Leo District 306 D8, Sri Lanka</div>
+            </div>
+          </div>`;
+        }
+
+        // Standard mini cards for other members
+        return `
         <div class="exec-mini fade-in">
           <div class="avatar" style="${m.photo ? `background-image:url('${m.photo}');background-size:cover;background-position:center;color:transparent;` : ''}">
             ${m.photo ? '' : initials(m.name)}
           </div>
           <div class="role">${m.role}</div>
           <h4>${m.name}</h4>
-        </div>`).join('');
+        </div>`;
+      }).join('');
     });
     reObserve();
     applySocialLinks(data.club.socialLinks);
@@ -301,8 +334,7 @@
     const list = document.getElementById('footer-club-links');
     if (!list) return;
     
-    // Default static link
-    let html = `<li><a href="https://www.lionsclubs.org/en/resources-for-members/leos-corner" target="_blank">About Leo Movement</a></li>`;
+    let html = '';
     
     // Add links from Governing Bodies
     if (data.affiliatedBodies) {
