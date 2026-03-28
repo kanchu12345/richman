@@ -47,8 +47,12 @@
       <img src="image/logo.jpg.jpeg" alt="Logo" class="login-logo" />
       <h1>Admin Panel</h1>
       <p class="login-sub">Centennial Leo Club of Richmond College</p>
+      <div class="form-group" id="loginEmailGroup" style="display:none">
+        <label>Email</label>
+        <input type="email" id="loginEmail" placeholder="admin@example.com" value="admin@example.com" />
+      </div>
       <div class="form-group">
-        <label>Password</label>
+        <label id="loginPassLabel">Password</label>
         <input type="password" id="loginPass" placeholder="Enter admin password"
           onkeydown="if(event.key==='Enter')doLogin()" />
       </div>
@@ -409,11 +413,14 @@
     }
 
     async function doLogout() {
-      if (window.hasFirebase) await window.fbFunctions.signOut(window.fbAuth);
-      localStorage.removeItem('leoLoggedIn');
-      document.getElementById('adminApp').style.display = 'none';
-      document.getElementById('loginScreen').style.display = 'flex';
-      document.getElementById('loginPass').value = '';
+      if (window.hasFirebase) {
+        await window.fbFunctions.signOut(window.fbAuth);
+      } else {
+        localStorage.removeItem('leoLoggedIn');
+        document.getElementById('adminApp').style.display = 'none';
+        document.getElementById('loginScreen').style.display = 'flex';
+        document.getElementById('loginPass').value = '';
+      }
     }
 
     function changePassword() {
@@ -1263,14 +1270,11 @@
     // ════════════════════════════════════════════════════════
     document.addEventListener('DOMContentLoaded', () => {
       if (window.hasFirebase) {
-        if (window.fbFunctions) {
-          // dynamically add email field
-          const loginPassDiv = document.getElementById('loginPass').parentNode;
-          const emailDiv = document.createElement('div');
-          emailDiv.className = 'form-group';
-          emailDiv.innerHTML = '<label>Email</label><input type="email" id="loginEmail" placeholder="admin@example.com" value="admin@example.com"/>';
-          loginPassDiv.parentNode.insertBefore(emailDiv, loginPassDiv);
+        // Show email field even before login when in server mode
+        document.getElementById('loginEmailGroup').style.display = 'flex';
+        document.getElementById('loginPassLabel').textContent = 'Password';
 
+        if (window.fbFunctions) {
           window.fbFunctions.onAuthStateChanged(window.fbAuth, user => {
             if (user) {
               document.getElementById('loginScreen').style.display = 'none';
@@ -1279,6 +1283,7 @@
             } else {
               document.getElementById('adminApp').style.display = 'none';
               document.getElementById('loginScreen').style.display = 'flex';
+              document.getElementById('loginPass').value = ''; // clear password on logout
             }
           });
         }
