@@ -39,7 +39,16 @@
     }
   ],
   "executive": [],
-  "newsletter": [],
+  "newsletter": [
+    {
+      "id": "n1774691727630",
+      "title": "New Issue",
+      "date": "",
+      "description": "",
+      "pdfLink": "https://online.fliphtml5.com/vvqkb/qvuf/",
+      "coverImage": ""
+    }
+  ],
   "affiliatedBodies": [
     {
       "id": "ab1774681190694",
