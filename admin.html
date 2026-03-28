@@ -413,14 +413,18 @@
     }
 
     async function doLogout() {
-      if (window.hasFirebase) {
-        await window.fbFunctions.signOut(window.fbAuth);
-      } else {
-        localStorage.removeItem('leoLoggedIn');
-        document.getElementById('adminApp').style.display = 'none';
-        document.getElementById('loginScreen').style.display = 'flex';
-        document.getElementById('loginPass').value = '';
+      try {
+        if (window.hasFirebase && window.fbFunctions?.signOut) {
+          await window.fbFunctions.signOut(window.fbAuth);
+        }
+      } catch (e) {
+        console.warn("SignOut failed, clearing locally:", e);
       }
+      
+      localStorage.removeItem('leoLoggedIn');
+      document.getElementById('adminApp').style.display = 'none';
+      document.getElementById('loginScreen').style.display = 'flex';
+      document.getElementById('loginPass').value = '';
     }
 
     function changePassword() {
@@ -555,9 +559,21 @@
       await loadSettings();
       try {
         const r = await fetch('data/content.json?t=' + Date.now());
-        content = r.ok ? await r.json() : defaultContent();
-      } catch { content = defaultContent(); }
+        const raw = await r.json();
+        // Crucial: ensure content is never null
+        content = (r.ok && raw) ? raw : defaultContent();
+      } catch (e) {
+        console.warn("Failed to load content.json, using defaults:", e);
+        content = defaultContent();
+      }
+      
+      // Ensure all arrays exist
+      if (!content.projects) content.projects = [];
+      if (!content.executive) content.executive = [];
+      if (!content.newsletter) content.newsletter = [];
       if (!content.affiliatedBodies) content.affiliatedBodies = [];
+      if (!content.club) content.club = defaultContent().club;
+
       renderProjects();
       renderExecutive();
       renderNewsletter();
@@ -566,7 +582,16 @@
     }
 
     function defaultContent() {
-      return { club: { email: '', whatsapp: '', whatsappLink: '', location: '', mapLink: '', about1: '', about2: '', socialLinks: { facebook: '#', instagram: '#', youtube: '#', linkedin: '#' } }, projects: [], executive: [], newsletter: [], affiliatedBodies: [] };
+      return {
+        club: {
+          name: 'Centennial Leo Club', email: '', whatsapp: '', location: '', mapLink: '',
+          about1: '', about2: '', HeroTitle: '', heroSubtitle: '', heroDesc: '',
+          missionTitle: 'Leading The Way <br/><span>For A Better Tomorrow</span>',
+          missionStatement: '', heroImage: '', groupTitle: '', groupSub: '',
+          socialLinks: { facebook: '#', instagram: '#', youtube: '#', linkedin: '#' }
+        },
+        projects: [], executive: [], newsletter: [], affiliatedBodies: []
+      };
     }
 
     // ════════════════════════════════════════════════════════
@@ -608,7 +633,7 @@
       </div>
       <div class="item-form" id="pc-form-${p.id}" style="display:none">
         <div class="form-row2">
-          <div class="form-group"><label>Title</label><input type="text" id="pf-title-${p.id}" value="${esc(p.title)}"/></div>
+          <div class="form-group"><label>Title</label><input type="text" id="pf-title-${p.id}" value="${esc(p.title)}" oninput="document.querySelector('#pc-${p.id} .item-title').textContent = this.value || 'Untitled Project'"/></div>
           <div class="form-group"><label>Year</label><input type="text" id="pf-year-${p.id}" value="${esc(p.year)}" style="max-width:120px"/></div>
         </div>
         <div class="form-row2">
@@ -975,13 +1000,17 @@
     // ════════════════════════════════════════════════════════
     function renderAffiliated() {
       const list = document.getElementById('affiliated-list');
-      if (!content?.affiliatedBodies?.length) { list.innerHTML = '<div class="empty-state">No affiliated bodies. Format data/content.json properly.</div>'; return; }
+      if (!list) return;
+      if (!content?.affiliatedBodies?.length) {
+        list.innerHTML = '<div class="empty-state">No affiliated bodies yet. Click "+ Add Body" to add one!</div>';
+        return;
+      }
       list.innerHTML = content.affiliatedBodies.map((b, i) => `
     <div class="item-card" id="ab-${b.id}">
       <div class="item-card-header">
         <div class="item-info">
           <div class="item-title">${b.title || 'New Body'}</div>
-          <div style="font-size:0.75rem; color:var(--text-muted);">${b.label || 'Governing Body'}</div>
+          <div class="item-meta-label" style="font-size:0.75rem; color:var(--text-muted);">${b.label || 'Governing Body'}</div>
         </div>
         <div class="item-actions">
           <button class="btn-icon" onclick="toggleEdit('ab-form-${b.id}')">✏️ Edit</button>
@@ -990,8 +1019,8 @@
       </div>
       <div class="item-form" id="ab-form-${b.id}" style="display:none">
         <div class="form-row2">
-          <div class="form-group"><label>Label (e.g. Governing Body)</label><input type="text" id="af-label-${b.id}" value="${esc(b.label || '')}"/></div>
-          <div class="form-group"><label>Title (Full Name)</label><input type="text" id="af-title-${b.id}" value="${esc(b.title)}"/></div>
+          <div class="form-group"><label>Label (e.g. Governing Body)</label><input type="text" id="af-label-${b.id}" value="${esc(b.label || '')}" oninput="document.querySelector('#ab-${b.id} .item-meta-label').textContent = this.value || 'Governing Body'"/></div>
+          <div class="form-group"><label>Title (Full Name)</label><input type="text" id="af-title-${b.id}" value="${esc(b.title)}" oninput="document.querySelector('#ab-${b.id} .item-title').textContent = this.value || 'New Body'"/></div>
         </div>
         <div class="form-group"><label>Description</label><textarea id="af-desc-${b.id}" rows="3">${esc(b.description)}</textarea></div>
         

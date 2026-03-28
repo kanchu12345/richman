@@ -1,1 +1,30 @@
-null
+{
+  "club": {
+    "name": "Centennial Leo Club",
+    "email": "leoclub@example.com",
+    "whatsapp": "+94000000000",
+    "location": "Richmond College, Galle",
+    "mapLink": "https://maps.app.goo.gl/K6fR1Z8eR",
+    "about1": "Leading with pride and excellence since foundation.",
+    "about2": "Awarded Most Outstanding School Leo Club.",
+    "missionTitle": "Leading The Way <br/><span>For A Better Tomorrow</span>",
+    "missionStatement": "To provide students with an opportunity for development and contribution, individually and collectively, as responsible members of the local, national and international community.",
+    "heroImage": "",
+    "groupTitle": "Team 2025/2026",
+    "groupSub": "Leading with Pride",
+    "founded": "2010",
+    "members": 450,
+    "districtAwards": 15,
+    "alumni": 320,
+    "socialLinks": {
+      "facebook": "https://facebook.com",
+      "instagram": "https://instagram.com",
+      "youtube": "https://youtube.com",
+      "linkedin": "https://linkedin.com"
+    }
+  },
+  "projects": [],
+  "executive": [],
+  "newsletter": [],
+  "affiliatedBodies": []
+}
