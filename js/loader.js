@@ -235,7 +235,7 @@
 
   window.renderExecutive = function (data) {
     if (!data) return;
-    const sections = { advisor:'exec-advisor', president:'exec-president', vp:'exec-vp', secretariat:'exec-secretariat', treasury:'exec-treasury', directors:'exec-directors' };
+    const sections = { president:'exec-president', vp:'exec-vp', secretariat:'exec-secretariat', treasury:'exec-treasury', directors:'exec-directors', staffadvisor:'exec-staffadvisor', advisor:'exec-advisor' };
     Object.entries(sections).forEach(([key, id]) => {
       const el = document.getElementById(id);
       if (!el) return;
@@ -256,8 +256,8 @@
               <p>${m.description || 'Leading the club with pride and excellence.'}</p>
             </div>
           </div>`;
-        } else if (key === 'advisor') {
-          // Special strip card for the Advisor
+        } else if (key === 'advisor' || key === 'staffadvisor') {
+          // Special strip card for Advisors
           return `
           <div class="advisor-card fade-in">
             <div class="advisor-ava" style="${m.photo ? `background-image:url('${m.photo}');background-size:cover;background-position:center;color:transparent;` : ''}">
@@ -266,7 +266,7 @@
             <div class="advisor-info">
               <div class="role">${m.role}</div>
               <div class="name">${m.name}</div>
-              <div class="org">Leo District 306 D8, Sri Lanka</div>
+              <div class="org">${key === 'staffadvisor' ? 'Richmond College, Galle' : 'Leo District 306 D8, Sri Lanka'}</div>
             </div>
           </div>`;
         }
