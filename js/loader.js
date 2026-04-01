@@ -319,7 +319,7 @@
             <div class="nl-num">Issue ${String(i + 1).padStart(2, '0')}</div>
             <h3>${n.title}</h3>
             <p>${n.description}</p>
-            ${n.pdfLink ? `<button class="btn-primary" onclick="openFlipbook('${n.pdfLink}')" style="padding:0.6rem 1.5rem; font-size:0.8rem; margin: 0 auto; display: flex;">📖 Read in 3D</button>` : '<span style="color:var(--text-muted);font-size:0.8rem;">PDF coming soon</span>'}
+            ${n.pdfLink ? '' : '<span style="color:var(--text-muted);font-size:0.8rem;">PDF coming soon</span>'}
           </div>
         </div>`;
       }).join('');
