@@ -817,7 +817,6 @@
             </div>
             <p class="hint" style="margin-top:0.25rem; font-size:0.75rem;">Tip: You can paste a link or upload a file directly to your website.</p>
           </div>
-          <button class="btn-primary" onclick="saveIssue('${n.id}', ${i})">✅ Save Issue</button>
         <div class="img-slot" style="margin-top:1rem;">
           <label>Optional Cover Image (Overrides auto-generated cover)</label>
           <div class="img-preview-box ${n.coverImage ? 'has-img' : ''}" id="nf-cover-box-${n.id}" style="height:120px; width:90px;">
@@ -828,6 +827,7 @@
         </div>
 
         <div class="form-actions">
+          <button class="btn-primary" onclick="saveIssue('${n.id}', ${i})">✅ Save Issue</button>
           <button class="btn-outline" onclick="toggleEdit('nl-form-${n.id}')">Cancel</button>
         </div>
       </div>
