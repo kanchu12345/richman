@@ -57,11 +57,22 @@
 
   function generateImageGallery(p) {
     const imgs = [p.image1, p.image2, p.image3, p.image4, p.image5].filter(Boolean);
-    if (imgs.length === 0) return `<div class="project-card-img-placeholder">${categoryEmoji(p.category)}</div>`;
-    if (imgs.length === 1) return `<div class="project-img-gallery"><img src="${imgs[0]}" class="project-card-img active" alt="${p.title}" /></div>`;
-    return `<div class="project-img-gallery auto-swap-gallery">
+    let html = '';
+    if (imgs.length === 0) html = `<div class="project-card-img-placeholder">${categoryEmoji(p.category)}</div>`;
+    else if (imgs.length === 1) html = `<div class="project-img-gallery"><img src="${imgs[0]}" class="project-card-img active" alt="${p.title}" /></div>`;
+    else html = `<div class="project-img-gallery auto-swap-gallery">
               ${imgs.map((src, i) => `<img src="${src}" class="project-card-img ${i === 0 ? 'active' : ''}" alt="${p.title}" />`).join('')}
             </div>`;
+            
+    if (p.fbLink) {
+      return `<a href="${p.fbLink}" target="_blank" class="project-fb-link" style="position:relative; display:block; overflow:hidden;">
+                ${html}
+                <div style="position:absolute; bottom:10px; right:10px; background:rgba(24,119,242,0.9); color:#fff; padding:4px 8px; border-radius:4px; font-size:0.75rem; font-weight:bold; z-index:10; box-shadow:0 2px 5px rgba(0,0,0,0.3);">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle; margin-right:4px; margin-bottom:2px;"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.532-4.697 1.313 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.885v2.27h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>View on FB
+                </div>
+              </a>`;
+    }
+    return html;
   }
 
   function generateDescription(p) {
