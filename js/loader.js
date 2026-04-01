@@ -288,6 +288,17 @@
 
   window.renderNewsletter = function (data) {
     if (!data) return;
+    
+    const c = data.club;
+    if (c) {
+      const nt = document.getElementById('nl-page-title');
+      const ns = document.getElementById('nl-page-sub');
+      const nm = document.getElementById('nl-page-motto');
+      if (nt && c.newsletterTitle) nt.textContent = c.newsletterTitle;
+      if (ns && c.newsletterSubtitle) ns.textContent = c.newsletterSubtitle;
+      if (nm && c.newsletterMotto) nm.textContent = c.newsletterMotto;
+    }
+
     const grid = document.getElementById('newsletter-grid');
     if (grid && data.newsletter) {
       grid.innerHTML = data.newsletter.map((n, i) => {

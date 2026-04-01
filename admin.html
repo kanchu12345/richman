@@ -271,6 +271,11 @@
               id="ci-mission-title" /></div>
           <div class="form-group"><label>Mission Statement</label><textarea id="ci-mission-statement"
               rows="3"></textarea></div>
+              
+          <div class="form-section-title" style="margin-top:1.5rem;">Newsletter Page Headers</div>
+          <div class="form-group"><label>Main Title (e.g. Golden Times)</label><input type="text" id="ci-nl-title" /></div>
+          <div class="form-group"><label>Subtitle (e.g. Official Newsletter...)</label><input type="text" id="ci-nl-sub" /></div>
+          <div class="form-group"><label>Motto (e.g. Where Leo Spirit Meets Action)</label><input type="text" id="ci-nl-motto" /></div>
 
           <div class="form-section-title" style="margin-top:1.5rem;">Social Media Links</div>
           <div class="form-row2">
@@ -602,7 +607,7 @@
           name: 'Centennial Leo Club', email: '', whatsapp: '', location: '', mapLink: '',
           about1: '', about2: '', HeroTitle: '', heroSubtitle: '', heroDesc: '',
           missionTitle: 'Leading The Way <br/><span>For A Better Tomorrow</span>',
-          missionStatement: '', heroImage: '', groupTitle: '', groupSub: '',
+          missionStatement: '', heroImage: '', newsletterTitle: 'Golden Times', newsletterSubtitle: 'Official Newsletter of the Leo Club of Richmond College', newsletterMotto: 'Where Leo Spirit Meets Action', groupTitle: '', groupSub: '',
           socialLinks: { facebook: 'https://facebook.com', instagram: 'https://www.instagram.com/richmond.leos', youtube: '#', linkedin: 'https://lk.linkedin.com/company/leo-club-of-richmond-college', x: 'https://x.com/RichmondLeo' }
         },
         projects: [], executive: [], newsletter: [], affiliatedBodies: []
@@ -971,6 +976,9 @@
       safeSet('ci-about1', c.about1 || '');
       safeSet('ci-about2', c.about2 || '');
       safeSet('ci-mission-title', c.missionTitle || '');
+      safeSet('ci-nl-title', c.newsletterTitle || '');
+      safeSet('ci-nl-sub', c.newsletterSubtitle || '');
+      safeSet('ci-nl-motto', c.newsletterMotto || '');
       safeSet('ci-pres-name', c.presidentName || '');
       safeSet('ci-pres-phone', c.presidentPhone || '');
       safeSet('ci-sec-name', c.secretaryName || '');
@@ -1011,6 +1019,9 @@
       content.club.about2 = safeGet('ci-about2');
       content.club.missionTitle = safeGet('ci-mission-title');
       content.club.missionStatement = safeGet('ci-mission-statement');
+      content.club.newsletterTitle = safeGet('ci-nl-title');
+      content.club.newsletterSubtitle = safeGet('ci-nl-sub');
+      content.club.newsletterMotto = safeGet('ci-nl-motto');
       content.club.presidentName = safeGet('ci-pres-name');
       content.club.presidentPhone = safeGet('ci-pres-phone');
       content.club.secretaryName = safeGet('ci-sec-name');
