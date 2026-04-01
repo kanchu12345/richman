@@ -71,7 +71,8 @@
       else html += `<p class="text-truncate">${p.description}</p><button class="see-more-btn" onclick="toggleText(this)">See More</button>`;
     }
     if (p.fbLink) {
-      html += `<div style="margin-top:0.5rem;"><a href="${p.fbLink}" target="_blank" class="see-more-btn" style="text-decoration:none;"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle; margin-right:4px; margin-bottom:2px;"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.532-4.697 1.313 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.885v2.27h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>See More on FB</a></div>`;
+      // User specifically requested the FB link to just say "See More" in text format
+      html += `<div style="margin-top:0.5rem;"><a href="${p.fbLink}" target="_blank" class="see-more-btn" style="text-decoration:none;">See More</a></div>`;
     }
     return html;
   }
