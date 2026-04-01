@@ -655,6 +655,7 @@
             <select id="pf-status-${p.id}">${STATUSES.map(s => `<option ${p.status === s ? 'selected' : ''}>${s}</option>`).join('')}</select>
           </div>
         </div>
+        <div class="form-group"><label>FB Post Link</label><input type="text" id="pf-fblink-${p.id}" value="${esc(p.fbLink)}" placeholder="https://facebook.com/..."/></div>
         <div class="form-group"><label>Description</label><textarea id="pf-desc-${p.id}" rows="3">${esc(p.description)}</textarea></div>
         <div class="img-upload-row">
         <div class="img-upload-row" style="display:flex; gap:1rem; flex-wrap:wrap; margin-top:1rem;">
@@ -685,6 +686,7 @@
       p.year = document.getElementById(`pf-year-${id}`).value;
       p.category = document.getElementById(`pf-cat-${id}`).value;
       p.status = document.getElementById(`pf-status-${id}`).value;
+      p.fbLink = document.getElementById(`pf-fblink-${id}`).value;
       p.description = document.getElementById(`pf-desc-${id}`).value;
       renderProjects();
       showToast('Project updated!');
@@ -692,7 +694,7 @@
 
     function addProject() {
       const id = 'p' + Date.now();
-      content.projects.push({ id, title: 'New Project', description: '', category: 'Education', year: String(new Date().getFullYear()), status: 'Upcoming', image1: '', image2: '', image3: '', image4: '', image5: '' });
+      content.projects.push({ id, title: 'New Project', description: '', fbLink: '', category: 'Education', year: String(new Date().getFullYear()), status: 'Upcoming', image1: '', image2: '', image3: '', image4: '', image5: '' });
       renderProjects();
       setTimeout(() => { toggleEdit('pc-form-' + id); document.getElementById(`pf-title-${id}`)?.focus(); }, 50);
     }
