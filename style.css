@@ -336,7 +336,12 @@ ul { list-style: none; }
   .hero-mobile-center { justify-content: center !important; flex-wrap: wrap; }
   .hero-mobile-align { text-align: center !important; }
   .hero-visual { justify-content: center; margin-top: 2rem; }
+  .hero-group-caption { display: none !important; }
+  .mobile-motto { display: inline; }
+  .desktop-motto { display: none; }
 }
+.mobile-motto { display: none; }
+.desktop-motto { display: inline; }
 
 .hero-tag {
   display: inline-block;
@@ -1421,7 +1426,7 @@ footer {
 .auto-cover .leo-logo-min { width: 40px; opacity: 0.8; margin-top: 1rem; }
 
 .book-info h3 { font-size: 1.05rem; color: var(--white); margin-bottom: 0.5rem; }
-.book-info p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1.2rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.book-info p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1.2rem; display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
 /* ════════════════════════════════════════
    FLIPBOOK MODAL

@@ -2,7 +2,7 @@
   "club": {
     "name": "Centennial Leo Club",
     "email": "leoclub@example.com",
-    "whatsapp": "+94000000000",
+    "whatsapp": "+94768086721",
     "location": "Richmond College, Galle",
     "mapLink": "https://maps.app.goo.gl/K6fR1Z8eR",
     "about1": "Leading with pride and excellence since foundation.",
@@ -14,7 +14,8 @@
     "groupSub": "Leading with Pride",
     "founded": "2010",
     "members": 450,
-    "districtAwards": 15,
+    "districtAwards": 20,
+    "multipleDistrictAwards": 5,
     "alumni": 320,
     "socialLinks": {
       "facebook": "https://www.facebook.com/RCGLC",
