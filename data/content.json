@@ -207,5 +207,16 @@
       "bgImage": "https://i.ibb.co/fGqCx8rP/livover.png",
       "logoImage": "https://i.ibb.co/XrQYZkGz/lion-removebg-preview.png"
     }
+  ],
+  "presidentialHistory": [
+    { "id": "ph1", "year": "2016/17", "gen": "Gen 1", "name": "Leo Sandul Siriwardana", "note": "1st President", "awards": [{"text":"2nd Runner-up – Most Outstanding School Leo Club","color":"maroon"},{"text":"2nd Runner-up – Most Outstanding School Leo Club President","color":"maroon"}] },
+    { "id": "ph2", "year": "2017/18", "gen": "Gen 2", "name": "Leo Sandul Siriwardana", "note": "Continued", "awards": [{"text":"Best Fundraising Project","color":"gold"},{"text":"1st Runner-up – Most Outstanding School Leo Club","color":"cyan"},{"text":"1st Runner-up – Most Outstanding School Leo Club President","color":"cyan"}] },
+    { "id": "ph3", "year": "2018/19", "gen": "Gen 3", "name": "Leo Nadith Jayawardena", "note": "", "awards": [{"text":"2nd Runner-up – Helping Hand for Differently-Abled","color":"maroon"},{"text":"Project: Nethata Saviyak","color":"maroon"},{"text":"2nd Runner-up – Most Outstanding School Leo Club","color":"maroon"}] },
+    { "id": "ph4", "year": "2019/20", "gen": "Gen 4", "name": "Leo Punsith Wickramanayaka", "note": "", "awards": [{"text":"1st Runner-up – Most Outstanding School Leo Club","color":"cyan"},{"text":"1st Runner-up – Most Outstanding School Leo Club President","color":"cyan"}] },
+    { "id": "ph5", "year": "2020/21", "gen": "Gen 5", "name": "Leo Gamitha Senarathne", "note": "", "awards": [{"text":"1st Runner-up – Most Outstanding School Leo Club","color":"cyan"},{"text":"1st Runner-up – Most Outstanding School Leo Club President","color":"cyan"},{"text":"Best Research Project","color":"gold"},{"text":"Project: Slay the Dread","color":"gold"}] },
+    { "id": "ph6", "year": "2021/22", "gen": "Gen 6", "name": "Leo Kulith Sathnindu", "note": "Most Outstanding President", "awards": [{"text":"🏆 Most Outstanding School Leo Club","color":"gold"},{"text":"Most Outstanding School Leo Club President – Leo Kulith","color":"gold"},{"text":"Most Outstanding School Leo Club Secretary – Leo Dumindu","color":"gold"},{"text":"Best International Joint Project – Rich Hearts","color":"gold"},{"text":"1st Runner-up – Clean Water & Energy Conservation","color":"cyan"},{"text":"Project: Perahankada","color":"maroon"},{"text":"1st Runner-up – Most Outstanding Service Project","color":"cyan"},{"text":"Project: Pipasayata Diya Dothak","color":"maroon"}] },
+    { "id": "ph7", "year": "2022/23", "gen": "Gen 7", "name": "Leo Ashmika Kodikara", "note": "", "awards": [{"text":"1st Runner-up – Most Outstanding School Leo Club","color":"cyan"},{"text":"1st Runner-up – Most Outstanding School Leo Club President","color":"cyan"}] },
+    { "id": "ph8", "year": "2023/24", "gen": "Gen 8", "name": "President – Generation 8", "note": "", "awards": [{"text":"Club Transition Period","color":"maroon"}] },
+    { "id": "ph9", "year": "2025/26", "gen": "Gen 9", "name": "Leo Mevinu Gamage", "note": "Current President", "awards": [{"text":"Club Reactivated – 2025/26","color":"cyan"},{"text":"Leo District 306 D8","color":"gold"}] }
   ]
 }

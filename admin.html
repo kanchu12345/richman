@@ -7,6 +7,32 @@
   <title>Admin Panel – Centennial Leo Club</title>
   <link rel="stylesheet" href="admin-style.css" />
   <link rel="icon" href="image/logo.jpg.jpeg" type="image/jpeg" />
+  <datalist id="role-list">
+    <option value="President">
+    <option value="Immediate Past President">
+    <option value="Vice President">
+    <option value="2nd Vice President">
+    <option value="Secretary">
+    <option value="Assistant Secretary">
+    <option value="Treasurer">
+    <option value="Assistant Treasurer">
+    <option value="Club Correspondent">
+    <option value="Outreach Director">
+    <option value="Membership Director">
+    <option value="Public Relations Director">
+    <option value="IT Director">
+    <option value="Project Director">
+    <option value="Health Director">
+    <option value="Education Director">
+    <option value="Environmental Director">
+    <option value="Sports Director">
+    <option value="Fund Raising Director">
+    <option value="Director">
+    <option value="Tail Twister">
+    <option value="Lion Tamer">
+    <option value="Leo Advisor">
+    <option value="Staff Advisor">
+  </datalist>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
@@ -156,7 +182,16 @@
           </div>
           <button class="btn-primary" onclick="addMember()">+ Add Member</button>
         </div>
-        <div id="executive-list" class="item-list"></div>
+        <div id="executive-list" class="item-list" style="margin-bottom:3rem;"></div>
+
+        <div class="pane-header" style="border-top:1px solid var(--border-color); padding-top:2rem; margin-top:2rem;">
+          <div>
+            <h2>🏆 Presidential History</h2>
+            <p>Manage the club's legacy. Edit year, generation, president names, and awards.</p>
+          </div>
+          <button class="btn-primary" onclick="addPh()">+ Add Generation</button>
+        </div>
+        <div id="presidential-history-list" class="item-list"></div>
       </div>
 
       <!-- ── NEWSLETTER TAB ── -->
@@ -741,7 +776,7 @@
       <div class="item-form" id="ec-form-${m.id}" style="display:none">
         <div class="form-row2">
           <div class="form-group"><label>Full Name</label><input type="text" id="ef-name-${m.id}" value="${esc(m.name)}"/></div>
-          <div class="form-group"><label>Role / Title</label><input type="text" id="ef-role-${m.id}" value="${esc(m.role)}"/></div>
+          <div class="form-group"><label>Role / Title</label><input type="text" id="ef-role-${m.id}" value="${esc(m.role)}" list="role-list"/></div>
         </div>
         <div class="form-group"><label>Section</label>
           <select id="ef-sec-${m.id}">${SECTIONS.map(s => `<option ${m.section === s ? 'selected' : ''}>${s}</option>`).join('')}</select>
@@ -760,6 +795,79 @@
         </div>
       </div>
     </div>`).join('');
+    }
+
+    // ════════════════════════════════════════════════════════
+    //  PRESIDENTIAL HISTORY
+    // ════════════════════════════════════════════════════════
+    function renderPresidentialHistory() {
+      const list = document.getElementById('presidential-history-list');
+      if (!content?.presidentialHistory?.length) { 
+        list.innerHTML = '<div class="empty-state">No presidential history yet.</div>'; 
+        return; 
+      }
+      list.innerHTML = content.presidentialHistory.map((p, i) => `
+    <div class="item-card" id="ph-${p.id}">
+      <div class="item-card-header">
+        <div class="item-info">
+          <div class="item-title">${p.year} · ${p.gen}</div>
+          <div class="item-meta">${p.name} ${p.note ? `· ${p.note}` : ''}</div>
+        </div>
+        <div class="item-actions">
+          <button class="btn-icon" onclick="toggleEdit('ph-form-${p.id}')">✏️ Edit</button>
+          <button class="btn-icon btn-del" onclick="deletePh('${p.id}')">🗑️</button>
+        </div>
+      </div>
+      <div class="item-form" id="ph-form-${p.id}" style="display:none">
+        <div class="form-row2">
+          <div class="form-group"><label>Year (e.g. 2016/17)</label><input type="text" id="phf-year-${p.id}" value="${esc(p.year)}"/></div>
+          <div class="form-group"><label>Generation (e.g. Gen 1)</label><input type="text" id="phf-gen-${p.id}" value="${esc(p.gen)}"/></div>
+        </div>
+        <div class="form-row2">
+          <div class="form-group"><label>President Name</label><input type="text" id="phf-name-${p.id}" value="${esc(p.name)}"/></div>
+          <div class="form-group"><label>Note (e.g. ★ 1st President)</label><input type="text" id="phf-note-${p.id}" value="${esc(p.note)}"/></div>
+        </div>
+        <div class="form-group">
+          <label>Awards (JSON format - e.g [{"text":"Award Name","color":"gold"}])</label>
+          <textarea id="phf-awards-${p.id}" style="height:80px; font-family:monospace; font-size:0.8rem;">${esc(JSON.stringify(p.awards || []))}</textarea>
+          <small style="color:var(--text-muted);">Colors: gold, cyan, maroon</small>
+        </div>
+        <div class="form-actions">
+          <button class="btn-primary" onclick="savePh('${p.id}',${i})">✅ Save Generation</button>
+          <button class="btn-outline" onclick="toggleEdit('ph-form-${p.id}')">Cancel</button>
+        </div>
+      </div>
+    </div>`).join('');
+    }
+
+    function savePh(id, i) {
+      const p = content.presidentialHistory[i];
+      p.year = document.getElementById(`phf-year-${id}`).value;
+      p.gen = document.getElementById(`phf-gen-${id}`).value;
+      p.name = document.getElementById(`phf-name-${id}`).value;
+      p.note = document.getElementById(`phf-note-${id}`).value;
+      try {
+        p.awards = JSON.parse(document.getElementById(`phf-awards-${id}`).value);
+      } catch(e) {
+        alert("Invalid JSON in Awards field. Please check your format.");
+        return;
+      }
+      renderPresidentialHistory();
+      showToast('History updated!');
+    }
+
+    function addPh() {
+      const id = 'ph' + Date.now();
+      content.presidentialHistory.push({ id, year: '2026/27', gen: 'Gen 10', name: 'New President', note: '', awards: [] });
+      renderPresidentialHistory();
+      setTimeout(() => { toggleEdit('ph-form-' + id); document.getElementById(`phf-name-${id}`)?.focus(); }, 50);
+    }
+
+    function deletePh(id) {
+      if (!confirm('Remove this presidential record?')) return;
+      content.presidentialHistory = content.presidentialHistory.filter(p => p.id !== id);
+      renderPresidentialHistory();
+      showToast('History record removed.');
     }
 
     function saveMember(id, i) {

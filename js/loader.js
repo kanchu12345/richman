@@ -286,6 +286,28 @@
     applySocialLinks(data.club.socialLinks);
   };
 
+  window.renderPresidentialHistory = function(data) {
+    const grid = document.getElementById('presidential-history-grid');
+    if (!grid || !data.presidentialHistory) return;
+    const colorMap = { gold: 'aw-gold', cyan: 'aw-cyan', maroon: 'aw-maroon' };
+    const total = data.presidentialHistory.length;
+    const titleEl = document.getElementById('ph-section-title');
+    if (titleEl) titleEl.textContent = `Presidential Legacy – ${total} Generations (2016 – Present)`;
+    grid.innerHTML = data.presidentialHistory.map(p => {
+      const noteHtml = p.note ? `<span style="font-size:0.75rem; color:var(--gold);">★ <em>${p.note}</em></span>` : '';
+      const awardsHtml = (p.awards || []).map(a => `<span class="gen-award ${colorMap[a.color] || 'aw-cyan'}">${a.text}</span>`).join('');
+      return `
+      <div class="gen-item">
+        <div class="gen-year">${p.year}<br/><span style="font-size:0.65rem; color:var(--text-muted); font-weight:400;">${p.gen}</span></div>
+        <div class="gen-details">
+          <div class="gen-name">${p.name} ${noteHtml}</div>
+          <div class="gen-awards">${awardsHtml}</div>
+        </div>
+      </div>`;
+    }).join('');
+    reObserve();
+  };
+
   window.renderNewsletter = function (data) {
     if (!data) return;
     
@@ -468,7 +490,10 @@
       initDynamicCounters();
     }
     else if (page === 'projects') renderProjects(data);
-    else if (page === 'executive') renderExecutive(data);
+    else if (page === 'executive') {
+      renderExecutive(data);
+      renderPresidentialHistory(data);
+    }
     else if (page === 'newsletter') renderNewsletter(data);
     else if (page === 'contact') renderContact(data);
 
