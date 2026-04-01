@@ -1,7 +1,7 @@
 {
   "club": {
     "name": "Centennial Leo Club",
-    "email": "leoclub@example.com",
+    "email": "rcgleos@gmail.com",
     "whatsapp": "+94768086721",
     "location": "Richmond College, Galle",
     "mapLink": "https://maps.app.goo.gl/K6fR1Z8eR",
@@ -10,6 +10,9 @@
     "missionTitle": "Leading The Way <br/><span>For A Better Tomorrow</span>",
     "missionStatement": "To provide students with an opportunity for development and contribution, individually and collectively, as responsible members of the local, national and international community.",
     "heroImage": "",
+    "newsletterTitle": "Golden Times",
+    "newsletterSubtitle": "Official Newsletter of the Leo Club of Richmond College",
+    "newsletterMotto": "Where Leo Spirit Meets Action",
     "groupTitle": "Team 2025/2026",
     "groupSub": "Leading with Pride",
     "founded": "2010",
@@ -58,14 +61,14 @@
       "image5": ""
     },
     {
-      "id": "p1775065715799",
-      "title": "Alms Giving",
-      "description": "With gratitude in our hearts, we are happy to announce the successful conclusion of Project Alms Giving. 🙏\n\nOn this sacred Poya Day, we had the privilege of practicing true dāna by serving Upāsaka Dāna to devotees, sharing not just a meal but also compassion, kindness, and the values of Buddhism. 🌕🤍\n\nThis project reminded us that service is not measured by scale, but by sincerity. We extend our heartfelt thanks to everyone who supported, contributed, and stood with us to make this meaningful initiative a success.\n\nMay the merits of this noble act be shared with all.\nService before self always. ",
-      "fbLink": "https://www.facebook.com/photo/?fbid=1335067475329049&set=a.552508630251608",
-      "category": "Culture",
+      "id": "p1775065854209",
+      "title": "New Project",
+      "description": "",
+      "fbLink": "",
+      "category": "Education",
       "year": "2026",
-      "status": "Completed",
-      "image1": "https://i.ibb.co/bjvFCRsJ/alms.jpg",
+      "status": "Upcoming",
+      "image1": "",
       "image2": "",
       "image3": "",
       "image4": "",
@@ -78,7 +81,8 @@
       "name": "Leo Mevinu Gamage",
       "role": "Club President 2025/26",
       "section": "president",
-      "description": "Leo Mevinu Gamage leads the club's reactivation in 2025/26, taking the helm as the 9th generation president of the Centennial Leo Club. Under his leadership, the club has rejoined the fold under the newly redistricted Leo District 306 D8, carrying forward the club's proud tradition of service, achievement, and community impact."
+      "description": "Leo Mevinu Gamage leads the club's reactivation in 2025/26, taking the helm as the 9th generation president of the Centennial Leo Club. Under his leadership, the club has rejoined the fold under the newly redistricted Leo District 306 D8, carrying forward the club's proud tradition of service, achievement, and community impact.",
+      "photo": "https://i.ibb.co/B2K03hYc/mevin-removebg-preview.png"
     },
     {
       "id": "ex2",
