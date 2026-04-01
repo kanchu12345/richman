@@ -256,8 +256,8 @@
               <p>${m.description || 'Leading the club with pride and excellence.'}</p>
             </div>
           </div>`;
-        } else if (key === 'advisor' || key === 'staffadvisor') {
-          // Special strip card for Advisors
+        } else if (key === 'advisor') {
+          // Special wide strip card for Leo Advisor only
           return `
           <div class="advisor-card fade-in">
             <div class="advisor-ava" style="${m.photo ? `background-image:url('${m.photo}');background-size:cover;background-position:center;color:transparent;` : ''}">
@@ -266,7 +266,7 @@
             <div class="advisor-info">
               <div class="role">${m.role}</div>
               <div class="name">${m.name}</div>
-              <div class="org">${key === 'staffadvisor' ? 'Richmond College, Galle' : 'Leo District 306 D8, Sri Lanka'}</div>
+              <div class="org">Centennial Leo Club of Richmond College</div>
             </div>
           </div>`;
         }
