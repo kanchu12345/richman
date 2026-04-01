@@ -281,6 +281,10 @@
             <div class="form-group"><label>YouTube URL</label><input type="text" id="ci-youtube" /></div>
             <div class="form-group"><label>LinkedIn URL</label><input type="text" id="ci-linkedin" /></div>
           </div>
+          <div class="form-row2">
+            <div class="form-group"><label>X (Twitter) URL</label><input type="text" id="ci-x" /></div>
+            <div class="form-group"></div>
+          </div>
           <button class="btn-primary" style="margin-top:1rem;" onclick="saveClubInfo()">✅ Apply Changes</button>
         </div>
       </div>
@@ -599,7 +603,7 @@
           about1: '', about2: '', HeroTitle: '', heroSubtitle: '', heroDesc: '',
           missionTitle: 'Leading The Way <br/><span>For A Better Tomorrow</span>',
           missionStatement: '', heroImage: '', groupTitle: '', groupSub: '',
-          socialLinks: { facebook: '#', instagram: '#', youtube: '#', linkedin: '#' }
+          socialLinks: { facebook: 'https://facebook.com', instagram: 'https://www.instagram.com/richmond.leos', youtube: '#', linkedin: 'https://lk.linkedin.com/company/leo-club-of-richmond-college', x: 'https://x.com/RichmondLeo' }
         },
         projects: [], executive: [], newsletter: [], affiliatedBodies: []
       };
@@ -977,6 +981,7 @@
       safeSet('ci-instagram', sl.instagram || '');
       safeSet('ci-youtube', sl.youtube || '');
       safeSet('ci-linkedin', sl.linkedin || '');
+      safeSet('ci-x', sl.x || '');
 
       // Stats
       safeSet('ci-members', c.members || 400);
@@ -1015,7 +1020,8 @@
         facebook: safeGet('ci-facebook'),
         instagram: safeGet('ci-instagram'),
         youtube: safeGet('ci-youtube'),
-        linkedin: safeGet('ci-linkedin')
+        linkedin: safeGet('ci-linkedin'),
+        x: safeGet('ci-x')
       };
       
       content.club.members = parseInt(safeGet('ci-members')) || 0;

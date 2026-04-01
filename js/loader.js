@@ -71,8 +71,17 @@
       else html += `<p class="text-truncate">${p.description}</p><button class="see-more-btn" onclick="toggleText(this)">See More</button>`;
     }
     if (p.fbLink) {
-      // User specifically requested the FB link to just say "See More" in text format
-      html += `<div style="margin-top:0.5rem;"><a href="${p.fbLink}" target="_blank" class="see-more-btn" style="text-decoration:none;">See More</a></div>`;
+      let url = p.fbLink;
+      if (url.includes('<iframe')) {
+        const match = url.match(/href=([^&"'\s]+)/); // Extract encode URL from plugin iframe
+        if (match) url = decodeURIComponent(match[1]);
+        else {
+          const srcMatch = url.match(/src=["']([^"']+)["']/);
+          if (srcMatch) url = srcMatch[1];
+        }
+      }
+      url = url.replace(/^["']|["']$/g, ''); // strip stray quotes
+      html += `<div style="margin-top:0.5rem;"><a href="${url}" target="_blank" class="see-more-btn" style="text-decoration:none;">See More Photos</a></div>`;
     }
     return html;
   }
@@ -371,7 +380,7 @@
 
   function applySocialLinks(links) {
     if (!links) return;
-    const map = { Facebook: links.facebook, Instagram: links.instagram, YouTube: links.youtube, LinkedIn: links.linkedin };
+    const map = { Facebook: links.facebook, Instagram: links.instagram, YouTube: links.youtube, LinkedIn: links.linkedin, X: links.x };
     document.querySelectorAll('.social-btn[title], .social-link-card[title]').forEach(a => {
       const url = map[a.title];
       if (url && url !== '#') a.href = url;
