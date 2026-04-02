@@ -145,6 +145,12 @@
       "section": "directors"
     },
     {
+      "id": "ex_sa1",
+      "name": "To be appointed",
+      "role": "Staff Advisor",
+      "section": "staffadvisor"
+    },
+    {
       "id": "ex12",
       "name": "Lion Lakma Kithmini",
       "role": "Leo Advisor",

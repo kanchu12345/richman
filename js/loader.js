@@ -256,19 +256,8 @@
               <p>${m.description || 'Leading the club with pride and excellence.'}</p>
             </div>
           </div>`;
-        } else if (key === 'advisor') {
-          // Special wide strip card for Leo Advisor only
-          return `
-          <div class="advisor-card fade-in">
-            <div class="advisor-ava" style="${m.photo ? `background-image:url('${m.photo}');background-size:cover;background-position:center;color:transparent;` : ''}">
-              ${m.photo ? '' : initials(m.name)}
-            </div>
-            <div class="advisor-info">
-              <div class="role">${m.role}</div>
-              <div class="name">${m.name}</div>
-              <div class="org">Centennial Leo Club of Richmond College</div>
-            </div>
-          </div>`;
+
+
         }
 
         // Standard mini cards for other members
