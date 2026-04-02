@@ -626,11 +626,13 @@
       if (!content.projects) content.projects = [];
       if (!content.executive) content.executive = [];
       if (!content.newsletter) content.newsletter = [];
+      if (!content.presidentialHistory) content.presidentialHistory = [];
       if (!content.affiliatedBodies) content.affiliatedBodies = [];
       if (!content.club) content.club = defaultContent().club;
 
       renderProjects();
       renderExecutive();
+      renderPresidentialHistory();
       renderNewsletter();
       loadClubInfo();
       renderAffiliated();
@@ -645,7 +647,7 @@
           missionStatement: '', heroImage: '', newsletterTitle: 'Golden Times', newsletterSubtitle: 'Official Newsletter of the Leo Club of Richmond College', newsletterMotto: 'Where Leo Spirit Meets Action', groupTitle: '', groupSub: '',
           socialLinks: { facebook: 'https://facebook.com', instagram: 'https://www.instagram.com/richmond.leos', youtube: '#', linkedin: 'https://lk.linkedin.com/company/leo-club-of-richmond-college', x: 'https://x.com/RichmondLeo' }
         },
-        projects: [], executive: [], newsletter: [], affiliatedBodies: []
+        projects: [], executive: [], newsletter: [], presidentialHistory: [], affiliatedBodies: []
       };
     }
 

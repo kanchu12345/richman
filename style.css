@@ -120,16 +120,15 @@ ul { list-style: none; }
 }
 .nav-title .name {
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 1.05rem;
   color: var(--white);
   letter-spacing: 0.5px;
 }
 .nav-title .sub {
-  font-size: 0.7rem;
-  color: var(--cyan);
+  font-size: 0.95rem;
+  color: var(--gold);
   font-weight: 500;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .nav-links {
@@ -968,9 +967,12 @@ footer {
   max-width: 1100px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
+  grid-template-columns: 2fr 1.5fr 1.5fr;
   gap: 2rem;
   margin-bottom: 2.5rem;
+}
+.footer-col {
+  justify-self: center;
 }
 .footer-brand { max-width: 280px; }
 .footer-brand .brand-row {
