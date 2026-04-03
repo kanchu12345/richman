@@ -309,6 +309,7 @@
           ${photoHtml}
           <div style="flex:1; min-width:0;">
             <div class="gen-name">${p.name} ${noteHtml}</div>
+            ${p.secretary || p.treasurer ? `<div class="gen-board">Sec: ${p.secretary || '–'} | Tres: ${p.treasurer || '–'}</div>` : ''}
             <div class="gen-awards">${awardsHtml}</div>
           </div>
         </div>
