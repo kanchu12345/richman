@@ -15,7 +15,12 @@
 
 /* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; overflow-x: hidden; max-width: 100vw; }
+html { 
+  scroll-behavior: smooth; 
+  overflow-x: hidden; 
+  max-width: 100vw; 
+  scrollbar-gutter: stable;
+}
 body {
   font-family: 'Inter', sans-serif;
   background: linear-gradient(160deg, #080f1e 0%, #0d1428 25%, #120d1e 50%, #0a1628 75%, #080f1e 100%);
@@ -51,9 +56,14 @@ ul { list-style: none; }
 }
 
 /* ── Scrollbar ── */
-::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: var(--navy-deep); }
-::-webkit-scrollbar-thumb { background: var(--cyan); border-radius: 3px; }
+::-webkit-scrollbar-thumb { 
+  background: linear-gradient(var(--cyan), var(--maroon)); 
+  border-radius: 10px; 
+  border: 2px solid var(--navy-deep);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--cyan); }
 
 /* ── Preloader ── */
 .preloader {
@@ -1182,8 +1192,49 @@ footer {
 .glow-pulse { animation: glow-pulse 3s ease-in-out infinite; }
 
 /* fade in on scroll */
-.fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
-.fade-in.visible { opacity: 1; transform: translateY(0); }
+.fade-in { 
+  opacity: 0; 
+  transform: translateY(40px) scale(0.96); 
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); 
+  will-change: transform, opacity;
+}
+.fade-in.visible { 
+  opacity: 1; 
+  transform: translateY(0) scale(1); 
+}
+
+/* Stagger Hooks (Up to 12 items) */
+.fade-in:nth-child(2) { transition-delay: 0.1s; }
+.fade-in:nth-child(3) { transition-delay: 0.2s; }
+.fade-in:nth-child(4) { transition-delay: 0.3s; }
+.fade-in:nth-child(5) { transition-delay: 0.4s; }
+.fade-in:nth-child(6) { transition-delay: 0.5s; }
+.fade-in:nth-child(7) { transition-delay: 0.6s; }
+
+/* Premium Card Lifts */
+.card, .project-card, .exec-mini, .stat-item, .newsletter-card, .social-link-card, .gen-item {
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+  will-change: transform;
+}
+.card:hover, .project-card:hover, .exec-mini:hover, .stat-item:hover, .newsletter-card:hover, .social-link-card:hover, .gen-item:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 15px 45px rgba(0, 188, 212, 0.2);
+  z-index: 5;
+}
+
+/* Button Micro-interactions */
+.btn-primary, .btn-outline {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px var(--cyan-glow);
+}
+.btn-primary:active {
+  transform: translateY(0) scale(0.98);
+}
 
 /* ════════════════════════════════════════
    ABOUT MEGA SECTION (3-Column Layout)

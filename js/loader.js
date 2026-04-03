@@ -474,7 +474,14 @@
 
   function reObserve() {
     const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+      entries.forEach((e, idx) => { 
+        if (e.isIntersecting) {
+          // If elements are extremely close together, manually add a slight stagger
+          setTimeout(() => {
+            e.target.classList.add('visible'); 
+          }, idx * 50);
+        }
+      });
     }, { threshold: 0.1 });
     document.querySelectorAll('.fade-in:not(.visible)').forEach(el => obs.observe(el));
   }
