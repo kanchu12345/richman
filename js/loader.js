@@ -285,12 +285,19 @@
     grid.innerHTML = data.presidentialHistory.map(p => {
       const noteHtml = p.note ? `<span style="font-size:0.75rem; color:var(--gold);">★ <em>${p.note}</em></span>` : '';
       const awardsHtml = (p.awards || []).map(a => `<span class="gen-award ${colorMap[a.color] || 'aw-cyan'}">${a.text}</span>`).join('');
+      const photoHtml = p.photo 
+        ? `<img src="${p.photo}" class="gen-photo" alt="${p.name}" style="width:42px; height:42px; border-radius:50%; object-fit:cover; border:2px solid var(--border); flex-shrink:0;"/>` 
+        : `<div class="gen-photo-placeholder" style="width:42px; height:42px; border-radius:50%; background:rgba(0,188,212,0.08); border:2px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:0.85rem; font-weight:700; color:var(--cyan); flex-shrink:0;">${initials(p.name)}</div>`;
+      
       return `
       <div class="gen-item">
         <div class="gen-year">${p.year}<br/><span style="font-size:0.65rem; color:var(--text-muted); font-weight:400;">${p.gen}</span></div>
-        <div class="gen-details">
-          <div class="gen-name">${p.name} ${noteHtml}</div>
-          <div class="gen-awards">${awardsHtml}</div>
+        <div class="gen-details" style="display:flex; align-items:center; gap:1rem; padding: 1rem 0 1rem 1.2rem; overflow: hidden; min-width: 0;">
+          ${photoHtml}
+          <div style="flex:1; min-width:0;">
+            <div class="gen-name">${p.name} ${noteHtml}</div>
+            <div class="gen-awards">${awardsHtml}</div>
+          </div>
         </div>
       </div>`;
     }).join('');
