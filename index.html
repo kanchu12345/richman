@@ -18,7 +18,7 @@
       top: 72px;
       left: 0; right: 0;
       z-index: 999;
-      height: 28px;
+      height: 20px;
       background: linear-gradient(90deg, rgba(8,15,30,0.97) 0%, rgba(13,24,48,0.97) 50%, rgba(8,15,30,0.97) 100%);
       border-bottom: 1px solid rgba(0,188,212,0.25);
       display: flex;
@@ -29,7 +29,7 @@
     .ticker-label {
       flex-shrink: 0;
       padding: 0 0.75rem;
-      font-size: 0.62rem;
+      font-size: 0.58rem;
       font-weight: 800;
       letter-spacing: 2px;
       text-transform: uppercase;
@@ -64,7 +64,7 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      font-size: 0.72rem;
+      font-size: 0.68rem;
       color: var(--text-muted);
       padding: 0 1.5rem;
       white-space: nowrap;
@@ -78,10 +78,10 @@
     .ticker-item a { color: var(--cyan); text-decoration: none; }
     .ticker-item a:hover { text-decoration: underline; }
     /* Push hero down to account for ticker */
-    body .hero { padding-top: 128px !important; }
+    body .hero { padding-top: 104px !important; }
     @media (max-width: 640px) {
       .news-ticker-bar { top: 72px; }
-      body .hero { padding-top: 128px !important; }
+      body .hero { padding-top: 104px !important; }
     }
   </style>
 </head>
@@ -99,8 +99,8 @@
     <a class="nav-brand" href="index.html">
       <img src="image/logo.jpg.jpeg" alt="Leo Club Logo" class="nav-logo" />
       <div class="nav-title">
-        <span class="name">Centennial Leo Club Of</span>
-        <span class="sub">Richmond College</span>
+        <span class="name">Centennial Leo Club</span>
+        <span class="sub">of Richmond College</span>
       </div>
     </a>
     <div class="nav-links">
@@ -142,10 +142,9 @@
         <div class="hero-tag" style="margin-bottom:1rem;">🦁Since 2016</div>
         <h1 class="hero-mobile-align" style="text-align:center; line-height: 1.1; margin-bottom: 0.5rem;"
           id="hero-title">
-          Centennial<br /><span style="display: block; color: var(--cyan);">Leo Club</span></h1>
-        <h2 class="hero-mobile-align"
-          style="font-family:'Playfair Display', serif; font-size:clamp(1.5rem, 3vw, 2.5rem); color:var(--white); margin-bottom:1.5rem; text-align:center;"
-          id="hero-subtitle">Richmond College</h2>
+          Centennial<br />
+          <span style="color: var(--cyan);">Leo Club of</span><br />
+          Richmond College</h1>
         <p class="hero-sub hero-mobile-align"
           style="margin-left:auto; margin-right:auto; max-width:100%; text-align:center;" id="hero-desc">Empowering
           youth to serve. Building leaders who make a difference in our communities and
@@ -410,10 +409,10 @@
       <div class="footer-col">
         <h4>Club</h4>
         <ul id="footer-club-links">
-          <li><a href="#">About Leo Clubs</a></li>
-          <li><a href="#">Lions International</a></li>
-          <li><a href="#">Leo District 306 D8</a></li>
-          <li><a href="#">Richmond College</a></li>
+          <li><a href="https://www.lionsclubs.org/en/discover-our-clubs/about-leos" target="_blank">About Leo Clubs</a></li>
+          <li><a href="https://www.lionsclubs.org/en/resources/for-members/lions-international-calendar" target="_blank">Lions International</a></li>
+          <li><a href="https://kanchu12345.github.io/richman/" target="_blank">Leo District 306 D8</a></li>
+          <li><a href="https://www.richmondcollege.lk/" target="_blank">Richmond College</a></li>
         </ul>
       </div>
 

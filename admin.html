@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <title>Admin Panel – Centennial Leo Club</title>
+  <title>Admin Panel – Centennial Leo Club of Richmond College</title>
   <link rel="stylesheet" href="admin-style.css" />
   <link rel="icon" href="image/logo.jpg.jpeg" type="image/jpeg" />
   <datalist id="role-list">
@@ -251,6 +251,18 @@
           <div class="form-group"><label>Hero Description</label><textarea id="ci-hero-desc" rows="2"></textarea></div>
           <div class="form-group"><label>Hero Motto / Tags</label><input type="text" id="ci-hero-motto" /></div>
           <button class="btn-primary" style="margin-top:1rem;" onclick="saveClubInfo()">✅ Apply Changes</button>
+        </div>
+
+        <!-- Latest News Ticker Section -->
+        <div class="form-card" style="margin-top:1rem;">
+          <div class="form-section-title" style="display:flex; justify-content:space-between; align-items:center;">
+            <span>📡 Latest News Ticker</span>
+            <button class="btn-primary" onclick="addNewsItem()" style="padding:0.4rem 0.8rem; font-size:0.75rem;">+
+              Add News</button>
+          </div>
+          <p class="hint" style="margin-bottom:1rem; font-size:0.82rem; color:var(--text-muted);">This news will scroll
+            from right to left just below the navigation bar on the home page. 0.5cm thick.</p>
+          <div id="news-ticker-list" class="item-list"></div>
         </div>
 
         <!-- Attached Bodies Section -->
@@ -638,6 +650,7 @@
       renderExecutive();
       renderPresidentialHistory();
       renderNewsletter();
+      renderNews();
       loadClubInfo();
       renderAffiliated();
     }
@@ -645,7 +658,7 @@
     function defaultContent() {
       return {
         club: {
-          name: 'Centennial Leo Club', email: '', whatsapp: '', location: '', mapLink: '',
+          name: 'Centennial Leo Club of Richmond College', email: '', whatsapp: '', location: '', mapLink: '',
           about1: '', about2: '', HeroTitle: '', heroSubtitle: '', heroDesc: '',
           missionTitle: 'Leading The Way <br/><span>For A Better Tomorrow</span>',
           missionStatement: '', heroImage: '', newsletterTitle: 'Golden Times', newsletterSubtitle: 'Official Newsletter of the Leo Club of Richmond College', newsletterMotto: 'Where Leo Spirit Meets Action', groupTitle: '', groupSub: '',
@@ -1073,6 +1086,64 @@
       content.newsletter = content.newsletter.filter(n => n.id !== id);
       renderNewsletter();
       showToast('Issue deleted.');
+    }
+
+    // ════════════════════════════════════════════════════════
+    //  NEWS TICKER
+    // ════════════════════════════════════════════════════════
+    function renderNews() {
+      const list = document.getElementById('news-ticker-list');
+      if (!content.latestNews) content.latestNews = [];
+      if (!content.latestNews.length) {
+        list.innerHTML = '<div class="empty-state">No news items. Click "+ Add News" to start.</div>';
+        return;
+      }
+      list.innerHTML = content.latestNews.map((n, i) => `
+        <div class="item-card" id="ln-${n.id}">
+          <div class="item-card-header">
+            <div class="item-info">
+              <div class="item-title" id="ln-title-${n.id}">${esc(n.text)}</div>
+            </div>
+            <div class="item-actions">
+              <button class="btn-icon" onclick="toggleEdit('ln-form-${n.id}')">✏️ Edit</button>
+              <button class="btn-icon btn-del" onclick="deleteNewsItem('${n.id}')">🗑️</button>
+            </div>
+          </div>
+          <div class="item-form" id="ln-form-${n.id}" style="display:none">
+            <div class="form-group">
+              <label>News Text</label>
+              <input type="text" id="lnf-text-${n.id}" value="${esc(n.text)}" 
+                oninput="document.getElementById('ln-title-${n.id}').textContent = this.value || 'New News'"/>
+            </div>
+            <div class="form-actions">
+              <button class="btn-primary" onclick="saveNewsItem('${n.id}', ${i})">✅ Save Item</button>
+              <button class="btn-outline" onclick="toggleEdit('ln-form-${n.id}')">Cancel</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function addNewsItem() {
+      if (!content.latestNews) content.latestNews = [];
+      const id = 'ln' + Date.now();
+      content.latestNews.push({ id, text: 'New News Item' });
+      renderNews();
+      setTimeout(() => { toggleEdit('ln-form-' + id); document.getElementById(`lnf-text-${id}`)?.focus(); }, 50);
+    }
+
+    function saveNewsItem(id, i) {
+      const text = document.getElementById(`lnf-text-${id}`).value;
+      content.latestNews[i].text = text;
+      renderNews();
+      showToast('News item updated locally!');
+    }
+
+    function deleteNewsItem(id) {
+      if (!confirm('Delete this news item?')) return;
+      content.latestNews = content.latestNews.filter(n => n.id !== id);
+      renderNews();
+      showToast('News item removed.');
     }
 
     // ════════════════════════════════════════════════════════

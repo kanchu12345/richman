@@ -417,10 +417,15 @@
     const list = document.getElementById('footer-club-links');
     if (!list) return;
     
-    let html = '';
+    let html = `
+      <li><a href="https://www.lionsclubs.org/en/discover-our-clubs/about-leos" target="_blank">About Leo Clubs</a></li>
+      <li><a href="https://www.lionsclubs.org/en/resources/for-members/lions-international-calendar" target="_blank">Lions International</a></li>
+      <li><a href="https://kanchu12345.github.io/richman/" target="_blank">Leo District 306 D8</a></li>
+      <li><a href="https://www.richmondcollege.lk/" target="_blank">Richmond College</a></li>
+    `;
     
-    // Add links from Governing Bodies
-    if (data.affiliatedBodies) {
+    // Add links from Governing Bodies (Governing Bodies of the club)
+    if (data.affiliatedBodies && data.affiliatedBodies.length) {
       data.affiliatedBodies.forEach(b => {
         const href = b.link && b.link !== '#' ? b.link : '#';
         const target = href !== '#' ? 'target="_blank"' : '';
@@ -434,7 +439,7 @@
     // Generate a beautiful programmatic cover
     return `
       <div class="auto-cover">
-        <div class="club-tag">Centennial Leo Club</div>
+        <div class="club-tag">Centennial Leo Club of Richmond College</div>
         <div class="book-title">${title || 'Newsletter Edition'}</div>
         <div>
           <div class="book-date">${date || ''}</div>
