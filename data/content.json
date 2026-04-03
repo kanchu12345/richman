@@ -175,47 +175,47 @@
   ],
   "affiliatedBodies": [
     {
-      "id": "ab1774681190694",
+      "id": "ab1",
       "label": "GLOBAL MOVEMENT",
       "title": "Leo Movement",
+      "link": "https://www.lionsclubs.org/en/discover-our-clubs/about-leos",
+      "description": "Sponsored by Lions Clubs International, the Leo Movement is the world’s largest youth-led service organization, spanning over 140 countries. Built on the pillars of Leadership, Experience, and Opportunity, it empowers youth aged 12 to 30 to serve their communities while fostering global fellowship.",
+      "bgImage": "",
+      "logoImage": ""
+    },
+    {
+      "id": "ab2",
+      "label": "GOVERNING BODY",
+      "title": "Leo Multiple District 306",
+      "link": "https://www.facebook.com/leomd306/",
+      "description": "Leo Multiple District 306 is the governing body overseeing 12 Leo Districts across Sri Lanka and the Maldives. Since the movement’s island-wide inception in 1969, the Council has unified over 200 clubs to foster leadership and service excellence.",
+      "bgImage": "",
+      "logoImage": ""
+    },
+    {
+      "id": "ab3",
+      "label": "GOVERNING BODY",
+      "title": "Leo District 306 D8",
       "link": "https://www.facebook.com/p/Leo-District-306-D8-61577577827979/",
-      "description": "Leo District 306 D8 is the governing body for the Leos of the South, overseeing a network of 16 Leo Clubs across the Southern Province. Guided by the theme \"Leading with Humanity,\" and the dedicated leadership of District President Leo Anushka Liyanage, the District coordinates inter-club collaborations, impactful service projects, and mentorship for Leos to create lasting social chang",
+      "description": "Leo District 306 D8 is the governing body for the Leos of the South, overseeing a network of Leo Clubs across the Southern Province. Guided by the theme \"Leading with Humanity,\" it coordinates impactful service projects and mentorship.",
       "bgImage": "",
       "logoImage": ""
     },
     {
-      "id": "ab1774681728253",
-      "label": "GOVERNING BODY",
-      "title": " Leo Multiple District 306",
-      "link": "https://richmondcollege.lk",
-      "description": "Founded in 1876 by Rev. George Baugh, Richmond College, Galle, is a premier national school celebrating 150 years of excellence this year. As the home of our Leo Club, the College instills a 150-year legacy of discipline and \"Nisi Dominus Frustra\" (Unless the Lord wills, in vain is the effort). We carry forward this rich heritage of excellence through every act of service we perfor",
-      "bgImage": "",
-      "logoImage": ""
-    },
-    {
-      "id": "ab1774681763047",
-      "label": "GOVERNING BODY",
-      "title": " Leo District 306D8",
-      "link": "https://www.lionsclubs.org/en/discover-our-clubs/leos",
-      "description": "Sponsored by Lions Clubs International, the Leo Movement is the world’s largest youth-led service organization, spanning over 140 countries. Built on the pillars of Leadership, Experience, and Opportunity, it empowers youth aged 12 to 30 to serve their communities while fostering global fellowship. Through diverse social service initiatives, Leos transform today’s volunteers into the responsible leaders of tomorrow.",
-      "bgImage": "",
-      "logoImage": ""
-    },
-    {
-      "id": "ab1774681796141",
+      "id": "ab4",
       "label": "OUR ALMA MATER",
       "title": "Richmond College",
-      "link": "https://www.facebook.com/leomd306/",
-      "description": "Leo Multiple District 306 is the governing body overseeing 12 Leo Districts across Sri Lanka and the Maldives. Since the movement’s island-wide inception in 1969, the Council has unified over 200 clubs to foster leadership and service excellence. It provides a strategic framework for thousands of young leaders to collaborate, share resources, and create a collective national impact.",
+      "link": "https://richmondcollege.lk/",
+      "description": "Founded in 1876, Richmond College, Galle, is a premier national school celebrating 150 years of excellence. As the home of our Leo Club, the college instills a legacy of discipline and service under the motto \"Nisi Dominus Frustra\".",
       "bgImage": "",
       "logoImage": ""
     },
     {
-      "id": "ab1774681835685",
+      "id": "ab5",
       "label": "OUR SPONSORING CLUB",
       "title": "The Lions Club of Galle Karapitiya",
       "link": "https://www.facebook.com/gallekarapitiyalionsclub/",
-      "description": "The Lions Club of Galle Karapitiya, inaugurated in 2011,  has been the dedicated sponsor and mentor of our Leo Club since our inauguration in 2016. Under the 2025/2026 leadership of President Lion Lakma Kithmini MJF MAF, the Club provides the essential guidance and \"We Serve\" spirit that empowers our members to lead with purpose. Their steadfast support forms the foundation of our success, helping us create a lasting positive impact in our community.",
+      "description": "The Lions Club of Galle Karapitiya has been the dedicated sponsor and mentor of our Leo Club since our inauguration in 2016, providing essential guidance and the \"We Serve\" spirit.",
       "bgImage": "https://i.ibb.co/fGqCx8rP/livover.png",
       "logoImage": "https://i.ibb.co/XrQYZkGz/lion-removebg-preview.png"
     }

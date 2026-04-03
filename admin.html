@@ -207,7 +207,43 @@
           </div>
           <button class="btn-primary" onclick="addNewsletter()">+ Add Issue</button>
         </div>
-        <div id="newsletter-list" class="item-list"></div>
+
+        <!-- Newsletter Headers section -->
+        <div class="form-card" style="margin-bottom:1.5rem; background: rgba(0,0,0,0.15);">
+          <div class="form-section-title" style="color:var(--cyan); border-bottom: 1px solid rgba(0,188,212,0.2); padding-bottom: 0.5rem; margin-bottom: 1rem; font-size: 0.85rem; letter-spacing: 1px;">NEWSLETTER PAGE HEADERS</div>
+          
+          <div class="form-group">
+            <label style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Main Title (e.g. THE VANGUARD)</label>
+            <input type="text" id="ci-nl-title" placeholder="THE VANGUARD" />
+          </div>
+          
+          <div class="form-group">
+            <label style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Subtitle (e.g. Leading the Charge...)</label>
+            <input type="text" id="ci-nl-sub" placeholder="Official Newsletter..." />
+          </div>
+          
+          <div class="form-group">
+            <label style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Motto (e.g. Where Leo Spirit Meets Action)</label>
+            <input type="text" id="ci-nl-motto" placeholder="Where Leo Spirit Meets Action" />
+          </div>
+          
+          <button class="btn-primary" style="margin-top:0.5rem; font-size:0.8rem; padding: 0.5rem 1rem;" onclick="saveClubInfo()">💾 Save Headers</button>
+        </div>
+        <!-- Newsletter list sections -->
+        <div id="newsletter-section-latest" style="margin-top:2rem;">
+          <div class="form-section-title" style="font-size:0.8rem; border-left: 3px solid var(--cyan); padding-left: 0.5rem;">📰 Latest Editions</div>
+          <div id="newsletter-list-latest" class="item-list" style="margin-bottom:2rem;"></div>
+        </div>
+
+        <div id="newsletter-section-past">
+          <div class="form-section-title" style="font-size:0.8rem; border-left: 3px solid #90a4ae; padding-left: 0.5rem;">📚 Past Editions</div>
+          <div id="newsletter-list-past" class="item-list" style="margin-bottom:2rem;"></div>
+        </div>
+
+        <div id="newsletter-section-special">
+          <div class="form-section-title" style="font-size:0.8rem; border-left: 3px solid var(--gold); padding-left: 0.5rem;">⭐ Special Editions</div>
+          <div id="newsletter-list-special" class="item-list"></div>
+        </div>
         <input type="file" id="pdfFileInput" accept=".pdf" style="display:none;" onchange="handlePDFUpload(this)">
       </div>
 
@@ -306,7 +342,8 @@
           </div>
 
           <div class="form-section-title" style="margin-top:1.5rem;">Club Statistics (Home Page)</div>
-          <div class="form-row" style="grid-template-columns: repeat(4, 1fr); gap: 1rem;">
+          <div class="form-row" style="grid-template-columns: repeat(5, 1fr); gap: 1rem;">
+            <div class="form-group"><label>Year Founded</label><input type="number" id="ci-founded" placeholder="e.g. 2016" /></div>
             <div class="form-group"><label>Members</label><input type="number" id="ci-members" /></div>
             <div class="form-group"><label>Alumni</label><input type="number" id="ci-alumni" /></div>
             <div class="form-group"><label>District Awards</label><input type="number" id="ci-awards" /></div>
@@ -937,57 +974,87 @@
     //  NEWSLETTER
     // ════════════════════════════════════════════════════════
     function renderNewsletter() {
-      const list = document.getElementById('newsletter-list');
-      if (!content?.newsletter?.length) { list.innerHTML = '<div class="empty-state">No newsletter issues yet.</div>'; return; }
-      list.innerHTML = content.newsletter.map((n, i) => `
-    <div class="item-card" id="nl-${n.id}">
-      <div class="item-card-header">
-        <div class="item-thumb"><span>📰</span></div>
-        <div class="item-info">
-          <div class="item-title">${n.title}</div>
-          <div class="item-meta">${n.date} · <span class="item-status" style="${(n.type || 'current') === 'current' ? 'color:var(--cyan)' : (n.type) === 'past' ? 'color:#90a4ae' : 'color:#e53935'}">${(n.type || 'current') === 'current' ? '📰 Latest' : (n.type) === 'past' ? '📚 Past' : '⭐ Special'}</span></div>
-        </div>
-        <div class="item-actions">
-          <button class="btn-icon" onclick="toggleEdit('nl-form-${n.id}')">✏️ Edit</button>
-          <button class="btn-icon btn-del" onclick="deleteIssue('${n.id}')">🗑️</button>
-        </div>
-      </div>
-      <div class="item-form" id="nl-form-${n.id}" style="display:none">
-        <div class="form-row2">
-          <div class="form-group"><label>Title</label><input type="text" id="nf-title-${n.id}" value="${esc(n.title)}"/></div>
-          <div class="form-group"><label>Date</label><input type="text" id="nf-date-${n.id}" value="${esc(n.date)}"/></div>
-        </div>
-        <div class="form-group"><label>Edition Type</label>
-          <select id="nf-type-${n.id}">
-            <option value="current" ${(n.type || 'current') === 'current' ? 'selected' : ''}>📰 Latest / Current Edition</option>
-            <option value="past" ${n.type === 'past' ? 'selected' : ''}>📚 Past Edition</option>
-            <option value="special" ${n.type === 'special' ? 'selected' : ''}>⭐ Special Edition</option>
-          </select>
-        </div>
-        <div class="form-group"><label>Description</label><textarea id="nf-desc-${n.id}" rows="3">${esc(n.description)}</textarea></div>
-          <div class="form-group">
-            <label>PDF Link (Google Drive or Upload File)</label>
-            <div style="display:flex; gap:0.5rem;">
-              <input type="text" id="nf-pdf-${n.id}" value="${esc(n.pdfLink)}" placeholder="https://..." style="flex:1;"/>
-              <button class="btn-outline" onclick="openPDFSelector('${n.id}', ${i})" style="white-space:nowrap; padding:0.5rem 1rem;">📁 Upload PDF</button>
-            </div>
-            <p class="hint" style="margin-top:0.25rem; font-size:0.75rem;">Tip: You can paste a link or upload a file directly to your website.</p>
-          </div>
-        <div class="img-slot" style="margin-top:1rem;">
-          <label>Optional Cover Image (Overrides auto-generated cover)</label>
-          <div class="img-preview-box ${n.coverImage ? 'has-img' : ''}" id="nf-cover-box-${n.id}" style="height:120px; width:90px;">
-            ${n.coverImage ? `<img src="${n.coverImage}" id="nf-cover-prev-${n.id}" style="height:100%; width:100%; object-fit:cover;"/>` : `<span id="nf-cover-prev-${n.id}">Auto</span>`}
-          </div>
-          <button class="btn-upload" onclick="openImgModal({obj:content.newsletter[${i}],field:'coverImage',imgElId:'nf-cover-prev-${n.id}',boxId:'nf-cover-box-${n.id}'})">📁 Upload Cover</button>
-          ${n.coverImage ? `<button class="btn-remove" onclick="removeImg(content.newsletter[${i}],'coverImage','nf-cover-prev-${n.id}','nf-cover-box-${n.id}')">✕ Remove</button>` : ''}
-        </div>
+      const lists = {
+        'current': document.getElementById('newsletter-list-latest'),
+        'past': document.getElementById('newsletter-list-past'),
+        'special': document.getElementById('newsletter-list-special')
+      };
 
-        <div class="form-actions">
-          <button class="btn-primary" onclick="saveIssue('${n.id}', ${i})">✅ Save Issue</button>
-          <button class="btn-outline" onclick="toggleEdit('nl-form-${n.id}')">Cancel</button>
-        </div>
-      </div>
-    </div>`).join('');
+      // Group newsletters by type
+      const groups = { 'current': [], 'past': [], 'special': [] };
+      if (content.newsletter) {
+        content.newsletter.forEach((n, index) => {
+          const t = n.type || 'current';
+          if (groups[t]) groups[t].push({ n, index });
+          else groups['current'].push({ n, index });
+        });
+      }
+
+      // Render each group
+      Object.entries(lists).forEach(([type, el]) => {
+        if (!el) return;
+        const items = groups[type];
+
+        if (!items.length) {
+          el.innerHTML = `<div class="empty-state" style="padding: 1rem; font-size: 0.8rem;">No ${type} editions yet.</div>`;
+          return;
+        }
+
+        el.innerHTML = items.map(({ n, i }) => {
+          const typeLabel = n.type === 'current' ? '📰 Latest' : n.type === 'past' ? '📚 Past' : '⭐ Special';
+          const typeColor = n.type === 'current' ? 'var(--cyan)' : n.type === 'past' ? '#90a4ae' : 'var(--gold)';
+          
+          return `
+          <div class="item-card" id="nl-${n.id}">
+            <div class="item-card-header">
+              <div class="item-thumb"><span>📰</span></div>
+              <div class="item-info">
+                <div class="item-title">${n.title}</div>
+                <div class="item-meta">${n.date} · <span class="item-status" style="color:${typeColor}">${typeLabel}</span></div>
+              </div>
+              <div class="item-actions">
+                <button class="btn-icon" onclick="toggleEdit('nl-form-${n.id}')">✏️ Edit</button>
+                <button class="btn-icon btn-del" onclick="deleteIssue('${n.id}')">🗑️</button>
+              </div>
+            </div>
+            <div class="item-form" id="nl-form-${n.id}" style="display:none">
+              <div class="form-row2">
+                <div class="form-group"><label>Title</label><input type="text" id="nf-title-${n.id}" value="${esc(n.title)}"/></div>
+                <div class="form-group"><label>Date</label><input type="text" id="nf-date-${n.id}" value="${esc(n.date)}"/></div>
+              </div>
+              <div class="form-group"><label>Edition Type</label>
+                <select id="nf-type-${n.id}">
+                  <option value="current" ${(n.type || 'current') === 'current' ? 'selected' : ''}>📰 Latest / Current Edition</option>
+                  <option value="past" ${n.type === 'past' ? 'selected' : ''}>📚 Past Edition</option>
+                  <option value="special" ${n.type === 'special' ? 'selected' : ''}>⭐ Special Edition</option>
+                </select>
+              </div>
+              <div class="form-group"><label>Description</label><textarea id="nf-desc-${n.id}" rows="3">${esc(n.description)}</textarea></div>
+                <div class="form-group">
+                  <label>PDF Link (Google Drive or Upload File)</label>
+                  <div style="display:flex; gap:0.5rem;">
+                    <input type="text" id="nf-pdf-${n.id}" value="${esc(n.pdfLink)}" placeholder="https://..." style="flex:1;"/>
+                    <button class="btn-outline" onclick="openPDFSelector('${n.id}', ${i})" style="white-space:nowrap; padding:0.5rem 1rem;">📁 Upload PDF</button>
+                  </div>
+                  <p class="hint" style="margin-top:0.25rem; font-size:0.75rem;">Tip: You can paste a link or upload a file directly to your website.</p>
+                </div>
+              <div class="img-slot" style="margin-top:1rem;">
+                <label>Optional Cover Image (Overrides auto-generated cover)</label>
+                <div class="img-preview-box ${n.coverImage ? 'has-img' : ''}" id="nf-cover-box-${n.id}" style="height:120px; width:90px;">
+                  ${n.coverImage ? `<img src="${n.coverImage}" id="nf-cover-prev-${n.id}" style="height:100%; width:100%; object-fit:cover;"/>` : `<span id="nf-cover-prev-${n.id}">Auto</span>`}
+                </div>
+                <button class="btn-upload" onclick="openImgModal({obj:content.newsletter[${i}],field:'coverImage',imgElId:'nf-cover-prev-${n.id}',boxId:'nf-cover-box-${n.id}'})">📁 Upload Cover</button>
+                ${n.coverImage ? `<button class="btn-remove" onclick="removeImg(content.newsletter[${i}],'coverImage','nf-cover-prev-${n.id}','nf-cover-box-${n.id}')">✕ Remove</button>` : ''}
+              </div>
+
+              <div class="form-actions">
+                <button class="btn-primary" onclick="saveIssue('${n.id}', ${i})">✅ Save Issue</button>
+                <button class="btn-outline" onclick="toggleEdit('nl-form-${n.id}')">Cancel</button>
+              </div>
+            </div>
+          </div>`;
+        }).join('');
+      });
     }
 
     function saveIssue(id, i) {
@@ -1189,6 +1256,7 @@
       safeSet('ci-nl-title', c.newsletterTitle || '');
       safeSet('ci-nl-sub', c.newsletterSubtitle || '');
       safeSet('ci-nl-motto', c.newsletterMotto || '');
+      safeSet('ci-founded', c.founded || 2016);
       safeSet('ci-pres-name', c.presidentName || '');
       safeSet('ci-pres-phone', c.presidentPhone || '');
       safeSet('ci-sec-name', c.secretaryName || '');
@@ -1232,6 +1300,7 @@
       content.club.newsletterTitle = safeGet('ci-nl-title');
       content.club.newsletterSubtitle = safeGet('ci-nl-sub');
       content.club.newsletterMotto = safeGet('ci-nl-motto');
+      content.club.founded = parseInt(safeGet('ci-founded')) || 2016;
       content.club.presidentName = safeGet('ci-pres-name');
       content.club.presidentPhone = safeGet('ci-pres-phone');
       content.club.secretaryName = safeGet('ci-sec-name');

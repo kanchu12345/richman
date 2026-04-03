@@ -418,16 +418,16 @@
     if (!list) return;
     
     let html = `
-      <li><a href="https://www.lionsclubs.org/en/discover-our-clubs/about-leos" target="_blank" rel="noopener">About Leo Clubs</a></li>
       <li><a href="https://www.lionsclubs.org/en/resources/for-members/lions-international-calendar" target="_blank" rel="noopener">Lions International</a></li>
     `;
     
-    // Add links from Governing Bodies (Governing Bodies of the club)
+    // Add links from Governing Bodies (Affiliated Bodies of the club)
     if (data.affiliatedBodies && data.affiliatedBodies.length) {
       data.affiliatedBodies.forEach(b => {
+        const title = b.title || 'Attached Body';
         const href = b.link && b.link !== '#' ? b.link : '#';
         const target = href !== '#' ? 'target="_blank" rel="noopener"' : '';
-        html += `<li><a href="${href}" ${target}>${b.title}</a></li>`;
+        html += `<li><a href="${href}" ${target}>${title}</a></li>`;
       });
     }
     list.innerHTML = html;
