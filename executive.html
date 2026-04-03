@@ -64,14 +64,17 @@
     .president-info .sub { color: var(--cyan); font-size: 0.9rem; font-weight: 500; margin-bottom: 0.75rem; }
     .president-info p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.7; }
 
-    /* exec cards with 2-col role/name layout */
+    /* exec cards layout */
     .exec-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 1.25rem;
       margin-bottom: 2rem;
     }
     .exec-mini {
+      flex: 0 0 calc(33.333% - 0.85rem);
+      max-width: calc(33.333% - 0.85rem);
       background: var(--navy-card); border: 1px solid var(--border);
       border-radius: var(--radius); padding: 1.4rem 1.5rem;
       transition: all var(--transition); position: relative; overflow: hidden;
@@ -169,7 +172,7 @@
 
     @media (max-width: 640px) {
       .president-card { flex-direction: column; text-align: center; }
-      .exec-row { grid-template-columns: 1fr 1fr; }
+      .exec-mini { flex: 0 0 calc(50% - 0.625rem); max-width: calc(50% - 0.625rem); }
       .president-history { padding: 1.25rem 0.75rem; overflow-x: hidden; }
       .gen-item { grid-template-columns: 75px 1fr; overflow: hidden; }
       .gen-year { font-size: 0.72rem; padding-right: 0.6rem; }
@@ -179,7 +182,7 @@
       .gen-award { font-size: 0.65rem; white-space: normal; word-break: break-word; }
     }
     @media (max-width: 400px) {
-      .exec-row { grid-template-columns: 1fr; }
+      .exec-mini { flex: 0 0 100%; max-width: 100%; }
       .gen-item { grid-template-columns: 65px 1fr; }
       .gen-year { font-size: 0.68rem; }
     }
@@ -239,13 +242,14 @@
       <!-- Dynamically filled -->
     </div>
 
-    <div class="exec-row" id="exec-vp"></div>
-    <div class="exec-row" id="exec-secretariat"></div>
-    <div class="exec-row" id="exec-treasury"></div>
-    <div class="exec-row" id="exec-directors"></div>
-
-    <div class="exec-row" id="exec-staffadvisor"></div>
-    <div class="exec-row" id="exec-advisor"></div>
+    <div class="exec-row">
+      <div id="exec-vp" style="display: contents;"></div>
+      <div id="exec-secretariat" style="display: contents;"></div>
+      <div id="exec-treasury" style="display: contents;"></div>
+      <div id="exec-directors" style="display: contents;"></div>
+      <div id="exec-staffadvisor" style="display: contents;"></div>
+      <div id="exec-advisor" style="display: contents;"></div>
+    </div>
 
     <!-- ═══ DISTRICT HISTORY ═══ -->
     <div class="exec-section-title" style="margin-top:4rem;">District History</div>

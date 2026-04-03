@@ -155,6 +155,12 @@
       "name": "Lion Lakma Kithmini",
       "role": "Leo Advisor",
       "section": "advisor"
+    },
+    {
+      "id": "ex13",
+      "name": "Leo Sanuka Menuja",
+      "role": "Editor",
+      "section": "advisor"
     }
   ],
   "newsletter": [
