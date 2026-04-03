@@ -241,19 +241,7 @@
       "gen": "Gen 1",
       "name": "Leo Sandul Siriwardana",
       "note": "1st President",
-      "secretary": "Leo Minuda Kalansooriya",
-      "treasurer": "Leo Mevinu Gamage",
-      "awards": [
-        {
-          "text": "2nd Runner-up – Most Outstanding School Leo Club",
-          "color": "maroon"
-        },
-        {
-          "text": "2nd Runner-up – Most Outstanding School Leo Club President",
-          "color": "maroon"
-        }
-      ],
-      "photo": "https://i.ibb.co/J8R3Njb/Leo-Nipun-Kariyawasam-jpg-removebg-preview.png"
+      "secretary": "Leo Minuda Kalansooriya", "treasurer": "Leo Mevinu Gamage", "vp": "Pending Update", "photo": "https://i.ibb.co/J8R3Njb/Leo-Nipun-Kariyawasam-jpg-removebg-preview.png", "secPhoto": "", "tresPhoto": "", "vpPhoto": ""
     },
     {
       "id": "ph2",
@@ -261,43 +249,17 @@
       "gen": "Gen 2",
       "name": "Leo Sandul Siriwardana",
       "note": "Continued",
-      "secretary": "Leo Minuda Kalansooriya",
-      "treasurer": "Leo Mevinu Gamage",
-      "awards": [
-        {
-          "text": "Best Fundraising Project",
-          "color": "gold"
-        },
-        {
-          "text": "1st Runner-up – Most Outstanding School Leo Club",
-          "color": "cyan"
-        },
-        {
-          "text": "1st Runner-up – Most Outstanding School Leo Club President",
-          "color": "cyan"
-        }
-      ],
-      "photo": "https://i.ibb.co/J8R3Njb/Leo-Nipun-Kariyawasam-jpg-removebg-preview.png"
+      "secretary": "Leo Minuda Kalansooriya", "treasurer": "Leo Mevinu Gamage", "vp": "Pending Update", "photo": "https://i.ibb.co/J8R3Njb/Leo-Nipun-Kariyawasam-jpg-removebg-preview.png", "secPhoto": "", "tresPhoto": "", "vpPhoto": ""
     },
     {
       "id": "ph3",
       "year": "2018/19",
       "gen": "Gen 3",
-      "name": "Leo Nadith Jayawardena",
-      "note": "",
+      "secretary": "Leo Nadith Jayawardena", "treasurer": "Leo Dumindu", "vp": "Pending Update", "photo": "", "secPhoto": "", "tresPhoto": "", "vpPhoto": "",
       "awards": [
-        {
-          "text": "2nd Runner-up – Helping Hand for Differently-Abled",
-          "color": "maroon"
-        },
-        {
-          "text": "Project: Nethata Saviyak",
-          "color": "maroon"
-        },
-        {
-          "text": "2nd Runner-up – Most Outstanding School Leo Club",
-          "color": "maroon"
-        }
+        { "text": "2nd Runner-up – Helping Hand for Differently-Abled", "color": "maroon" },
+        { "text": "Project: Nethata Saviyak", "color": "maroon" },
+        { "text": "2nd Runner-up – Most Outstanding School Leo Club", "color": "maroon" }
       ]
     },
     {
@@ -384,7 +346,7 @@
           "color": "maroon"
         }
       ],
-      "secretary": "Leo Dumindu", "treasurer": "", "photo": "", "secPhoto": "", "tresPhoto": ""
+      "secretary": "Leo Dumindu", "treasurer": "", "vp": "Pending Update", "photo": "", "secPhoto": "", "tresPhoto": "", "vpPhoto": ""
     },
     {
       "id": "ph7",
@@ -435,7 +397,7 @@
         }
       ],
       "photo": "https://i.ibb.co/PZ3yVrkB/leo-removebg-preview.png",
-      "secretary": "", "treasurer": "", "secPhoto": "", "tresPhoto": ""
+      "secretary": "", "treasurer": "", "vp": "Pending Update", "secPhoto": "", "tresPhoto": "", "vpPhoto": ""
     }
   ],
   "latestNews": [

@@ -310,7 +310,8 @@
       };
 
       const presAv = getAvatar(p.photo, p.name, 'P');
-      const secAv = getAvatar(p.secPhoto, p.secretary, 'S');
+      const vpAv   = getAvatar(p.vpPhoto, p.vp, 'VP');
+      const secAv  = getAvatar(p.secPhoto, p.secretary, 'S');
       const tresAv = getAvatar(p.tresPhoto, p.treasurer, 'T');
 
       return `
@@ -319,12 +320,13 @@
         <div class="gen-details">
           <div class="gen-avatars-row" style="margin-bottom: 0.75rem;">
             ${presAv}
+            ${vpAv}
             ${secAv}
             ${tresAv}
           </div>
           <div style="flex:1; min-width:0; width: 100%;">
             <div class="gen-name">${p.name || 'President TBD'} ${noteHtml}</div>
-            <div class="gen-board">SECRETARY: ${p.secretary || 'Pending Update'} | TREASURER: ${p.treasurer || 'Pending Update'}</div>
+            <div class="gen-board">VP: ${p.vp || 'Pending'} | S: ${p.secretary || 'Pending'} | T: ${p.treasurer || 'Pending'}</div>
             <div class="gen-awards">${awardsHtml}</div>
           </div>
         </div>

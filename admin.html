@@ -900,40 +900,52 @@
         </div>
         <div class="form-row2">
           <div class="form-group"><label>President Name</label><input type="text" id="phf-name-${p.id}" value="${esc(p.name)}"/></div>
-          <div class="form-group"><label>Note (e.g. ★ 1st President)</label><input type="text" id="phf-note-${p.id}" value="${esc(p.note)}"/></div>
+          <div class="form-group"><label>Vice President Name</label><input type="text" id="phf-vp-${p.id}" value="${esc(p.vp || '')}" placeholder="e.g. Leo John Doe"/></div>
         </div>
         <div class="form-row2">
           <div class="form-group"><label>Secretary Name</label><input type="text" id="phf-sec-${p.id}" value="${esc(p.secretary || '')}" placeholder="e.g. Leo Jane Smith"/></div>
           <div class="form-group"><label>Treasurer Name</label><input type="text" id="phf-tres-${p.id}" value="${esc(p.treasurer || '')}" placeholder="e.g. Leo Bob Brown"/></div>
         </div>
         <div class="form-group">
+          <label>Note (e.g. ★ 1st President)</label>
+          <input type="text" id="phf-note-${p.id}" value="${esc(p.note)}"/>
+        </div>
+        <div class="form-group">
           <label>Awards (JSON format - e.g [{"text":"Award Name","color":"gold"}])</label>
           <textarea id="phf-awards-${p.id}" style="height:80px; font-family:monospace; font-size:0.8rem;">${esc(JSON.stringify(p.awards || []))}</textarea>
           <small style="color:var(--text-muted);">Colors: gold, cyan, maroon</small>
         </div>
-        <div class="form-row3" style="margin-top:1.5rem;">
+        <div class="form-row3" style="display:grid; grid-template-columns: repeat(4, 1fr); gap:1rem; margin-top:1.5rem;">
           <div class="img-slot">
-            <label>President Photo</label>
+            <label>President</label>
             <div class="img-preview-box round ${p.photo ? 'has-img' : ''}" id="phf-photo-box-${p.id}">
               ${p.photo ? `<img src="${p.photo}" alt="photo" id="phf-photo-prev-${p.id}" style="border-radius:50%;"/>` : `<span id="phf-photo-prev-${p.id}">P</span>`}
             </div>
-            <button class="btn-upload" onclick="openImgModal({obj:content.presidentialHistory[${i}],field:'photo',imgElId:'phf-photo-prev-${p.id}',boxId:'phf-photo-box-${p.id}',round:true})">📁 Upload</button>
+            <button class="btn-upload" onclick="openImgModal({obj:content.presidentialHistory[${i}],field:'photo',imgElId:'phf-photo-prev-${p.id}',boxId:'phf-photo-box-${p.id}',round:true})">📁</button>
             ${p.photo ? `<button class="btn-remove" onclick="removeImg(content.presidentialHistory[${i}],'photo','phf-photo-prev-${p.id}','phf-photo-box-${p.id}')">✕</button>` : ''}
           </div>
           <div class="img-slot">
-            <label>Secretary Photo</label>
+            <label>Vice Pres</label>
+            <div class="img-preview-box round ${p.vpPhoto ? 'has-img' : ''}" id="phf-vpphoto-box-${p.id}">
+              ${p.vpPhoto ? `<img src="${p.vpPhoto}" alt="photo" id="phf-vpphoto-prev-${p.id}" style="border-radius:50%;"/>` : `<span id="phf-vpphoto-prev-${p.id}">VP</span>`}
+            </div>
+            <button class="btn-upload" onclick="openImgModal({obj:content.presidentialHistory[${i}],field:'vpPhoto',imgElId:'phf-vpphoto-prev-${p.id}',boxId:'phf-vpphoto-box-${p.id}',round:true})">📁</button>
+            ${p.vpPhoto ? `<button class="btn-remove" onclick="removeImg(content.presidentialHistory[${i}],'vpPhoto','phf-vpphoto-prev-${p.id}','phf-vpphoto-box-${p.id}')">✕</button>` : ''}
+          </div>
+          <div class="img-slot" style="margin-top:0;">
+            <label>Secretary</label>
             <div class="img-preview-box round ${p.secPhoto ? 'has-img' : ''}" id="phf-secphoto-box-${p.id}">
               ${p.secPhoto ? `<img src="${p.secPhoto}" alt="photo" id="phf-secphoto-prev-${p.id}" style="border-radius:50%;"/>` : `<span id="phf-secphoto-prev-${p.id}">S</span>`}
             </div>
-            <button class="btn-upload" onclick="openImgModal({obj:content.presidentialHistory[${i}],field:'secPhoto',imgElId:'phf-secphoto-prev-${p.id}',boxId:'phf-secphoto-box-${p.id}',round:true})">📁 Upload</button>
+            <button class="btn-upload" onclick="openImgModal({obj:content.presidentialHistory[${i}],field:'secPhoto',imgElId:'phf-secphoto-prev-${p.id}',boxId:'phf-secphoto-box-${p.id}',round:true})">📁</button>
             ${p.secPhoto ? `<button class="btn-remove" onclick="removeImg(content.presidentialHistory[${i}],'secPhoto','phf-secphoto-prev-${p.id}','phf-secphoto-box-${p.id}')">✕</button>` : ''}
           </div>
-          <div class="img-slot">
-            <label>Treasurer Photo</label>
+          <div class="img-slot" style="margin-top:0;">
+            <label>Treasurer</label>
             <div class="img-preview-box round ${p.tresPhoto ? 'has-img' : ''}" id="phf-tresphoto-box-${p.id}">
               ${p.tresPhoto ? `<img src="${p.tresPhoto}" alt="photo" id="phf-tresphoto-prev-${p.id}" style="border-radius:50%;"/>` : `<span id="phf-tresphoto-prev-${p.id}">T</span>`}
             </div>
-            <button class="btn-upload" onclick="openImgModal({obj:content.presidentialHistory[${i}],field:'tresPhoto',imgElId:'phf-tresphoto-prev-${p.id}',boxId:'phf-tresphoto-box-${p.id}',round:true})">📁 Upload</button>
+            <button class="btn-upload" onclick="openImgModal({obj:content.presidentialHistory[${i}],field:'tresPhoto',imgElId:'phf-tresphoto-prev-${p.id}',boxId:'phf-tresphoto-box-${p.id}',round:true})">📁</button>
             ${p.tresPhoto ? `<button class="btn-remove" onclick="removeImg(content.presidentialHistory[${i}],'tresPhoto','phf-tresphoto-prev-${p.id}','phf-tresphoto-box-${p.id}')">✕</button>` : ''}
           </div>
         </div>
@@ -950,6 +962,7 @@
       p.year = document.getElementById(`phf-year-${id}`).value;
       p.gen = document.getElementById(`phf-gen-${id}`).value;
       p.name = document.getElementById(`phf-name-${id}`).value;
+      p.vp = document.getElementById(`phf-vp-${id}`).value;
       p.note = document.getElementById(`phf-note-${id}`).value;
       p.secretary = document.getElementById(`phf-sec-${id}`).value;
       p.treasurer = document.getElementById(`phf-tres-${id}`).value;
@@ -965,7 +978,7 @@
 
     function addPh() {
       const id = 'ph' + Date.now();
-      content.presidentialHistory.push({ id, year: '2026/27', gen: 'Gen 10', name: 'New President', secretary: '', treasurer: '', note: '', awards: [], photo: '', secPhoto: '', tresPhoto: '' });
+      content.presidentialHistory.push({ id, year: '2016/17', gen: 'Gen 1', name: '', vp: '', secretary: '', treasurer: '', awards: [], photo: '', vpPhoto: '', secPhoto: '', tresPhoto: '' });
       renderClubHistory();
       setTimeout(() => { toggleEdit('ph-form-' + id); document.getElementById(`phf-name-${id}`)?.focus(); }, 50);
     }
