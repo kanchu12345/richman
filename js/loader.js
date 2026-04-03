@@ -326,7 +326,11 @@
           </div>
           <div style="flex:1; min-width:0; width: 100%;">
             <div class="gen-name">${p.name || 'President TBD'} ${noteHtml}</div>
-            <div class="gen-board">VP: ${p.vp || 'Pending'} | S: ${p.secretary || 'Pending'} | T: ${p.treasurer || 'Pending'}</div>
+            <div class="gen-board">
+              <div>VP: ${p.vp || 'Pending'}</div>
+              <div>S: ${p.secretary || 'Pending'}</div>
+              <div>T: ${p.treasurer || 'Pending'}</div>
+            </div>
             <div class="gen-awards">${awardsHtml}</div>
           </div>
         </div>
