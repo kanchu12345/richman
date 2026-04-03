@@ -39,7 +39,8 @@ ul { list-style: none; }
   --cyan-glow:   rgba(0,188,212,0.15);
   --maroon:      #8b1a1a;
   --maroon-light:#c62828;
-  --gold:        #f4c542;
+  --gold:        #e53935;
+  --gold-light:  #ff6b6b;
   --white:       #ffffff;
   --text-main:   #e8eaf6;
   --text-muted:  #90a4ae;
@@ -126,7 +127,10 @@ ul { list-style: none; }
 }
 .nav-title .sub {
   font-size: 0.95rem;
-  color: var(--gold);
+  background: linear-gradient(135deg, #e53935, #ff6b35);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   font-weight: 500;
   letter-spacing: 0.5px;
 }
@@ -260,7 +264,7 @@ ul { list-style: none; }
   position: absolute;
   inset: -3px;
   border-radius: 50%;
-  background: conic-gradient(from 0deg, transparent, var(--cyan), transparent 30%, var(--gold), transparent 70%);
+  background: conic-gradient(from 0deg, transparent, var(--cyan), transparent 30%, var(--maroon-light), transparent 70%);
   animation: logoSpin 4s linear infinite;
   z-index: -1;
   filter: blur(5px);
@@ -378,6 +382,10 @@ ul { list-style: none; }
   letter-spacing: 3px;
   text-transform: uppercase;
   color: var(--gold);
+  background: linear-gradient(135deg, #e53935, #ff6b35);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin-bottom: 2.5rem;
 }
 

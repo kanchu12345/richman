@@ -317,13 +317,25 @@
       if (nm && c.newsletterMotto) nm.textContent = c.newsletterMotto;
     }
 
-    const grid = document.getElementById('newsletter-grid');
-    if (grid && data.newsletter) {
-      grid.innerHTML = data.newsletter.map((n, i) => {
+    if (!data.newsletter) return;
+
+    const groups = { current: [], past: [], special: [] };
+    data.newsletter.forEach((n, i) => {
+      const t = n.type || 'current';
+      if (groups[t]) groups[t].push({ n, i });
+      else groups['current'].push({ n, i });
+    });
+
+    function renderGroup(items, gridId, sectionId) {
+      const grid = document.getElementById(gridId);
+      const section = document.getElementById(sectionId);
+      if (!grid) return;
+      if (!items.length) { if (section) section.style.display = 'none'; return; }
+      if (section) section.style.display = 'block';
+      grid.innerHTML = items.map(({ n, i }) => {
         const coverHtml = n.coverImage 
           ? `<img src="${n.coverImage}" alt="${n.title}" style="width:100%;height:100%;object-fit:cover;" />`
           : generateBookCover(n.title, n.date);
-        
         return `
         <div class="book-item fade-in">
           <div class="book-wrap ${n.pdfLink ? '' : 'no-link'}" onclick="${n.pdfLink ? `openFlipbook('${n.pdfLink}')` : ''}">
@@ -343,6 +355,17 @@
       }).join('');
       reObserve();
     }
+
+    renderGroup(groups.current, 'newsletter-grid-current', 'nl-section-current');
+    renderGroup(groups.past,    'newsletter-grid-past',    'nl-section-past');
+    renderGroup(groups.special, 'newsletter-grid-special', 'nl-section-special');
+
+    // Fallback: legacy single grid support
+    const legacyGrid = document.getElementById('newsletter-grid');
+    if (legacyGrid && data.newsletter.length) {
+      legacyGrid.innerHTML = '';
+    }
+
     applySocialLinks(data.club.socialLinks);
   };
 

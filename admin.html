@@ -931,6 +931,13 @@
           <div class="form-group"><label>Title</label><input type="text" id="nf-title-${n.id}" value="${esc(n.title)}"/></div>
           <div class="form-group"><label>Date</label><input type="text" id="nf-date-${n.id}" value="${esc(n.date)}"/></div>
         </div>
+        <div class="form-group"><label>Edition Type</label>
+          <select id="nf-type-${n.id}">
+            <option value="current" ${(n.type||'current')==='current'?'selected':''}>📰 Latest / Current Edition</option>
+            <option value="past" ${n.type==='past'?'selected':''}>📚 Past Edition</option>
+            <option value="special" ${n.type==='special'?'selected':''}>⭐ Special Edition</option>
+          </select>
+        </div>
         <div class="form-group"><label>Description</label><textarea id="nf-desc-${n.id}" rows="3">${esc(n.description)}</textarea></div>
           <div class="form-group">
             <label>PDF Link (Google Drive or Upload File)</label>
@@ -962,6 +969,7 @@
       n.title = document.getElementById(`nf-title-${id}`).value;
       n.date = document.getElementById(`nf-date-${id}`).value;
       n.description = document.getElementById(`nf-desc-${id}`).value;
+      n.type = document.getElementById(`nf-type-${id}`)?.value || 'current';
       
       let link = document.getElementById(`nf-pdf-${id}`).value.trim();
       // Auto-fix Google Drive links for embedding
@@ -1051,7 +1059,7 @@
 
     function addNewsletter() {
       const id = 'n' + Date.now();
-      content.newsletter.push({ id, title: 'New Issue', date: '', description: '', pdfLink: '', coverImage: '' });
+      content.newsletter.push({ id, title: 'New Issue', date: '', description: '', pdfLink: '', coverImage: '', type: 'current' });
       renderNewsletter();
       setTimeout(() => { toggleEdit('nl-form-' + id); document.getElementById(`nf-title-${id}`)?.focus(); }, 50);
     }
