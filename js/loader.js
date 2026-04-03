@@ -418,17 +418,15 @@
     if (!list) return;
     
     let html = `
-      <li><a href="https://www.lionsclubs.org/en/discover-our-clubs/about-leos" target="_blank">About Leo Clubs</a></li>
-      <li><a href="https://www.lionsclubs.org/en/resources/for-members/lions-international-calendar" target="_blank">Lions International</a></li>
-      <li><a href="https://kanchu12345.github.io/richman/" target="_blank">Leo District 306 D8</a></li>
-      <li><a href="https://www.richmondcollege.lk/" target="_blank">Richmond College</a></li>
+      <li><a href="https://www.lionsclubs.org/en/discover-our-clubs/about-leos" target="_blank" rel="noopener">About Leo Clubs</a></li>
+      <li><a href="https://www.lionsclubs.org/en/resources/for-members/lions-international-calendar" target="_blank" rel="noopener">Lions International</a></li>
     `;
     
     // Add links from Governing Bodies (Governing Bodies of the club)
     if (data.affiliatedBodies && data.affiliatedBodies.length) {
       data.affiliatedBodies.forEach(b => {
         const href = b.link && b.link !== '#' ? b.link : '#';
-        const target = href !== '#' ? 'target="_blank"' : '';
+        const target = href !== '#' ? 'target="_blank" rel="noopener"' : '';
         html += `<li><a href="${href}" ${target}>${b.title}</a></li>`;
       });
     }
