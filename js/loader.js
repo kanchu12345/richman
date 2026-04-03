@@ -558,4 +558,44 @@
     // Safety fallback just in case
     setTimeout(removePreloader, 3000);
   });
+
+  // ─── Lightbox Image Viewer ──────────────────────────────────────────────────
+  function setupLightbox() {
+    if (document.getElementById('lightbox')) return;
+    
+    const style = document.createElement('style');
+    style.innerHTML = `
+      #lightbox { display: none; position: fixed; z-index: 99999; left: 0; top: 0; width: 100vw; height: 100vh; background-color: rgba(0,10,20,0.95); align-items: center; justify-content: center; backdrop-filter: blur(5px); }
+      #lightbox.active { display: flex; animation: fadein 0.3s ease; }
+      #lightbox img { max-width: 90%; max-height: 85%; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); object-fit: contain; }
+      #lightbox-close { position: absolute; top: 15px; right: 25px; color: #fff; font-size: 40px; cursor: pointer; opacity: 0.7; transition: 0.2s; }
+      #lightbox-close:hover { opacity: 1; color: var(--cyan); }
+      @keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+      .project-card-img { cursor: pointer; }
+    `;
+    document.head.appendChild(style);
+
+    const lb = document.createElement('div');
+    lb.id = 'lightbox';
+    lb.innerHTML = `<span id="lightbox-close">&times;</span><img id="lightbox-img" src="" alt="Full Screen" />`;
+    document.body.appendChild(lb);
+
+    document.addEventListener('click', (e) => {
+      // Open Lightbox
+      if (e.target.classList.contains('project-card-img') || e.target.classList.contains('gen-photo')) {
+        const src = e.target.src || e.target.style.backgroundImage.slice(5, -2);
+        if(!src) return;
+        document.getElementById('lightbox-img').src = src;
+        lb.classList.add('active');
+      }
+      // Close Lightbox
+      if (e.target.id === 'lightbox' || e.target.id === 'lightbox-close') {
+        lb.classList.remove('active');
+        setTimeout(() => { document.getElementById('lightbox-img').src = ''; }, 300);
+      }
+    });
+  }
+
+  setupLightbox();
+
 })();
