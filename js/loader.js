@@ -39,6 +39,36 @@
     }
   };
 
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const scrollObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        if (!entry.target.classList.contains('no-unobserve')) {
+          scrollObserver.unobserve(entry.target);
+        }
+      }
+    });
+  }, observerOptions);
+
+  window.reObserve = function() {
+    document.querySelectorAll('.reveal, .reveal-up, .reveal-left').forEach(el => {
+      scrollObserver.observe(el);
+    });
+  };
+
+  function initNavbarScroll() {
+    const nav = document.querySelector('.navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    });
+  }
+
   window.startAutoSwap = function() {
     setInterval(() => {
       document.querySelectorAll('.auto-swap-gallery').forEach(gal => {
@@ -561,6 +591,9 @@
     }
     else if (page === 'newsletter') renderNewsletter(data);
     else if (page === 'contact') renderContact(data);
+
+    initNavbarScroll();
+    reObserve();
 
     // Wait for everything (images etc) then hide preloader
     if (document.readyState === 'complete') {
