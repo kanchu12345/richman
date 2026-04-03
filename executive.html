@@ -172,14 +172,16 @@
       box-shadow: 0 0 12px rgba(0,188,212,0.2);
     }
     .gen-name { font-size: 0.92rem; font-weight: 600; color: var(--white); margin-bottom: 0.4rem; }
-    .gen-awards { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .gen-awards { display: flex; flex-direction: column; gap: 0.25rem; margin-top: 0.3rem; }
     .gen-award {
-      font-size: 0.7rem; font-weight: 600; padding: 0.18rem 0.6rem;
-      border-radius: 50px; white-space: normal; word-break: break-word;
+      font-size: 0.75rem; font-weight: 500;
+      white-space: normal; word-break: break-word;
+      padding-left: 0.75rem; position: relative; line-height: 1.4;
     }
-    .aw-gold { background: rgba(244,197,66,0.12); color: var(--gold); border: 1px solid rgba(244,197,66,0.25); }
-    .aw-cyan { background: rgba(0,188,212,0.1); color: var(--cyan); border: 1px solid rgba(0,188,212,0.2); }
-    .aw-maroon { background: rgba(139,26,26,0.15); color: #ef9a9a; border: 1px solid rgba(139,26,26,0.3); }
+    .gen-award::before { content: '–'; position: absolute; left: 0; opacity: 0.6; }
+    .aw-gold { color: var(--gold); }
+    .aw-cyan { color: var(--cyan); }
+    .aw-maroon { color: #ef9a9a; }
 
     @media (max-width: 640px) {
       .president-card { flex-direction: column; text-align: center; }
