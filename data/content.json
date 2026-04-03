@@ -5,17 +5,17 @@
     "whatsapp": "+94768086721",
     "location": "Richmond College, Galle",
     "mapLink": "https://maps.app.goo.gl/K6fR1Z8eR",
-    "about1": "Leading with pride and excellence since foundation.",
+    "about1": "",
     "about2": "Awarded Most Outstanding School Leo Club.",
     "missionTitle": "Leading The Way <br/><span>For A Better Tomorrow</span>",
-    "missionStatement": "To provide students with an opportunity for development and contribution, individually and collectively, as responsible members of the local, national and international community.",
+    "missionStatement": "",
     "heroImage": "",
     "newsletterTitle": "THE VANGUARD",
     "newsletterSubtitle": "Leading the Charge of Change",
     "newsletterMotto": "Where Leo Spirit Meets Action",
     "groupTitle": "Team 2025/2026",
     "groupSub": "Leading with Pride",
-    "founded": "2010",
+    "founded": 2016,
     "members": 450,
     "districtAwards": 20,
     "multipleDistrictAwards": 5,
@@ -30,7 +30,12 @@
     "presidentName": "Leo Mevinu Gamage",
     "presidentPhone": "+94 70 163 6086",
     "secretaryName": "Leo Minuda Kalansooriya",
-    "secretaryPhone": "+94 76 419 3485"
+    "secretaryPhone": "+94 76 419 3485",
+    "heroTitle": "Centennial <span>Leo Club</span>",
+    "heroSubtitle": "of Richmond College",
+    "heroDesc": "Empowering youth to serve. Building leaders who make a difference in our communities and beyond.",
+    "heroMotto": "# One Team · # One Dream · # One Aim",
+    "whatsappLink": "https://wa.me/94768086721"
   },
   "projects": [
     {
@@ -171,6 +176,15 @@
       "description": "",
       "pdfLink": "https://online.fliphtml5.com/vvqkb/qvuf/",
       "coverImage": "https://i.ibb.co/0pHT4cpv/Screenshot-2026-04-01-225558.png"
+    },
+    {
+      "id": "n1775194723951",
+      "title": "New Issue",
+      "date": "",
+      "description": "",
+      "pdfLink": "",
+      "coverImage": "",
+      "type": "current"
     }
   ],
   "affiliatedBodies": [
@@ -236,7 +250,8 @@
           "text": "2nd Runner-up – Most Outstanding School Leo Club President",
           "color": "maroon"
         }
-      ]
+      ],
+      "photo": "https://i.ibb.co/J8R3Njb/Leo-Nipun-Kariyawasam-jpg-removebg-preview.png"
     },
     {
       "id": "ph2",
@@ -257,7 +272,8 @@
           "text": "1st Runner-up – Most Outstanding School Leo Club President",
           "color": "cyan"
         }
-      ]
+      ],
+      "photo": "https://i.ibb.co/J8R3Njb/Leo-Nipun-Kariyawasam-jpg-removebg-preview.png"
     },
     {
       "id": "ph3",
@@ -413,8 +429,17 @@
     }
   ],
   "latestNews": [
-    { "id": "ln1", "text": "🦁 Centennial Leo Club of Richmond College is now active under Leo District 306 D8!" },
-    { "id": "ln2", "text": "📰 THE VANGUARD – Our club newsletter is now live! Check out the Newsletter page." },
-    { "id": "ln3", "text": "🌟 Project දැනුමට සවියක් successfully completed – Thank you to all supporters!" }
+    {
+      "id": "ln1",
+      "text": "🦁 Centennial Leo Club of Richmond College is now active under Leo District 306 D8!"
+    },
+    {
+      "id": "ln2",
+      "text": "📰 THE VANGUARD – Our club newsletter is now live! Check out the Newsletter page."
+    },
+    {
+      "id": "ln3",
+      "text": "🌟 Project දැනුමට සවියක් successfully completed – Thank you to all supporters!"
+    }
   ]
 }
