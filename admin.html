@@ -140,10 +140,7 @@
           <a href="https://kanchu12345.github.io/richman/newsletter.html" target="_blank" class="sb-preview-btn"
             title="View live page">↗</a>
         </div>
-        <div class="sb-nav-item">
-          <a class="sb-link" onclick="showTab('news')" id="tab-news">📡 Latest News</a>
-          <a href="https://kanchu12345.github.io/richman/" target="_blank" class="sb-preview-btn" title="View live page">↗</a>
-        </div>
+
         <div class="sb-nav-item">
           <a class="sb-link" onclick="showTab('club')" id="tab-club">🏛️ Club Info</a>
           <a href="https://kanchu12345.github.io/richman/" target="_blank" class="sb-preview-btn"
@@ -154,7 +151,9 @@
       <div class="sb-footer">
         <button class="btn-save" onclick="saveToGitHub()" id="saveBtn">🚀 Publish Updates</button>
         <div id="saveStatus" class="save-status"></div>
-        <button class="btn-outline" onclick="downloadJSON()" style="width:100%; margin-top:0.5rem; font-size:0.85rem; border-color:var(--border-color);">📥 Download JSON (Fallback)</button>
+        <button class="btn-outline" onclick="downloadJSON()"
+          style="width:100%; margin-top:0.5rem; font-size:0.85rem; border-color:var(--border-color);">📥 Download JSON
+          (Fallback)</button>
         <a id="previewAfterSave" href="https://kanchu12345.github.io/richman/" target="_blank" class="btn-preview-live"
           style="display:none">🌐 View Live Website →</a>
         <button class="btn-logout" onclick="doLogout()">← Logout</button>
@@ -203,7 +202,8 @@
         <div class="pane-header">
           <div>
             <h2>Newsletter</h2>
-            <p>Manage newsletter issues. <span style="color:var(--cyan); font-weight:600;">(Remember: Click "Save Issue" before "Publish Updates")</span></p>
+            <p>Manage newsletter issues. <span style="color:var(--cyan); font-weight:600;">(Remember: Click "Save Issue"
+                before "Publish Updates")</span></p>
           </div>
           <button class="btn-primary" onclick="addNewsletter()">+ Add Issue</button>
         </div>
@@ -311,7 +311,8 @@
             <div class="form-group"><label>Members</label><input type="number" id="ci-members" /></div>
             <div class="form-group"><label>Alumni</label><input type="number" id="ci-alumni" /></div>
             <div class="form-group"><label>District Awards</label><input type="number" id="ci-awards" /></div>
-            <div class="form-group"><label>Multiple Dist. Awards</label><input type="number" id="ci-multi-awards" /></div>
+            <div class="form-group"><label>Multiple Dist. Awards</label><input type="number" id="ci-multi-awards" />
+            </div>
           </div>
 
           <div class="form-section-title" style="margin-top:1.5rem;">About Text</div>
@@ -322,11 +323,14 @@
               id="ci-mission-title" /></div>
           <div class="form-group"><label>Mission Statement</label><textarea id="ci-mission-statement"
               rows="3"></textarea></div>
-              
+
           <div class="form-section-title" style="margin-top:1.5rem;">Newsletter Page Headers</div>
-          <div class="form-group"><label>Main Title (e.g. Golden Times)</label><input type="text" id="ci-nl-title" /></div>
-          <div class="form-group"><label>Subtitle (e.g. Official Newsletter...)</label><input type="text" id="ci-nl-sub" /></div>
-          <div class="form-group"><label>Motto (e.g. Where Leo Spirit Meets Action)</label><input type="text" id="ci-nl-motto" /></div>
+          <div class="form-group"><label>Main Title (e.g. Golden Times)</label><input type="text" id="ci-nl-title" />
+          </div>
+          <div class="form-group"><label>Subtitle (e.g. Official Newsletter...)</label><input type="text"
+              id="ci-nl-sub" /></div>
+          <div class="form-group"><label>Motto (e.g. Where Leo Spirit Meets Action)</label><input type="text"
+              id="ci-nl-motto" /></div>
 
           <div class="form-section-title" style="margin-top:1.5rem;">Social Media Links</div>
           <div class="form-row2">
@@ -369,14 +373,20 @@
             <div class="form-group" style="position:relative;">
               <label>Personal Access Token</label>
               <input type="password" id="gh-token" placeholder="ghp_..." />
-              <button class="btn-icon" onclick="toggleTokenVisibility()" style="position:absolute; right:10px; top:32px; font-size:1.2rem; cursor:pointer;" title="Show/Hide">👁️</button>
+              <button class="btn-icon" onclick="toggleTokenVisibility()"
+                style="position:absolute; right:10px; top:32px; font-size:1.2rem; cursor:pointer;"
+                title="Show/Hide">👁️</button>
             </div>
-            <p class="hint" style="margin-top:0.5rem; font-size:0.75rem;">Need a token? <a href="https://github.com/settings/tokens" target="_blank" style="color:var(--primary-color);">Generate one here</a> (requires 'repo' scope).</p>
-            <p class="hint" style="margin-top:0.25rem; font-size:0.75rem; color:var(--primary-color);">💡 Tip: Ensure token has <b>"Contents: Read & Write"</b> permissions.</p>
+            <p class="hint" style="margin-top:0.5rem; font-size:0.75rem;">Need a token? <a
+                href="https://github.com/settings/tokens" target="_blank" style="color:var(--primary-color);">Generate
+                one here</a> (requires 'repo' scope).</p>
+            <p class="hint" style="margin-top:0.25rem; font-size:0.75rem; color:var(--primary-color);">💡 Tip: Ensure
+              token has <b>"Contents: Read & Write"</b> permissions.</p>
             <div style="margin-top:1rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
               <button class="btn-primary" onclick="saveGHSettings()">💾 Save Settings</button>
               <button class="btn-outline" onclick="testGitHub()">🔍 Test Repo Access</button>
-              <button class="btn-outline" onclick="verifyToken()" style="border-color:var(--gold); color:var(--gold);">👤 Verify Account</button>
+              <button class="btn-outline" onclick="verifyToken()"
+                style="border-color:var(--gold); color:var(--gold);">👤 Verify Account</button>
             </div>
             <div id="gh-status" class="save-status"></div>
           </div>
@@ -491,7 +501,7 @@
       } catch (e) {
         console.warn("SignOut failed, clearing locally:", e);
       }
-      
+
       localStorage.removeItem('leoLoggedIn');
       document.getElementById('adminApp').style.display = 'none';
       document.getElementById('loginScreen').style.display = 'flex';
@@ -529,13 +539,13 @@
           console.error("Firebase settings error:", e);
         }
       }
-      
+
       // Auto-configure defaults for client handover
       if (!gh.user) gh.user = 'kanchu12345';
       if (!gh.repo) gh.repo = 'richman';
       if (!gh.branch) gh.branch = 'main';
       if (!cl.cloud) cl.cloud = '580db6f671331120289dba6d8ec108c2';
-      
+
       localStorage.setItem('leoGH', JSON.stringify(gh));
       localStorage.setItem('leoCL', JSON.stringify(cl));
 
@@ -578,7 +588,7 @@
     async function testGitHub() {
       const st = document.getElementById('gh-status');
       let gh = JSON.parse(localStorage.getItem('leoGH') || '{}');
-      
+
       const user = (gh.user || 'kanchu12345').trim();
       const repo = (gh.repo || 'richman').trim();
       const token = (gh.token || '').trim();
@@ -637,7 +647,7 @@
         console.warn("Failed to load content.json, using defaults:", e);
         content = defaultContent();
       }
-      
+
       // Ensure all arrays exist
       if (!content.projects) content.projects = [];
       if (!content.executive) content.executive = [];
@@ -821,9 +831,9 @@
     // ════════════════════════════════════════════════════════
     function renderPresidentialHistory() {
       const list = document.getElementById('presidential-history-list');
-      if (!content?.presidentialHistory?.length) { 
-        list.innerHTML = '<div class="empty-state">No presidential history yet.</div>'; 
-        return; 
+      if (!content?.presidentialHistory?.length) {
+        list.innerHTML = '<div class="empty-state">No presidential history yet.</div>';
+        return;
       }
       list.innerHTML = content.presidentialHistory.map((p, i) => `
     <div class="item-card" id="ph-${p.id}">
@@ -875,7 +885,7 @@
       p.note = document.getElementById(`phf-note-${id}`).value;
       try {
         p.awards = JSON.parse(document.getElementById(`phf-awards-${id}`).value);
-      } catch(e) {
+      } catch (e) {
         alert("Invalid JSON in Awards field. Please check your format.");
         return;
       }
@@ -936,7 +946,7 @@
         <div class="item-thumb"><span>📰</span></div>
         <div class="item-info">
           <div class="item-title">${n.title}</div>
-          <div class="item-meta">${n.date} · <span class="item-status" style="${(n.type||'current')==='current'?'color:var(--cyan)':(n.type)==='past'?'color:#90a4ae':'color:#e53935'}">${(n.type||'current')==='current'?'📰 Latest':(n.type)==='past'?'📚 Past':'⭐ Special'}</span></div>
+          <div class="item-meta">${n.date} · <span class="item-status" style="${(n.type || 'current') === 'current' ? 'color:var(--cyan)' : (n.type) === 'past' ? 'color:#90a4ae' : 'color:#e53935'}">${(n.type || 'current') === 'current' ? '📰 Latest' : (n.type) === 'past' ? '📚 Past' : '⭐ Special'}</span></div>
         </div>
         <div class="item-actions">
           <button class="btn-icon" onclick="toggleEdit('nl-form-${n.id}')">✏️ Edit</button>
@@ -950,9 +960,9 @@
         </div>
         <div class="form-group"><label>Edition Type</label>
           <select id="nf-type-${n.id}">
-            <option value="current" ${(n.type||'current')==='current'?'selected':''}>📰 Latest / Current Edition</option>
-            <option value="past" ${n.type==='past'?'selected':''}>📚 Past Edition</option>
-            <option value="special" ${n.type==='special'?'selected':''}>⭐ Special Edition</option>
+            <option value="current" ${(n.type || 'current') === 'current' ? 'selected' : ''}>📰 Latest / Current Edition</option>
+            <option value="past" ${n.type === 'past' ? 'selected' : ''}>📚 Past Edition</option>
+            <option value="special" ${n.type === 'special' ? 'selected' : ''}>⭐ Special Edition</option>
           </select>
         </div>
         <div class="form-group"><label>Description</label><textarea id="nf-desc-${n.id}" rows="3">${esc(n.description)}</textarea></div>
@@ -987,7 +997,7 @@
       n.date = document.getElementById(`nf-date-${id}`).value;
       n.description = document.getElementById(`nf-desc-${id}`).value;
       n.type = document.getElementById(`nf-type-${id}`)?.value || 'current';
-      
+
       let link = document.getElementById(`nf-pdf-${id}`).value.trim();
       // Auto-fix Google Drive links for embedding
       if (link.includes('drive.google.com')) {
@@ -999,7 +1009,7 @@
         }
       }
       n.pdfLink = link;
-      
+
       renderNewsletter();
       showToast('✅ Issue updated locally! Now click "Publish Updates".');
     }
@@ -1016,7 +1026,7 @@
     async function handlePDFUpload(input) {
       const file = input.files[0];
       if (!file || !currentPDFTargetId) return;
-      
+
       if (file.size > 25 * 1024 * 1024) {
         showToast('❌ File too large! Maximum 25MB.');
         return;
@@ -1024,8 +1034,8 @@
 
       const gh = JSON.parse(localStorage.getItem('leoGH') || '{}');
       const token = (gh.token || "").trim();
-      const user = (gh.user  || "kanchu12345").trim();
-      const repo = (gh.repo  || "richman").trim();
+      const user = (gh.user || "kanchu12345").trim();
+      const repo = (gh.repo || "richman").trim();
       const branch = (gh.branch || "main").trim();
 
       if (!token) {
@@ -1034,16 +1044,16 @@
       }
 
       showToast('⏳ Uploading PDF to GitHub... Please wait.');
-      
+
       const reader = new FileReader();
       reader.onload = async (e) => {
         const b64 = e.target.result.split(',')[1];
         const safeName = file.name.replace(/[^a-z0-9.]/gi, '_').toLowerCase();
         const fileName = `issue_${Date.now()}_${safeName}`;
         const path = `newsletter/${fileName}`;
-        
+
         const apiBase = `https://api.github.com/repos/${user}/${repo}/contents/${path}`;
-        
+
         try {
           const res = await fetch(apiBase, {
             method: 'PUT',
@@ -1163,7 +1173,7 @@
       }
 
       const safeSet = (id, val) => { const el = document.getElementById(id); if (el) el.value = val; };
-      
+
       safeSet('ci-hero-title', c.heroTitle || 'Centennial <span>Leo Club</span>');
       safeSet('ci-hero-subtitle', c.heroSubtitle || 'of Richmond College');
       safeSet('ci-hero-desc', c.heroDesc || 'Empowering youth to serve. Building leaders who make a difference in our communities and beyond.');
@@ -1184,7 +1194,7 @@
       safeSet('ci-pres-phone', c.presidentPhone || '');
       safeSet('ci-sec-name', c.secretaryName || '');
       safeSet('ci-sec-phone', c.secretaryPhone || '');
-      
+
       const sl = c.socialLinks || {};
       safeSet('ci-facebook', sl.facebook || '');
       safeSet('ci-instagram', sl.instagram || '');
@@ -1201,10 +1211,10 @@
 
     function saveClubInfo() {
       const safeGet = (id) => { const el = document.getElementById(id); return el ? el.value.trim() : ''; };
-      
+
       const wa = safeGet('ci-whatsapp').replace(/\s/g, '').replace(/^\+/, '');
       if (!content.club) content.club = {};
-      
+
       content.club.heroTitle = safeGet('ci-hero-title');
       content.club.heroSubtitle = safeGet('ci-hero-subtitle');
       content.club.heroDesc = safeGet('ci-hero-desc');
@@ -1227,7 +1237,7 @@
       content.club.presidentPhone = safeGet('ci-pres-phone');
       content.club.secretaryName = safeGet('ci-sec-name');
       content.club.secretaryPhone = safeGet('ci-sec-phone');
-      
+
       content.club.socialLinks = {
         facebook: safeGet('ci-facebook'),
         instagram: safeGet('ci-instagram'),
@@ -1235,7 +1245,7 @@
         linkedin: safeGet('ci-linkedin'),
         x: safeGet('ci-x')
       };
-      
+
       content.club.members = parseInt(safeGet('ci-members')) || 0;
       content.club.alumni = parseInt(safeGet('ci-alumni')) || 0;
       content.club.districtAwards = parseInt(safeGet('ci-awards')) || 0;
@@ -1437,11 +1447,11 @@
     // ════════════════════════════════════════════════════════
     async function saveToGitHub() {
       let gh = JSON.parse(localStorage.getItem('leoGH') || '{}');
-      
+
       // Final safeguard: ensure we have the latest from inputs if not saved
       if (!gh.token) gh.token = document.getElementById('gh-token').value;
-      if (!gh.user)  gh.user  = 'kanchu12345';
-      if (!gh.repo)  gh.repo  = 'richman';
+      if (!gh.user) gh.user = 'kanchu12345';
+      if (!gh.repo) gh.repo = 'richman';
       if (!gh.branch) gh.branch = 'master';
 
       // Cleanup
@@ -1449,7 +1459,7 @@
 
       const st = document.getElementById('saveStatus');
       const btn = document.getElementById('saveBtn');
-      
+
       if (!gh.token) {
         showStatus(st, 'error', '❌ No token found. Check Settings.');
         return;
