@@ -16,16 +16,18 @@
     .news-ticker-bar {
       position: fixed;
       top: 72px;
-      left: 0; right: 0;
+      left: 0;
+      right: 0;
       z-index: 999;
       height: 20px;
-      background: linear-gradient(90deg, rgba(8,15,30,0.97) 0%, rgba(13,24,48,0.97) 50%, rgba(8,15,30,0.97) 100%);
-      border-bottom: 1px solid rgba(0,188,212,0.25);
+      background: linear-gradient(90deg, rgba(8, 15, 30, 0.97) 0%, rgba(13, 24, 48, 0.97) 50%, rgba(8, 15, 30, 0.97) 100%);
+      border-bottom: 1px solid rgba(0, 188, 212, 0.25);
       display: flex;
       align-items: center;
       overflow: hidden;
       backdrop-filter: blur(8px);
     }
+
     .ticker-label {
       flex-shrink: 0;
       padding: 0 0.75rem;
@@ -38,9 +40,10 @@
       height: 100%;
       display: flex;
       align-items: center;
-      border-right: 1px solid rgba(0,188,212,0.3);
+      border-right: 1px solid rgba(0, 188, 212, 0.3);
       white-space: nowrap;
     }
+
     .ticker-track {
       flex: 1;
       overflow: hidden;
@@ -48,6 +51,7 @@
       display: flex;
       align-items: center;
     }
+
     .ticker-inner {
       display: flex;
       gap: 0;
@@ -55,11 +59,21 @@
       white-space: nowrap;
       will-change: transform;
     }
-    .ticker-inner:hover { animation-play-state: paused; }
-    @keyframes tickerScroll {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+
+    .ticker-inner:hover {
+      animation-play-state: paused;
     }
+
+    @keyframes tickerScroll {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
     .ticker-item {
       display: inline-flex;
       align-items: center;
@@ -69,19 +83,37 @@
       padding: 0 1.5rem;
       white-space: nowrap;
     }
+
     .ticker-item .ticker-dot {
-      width: 4px; height: 4px;
+      width: 4px;
+      height: 4px;
       border-radius: 50%;
       background: var(--cyan);
       flex-shrink: 0;
     }
-    .ticker-item a { color: var(--cyan); text-decoration: none; }
-    .ticker-item a:hover { text-decoration: underline; }
+
+    .ticker-item a {
+      color: var(--cyan);
+      text-decoration: none;
+    }
+
+    .ticker-item a:hover {
+      text-decoration: underline;
+    }
+
     /* Push hero down to account for ticker */
-    body .hero { padding-top: 104px !important; }
+    body .hero {
+      padding-top: 104px !important;
+    }
+
     @media (max-width: 640px) {
-      .news-ticker-bar { top: 72px; }
-      body .hero { padding-top: 104px !important; }
+      .news-ticker-bar {
+        top: 72px;
+      }
+
+      body .hero {
+        padding-top: 104px !important;
+      }
     }
   </style>
 </head>
@@ -130,7 +162,8 @@
     <div class="ticker-track">
       <div class="ticker-inner" id="ticker-inner">
         <!-- items injected by loader.js -->
-        <span class="ticker-item"><span class="ticker-dot"></span>Welcome to the Centennial Leo Club of Richmond College – Leo District 306 D8</span>
+        <span class="ticker-item"><span class="ticker-dot"></span>Welcome to the Centennial Leo Club of Richmond College
+          – Leo District 306 D8</span>
       </div>
     </div>
   </div>
@@ -144,7 +177,8 @@
           id="hero-title">
           Centennial<br />
           <span style="color: var(--cyan);">Leo Club of</span><br />
-          Richmond College</h1>
+          Richmond College
+        </h1>
         <p class="hero-sub hero-mobile-align"
           style="margin-left:auto; margin-right:auto; max-width:100%; text-align:center;" id="hero-desc">Empowering
           youth to serve. Building leaders who make a difference in our communities and
@@ -333,7 +367,7 @@
       <h2 class="section-title">Join <span>Club</span></h2>
       <p class="section-desc" style="margin:0 auto 2rem;">Get the latest news, project updates, and event announcements
         from the Centennial Leo Club of Richmond College.</p>
-      <a href="newsletter.html" class="btn-primary" style="margin:0 auto;">📧 Subscribe to Newsletter</a>
+      <a href="contact.html" class="btn-primary" style="margin:0 auto;">📧 Subscribe to Newsletter</a>
     </div>
   </section>
 
@@ -351,7 +385,7 @@
         <p style="text-align:center;">A dynamic youth service organization under Lions International, proudly serving
           Sri Lanka since 2016.<br />
           <span style="color: var(--cyan); display: block; margin-top: 0.5rem;">One Team, One Goal, One Aim</span>
-            </span>
+          </span>
         </p>
         <div class="footer-social">
           <a class="social-btn" href="#" title="Facebook">
@@ -408,11 +442,15 @@
       <div class="footer-col">
         <h4>Club</h4>
         <ul id="footer-club-links">
-          <li><a href="https://www.lionsclubs.org/en/discover-our-clubs/about-leos" target="_blank" rel="noopener">Leo Movement</a></li>
-          <li><a href="https://www.facebook.com/leomd306/" target="_blank" rel="noopener">Leo Multiple District 306</a></li>
-          <li><a href="https://www.facebook.com/p/Leo-District-306-D8-61577577827979/" target="_blank" rel="noopener">Leo District 306 D8</a></li>
+          <li><a href="https://www.lionsclubs.org/en/discover-our-clubs/about-leos" target="_blank" rel="noopener">Leo
+              Movement</a></li>
+          <li><a href="https://www.facebook.com/leomd306/" target="_blank" rel="noopener">Leo Multiple District 306</a>
+          </li>
+          <li><a href="https://www.facebook.com/p/Leo-District-306-D8-61577577827979/" target="_blank"
+              rel="noopener">Leo District 306 D8</a></li>
           <li><a href="https://richmondcollege.lk/" target="_blank" rel="noopener">Richmond College</a></li>
-          <li><a href="https://www.lionsclubs.org/en/resources/for-members/lions-international-calendar" target="_blank" rel="noopener">Lions International</a></li>
+          <li><a href="https://www.lionsclubs.org/en/resources/for-members/lions-international-calendar" target="_blank"
+              rel="noopener">Lions International</a></li>
         </ul>
       </div>
 

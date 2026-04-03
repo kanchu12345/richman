@@ -187,14 +187,24 @@
         </div>
         <div id="executive-list" class="item-list" style="margin-bottom:3rem;"></div>
 
-        <div class="pane-header" style="border-top:1px solid var(--border-color); padding-top:2rem; margin-top:2rem;">
           <div>
-            <h2>🏆 Presidential History</h2>
-            <p>Manage the club's legacy. Edit year, generation, president names, and awards.</p>
+            <h2>🏆 Club History (Legacy)</h2>
+            <p>Manage the club's legacy. Edit year, generation, names, and awards for all past boards. Space for President, Secretary, and Treasurer photos included.</p>
           </div>
           <button class="btn-primary" onclick="addPh()">+ Add Generation</button>
         </div>
-        <div id="presidential-history-list" class="item-list"></div>
+        
+        <!-- Global Motto Editor -->
+        <div class="form-card" style="margin-bottom:2rem; background: rgba(0,0,0,0.15);">
+          <div class="form-section-title" style="color:var(--cyan); border-bottom: 1px solid rgba(0,188,212,0.2); padding-bottom: 0.5rem; margin-bottom: 1rem; font-size: 0.85rem; letter-spacing: 1px;">GLOBAL CLUB MOTTO</div>
+          <div class="form-group">
+            <label style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Main Website Motto (e.g. One Team, One Goal, One Aim)</label>
+            <input type="text" id="ci-hero-motto" placeholder="One Team, One Goal, One Aim" />
+          </div>
+          <button class="btn-primary" style="margin-top:0.5rem; font-size:0.8rem; padding: 0.5rem 1rem;" onclick="saveClubInfo()">💾 Save Global Motto</button>
+        </div>
+
+        <div id="club-history-list" class="item-list"></div>
       </div>
 
       <!-- ── NEWSLETTER TAB ── -->
@@ -991,7 +1001,10 @@
     }
 
     function initials(name) {
-      return name.replace(/^Leo |^Lion /, '').split(' ').slice(0, 2).map(w => w[0]).join('').toUpperCase();
+      if (!name) return '??';
+      const clean = name.replace(/^Leo |^Lion |^Lioness /, '').trim();
+      if (!clean) return '??';
+      return clean.split(' ').slice(0, 2).map(w => w ? w[0] : '').join('').toUpperCase();
     }
 
     // ════════════════════════════════════════════════════════
@@ -1267,7 +1280,7 @@
       safeSet('ci-hero-title', c.heroTitle || 'Centennial <span>Leo Club</span>');
       safeSet('ci-hero-subtitle', c.heroSubtitle || 'of Richmond College');
       safeSet('ci-hero-desc', c.heroDesc || 'Empowering youth to serve. Building leaders who make a difference in our communities and beyond.');
-      safeSet('ci-hero-motto', c.heroMotto || '# One Team · # One Dream · # One Aim');
+      safeSet('ci-hero-motto', c.heroMotto || 'One Team, One Goal, One Aim');
       safeSet('ci-group-title', c.groupTitle || 'Team 2025/2026');
       safeSet('ci-group-sub', c.groupSub || 'Leading with Pride');
       safeSet('ci-email', c.email || '');
