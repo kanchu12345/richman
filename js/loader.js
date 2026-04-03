@@ -317,12 +317,12 @@
       <div class="gen-item">
         <div class="gen-year">${p.year}<br/><span style="font-size:0.65rem; color:var(--text-muted); font-weight:400;">${p.gen}</span></div>
         <div class="gen-details">
-          <div class="gen-avatars-row">
+          <div class="gen-avatars-row" style="margin-bottom: 0.75rem;">
             ${presAv}
             ${secAv}
             ${tresAv}
           </div>
-          <div style="flex:1; min-width:0;">
+          <div style="flex:1; min-width:0; width: 100%;">
             <div class="gen-name">${p.name || 'President TBD'} ${noteHtml}</div>
             <div class="gen-board">SECRETARY: ${p.secretary || 'Pending Update'} | TREASURER: ${p.treasurer || 'Pending Update'}</div>
             <div class="gen-awards">${awardsHtml}</div>
