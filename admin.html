@@ -694,7 +694,7 @@
 
       renderProjects();
       renderExecutive();
-      renderPresidentialHistory();
+      renderClubHistory();
       renderNewsletter();
       renderNews();
       loadClubInfo();
@@ -863,12 +863,12 @@
     }
 
     // ════════════════════════════════════════════════════════
-    //  PRESIDENTIAL HISTORY
+    //  CLUB HISTORY
     // ════════════════════════════════════════════════════════
-    function renderPresidentialHistory() {
-      const list = document.getElementById('presidential-history-list');
+    function renderClubHistory() {
+      const list = document.getElementById('club-history-list');
       if (!content?.presidentialHistory?.length) {
-        list.innerHTML = '<div class="empty-state">No presidential history yet.</div>';
+        list.innerHTML = '<div class="empty-state">No club history yet.</div>';
         return;
       }
       list.innerHTML = content.presidentialHistory.map((p, i) => `
@@ -949,22 +949,22 @@
         alert("Invalid JSON in Awards field. Please check your format.");
         return;
       }
-      renderPresidentialHistory();
-      showToast('History updated!');
+      renderClubHistory();
+      showToast('Club history updated!');
     }
 
     function addPh() {
       const id = 'ph' + Date.now();
       content.presidentialHistory.push({ id, year: '2026/27', gen: 'Gen 10', name: 'New President', secretary: '', treasurer: '', note: '', awards: [], photo: '', secPhoto: '', tresPhoto: '' });
-      renderPresidentialHistory();
+      renderClubHistory();
       setTimeout(() => { toggleEdit('ph-form-' + id); document.getElementById(`phf-name-${id}`)?.focus(); }, 50);
     }
 
     function deletePh(id) {
-      if (!confirm('Remove this presidential record?')) return;
+      if (!confirm('Remove this club history record?')) return;
       content.presidentialHistory = content.presidentialHistory.filter(p => p.id !== id);
-      renderPresidentialHistory();
-      showToast('History record removed.');
+      renderClubHistory();
+      showToast('Club history record removed.');
     }
 
     function saveMember(id, i) {

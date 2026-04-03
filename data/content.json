@@ -315,7 +315,8 @@
           "text": "1st Runner-up – Most Outstanding School Leo Club President",
           "color": "cyan"
         }
-      ]
+      ],
+      "secretary": "", "treasurer": "", "photo": "", "secPhoto": "", "tresPhoto": ""
     },
     {
       "id": "ph5",
@@ -340,7 +341,8 @@
           "text": "Project: Slay the Dread",
           "color": "gold"
         }
-      ]
+      ],
+      "secretary": "", "treasurer": "", "photo": "", "secPhoto": "", "tresPhoto": ""
     },
     {
       "id": "ph6",
@@ -381,7 +383,8 @@
           "text": "Project: Pipasayata Diya Dothak",
           "color": "maroon"
         }
-      ]
+      ],
+      "secretary": "Leo Dumindu", "treasurer": "", "photo": "", "secPhoto": "", "tresPhoto": ""
     },
     {
       "id": "ph7",
@@ -398,7 +401,8 @@
           "text": "1st Runner-up – Most Outstanding School Leo Club President",
           "color": "cyan"
         }
-      ]
+      ],
+      "secretary": "", "treasurer": "", "photo": "", "secPhoto": "", "tresPhoto": ""
     },
     {
       "id": "ph8",
@@ -411,7 +415,8 @@
           "text": "Club Transition Period",
           "color": "maroon"
         }
-      ]
+      ],
+      "secretary": "", "treasurer": "", "photo": "", "secPhoto": "", "tresPhoto": ""
     },
     {
       "id": "ph9",
@@ -429,7 +434,8 @@
           "color": "gold"
         }
       ],
-      "photo": "https://i.ibb.co/PZ3yVrkB/leo-removebg-preview.png"
+      "photo": "https://i.ibb.co/PZ3yVrkB/leo-removebg-preview.png",
+      "secretary": "", "treasurer": "", "secPhoto": "", "tresPhoto": ""
     }
   ],
   "latestNews": [
