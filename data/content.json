@@ -411,5 +411,10 @@
       ],
       "photo": "https://i.ibb.co/PZ3yVrkB/leo-removebg-preview.png"
     }
+  ],
+  "latestNews": [
+    { "id": "ln1", "text": "🦁 Centennial Leo Club of Richmond College is now active under Leo District 306 D8!" },
+    { "id": "ln2", "text": "📰 THE VANGUARD – Our club newsletter is now live! Check out the Newsletter page." },
+    { "id": "ln3", "text": "🌟 Project දැනුමට සවියක් successfully completed – Thank you to all supporters!" }
   ]
 }

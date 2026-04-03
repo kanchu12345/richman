@@ -127,10 +127,7 @@ ul { list-style: none; }
 }
 .nav-title .sub {
   font-size: 0.95rem;
-  background: linear-gradient(135deg, #e53935, #ff6b35);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--cyan);
   font-weight: 500;
   letter-spacing: 0.5px;
 }
@@ -381,11 +378,7 @@ ul { list-style: none; }
   font-weight: 700;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--gold);
-  background: linear-gradient(135deg, #e53935, #ff6b35);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--cyan);
   margin-bottom: 2.5rem;
 }
 

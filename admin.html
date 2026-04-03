@@ -141,6 +141,10 @@
             title="View live page">↗</a>
         </div>
         <div class="sb-nav-item">
+          <a class="sb-link" onclick="showTab('news')" id="tab-news">📡 Latest News</a>
+          <a href="https://kanchu12345.github.io/richman/" target="_blank" class="sb-preview-btn" title="View live page">↗</a>
+        </div>
+        <div class="sb-nav-item">
           <a class="sb-link" onclick="showTab('club')" id="tab-club">🏛️ Club Info</a>
           <a href="https://kanchu12345.github.io/richman/" target="_blank" class="sb-preview-btn"
             title="View live page">↗</a>
@@ -919,7 +923,7 @@
         <div class="item-thumb"><span>📰</span></div>
         <div class="item-info">
           <div class="item-title">${n.title}</div>
-          <div class="item-meta">${n.date}</div>
+          <div class="item-meta">${n.date} · <span class="item-status" style="${(n.type||'current')==='current'?'color:var(--cyan)':(n.type)==='past'?'color:#90a4ae':'color:#e53935'}">${(n.type||'current')==='current'?'📰 Latest':(n.type)==='past'?'📚 Past':'⭐ Special'}</span></div>
         </div>
         <div class="item-actions">
           <button class="btn-icon" onclick="toggleEdit('nl-form-${n.id}')">✏️ Edit</button>

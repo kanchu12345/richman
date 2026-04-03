@@ -11,6 +11,79 @@
   <link rel="icon" href="image/logo.jpg.jpeg" type="image/jpeg" />
   <script src="https://cdn.jsdelivr.net/npm/tsparticles-confetti@2.12.0/tsparticles.confetti.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+  <style>
+    /* ── NEWS TICKER ── */
+    .news-ticker-bar {
+      position: fixed;
+      top: 72px;
+      left: 0; right: 0;
+      z-index: 999;
+      height: 28px;
+      background: linear-gradient(90deg, rgba(8,15,30,0.97) 0%, rgba(13,24,48,0.97) 50%, rgba(8,15,30,0.97) 100%);
+      border-bottom: 1px solid rgba(0,188,212,0.25);
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      backdrop-filter: blur(8px);
+    }
+    .ticker-label {
+      flex-shrink: 0;
+      padding: 0 0.75rem;
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #fff;
+      background: linear-gradient(135deg, #8b1a1a, #c62828);
+      height: 100%;
+      display: flex;
+      align-items: center;
+      border-right: 1px solid rgba(0,188,212,0.3);
+      white-space: nowrap;
+    }
+    .ticker-track {
+      flex: 1;
+      overflow: hidden;
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+    .ticker-inner {
+      display: flex;
+      gap: 0;
+      animation: tickerScroll 30s linear infinite;
+      white-space: nowrap;
+      will-change: transform;
+    }
+    .ticker-inner:hover { animation-play-state: paused; }
+    @keyframes tickerScroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .ticker-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      padding: 0 1.5rem;
+      white-space: nowrap;
+    }
+    .ticker-item .ticker-dot {
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--cyan);
+      flex-shrink: 0;
+    }
+    .ticker-item a { color: var(--cyan); text-decoration: none; }
+    .ticker-item a:hover { text-decoration: underline; }
+    /* Push hero down to account for ticker */
+    body .hero { padding-top: 128px !important; }
+    @media (max-width: 640px) {
+      .news-ticker-bar { top: 72px; }
+      body .hero { padding-top: 128px !important; }
+    }
+  </style>
 </head>
 
 <body data-page="home">
@@ -49,6 +122,17 @@
     <a href="newsletter.html" onclick="toggleMenu()">Newsletter</a>
     <a href="executive.html" onclick="toggleMenu()">Executive Committee</a>
     <a href="contact.html" onclick="toggleMenu()">Contact Us</a>
+  </div>
+
+  <!-- ══ NEWS TICKER ══ -->
+  <div class="news-ticker-bar" id="news-ticker">
+    <div class="ticker-label">📡 Latest News</div>
+    <div class="ticker-track">
+      <div class="ticker-inner" id="ticker-inner">
+        <!-- items injected by loader.js -->
+        <span class="ticker-item"><span class="ticker-dot"></span>Welcome to the Centennial Leo Club of Richmond College – Leo District 306 D8</span>
+      </div>
+    </div>
   </div>
 
   <section class="hero" id="home">
@@ -175,7 +259,7 @@
         <div class="section-label" style="margin:0 auto 0.75rem;">Our Values</div>
         <h2 class="section-title" style="text-align:center; color: var(--cyan);">
           One Team. <br />
-          One Dream.<br> One Aim.<br />
+          One Dream.<br> One Aim.
         </h2>
       </div>
       <div class="grid-3">
@@ -248,7 +332,7 @@
       <div class="section-label"
         style="display:block; text-align:center; border-left:none; padding-left:0; margin:0 auto 0.75rem;">Newsletter
       </div>
-      <h2 class="section-title">Stay <span>Updated</span></h2>
+      <h2 class="section-title">Join <span>Club</span></h2>
       <p class="section-desc" style="margin:0 auto 2rem;">Get the latest news, project updates, and event announcements
         from the Centennial Leo Club of Richmond College.</p>
       <a href="newsletter.html" class="btn-primary" style="margin:0 auto;">📧 Subscribe to Newsletter</a>

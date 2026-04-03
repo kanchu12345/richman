@@ -186,6 +186,19 @@
         bodiesGrid.innerHTML = '';
       }
     }
+
+    // ── News Ticker ──
+    const ticker = document.getElementById('ticker-inner');
+    if (ticker && data.latestNews && data.latestNews.length) {
+      const items = data.latestNews.map(n =>
+        `<span class="ticker-item"><span class="ticker-dot"></span>${n.text}</span>`
+      ).join('');
+      // Duplicate for seamless loop
+      ticker.innerHTML = items + items;
+      // Set animation duration based on item count (40s per 5 items)
+      const dur = Math.max(20, data.latestNews.length * 8);
+      ticker.style.animationDuration = dur + 's';
+    }
   };
 
   window.renderProjects = function (data) {
@@ -328,10 +341,11 @@
 
     function renderGroup(items, gridId, sectionId) {
       const grid = document.getElementById(gridId);
-      const section = document.getElementById(sectionId);
       if (!grid) return;
-      if (!items.length) { if (section) section.style.display = 'none'; return; }
-      if (section) section.style.display = 'block';
+      if (!items.length) {
+        grid.innerHTML = `<p style="color:var(--text-muted); font-size:0.9rem; font-style:italic; padding:1rem 0;">No editions in this section yet. Add them from the Admin Panel.</p>`;
+        return;
+      }
       grid.innerHTML = items.map(({ n, i }) => {
         const coverHtml = n.coverImage 
           ? `<img src="${n.coverImage}" alt="${n.title}" style="width:100%;height:100%;object-fit:cover;" />`
