@@ -161,7 +161,7 @@
     }
     .gen-details { 
       padding: 1rem 0 1rem 1.2rem; 
-      display: flex; align-items: center; gap: 1rem;
+      display: flex; align-items: flex-start; gap: 1rem;
       overflow: hidden; min-width: 0;
     }
     .gen-photo { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 3px solid var(--cyan); flex-shrink: 0; box-shadow: 0 0 12px rgba(0,188,212,0.2); }
@@ -185,21 +185,21 @@
       .president-card { flex-direction: column; text-align: center; }
       .exec-mini { flex: 0 0 calc(50% - 0.625rem); max-width: calc(50% - 0.625rem); }
       .president-history { padding: 1.25rem 0.75rem; overflow-x: hidden; }
-      .gen-item { grid-template-columns: 70px 1fr; overflow: hidden; }
+      .gen-item { grid-template-columns: 75px 1fr; overflow: hidden; }
       .gen-year { font-size: 0.72rem; padding-right: 0.6rem; }
-      .gen-details { padding: 0.75rem 0 0.75rem 0.6rem; overflow: hidden; min-width: 0; gap: 0.6rem; }
-      .gen-photo { width: 52px; height: 52px; border-width: 2px; }
-      .gen-photo-placeholder { width: 52px; height: 52px; border-width: 2px; font-size: 1rem; }
-      .gen-name { font-size: 0.82rem; word-break: break-word; }
-      .gen-awards { gap: 0.3rem; }
+      .gen-details { padding: 0.75rem 0 0.75rem 0.6rem; overflow: hidden; min-width: 0; gap: 0.75rem; align-items: flex-start; }
+      .gen-photo { width: 72px; height: 72px; border-width: 2px; }
+      .gen-photo-placeholder { width: 72px; height: 72px; border-width: 2px; font-size: 1.25rem; }
+      .gen-name { font-size: 0.85rem; word-break: break-word; }
+      .gen-awards { gap: 0.3rem; margin-top: 0.3rem; }
       .gen-award { font-size: 0.65rem; white-space: normal; word-break: break-word; }
     }
     @media (max-width: 400px) {
       .exec-mini { flex: 0 0 100%; max-width: 100%; }
-      .gen-item { grid-template-columns: 62px 1fr; }
+      .gen-item { grid-template-columns: 72px 1fr; }
       .gen-year { font-size: 0.68rem; }
-      .gen-photo { width: 44px; height: 44px; }
-      .gen-photo-placeholder { width: 44px; height: 44px; font-size: 0.85rem; }
+      .gen-photo { width: 64px; height: 64px; }
+      .gen-photo-placeholder { width: 64px; height: 64px; font-size: 1.1rem; }
     }
   </style>
 </head>
