@@ -87,9 +87,10 @@
   }
 
   function initials(name) {
-    return name.replace(/^Leo |^Lion /, '')
+    if (!name) return '';
+    return name.replace(/^Leo |^Lion /, '').trim()
       .split(' ').slice(0, 2)
-      .map(w => w[0]).join('').toUpperCase();
+      .map(w => w ? w[0] : '').join('').toUpperCase();
   }
 
   function statusBadge(s) {
@@ -323,7 +324,7 @@
           </div>
           <div style="flex:1; min-width:0;">
             <div class="gen-name">${p.name || 'President TBD'} ${noteHtml}</div>
-            <div class="gen-board">SEC: ${p.secretary || 'Pending Update'} | TRES: ${p.treasurer || 'Pending Update'}</div>
+            <div class="gen-board">SECRETARY: ${p.secretary || 'Pending Update'} | TREASURER: ${p.treasurer || 'Pending Update'}</div>
             <div class="gen-awards">${awardsHtml}</div>
           </div>
         </div>
