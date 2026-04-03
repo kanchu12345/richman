@@ -293,8 +293,8 @@ ul { list-style: none; }
     0 24px 60px rgba(0,0,0,0.6), 
     0 0 30px rgba(0,188,212,0.3); /* Soft cyan glow */
   transition: transform 0.4s ease, box-shadow 0.4s ease;
-  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent),
-              linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 2%, black 98%, transparent),
+              linear-gradient(to bottom, transparent, black 2%, black 98%, transparent);
   mask-composite: intersect;
 }
 .hero-group-frame:hover {
@@ -306,7 +306,7 @@ ul { list-style: none; }
 .hero-img-main {
   width: 100%;
   max-height: none;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
   display: block;
 }
