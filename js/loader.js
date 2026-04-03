@@ -298,18 +298,30 @@
     grid.innerHTML = data.presidentialHistory.map(p => {
       const noteHtml = p.note ? `<span style="font-size:0.75rem; color:var(--gold);">★ <em>${p.note}</em></span>` : '';
       const awardsHtml = (p.awards || []).map(a => `<span class="gen-award ${colorMap[a.color] || 'aw-cyan'}">${a.text}</span>`).join('');
-      const photoHtml = p.photo 
-        ? `<img src="${p.photo}" class="gen-photo" alt="${p.name}" />` 
-        : `<div class="gen-photo-placeholder">${initials(p.name)}</div>`;
       
+      const getAvatar = (photo, name, label) => {
+        if (photo) {
+          return `<div class="gen-avatar-wrap"><img src="${photo}" class="gen-photo" alt="${name}" /><span class="gen-role-tag">${label}</span></div>`;
+        }
+        return `<div class="gen-avatar-wrap"><div class="gen-photo-placeholder">${initials(name)}</div><span class="gen-role-tag">${label}</span></div>`;
+      };
+
+      const presAv = getAvatar(p.photo, p.name, 'P');
+      const secAv = (p.secretary) ? getAvatar(p.secPhoto, p.secretary, 'S') : '';
+      const tresAv = (p.treasurer) ? getAvatar(p.tresPhoto, p.treasurer, 'T') : '';
+
       return `
       <div class="gen-item">
         <div class="gen-year">${p.year}<br/><span style="font-size:0.65rem; color:var(--text-muted); font-weight:400;">${p.gen}</span></div>
         <div class="gen-details">
-          ${photoHtml}
+          <div class="gen-avatars-row">
+            ${presAv}
+            ${secAv}
+            ${tresAv}
+          </div>
           <div style="flex:1; min-width:0;">
             <div class="gen-name">${p.name} ${noteHtml}</div>
-            ${p.secretary || p.treasurer ? `<div class="gen-board">Sec: ${p.secretary || '–'} | Tres: ${p.treasurer || '–'}</div>` : ''}
+            ${p.secretary || p.treasurer ? `<div class="gen-board">S: ${p.secretary || '–'} | T: ${p.treasurer || '–'}</div>` : ''}
             <div class="gen-awards">${awardsHtml}</div>
           </div>
         </div>
