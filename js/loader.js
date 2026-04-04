@@ -519,7 +519,7 @@
         }
       });
     }, { threshold: 0.1 });
-    document.querySelectorAll('.fade-in:not(.visible)').forEach(el => obs.observe(el));
+    document.querySelectorAll('.fade-in:not(.visible), .reveal:not(.visible), .reveal-up:not(.visible), .reveal-left:not(.visible)').forEach(el => obs.observe(el));
   }
 
   function initDynamicCounters() {
