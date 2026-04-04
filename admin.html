@@ -33,7 +33,7 @@
     <option value="Leo Advisor">
     <option value="Staff Advisor">
   </datalist>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
@@ -709,6 +709,7 @@
       renderNews();
       loadClubInfo();
       renderAffiliated();
+      revitalizeHeaders();
     }
 
     function defaultContent() {
@@ -730,11 +731,24 @@
     function showTab(name) {
       document.querySelectorAll('.pane').forEach(p => {
         p.classList.remove('active');
-        p.style.display = ''; // force clear inline styles that might block the CSS
+        p.style.display = ''; 
       });
       document.querySelectorAll('.sb-link').forEach(l => l.classList.remove('active'));
-      document.getElementById('pane-' + name).classList.add('active');
+      const pane = document.getElementById('pane-' + name);
+      pane.classList.add('active');
       document.getElementById('tab-' + name).classList.add('active');
+      revitalizeHeaders(pane);
+    }
+
+    function revitalizeHeaders(container = document) {
+      container.querySelectorAll('.pane-header h2').forEach(h2 => {
+        if (!h2.querySelector('span')) {
+          const words = h2.textContent.trim().split(' ');
+          if (words.length > 1) {
+            h2.innerHTML = `${words[0]} <span>${words.slice(1).join(' ')}</span>`;
+          }
+        }
+      });
     }
 
     // ════════════════════════════════════════════════════════

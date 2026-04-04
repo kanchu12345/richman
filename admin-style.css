@@ -221,10 +221,12 @@ p.hint strong { color: #e2e8f0; }
   margin-bottom: 2rem; flex-wrap: wrap;
 }
 .pane-header h2 {
-  font-size: 1.5rem; font-weight: 800;
-  background: linear-gradient(135deg, #e2e8f0, var(--cyan));
-  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.75rem; font-weight: 700;
+  color: var(--white);
 }
+.pane-header h2 span { color: var(--cyan); }
+
 .pane-header p { color: var(--muted); font-size: 0.85rem; margin-top: 0.25rem; }
 
 /* ── ITEM CARDS ──────────────────────────── */

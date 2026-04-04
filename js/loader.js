@@ -377,7 +377,14 @@
       const nt = document.getElementById('nl-page-title');
       const ns = document.getElementById('nl-page-sub');
       const nm = document.getElementById('nl-page-motto');
-      if (nt && c.newsletterTitle) nt.textContent = c.newsletterTitle;
+            if (nt && c.newsletterTitle) {
+        const words = c.newsletterTitle.trim().split(' ');
+        if (words.length > 1) {
+          nt.innerHTML = `${words[0]} <span>${words.slice(1).join(' ')}</span>`;
+        } else {
+          nt.textContent = c.newsletterTitle;
+        }
+      }
       if (ns && c.newsletterSubtitle) ns.textContent = c.newsletterSubtitle;
       if (nm && c.newsletterMotto) nm.textContent = c.newsletterMotto;
     }
