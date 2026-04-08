@@ -165,6 +165,23 @@
 
       <!-- ── PROJECTS TAB ── -->
       <div id="pane-projects" class="pane active">
+        <!-- Projects Page Headers section -->
+        <div class="form-card" style="margin-bottom:1.5rem; background: rgba(0,0,0,0.15);">
+          <div class="form-section-title" style="color:var(--cyan); border-bottom: 1px solid rgba(0,188,212,0.2); padding-bottom: 0.5rem; margin-bottom: 1rem; font-size: 0.85rem; letter-spacing: 1px;">PROJECTS PAGE HEADERS</div>
+          
+          <div class="form-group">
+            <label style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Main Title (e.g. Our Projects)</label>
+            <input type="text" id="ci-proj-title" placeholder="Our Projects" />
+          </div>
+          
+          <div class="form-group">
+            <label style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Subtitle (e.g. Community service initiatives...)</label>
+            <input type="text" id="ci-proj-sub" placeholder="Community service initiatives making a real difference." />
+          </div>
+          
+          <button class="btn-primary" style="margin-top:0.5rem; font-size:0.8rem; padding: 0.5rem 1rem;" onclick="saveClubInfo()">💾 Save Headers</button>
+        </div>
+
         <div class="pane-header">
           <div>
             <h2>Projects</h2>
@@ -178,6 +195,23 @@
 
       <!-- ── EXECUTIVE TAB ── -->
       <div id="pane-executive" class="pane">
+        <!-- Executive Page Headers section -->
+        <div class="form-card" style="margin-bottom:1.5rem; background: rgba(0,0,0,0.15);">
+          <div class="form-section-title" style="color:var(--cyan); border-bottom: 1px solid rgba(0,188,212,0.2); padding-bottom: 0.5rem; margin-bottom: 1rem; font-size: 0.85rem; letter-spacing: 1px;">EXECUTIVE PAGE HEADERS</div>
+          
+          <div class="form-group">
+            <label style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Main Title (e.g. Executive Committee)</label>
+            <input type="text" id="ci-exec-title" placeholder="Executive Committee" />
+          </div>
+          
+          <div class="form-group">
+            <label style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Subtitle (e.g. Meet the leaders...)</label>
+            <input type="text" id="ci-exec-sub" placeholder="Meet the leaders guiding the Centennial Leo Club forward." />
+          </div>
+          
+          <button class="btn-primary" style="margin-top:0.5rem; font-size:0.8rem; padding: 0.5rem 1rem;" onclick="saveClubInfo()">💾 Save Headers</button>
+        </div>
+
         <div class="pane-header">
           <div>
             <h2>Executive Committee</h2>
@@ -759,6 +793,8 @@
           about1: '', about2: '', HeroTitle: '', heroSubtitle: '', heroDesc: '',
           missionTitle: 'Leading The Way <br/><span>For A Better Tomorrow</span>',
           missionStatement: '', heroImage: '', newsletterTitle: 'Golden Times', newsletterSubtitle: 'Official Newsletter of the Leo Club of Richmond College', newsletterMotto: 'Where Leo Spirit Meets Action', groupTitle: '', groupSub: '',
+          projTitle: 'Our <span>Projects</span>', projSubtitle: 'Community service initiatives making a real difference.',
+          execTitle: 'Executive <span>Committee</span>', execSubtitle: 'Meet the leaders guiding the Centennial Leo Club forward.',
           nlSecLatest: '📰 Latest Edition', nlSecPast: '📚 Past Editions', nlSecSpecial: '⭐ Special Edition',
           socialLinks: { facebook: 'https://facebook.com', instagram: 'https://www.instagram.com/richmond.leos', youtube: '#', linkedin: 'https://lk.linkedin.com/company/leo-club-of-richmond-college', x: 'https://x.com/RichmondLeo' }
         },
@@ -1376,6 +1412,10 @@
       safeSet('ci-nl-sec-latest', c.nlSecLatest || '📰 Latest Edition');
       safeSet('ci-nl-sec-past', c.nlSecPast || '📚 Past Editions');
       safeSet('ci-nl-sec-special', c.nlSecSpecial || '⭐ Special Edition');
+      safeSet('ci-proj-title', c.projTitle || 'Our <span>Projects</span>');
+      safeSet('ci-proj-sub', c.projSubtitle || 'Community service initiatives making a real difference.');
+      safeSet('ci-exec-title', c.execTitle || 'Executive <span>Committee</span>');
+      safeSet('ci-exec-sub', c.execSubtitle || 'Meet the leaders guiding the Centennial Leo Club forward.');
       safeSet('ci-founded', c.founded || 2016);
       safeSet('ci-pres-name', c.presidentName || '');
       safeSet('ci-pres-phone', c.presidentPhone || '');
@@ -1423,6 +1463,10 @@
       content.club.nlSecLatest = safeGet('ci-nl-sec-latest') || '📰 Latest Edition';
       content.club.nlSecPast = safeGet('ci-nl-sec-past') || '📚 Past Editions';
       content.club.nlSecSpecial = safeGet('ci-nl-sec-special') || '⭐ Special Edition';
+      content.club.projTitle = safeGet('ci-proj-title') || 'Our <span>Projects</span>';
+      content.club.projSubtitle = safeGet('ci-proj-sub') || 'Community service initiatives making a real difference.';
+      content.club.execTitle = safeGet('ci-exec-title') || 'Executive <span>Committee</span>';
+      content.club.execSubtitle = safeGet('ci-exec-sub') || 'Meet the leaders guiding the Centennial Leo Club forward.';
       content.club.founded = parseInt(safeGet('ci-founded')) || 2016;
       content.club.presidentName = safeGet('ci-pres-name');
       content.club.presidentPhone = safeGet('ci-pres-phone');

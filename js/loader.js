@@ -221,6 +221,14 @@
 
   window.renderProjects = function (data) {
     if (!data) return;
+    
+    if (data.club) {
+      const pt = document.getElementById('proj-page-title');
+      const ps = document.getElementById('proj-page-sub');
+      if (pt && data.club.projTitle) pt.innerHTML = data.club.projTitle;
+      if (ps && data.club.projSubtitle) ps.innerHTML = data.club.projSubtitle;
+    }
+
     const container = document.getElementById('projects-grid');
     if (!container) return;
 
@@ -266,6 +274,14 @@
 
   window.renderExecutive = function (data) {
     if (!data) return;
+    
+    if (data.club) {
+      const et = document.getElementById('exec-page-title');
+      const es = document.getElementById('exec-page-sub');
+      if (et && data.club.execTitle) et.innerHTML = data.club.execTitle;
+      if (es && data.club.execSubtitle) es.innerHTML = data.club.execSubtitle;
+    }
+
     const sections = { president:'exec-president', vp:'exec-vp', secretariat:'exec-secretariat', treasury:'exec-treasury', directors:'exec-directors', staffadvisor:'exec-staffadvisor', advisor:'exec-advisor' };
     Object.entries(sections).forEach(([key, id]) => {
       const el = document.getElementById(id);
