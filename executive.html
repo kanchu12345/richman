@@ -112,6 +112,30 @@
       display: flex; align-items: center; gap: 1rem;
       transition: all var(--transition);
     }
+
+    @media (max-width: 768px) {
+      .president-card {
+        flex-direction: column;
+        padding: 1.5rem;
+        text-align: center;
+        gap: 1.5rem;
+      }
+      .president-avatar {
+        min-width: 90px; height: 90px;
+        font-size: 2rem;
+      }
+      .exec-mini {
+        flex: 0 0 100%;
+        max-width: 100%;
+        padding: 1.2rem;
+      }
+      .exec-section-title {
+        font-size: 0.65rem;
+        letter-spacing: 2px;
+      }
+      .page-header h1 { font-size: 2rem; }
+    }
+
     .advisor-card:hover { border-color: rgba(244,197,66,0.45); transform: translateY(-2px); }
     .advisor-ava {
       width: 54px; height: 54px; border-radius: 50%;

@@ -27,7 +27,9 @@ body {
   background-attachment: fixed;
   color: #e8eaf6;
   line-height: 1.7;
+  overflow-y: auto;
   overflow-x: hidden;
+  width: 100%;
 }
 a { color: inherit; text-decoration: none; }
 img { max-width: 100%; display: block; }
@@ -1170,8 +1172,8 @@ footer {
 ════════════════════════════════════════ */
 .scroll-top {
   position: fixed;
-  bottom: 2rem;
-  right: 2rem;
+  bottom: 1.5rem;
+  right: 1.5rem;
   width: 44px;
   height: 44px;
   border-radius: 50%;
@@ -1241,7 +1243,7 @@ footer {
 @media (max-width: 768px) {
   .nav-links { display: none; }
   .nav-toggle { display: flex; }
-  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
   .form-row { grid-template-columns: 1fr; }
   .hero-logo-main { width: 120px; height: 120px; }
   .navbar { padding: 0 1rem; }
@@ -1249,10 +1251,9 @@ footer {
   .container { padding: 0 1.25rem; }
 }
 @media (max-width: 540px) {
-  .footer-grid { grid-template-columns: 1fr; }
   .footer-brand { max-width: 100%; }
   .hero h1 { font-size: 2.25rem; }
-  .page-header { padding: 5rem 1rem 2.5rem; min-height: 280px; }
+  .page-header { padding: 4rem 1rem 2rem; min-height: 220px; }
   .hero-grid { padding: 0 0.5rem; gap: 1.5rem; }
   .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
 }
