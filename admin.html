@@ -205,6 +205,24 @@
         </div>
 
         <div id="club-history-list" class="item-list"></div>
+
+        <!-- Executive Page Specific Settings -->
+        <div class="form-card" style="margin-top:4rem;">
+          <div class="form-section-title" style="color:var(--cyan); border-bottom:1px solid rgba(0,188,212,0.2); padding-bottom:0.5rem; margin-bottom:1.5rem;">📸 Executive Page - Bottom Image</div>
+          <p class="hint" style="margin-bottom:1.5rem; font-size:0.85rem;">This image appears at the very bottom of the Executive Committee page (e.g. a group capture or team photo).</p>
+          
+          <div class="img-upload-row">
+            <div class="img-slot" style="max-width:400px;">
+              <label>Footer Image</label>
+              <div class="img-preview-box ${content.club.executiveFooterImage ? 'has-img' : ''}" id="exec-footer-img-box" style="height:200px; margin: 0.5rem 0;">
+                ${content.club.executiveFooterImage ? `<img src="${content.club.executiveFooterImage}" id="exec-footer-img-prev"/>` : `<span id="exec-footer-img-prev">No image selected</span>`}
+              </div>
+              <button class="btn-upload" onclick="openImgModal({obj:content.club, field:'executiveFooterImage', imgElId:'exec-footer-img-prev', boxId:'exec-footer-img-box'})">📁 Upload Image</button>
+              ${content.club.executiveFooterImage ? `<button class="btn-remove" onclick="removeImg(content.club, 'executiveFooterImage', 'exec-footer-img-prev', 'exec-footer-img-box')">✕ Remove</button>` : ''}
+            </div>
+          </div>
+          <button class="btn-primary" style="margin-top:1.5rem;" onclick="saveClubInfo()">✅ Save Page Settings</button>
+        </div>
       </div>
 
       <!-- ── NEWSLETTER TAB ── -->
@@ -1300,6 +1318,18 @@
         document.getElementById('club-hero-box').classList.remove('has-img');
         document.getElementById('club-hero-box').innerHTML = `<span id="club-hero-prev">No image</span>`;
         if (document.getElementById('club-hero-remove')) document.getElementById('club-hero-remove').style.display = 'none';
+      }
+      
+      // Executive Footer Image
+      const execBox = document.getElementById('exec-footer-img-box');
+      if (execBox) {
+        if (c.executiveFooterImage) {
+          execBox.classList.add('has-img');
+          execBox.innerHTML = `<img src="${c.executiveFooterImage}" id="exec-footer-img-prev"/>`;
+        } else {
+          execBox.classList.remove('has-img');
+          execBox.innerHTML = `<span id="exec-footer-img-prev">No image selected</span>`;
+        }
       }
 
       const safeSet = (id, val) => { const el = document.getElementById(id); if (el) el.value = val; };

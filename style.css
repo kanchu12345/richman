@@ -1720,3 +1720,30 @@ footer {
 
 .fb-iframe-wrap { width: 100%; height: 100%; }
 .fb-iframe-wrap iframe { width: 100%; height: 100%; }
+
+/* ══ EXECUTIVE FOOTER IMAGE ══ */
+.exec-footer-image {
+  margin: 6rem 0 4rem;
+  position: relative;
+}
+.exec-footer-image img {
+  display: block;
+  margin: 0 auto;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 188, 212, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 
+              0 0 20px rgba(0, 188, 212, 0.1);
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+              box-shadow 0.5s ease;
+  cursor: pointer;
+}
+.exec-footer-image img:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), 
+              0 0 30px rgba(0, 188, 212, 0.2);
+  border-color: var(--cyan);
+}
+@media (max-width: 768px) {
+  .exec-footer-image { margin: 4rem 0 2rem; }
+  .exec-footer-image img { border-radius: 12px; }
+}

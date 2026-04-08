@@ -315,6 +315,13 @@
         </div>`;
       }).join('');
     });
+    
+    // Executive Footer Image
+    const footerImg = document.getElementById('exec-dynamic-footer-img');
+    if (footerImg && data.club && data.club.executiveFooterImage) {
+      footerImg.src = data.club.executiveFooterImage;
+    }
+
     reObserve();
     applySocialLinks(data.club.socialLinks);
   };
