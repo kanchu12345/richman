@@ -609,12 +609,15 @@
   document.addEventListener('DOMContentLoaded', async () => {
     startAutoSwap();
     const data = await loadContent();
+
+    // Detect page early so it is always in scope
+    const page = document.body.dataset.page;
+
     if (data) {
       window.siteContent = data;
       renderFooter(data);
 
       // ── News Ticker (Home page only) ──
-      const page = document.body.dataset.page;
       if (page === 'home') {
         const ticker = document.getElementById('ticker-inner');
         if (ticker && data.latestNews && data.latestNews.length) {
