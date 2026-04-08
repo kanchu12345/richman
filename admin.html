@@ -259,6 +259,26 @@
           
           <button class="btn-primary" style="margin-top:0.5rem; font-size:0.8rem; padding: 0.5rem 1rem;" onclick="saveClubInfo()">💾 Save Headers</button>
         </div>
+
+        <!-- Newsletter Section Titles section -->
+        <div class="form-card" style="margin-bottom:1.5rem; background: rgba(0,0,0,0.15);">
+          <div class="form-section-title" style="color:var(--cyan); border-bottom: 1px solid rgba(0,188,212,0.2); padding-bottom: 0.5rem; margin-bottom: 1rem; font-size: 0.85rem; letter-spacing: 1px;">NEWSLETTER SECTION TITLES</div>
+          
+          <div class="form-group" style="margin-bottom: 1rem;">
+            <label style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Latest Editions Title</label>
+            <input type="text" id="ci-nl-sec-latest" placeholder="📰 Latest Edition" />
+          </div>
+          <div class="form-group" style="margin-bottom: 1rem;">
+            <label style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Past Editions Title</label>
+            <input type="text" id="ci-nl-sec-past" placeholder="📚 Past Editions" />
+          </div>
+          <div class="form-group">
+            <label style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Special Editions Title</label>
+            <input type="text" id="ci-nl-sec-special" placeholder="⭐ Special Edition" />
+          </div>
+          
+          <button class="btn-primary" style="margin-top:1rem; font-size:0.8rem; padding: 0.5rem 1rem;" onclick="saveClubInfo()">💾 Save Section Titles</button>
+        </div>
         <!-- Newsletter list sections -->
         <div id="newsletter-section-latest" style="margin-top:2rem;">
           <div class="form-section-title" style="font-size:0.8rem; border-left: 3px solid var(--cyan); padding-left: 0.5rem;">📰 Latest Editions</div>
@@ -739,6 +759,7 @@
           about1: '', about2: '', HeroTitle: '', heroSubtitle: '', heroDesc: '',
           missionTitle: 'Leading The Way <br/><span>For A Better Tomorrow</span>',
           missionStatement: '', heroImage: '', newsletterTitle: 'Golden Times', newsletterSubtitle: 'Official Newsletter of the Leo Club of Richmond College', newsletterMotto: 'Where Leo Spirit Meets Action', groupTitle: '', groupSub: '',
+          nlSecLatest: '📰 Latest Edition', nlSecPast: '📚 Past Editions', nlSecSpecial: '⭐ Special Edition',
           socialLinks: { facebook: 'https://facebook.com', instagram: 'https://www.instagram.com/richmond.leos', youtube: '#', linkedin: 'https://lk.linkedin.com/company/leo-club-of-richmond-college', x: 'https://x.com/RichmondLeo' }
         },
         projects: [], executive: [], newsletter: [], presidentialHistory: [], affiliatedBodies: []
@@ -1352,6 +1373,9 @@
       safeSet('ci-nl-title', c.newsletterTitle || '');
       safeSet('ci-nl-sub', c.newsletterSubtitle || '');
       safeSet('ci-nl-motto', c.newsletterMotto || '');
+      safeSet('ci-nl-sec-latest', c.nlSecLatest || '📰 Latest Edition');
+      safeSet('ci-nl-sec-past', c.nlSecPast || '📚 Past Editions');
+      safeSet('ci-nl-sec-special', c.nlSecSpecial || '⭐ Special Edition');
       safeSet('ci-founded', c.founded || 2016);
       safeSet('ci-pres-name', c.presidentName || '');
       safeSet('ci-pres-phone', c.presidentPhone || '');
@@ -1396,6 +1420,9 @@
       content.club.newsletterTitle = safeGet('ci-nl-title');
       content.club.newsletterSubtitle = safeGet('ci-nl-sub');
       content.club.newsletterMotto = safeGet('ci-nl-motto');
+      content.club.nlSecLatest = safeGet('ci-nl-sec-latest') || '📰 Latest Edition';
+      content.club.nlSecPast = safeGet('ci-nl-sec-past') || '📚 Past Editions';
+      content.club.nlSecSpecial = safeGet('ci-nl-sec-special') || '⭐ Special Edition';
       content.club.founded = parseInt(safeGet('ci-founded')) || 2016;
       content.club.presidentName = safeGet('ci-pres-name');
       content.club.presidentPhone = safeGet('ci-pres-phone');

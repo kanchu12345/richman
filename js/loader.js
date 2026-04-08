@@ -381,6 +381,14 @@
       }
       if (ns && c.newsletterSubtitle) ns.textContent = c.newsletterSubtitle;
       if (nm && c.newsletterMotto) nm.textContent = c.newsletterMotto;
+
+      const secLatest = document.getElementById('nl-title-latest');
+      const secPast = document.getElementById('nl-title-past');
+      const secSpecial = document.getElementById('nl-title-special');
+      
+      if (secLatest && c.nlSecLatest) secLatest.innerHTML = c.nlSecLatest;
+      if (secPast && c.nlSecPast) secPast.innerHTML = c.nlSecPast;
+      if (secSpecial && c.nlSecSpecial) secSpecial.innerHTML = c.nlSecSpecial;
     }
 
     if (!data.newsletter) return;
