@@ -467,6 +467,7 @@ ul { list-style: none; }
 .btn-primary {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   padding: 0.85rem 2rem;
   background: linear-gradient(135deg, #8b1a1a, #b52020, #00bcd4);
@@ -488,6 +489,7 @@ ul { list-style: none; }
 .btn-outline {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   padding: 0.85rem 2rem;
   background: transparent;
@@ -1691,10 +1693,7 @@ footer {
   backdrop-filter: blur(10px);
   z-index: 10000;
   display: flex;
-  align-items: center;
   justify-content: center;
-  opacity: 0;
-  pointer-events: none;
   transition: opacity 0.4s ease;
   padding: 2rem;
 }
