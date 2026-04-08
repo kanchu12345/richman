@@ -217,19 +217,6 @@
         bodiesGrid.innerHTML = '';
       }
     }
-
-    // ── News Ticker ──
-    const ticker = document.getElementById('ticker-inner');
-    if (ticker && data.latestNews && data.latestNews.length) {
-      const items = data.latestNews.map(n =>
-        `<span class="ticker-item"><span class="ticker-dot"></span>${n.text}</span>`
-      ).join('');
-      // Duplicate for seamless loop
-      ticker.innerHTML = items + items;
-      // Set animation duration based on item count (40s per 5 items)
-      const dur = Math.max(20, data.latestNews.length * 8);
-      ticker.style.animationDuration = dur + 's';
-    }
   };
 
   window.renderProjects = function (data) {
@@ -590,6 +577,17 @@
     if (data) {
       window.siteContent = data;
       renderFooter(data);
+
+      // ── News Ticker ──
+      const ticker = document.getElementById('ticker-inner');
+      if (ticker && data.latestNews && data.latestNews.length) {
+        const items = data.latestNews.map(n =>
+          `<span class="ticker-item"><span class="ticker-dot"></span>${n.text}</span>`
+        ).join('');
+        ticker.innerHTML = items + items;
+        const dur = Math.max(20, data.latestNews.length * 8);
+        ticker.style.animationDuration = dur + 's';
+      }
     }
     
     // Auto-detect page and render

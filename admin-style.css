@@ -70,7 +70,7 @@ p.hint strong { color: #e2e8f0; }
 .login-hint { color: var(--muted); font-size: 0.75rem; margin-top: 1.25rem; opacity: 0.6; }
 
 /* ── LAYOUT ──────────────────────────────── */
-#adminApp { display: flex !important; min-height: 100vh; flex-direction: column; }
+#adminApp { display: flex; min-height: 100vh; flex-direction: column; }
 
 /* Live Site Banner */
 .live-site-bar {
