@@ -8,15 +8,19 @@
   const CONTENT_PATH = '/data/content.json';
 
   async function loadContent() {
+    const timeout = 8000; // 8s max — avoids mobile hang
+    function fetchWithTimeout(url) {
+      const ctrl = new AbortController();
+      const id = setTimeout(() => ctrl.abort(), timeout);
+      return fetch(url, { signal: ctrl.signal }).finally(() => clearTimeout(id));
+    }
     try {
-      // Try absolute path first (works on server/GitHub Pages)
-      let res = await fetch(CONTENT_PATH + '?t=' + Date.now());
+      let res = await fetchWithTimeout(CONTENT_PATH + '?t=' + Date.now());
       if (!res.ok) throw new Error('absolute path failed');
       return await res.json();
     } catch {
-      // Fallback: relative path (works when opening local files)
       try {
-        let res2 = await fetch('data/content.json?t=' + Date.now());
+        let res2 = await fetchWithTimeout('data/content.json?t=' + Date.now());
         if (!res2.ok) throw new Error('relative path failed');
         return await res2.json();
       } catch (e) {
@@ -608,10 +612,14 @@
   // ─── Bootstrap ────────────────────────────────────────────────────────────
   document.addEventListener('DOMContentLoaded', async () => {
     startAutoSwap();
-    const data = await loadContent();
 
     // Detect page early so it is always in scope
     const page = document.body.dataset.page;
+
+    // Hard preloader fallback — always fires after 5s regardless of network
+    setTimeout(removePreloader, 5000);
+
+    const data = await loadContent();
 
     if (data) {
       window.siteContent = data;
@@ -647,14 +655,12 @@
     initNavbarScroll();
     reObserve();
 
-    // Wait for everything (images etc) then hide preloader
+    // Hide preloader after data renders
     if (document.readyState === 'complete') {
       removePreloader();
     } else {
       window.addEventListener('load', removePreloader);
     }
-    // Safety fallback just in case
-    setTimeout(removePreloader, 3000);
   });
 
   // ─── Lightbox Image Viewer ──────────────────────────────────────────────────
