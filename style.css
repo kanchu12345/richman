@@ -725,7 +725,7 @@ ul { list-style: none; }
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 1.5px;
-  text-transform: uppercase;
+  text-transform: capitalize;
   color: var(--cyan);
   margin-bottom: 0.5rem;
   display: block;
