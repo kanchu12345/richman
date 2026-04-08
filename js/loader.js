@@ -170,6 +170,17 @@
     if (mTitle) mTitle.innerHTML = c.missionTitle || 'Leading The Way <br/><span>For A Better Tomorrow</span>';
     if (mText) mText.innerHTML = c.missionStatement || '';
 
+    // Newsletter CTA on home
+    const homeNlTitle = document.getElementById('home-nl-title');
+    const homeNlMotto = document.getElementById('home-nl-motto');
+    if (homeNlTitle && c.newsletterTitle) {
+      const words = c.newsletterTitle.trim().split(' ');
+      homeNlTitle.innerHTML = words.length > 1
+        ? `${words[0]} <span>${words.slice(1).join(' ')}</span>`
+        : c.newsletterTitle;
+    }
+    if (homeNlMotto && c.newsletterMotto) homeNlMotto.textContent = c.newsletterMotto;
+
     // Featured projects (first 3)
     const grid = document.getElementById('featured-projects');
     if (grid && data.projects) {
@@ -602,20 +613,22 @@
       window.siteContent = data;
       renderFooter(data);
 
-      // ── News Ticker ──
-      const ticker = document.getElementById('ticker-inner');
-      if (ticker && data.latestNews && data.latestNews.length) {
-        const items = data.latestNews.map(n =>
-          `<span class="ticker-item"><span class="ticker-dot"></span>${n.text}</span>`
-        ).join('');
-        ticker.innerHTML = items + items;
-        const dur = Math.max(20, data.latestNews.length * 8);
-        ticker.style.animationDuration = dur + 's';
+      // ── News Ticker (Home page only) ──
+      const page = document.body.dataset.page;
+      if (page === 'home') {
+        const ticker = document.getElementById('ticker-inner');
+        if (ticker && data.latestNews && data.latestNews.length) {
+          const items = data.latestNews.map(n =>
+            `<span class="ticker-item"><span class="ticker-dot"></span>${n.text}</span>`
+          ).join('');
+          ticker.innerHTML = items + items;
+          const dur = Math.max(20, data.latestNews.length * 8);
+          ticker.style.animationDuration = dur + 's';
+        }
       }
     }
     
     // Auto-detect page and render
-    const page = document.body.dataset.page;
     if (page === 'home') {
       renderHome(data);
       initDynamicCounters();
