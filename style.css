@@ -1693,7 +1693,10 @@ footer {
   backdrop-filter: blur(10px);
   z-index: 10000;
   display: flex;
+  align-items: center;
   justify-content: center;
+  opacity: 0;
+  pointer-events: none;
   transition: opacity 0.4s ease;
   padding: 2rem;
 }
