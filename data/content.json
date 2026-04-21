@@ -171,8 +171,7 @@
       "date": "",
       "description": "",
       "pdfLink": "https://online.fliphtml5.com/vvqkb/qvuf/",
-      "coverImage": "https://i.ibb.co/0pHT4cpv/Screenshot-2026-04-01-225558.png",
-      "type": "current"
+      "coverImage": "https://i.ibb.co/0pHT4cpv/Screenshot-2026-04-01-225558.png"
     },
     {
       "id": "n1775794414827",
@@ -182,6 +181,15 @@
       "pdfLink": "",
       "coverImage": "",
       "type": "current"
+    },
+    {
+      "id": "n1776756140482",
+      "title": "New Issue",
+      "date": "",
+      "description": "test",
+      "pdfLink": "",
+      "coverImage": "",
+      "type": "past"
     }
   ],
   "affiliatedBodies": [
