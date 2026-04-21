@@ -1169,23 +1169,29 @@
                 </select>
               </div>
 
-              <!-- Section Header block – updates when Edition Type changes -->
+              <!-- Massive Page Header block – updates when Edition Type changes -->
               <div style="background:rgba(0,188,212,0.05); border:1px solid rgba(0,188,212,0.15); border-radius:8px; padding:1rem; margin:0.75rem 0;">
                 <div style="font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:2px; margin-bottom:0.75rem; color:var(--cyan);">
-                  <span id="nf-sec-label-${n.id}">${resolvedType === 'current' ? '📰 Latest' : resolvedType === 'past' ? '📚 Past' : '⭐ Special'} Editions</span> – Section Header on Website
+                  <span id="nf-sec-label-${n.id}">${resolvedType === 'current' ? '📰 Latest' : resolvedType === 'past' ? '📚 Past' : '⭐ Special'} Editions</span> – MASSIVE PAGE HEADER ON WEBSITE
+                </div>
+                <div class="form-group">
+                  <label style="font-size:0.75rem;">Main Title (e.g. LATEST EDITION)</label>
+                  <input type="text" id="nf-sec-title-${n.id}"
+                    value="${esc(resolvedType === 'current' ? (content.club.nlTitleLatest||'LATEST EDITION') : resolvedType === 'past' ? (content.club.nlTitlePast||'PAST EDITIONS') : (content.club.nlTitleSpecial||'SPECIAL EDITIONS'))}"
+                    placeholder="e.g. LATEST EDITION" />
                 </div>
                 <div class="form-row2">
                   <div class="form-group">
-                    <label style="font-size:0.75rem;">Section Title</label>
-                    <input type="text" id="nf-sec-title-${n.id}"
-                      value="${esc(resolvedType === 'current' ? (content.club.nlSecLatest||'📰 Latest Edition') : resolvedType === 'past' ? (content.club.nlSecPast||'📚 Past Editions') : (content.club.nlSecSpecial||'⭐ Special Edition'))}"
-                      placeholder="e.g. 📰 Latest Edition" />
+                    <label style="font-size:0.75rem;">Subtitle (e.g. Our Newest Releases)</label>
+                    <input type="text" id="nf-sec-sub-${n.id}"
+                      value="${esc(resolvedType === 'current' ? (content.club.nlSubLatest||'') : resolvedType === 'past' ? (content.club.nlSubPast||'') : (content.club.nlSubSpecial||''))}"
+                      placeholder="e.g. Our Newest Releases" />
                   </div>
                   <div class="form-group">
-                    <label style="font-size:0.75rem;">Section Subtitle / Description</label>
-                    <input type="text" id="nf-sec-sub-${n.id}"
-                      value="${esc(resolvedType === 'current' ? (content.club.nlSecLatestSub||'') : resolvedType === 'past' ? (content.club.nlSecPastSub||'') : (content.club.nlSecSpecialSub||''))}"
-                      placeholder="e.g. Browse our latest newsletter edition." />
+                    <label style="font-size:0.75rem;">Motto (e.g. Read the latest stories)</label>
+                    <input type="text" id="nf-sec-motto-${n.id}"
+                      value="${esc(resolvedType === 'current' ? (content.club.nlMottoLatest||'') : resolvedType === 'past' ? (content.club.nlMottoPast||'') : (content.club.nlMottoSpecial||''))}"
+                      placeholder="e.g. Read the latest stories" />
                   </div>
                 </div>
               </div>
@@ -1224,28 +1230,25 @@
       n.description = document.getElementById(`nf-desc-${id}`)?.value || '';
       n.type = document.getElementById(`nf-type-${id}`)?.value || 'current';
 
-      // Save section headers for this edition type
+      // Save massive page headers for this edition type
       if (!content.club) content.club = {};
       const secTitle = document.getElementById(`nf-sec-title-${id}`)?.value.trim() || '';
       const secSub   = document.getElementById(`nf-sec-sub-${id}`)?.value.trim()   || '';
+      const secMotto = document.getElementById(`nf-sec-motto-${id}`)?.value.trim() || '';
+      
       if (n.type === 'current') {
-        if (secTitle) content.club.nlSecLatest = secTitle;
-        content.club.nlSecLatestSub = secSub;
+        if (secTitle) content.club.nlTitleLatest = secTitle;
+        content.club.nlSubLatest = secSub;
+        content.club.nlMottoLatest = secMotto;
       } else if (n.type === 'past') {
-        if (secTitle) content.club.nlSecPast = secTitle;
-        content.club.nlSecPastSub = secSub;
+        if (secTitle) content.club.nlTitlePast = secTitle;
+        content.club.nlSubPast = secSub;
+        content.club.nlMottoPast = secMotto;
       } else if (n.type === 'special') {
-        if (secTitle) content.club.nlSecSpecial = secTitle;
-        content.club.nlSecSpecialSub = secSub;
+        if (secTitle) content.club.nlTitleSpecial = secTitle;
+        content.club.nlSubSpecial = secSub;
+        content.club.nlMottoSpecial = secMotto;
       }
-      // Sync hidden backing fields so saveClubInfo() stays consistent
-      const safeHidden = (elId, val) => { const el = document.getElementById(elId); if (el) el.value = val; };
-      safeHidden('ci-nl-sec-latest',     content.club.nlSecLatest     || '📰 Latest Edition');
-      safeHidden('ci-nl-sec-latest-sub', content.club.nlSecLatestSub  || '');
-      safeHidden('ci-nl-sec-past',       content.club.nlSecPast       || '📚 Past Editions');
-      safeHidden('ci-nl-sec-past-sub',   content.club.nlSecPastSub    || '');
-      safeHidden('ci-nl-sec-special',    content.club.nlSecSpecial    || '⭐ Special Edition');
-      safeHidden('ci-nl-sec-special-sub',content.club.nlSecSpecialSub || '');
 
       let link = document.getElementById(`nf-pdf-${id}`)?.value.trim() || '';
       if (link.includes('drive.google.com')) {
