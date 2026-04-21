@@ -5,4 +5,4 @@
 5. Click 'Test Connection' and verify it shows a 'Connected!' success message (using the hardcoded token).
 6. Report final status.
 
-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
+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

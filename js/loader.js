@@ -420,6 +420,17 @@
       if (secLatest && c.nlSecLatest) secLatest.innerHTML = c.nlSecLatest;
       if (secPast && c.nlSecPast) secPast.innerHTML = c.nlSecPast;
       if (secSpecial && c.nlSecSpecial) secSpecial.innerHTML = c.nlSecSpecial;
+
+      // Per-section subtitles
+      const applySecSub = (elId, val) => {
+        const el = document.getElementById(elId);
+        if (!el) return;
+        if (val) { el.textContent = val; el.style.display = 'block'; }
+        else { el.style.display = 'none'; }
+      };
+      applySecSub('nl-sub-latest', c.nlSecLatestSub);
+      applySecSub('nl-sub-past', c.nlSecPastSub);
+      applySecSub('nl-sub-special', c.nlSecSpecialSub);
     }
 
     if (!data.newsletter) return;
