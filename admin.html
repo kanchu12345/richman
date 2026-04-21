@@ -271,35 +271,7 @@
           <button class="btn-primary" onclick="addNewsletter()">+ Add Newsletter</button>
         </div>
 
-        <!-- Newsletter Headers section -->
-        <div class="form-card" style="margin-bottom:1.5rem; background: rgba(0,0,0,0.15);">
-          <div class="form-section-title" style="color:var(--cyan); border-bottom: 1px solid rgba(0,188,212,0.2); padding-bottom: 0.5rem; margin-bottom: 1rem; font-size: 0.85rem; letter-spacing: 1px;">NEWSLETTER PAGE HEADERS</div>
-          
-          <div class="form-group">
-            <label style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Main Title (e.g. THE VANGUARD)</label>
-            <input type="text" id="ci-nl-title" placeholder="THE VANGUARD" />
-          </div>
-          
-          <div class="form-group">
-            <label style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Subtitle (e.g. Leading the Charge...)</label>
-            <input type="text" id="ci-nl-sub" placeholder="Official Newsletter..." />
-          </div>
-          
-          <div class="form-group">
-            <label style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Motto (e.g. Where Leo Spirit Meets Action)</label>
-            <input type="text" id="ci-nl-motto" placeholder="Where Leo Spirit Meets Action" />
-          </div>
-          
-          <button class="btn-primary" style="margin-top:0.5rem; font-size:0.8rem; padding: 0.5rem 1rem;" onclick="saveClubInfo()">💾 Save Headers</button>
-        </div>
-
-        <!-- Hidden backing fields – keep loadClubInfo/saveClubInfo working -->
-        <input type="hidden" id="ci-nl-sec-latest" />
-        <input type="hidden" id="ci-nl-sec-latest-sub" />
-        <input type="hidden" id="ci-nl-sec-past" />
-        <input type="hidden" id="ci-nl-sec-past-sub" />
-        <input type="hidden" id="ci-nl-sec-special" />
-        <input type="hidden" id="ci-nl-sec-special-sub" />
+        <!-- Hidden backing fields removed per user request -->
         <!-- Newsletter list sections -->
         <div id="newsletter-section-latest" style="margin-top:2rem;">
           <div class="form-section-title" style="font-size:0.8rem; border-left: 3px solid var(--cyan); padding-left: 0.5rem;">📰 Latest Editions</div>
@@ -1269,17 +1241,19 @@
       const type = selectEl.value;
       const c = content.club || {};
       const map = {
-        current: { label: '📰 Latest Editions', title: c.nlSecLatest    || '📰 Latest Edition',  sub: c.nlSecLatestSub  || '' },
-        past:    { label: '📚 Past Editions',   title: c.nlSecPast      || '📚 Past Editions',    sub: c.nlSecPastSub    || '' },
-        special: { label: '⭐ Special Editions', title: c.nlSecSpecial   || '⭐ Special Edition',  sub: c.nlSecSpecialSub || '' }
+        current: { label: '📰 Latest Editions', title: c.nlTitleLatest  || 'LATEST EDITION',    sub: c.nlSubLatest  || '', motto: c.nlMottoLatest || '' },
+        past:    { label: '📚 Past Editions',   title: c.nlTitlePast    || 'PAST EDITIONS',     sub: c.nlSubPast    || '', motto: c.nlMottoPast || '' },
+        special: { label: '⭐ Special Editions', title: c.nlTitleSpecial || 'SPECIAL EDITIONS',  sub: c.nlSubSpecial || '', motto: c.nlMottoSpecial || '' }
       };
       const vals = map[type] || map['current'];
       const lbl   = document.getElementById(`nf-sec-label-${id}`);
       const tEl   = document.getElementById(`nf-sec-title-${id}`);
       const sEl   = document.getElementById(`nf-sec-sub-${id}`);
+      const mEl   = document.getElementById(`nf-sec-motto-${id}`);
       if (lbl)  lbl.textContent  = vals.label;
       if (tEl)  tEl.value        = vals.title;
       if (sEl)  sEl.value        = vals.sub;
+      if (mEl)  mEl.value        = vals.motto;
     }
 
     let currentPDFTargetId = null;
