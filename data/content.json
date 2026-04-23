@@ -119,13 +119,15 @@
       "id": "ex5",
       "name": "Leo Inosh Ranathunga",
       "role": "Assistant Secretary",
-      "section": "secretariat"
+      "section": "secretariat",
+      "photo": "https://i.ibb.co/N6v0yv8L/MG-0013.jpg"
     },
     {
       "id": "ex6",
       "name": "Leo Sadeepa Weerasinghe",
       "role": "Treasurer",
-      "section": "treasury"
+      "section": "treasury",
+      "photo": "https://i.ibb.co/cXLP9M1S/MG-0021.jpg"
     },
     {
       "id": "ex7",
@@ -137,11 +139,12 @@
       "id": "ex8",
       "name": "Leo Harindu Thirasara",
       "role": "Director – Public Relations",
-      "section": "directors"
+      "section": "directors",
+      "photo": "https://i.ibb.co/twWpmH1K/MG-0054.jpg"
     },
     {
       "id": "ex10",
-      "name": "Leo Asuru Oshada",
+      "name": "Leo Basuru Oshada",
       "role": "Director",
       "section": "directors"
     },
@@ -149,7 +152,8 @@
       "id": "ex_sa1",
       "name": "To be appointed",
       "role": "Staff Advisor",
-      "section": "staffadvisor"
+      "section": "staffadvisor",
+      "photo": "https://i.ibb.co/SX8mQZVL/MG-9990.jpg"
     },
     {
       "id": "ex12",
