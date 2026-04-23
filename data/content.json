@@ -184,21 +184,22 @@
       "id": "ex4",
       "name": "Leo Minuda Kalansooriya",
       "role": "Secretary",
-      "section": "secretariat"
+      "section": "secretariat",
+      "photo": "https://i.ibb.co/cS4V8D1q/4-compresso.webp"
     },
     {
       "id": "ex5",
       "name": "Leo Inosh Ranathunga",
       "role": "Assistant Secretary",
       "section": "secretariat",
-      "photo": "https://i.ibb.co/N6v0yv8L/MG-0013.jpg"
+      "photo": "https://i.ibb.co/jkrx619f/6-compresso.webp"
     },
     {
       "id": "ex6",
       "name": "Leo Sadeepa Weerasinghe",
       "role": "Treasurer",
       "section": "treasury",
-      "photo": "https://i.ibb.co/cXLP9M1S/MG-0021.jpg"
+      "photo": "https://i.ibb.co/LmhZBNt/3-compresso.webp"
     },
     {
       "id": "ex7",
@@ -211,7 +212,7 @@
       "name": "Leo Harindu Thirasara",
       "role": "Director – Public Relations",
       "section": "directors",
-      "photo": "https://i.ibb.co/twWpmH1K/MG-0054.jpg"
+      "photo": "https://i.ibb.co/WvmRQFQb/5-compresso-compresso.webp"
     },
     {
       "id": "ex10",
@@ -221,10 +222,10 @@
     },
     {
       "id": "ex_sa1",
-      "name": "To be appointed",
+      "name": "Ms.Sanduni Kodituwakku",
       "role": "Staff Advisor",
       "section": "staffadvisor",
-      "photo": "https://i.ibb.co/SX8mQZVL/MG-9990.jpg"
+      "photo": "https://i.ibb.co/hJXQ7f1P/1-compresso.webp"
     },
     {
       "id": "ex12",
