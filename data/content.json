@@ -43,7 +43,10 @@
     "projTitle": "Our <span>Projects</span>",
     "projSubtitle": "Community service initiatives making a real difference.",
     "execTitle": "Executive <span>Committee</span>",
-    "execSubtitle": "Meet the leaders guiding the Centennial Leo Club forward."
+    "execSubtitle": "Meet the leaders guiding the Centennial Leo Club forward.",
+    "nlTitleSpecial": "SPECIAL EDITIONS",
+    "nlSubSpecial": "",
+    "nlMottoSpecial": ""
   },
   "projects": [
     {
@@ -301,29 +304,12 @@
   "newsletter": [
     {
       "id": "n1774691727630",
-      "title": "New Issue",
+      "title": "Club Directory - INSPIRATION'25",
       "date": "",
       "description": "",
       "pdfLink": "https://online.fliphtml5.com/vvqkb/qvuf/",
-      "coverImage": "https://i.ibb.co/0pHT4cpv/Screenshot-2026-04-01-225558.png"
-    },
-    {
-      "id": "n1775794414827",
-      "title": "New Issue",
-      "date": "",
-      "description": "",
-      "pdfLink": "",
-      "coverImage": "",
-      "type": "current"
-    },
-    {
-      "id": "n1776756140482",
-      "title": "New Issue",
-      "date": "",
-      "description": "test",
-      "pdfLink": "",
-      "coverImage": "",
-      "type": "past"
+      "coverImage": "https://i.ibb.co/0pHT4cpv/Screenshot-2026-04-01-225558.png",
+      "type": "special"
     }
   ],
   "affiliatedBodies": [
