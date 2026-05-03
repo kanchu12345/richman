@@ -302,7 +302,8 @@
       "id": "ex12",
       "name": "Lion Lakma Kithmini",
       "role": "Leo Advisor",
-      "section": "advisor"
+      "section": "advisor",
+      "photo": "https://i.ibb.co/yn1mVr9s/IMG-8912-1.jpg"
     }
   ],
   "newsletter": [
@@ -583,12 +584,12 @@
           "color": "gold"
         }
       ],
-      "photo": "https://i.ibb.co/PZ3yVrkB/leo-removebg-preview.png",
-      "secretary": "",
-      "treasurer": "",
-      "vp": "Pending Update",
-      "secPhoto": "",
-      "tresPhoto": "",
+      "photo": "https://i.ibb.co/k6mGB8t6/MG-0025.jpg",
+      "secretary": "Leo Minuda Kalansooriya",
+      "treasurer": "Leo Sadeepa Weerasinghe",
+      "vp": "Leo Sachitha Weerasinghe",
+      "secPhoto": "https://i.ibb.co/YFCJt9FN/4-compresso.webp",
+      "tresPhoto": "https://i.ibb.co/4wDBbVDy/3-compresso.webp",
       "vpPhoto": ""
     }
   ],
