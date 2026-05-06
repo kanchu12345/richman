@@ -48,7 +48,7 @@
     "nlSubSpecial": "",
     "nlMottoSpecial": "",
     "nlTitleLatest": "LATEST EDITION",
-    "nlSubLatest": "",
+    "nlSubLatest": "THE VANGUARD",
     "nlMottoLatest": ""
   },
   "projects": [
@@ -290,6 +290,20 @@
       "role": "Leo Advisor",
       "section": "advisor",
       "photo": "https://i.ibb.co/yn1mVr9s/IMG-8912-1.jpg"
+    },
+    {
+      "id": "e1778054704050",
+      "name": "Leo Thilitha Nisalsith",
+      "role": "Director",
+      "section": "directors",
+      "photo": "https://i.ibb.co/cKLHWkGh/MG-0003.jpg"
+    },
+    {
+      "id": "e1778055035572",
+      "name": "New Member",
+      "role": "Director",
+      "section": "directors",
+      "photo": ""
     }
   ],
   "newsletter": [
@@ -406,8 +420,8 @@
       "secretary": "Chamika Jayasekara",
       "treasurer": "Duranjana Kodithuwakku",
       "vp": "Punsith Wickramanayake",
-      "photo": "",
-      "secPhoto": "",
+      "photo": "https://i.ibb.co/F4Sc8g39/Nadith-jpg.jpg",
+      "secPhoto": "https://i.ibb.co/v6RWc7xS/chamika-jpg.jpg",
       "tresPhoto": "",
       "vpPhoto": "",
       "awards": [
