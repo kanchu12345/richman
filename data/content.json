@@ -375,13 +375,14 @@
       "gen": "Gen 1",
       "name": "Leo Sandul Siriwardana",
       "note": "1st President",
-      "secretary": "Leo Minuda Kalansooriya",
-      "treasurer": "Leo Mevinu Gamage",
-      "vp": "Pending Update",
-      "photo": "https://i.ibb.co/J8R3Njb/Leo-Nipun-Kariyawasam-jpg-removebg-preview.png",
+      "secretary": "Anjula Kariyawasam",
+      "treasurer": "Janith Hirusha",
+      "vp": "Minindu Vithanage",
+      "photo": "",
       "secPhoto": "",
       "tresPhoto": "",
-      "vpPhoto": ""
+      "vpPhoto": "",
+      "awards": []
     },
     {
       "id": "ph2",
@@ -389,21 +390,22 @@
       "gen": "Gen 2",
       "name": "Leo Sandul Siriwardana",
       "note": "Continued",
-      "secretary": "Leo Minuda Kalansooriya",
-      "treasurer": "Leo Mevinu Gamage",
-      "vp": "Pending Update",
-      "photo": "https://i.ibb.co/J8R3Njb/Leo-Nipun-Kariyawasam-jpg-removebg-preview.png",
+      "secretary": "Leo Nipun Kariyawasam",
+      "treasurer": "-",
+      "vp": "Minindu Pawan",
+      "photo": "",
       "secPhoto": "",
       "tresPhoto": "",
-      "vpPhoto": ""
+      "vpPhoto": "",
+      "awards": []
     },
     {
       "id": "ph3",
       "year": "2018/19",
       "gen": "Gen 3",
-      "secretary": "Leo Nadith Jayawardena",
-      "treasurer": "Leo Dumindu",
-      "vp": "Pending Update",
+      "secretary": "Chamika Jayasekara",
+      "treasurer": "Duranjana Kodithuwakku",
+      "vp": "Punsith Wickramanayake",
       "photo": "",
       "secPhoto": "",
       "tresPhoto": "",
@@ -421,7 +423,9 @@
           "text": "2nd Runner-up – Most Outstanding School Leo Club",
           "color": "maroon"
         }
-      ]
+      ],
+      "name": "Leo Nadith Jayawardena",
+      "note": ""
     },
     {
       "id": "ph4",
@@ -439,11 +443,12 @@
           "color": "cyan"
         }
       ],
-      "secretary": "",
-      "treasurer": "",
+      "secretary": "Leo Esandu Hansaka Epa",
+      "treasurer": "Leo Kalindu Pahasara Gamage",
       "photo": "",
       "secPhoto": "",
-      "tresPhoto": ""
+      "tresPhoto": "",
+      "vp": "Leo Gamitha Senarathne"
     },
     {
       "id": "ph5",
