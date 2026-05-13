@@ -641,27 +641,9 @@
       "tresPhoto": ""
     },
     {
-      "id": "ph8",
-      "year": "2023/24",
-      "gen": "Gen 8",
-      "name": "President – Generation 8",
-      "note": "",
-      "awards": [
-        {
-          "text": "Club Transition Period",
-          "color": "maroon"
-        }
-      ],
-      "secretary": "",
-      "treasurer": "",
-      "photo": "",
-      "secPhoto": "",
-      "tresPhoto": ""
-    },
-    {
       "id": "ph9",
       "year": "2025/26",
-      "gen": "Gen 9",
+      "gen": "Gen 10",
       "name": "Leo Mevinu Gamage",
       "note": "Current President",
       "awards": [
@@ -680,7 +662,7 @@
       "vp": "Leo Sachitha Weerasinghe",
       "secPhoto": "https://i.ibb.co/YFCJt9FN/4-compresso.webp",
       "tresPhoto": "https://i.ibb.co/4wDBbVDy/3-compresso.webp",
-      "vpPhoto": ""
+      "vpPhoto": "https://i.ibb.co/xtR3bcB8/org-jpg-1.jpg"
     }
   ],
   "latestNews": [
