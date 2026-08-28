@@ -411,13 +411,19 @@
     <div class="footer-bottom">
       <span>© 2025 Centennial Leo Club of Richmond College. All rights reserved.</span>
       <span class="district">🦁 Leo District 306 D8 (formerly 306 A2) · Est. 2016</span>
+      <p style="font-size: 13px; color: #888;">
+        Website Designed & Developed by 
+        <a href="https://infiniteweb.dev/" target="_blank" rel="noopener" style="color: #04AA6D; text-decoration: none; font-weight: 600;">
+          Infinite Creative Web Design
+        </a>
+      </p>
     </div>
   </footer>
 
   <!-- ══ SCROLL TO TOP ══ -->
   <!-- ══ DESIGN CREDIT BADGE — DO NOT REMOVE ══ -->
-  <a id="infinite-design-credit" href="https://www.facebook.com/profile.php?id=100082101311247" target="_blank"
-    rel="noopener" title="Website designed by Infinite Design">
+  <a id="infinite-design-credit" href="https://infiniteweb.dev/" target="_blank"
+    rel="noopener" title="Website Designed & Developed by Infinite Creative Web Design">
     <span class="idcredit-dot"></span>
     <span class="idcredit-label">Designed by</span>
     <span class="idcredit-name">Infinite Design</span>
@@ -440,15 +446,15 @@
     document.querySelectorAll('.fade-in, .reveal, .reveal-up, .reveal-left').forEach(el => observer.observe(el));
     // ── Credit Guard — Infinite Design ──
     (function protectCredit() {
-      const FB = 'https://www.facebook.com/profile.php?id=100082101311247';
+      const FB = 'https://infiniteweb.dev/';
       const ID = 'infinite-design-credit';
       var _busy = false;
       function restore() {
         if (_busy) return; _busy = true;
         var el = document.getElementById(ID);
-        if (!el || (el.href || '').indexOf('100082101311247') === -1) {
+        if (!el || (el.href || '').indexOf('infiniteweb.dev') === -1) {
           if (!el) { el = document.createElement('a'); el.id = ID; document.body.appendChild(el); }
-          el.href = FB; el.target = '_blank'; el.rel = 'noopener'; el.title = 'Website designed by Infinite Design';
+          el.href = FB; el.target = '_blank'; el.rel = 'noopener'; el.title = 'Website Designed & Developed by Infinite Creative Web Design';
           el.innerHTML = '<span class="idcredit-dot"></span><span class="idcredit-label">Designed by</span><span class="idcredit-name">Infinite Design</span>';
           el.style.cssText = 'position:fixed!important;bottom:1rem!important;left:1rem!important;display:flex!important;visibility:visible!important;opacity:1!important;z-index:9999!important;pointer-events:all!important;';
         }
